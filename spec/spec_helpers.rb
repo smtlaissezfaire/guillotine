@@ -9,6 +9,18 @@ module SpecHelperFunctions
     ActiveRecord::Migration.verbose = false
 
     ActiveRecord::Schema.define do  
+      create_table :people do |t|
+        t.string :first_name
+        t.string :last_name
+        t.string :phone_number
+      end
     end
-  end  
+  end
 end
+
+include SpecHelperFunctions
+setup_database_connection
+
+class Person < ActiveRecord::Base
+end
+
