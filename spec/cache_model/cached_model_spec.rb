@@ -124,7 +124,10 @@ module CacheModel
           it "should find scott when give not matt" do
             @finder.find(:first, :conditions => ["first_name != ?", "Matt"]).should == @scott
           end
-
+          
+          it "should find matt when given scott" do
+            @finder.find(:first, :conditions => ["first_name != ?", "Scott"]).should == @matt
+          end
         end
       end
     end
