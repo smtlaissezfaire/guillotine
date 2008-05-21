@@ -22,20 +22,9 @@ module CacheModel
       end
     end
     
-    it "should find all records" do
-      @finder.find(:all).should == [@person]
-    end
-    
-    it "should only find the records once" do
-      @target.should_receive(:find).with(:all).once
-
-      @finder.find(:all)
-      @finder.find(:all)
-    end
-    
     it "should find all the records even when passed find(:first)" do
-      @target.stub!(:find)
-      @target.should_receive(:find).with(:all)
+      @target.stub!(:find).and_return [@person]
+      @target.should_receive(:find).with(:all).and_return [@person]
       @finder.find(:first)
     end
     
