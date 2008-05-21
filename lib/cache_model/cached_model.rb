@@ -130,7 +130,7 @@ module CacheModel
     end
     
     def find_by_id(id)
-      all_records.find { |r| r.id == id }
+      all_records.find { |r| r.id == id.to_i }
     end
   end
 end
