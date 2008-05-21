@@ -28,16 +28,6 @@ module CacheModel
       @finder.find(:first)
     end
     
-    describe "with an id in the cache" do
-      before :each do
-        @finder.find(:all)
-      end
-      
-      it "should grab the record out of the cache" do
-        @finder.find(@person.id).should == @person
-      end
-    end
-    
     describe "finding an element with :first and no params" do
       it "should find the first record" do
         @finder.find(:first).should == @person
