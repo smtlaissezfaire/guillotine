@@ -1,0 +1,50 @@
+
+lib/cache_model/active_record.rb,35
+  def cache_modelcache_model2,36
+
+lib/cache_model/cached_model.rb,1016
+module CacheModelCacheModel1,0
+  class CachedModelCachedModel2,18
+    def initialize(target)initialize3,38
+    def find(*args)find7,101
+    def if_excluded_options?(*args)if_excluded_options?25,435
+    def first_finder(options={ })first_finder37,671
+    class ConditionConverterConditionConverter46,933
+        def parse(hash_or_array)parse48,982
+        def new_subtype(hash_or_array)new_subtype52,1079
+      def to_procto_proc62,1342
+    class HashConditionConverter < ConditionConverterHashConditionConverter67,1399
+      def initialize(hash)initialize68,1453
+      def parseparse74,1549
+    class ArrayConditionConverter < ConditionConverterArrayConditionConverter87,1795
+      def initialize(array)initialize88,1850
+      def parseparse97,2062
+      def map_paramatersmap_paramaters109,2372
+      def matching_paramsmatching_params113,2445
+    def find_all_recordsfind_all_records130,2870
+    def all_recordsall_records134,2955
+    def find_by_id(id)find_by_id138,3011
+
+lib/cache_model.rb,0
+
+spec/cache_model/cached_model_spec.rb,35
+module CacheModelCacheModel9,200
+
+spec/cache_model/exceptions_spec.rb,34
+module CacheModelCacheModel3,52
+
+spec/cache_model/find_all_spec.rb,34
+module CacheModelCacheModel3,52
+
+spec/cache_model/find_by_id_spec.rb,34
+module CacheModelCacheModel3,52
+
+spec/cache_model/first_spec.rb,34
+module CacheModelCacheModel3,52
+
+spec/spec_helper.rb,0
+
+spec/spec_helpers.rb,162
+module SpecHelperFunctionsSpecHelperFunctions1,0
+  def setup_database_connectionsetup_database_connection2,27
+class Person < ActiveRecord::BasePerson24,546
