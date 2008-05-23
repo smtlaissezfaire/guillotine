@@ -7,15 +7,15 @@ Autotest.add_hook :initialize do |mapper|
   #                        #
   ##########################
 
-  def mapper.clear
+  map = mapper
+
+  def map.clear
     clear_mappings
   end
 
-  def mapper.add(*args, &blk)
+  def map.add(*args, &blk)
     add_mapping(*args, &blk)
   end
-
-  map = mapper
 
   def regex(string)
     Regexp.new(string)
