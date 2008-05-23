@@ -17,6 +17,10 @@ Autotest.add_hook :initialize do |mapper|
 
   map = mapper
 
+  def regex(string)
+    Regexp.new(string)
+  end
+
 
   ##########################
   #                        #
@@ -26,17 +30,21 @@ Autotest.add_hook :initialize do |mapper|
   ##########################
 
   # Autotest itself
-  autotest_file       = Regexp.new "^.autotest"
+  autotest_file       = regex "^.autotest"
 
   # Spec Files
-  spec_dot_opts       = Regexp.new "^spec/spec.opts"
-  spec_helper         = Regexp.new "^spec/spec_helper.rb"
-  all_spec_files      = Regexp.new "^spec/.*_spec.rb"
+  spec_dot_opts       = regex "^spec/spec.opts"
+  spec_helper         = regex "^spec/spec_helper.rb"
+  all_spec_files      = regex "^spec/.*_spec.rb"
   any_spec_file       = all_spec_files
 
   # Project files
-  project_files       = Regexp.new "^lib/.*"
+  project_files       = regex "^lib/.*"
   any_project_file    = project_files
+
+  ignored_files       = [
+                          regex "^\.git/.*"
+                        ]
 
 
   ##########################
@@ -61,6 +69,11 @@ Autotest.add_hook :initialize do |mapper|
 
   map.add(any_project_file) do |filename, _|
     mapper.files_matching(all_spec_files)
+  end
+
+  # For these files, do nothing
+  ignored_files.each do |file| 
+    map.add(file) { }
   end
 
 end
