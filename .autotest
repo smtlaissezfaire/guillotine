@@ -2,6 +2,24 @@ Autotest.add_hook :initialize do |mapper|
 
   ##########################
   #                        #
+  #  Conveniences for      #
+  #  Autotest              #
+  #                        #
+  ##########################
+
+  def mapper.clear
+    clear_mappings
+  end
+
+  def mapper.add(*args, &blk)
+    add_mapping(*args, &blk)
+  end
+
+  map = mapper
+
+
+  ##########################
+  #                        #
   #  Convenience           #
   #  Variables             #
   #                        #
@@ -20,27 +38,29 @@ Autotest.add_hook :initialize do |mapper|
   project_files       = Regexp.new "^lib/.*"
   any_project_file    = project_files
 
+
   ##########################
   #                        #
   #  Mappings              #
   #                        #
   ##########################
 
-  mapper.clear_mappings
+  map.clear
 
-  mapper.add_mapping(autotest_file) do
+  map.add(autotest_file) do
     mapper.files_matching(all_spec_files)
   end
 
-  mapper.add_mapping(spec_helper) do
+  map.add(spec_helper) do
     mapper.files_matching(all_spec_files)
   end
 
-  mapper.add_mapping(any_spec_file) do |filename, _|
+  map.add(any_spec_file) do |filename, _|
     filename
   end
 
-  mapper.add_mapping(any_project_file) do |filename, _|
+  map.add(any_project_file) do |filename, _|
     mapper.files_matching(all_spec_files)
   end
+
 end
