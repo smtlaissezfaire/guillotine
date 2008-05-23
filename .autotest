@@ -1,0 +1,46 @@
+Autotest.add_hook :initialize do |mapper|
+
+  ##########################
+  #                        #
+  #  Convenience           #
+  #  Variables             #
+  #                        #
+  ##########################
+
+  # Autotest itself
+  autotest_file       = Regexp.new "^.autotest"
+
+  # Spec Files
+  spec_dot_opts       = Regexp.new "^spec/spec.opts"
+  spec_helper         = Regexp.new "^spec/spec_helper.rb"
+  all_spec_files      = Regexp.new "^spec/.*_spec.rb"
+  any_spec_file       = all_spec_files
+
+  # Project files
+  project_files       = Regexp.new "^lib/.*"
+  any_project_file    = project_files
+
+  ##########################
+  #                        #
+  #  Mappings              #
+  #                        #
+  ##########################
+
+  mapper.clear_mappings
+
+  mapper.add_mapping(autotest_file) do
+    mapper.files_matching(all_spec_files)
+  end
+
+  mapper.add_mapping(spec_helper) do
+    mapper.files_matching(all_spec_files)
+  end
+
+  mapper.add_mapping(any_spec_file) do |filename, _|
+    filename
+  end
+
+  mapper.add_mapping(any_project_file) do |filename, _|
+    mapper.files_matching(all_spec_files)
+  end
+end
