@@ -43,7 +43,7 @@ Autotest.add_hook :initialize do |mapper|
   any_project_file    = project_files
 
   ignored_files       = [
-                          regex "^\.git/.*"
+                          regex("^\.git/.*")
                         ]
 
 
