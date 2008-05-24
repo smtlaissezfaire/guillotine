@@ -1,0 +1,64 @@
+
+CachedModel 
+
+=================
+
+Provide transparent, row level cache to ActiveRecord.
+
+
+Philosophical problems to current
+caching schemes in ActiveRecord:
+================================
+
+1.  Rails Query cache is dead simple.  It's great, but it only caches 
+    queries per request.  At the start of a new request, the cache
+    is invalidated.
+
+2.  Memcached: cached_model, acts_as_cached.  This works on a time basis
+    (expiring automatically after X minutes).  Works great, except that
+    you'll need to modify your code to use it.  Plus, it is not intelligent,
+    so, for example, if you want to perform these two queries in two seperate
+    places:
+
+        User.find(:all, :limit => 10)
+
+        User.find(:all, :limit => 20)
+    
+    You'll either need to write the logic to grab the first 10 from the cache
+    for the second query, or you'll need to store both sets of records in 
+    memcached, which is just a waste of memory.
+
+3.  Mysql has it's own query cache, which works great for sites which are
+    90% (or more) reads to writes.  The cache is per table, and gets invalidated
+    as soon as any write is performed to the table.  For larger tables this means
+    removing the cache (for the whole table!) from memory, only to recreate
+    it.  Further, the query cache cannot be turned on per-table, which just
+    seems silly.
+
+
+Solution
+
+==============
+
+Use cached_model, which means that the table can stay in memory as long as 
+you use ActiveRecord's standard methods to read and write from the table.
+
+The cache is row level, so any time an individual row is written to it not
+only gets written to the database, but also updated in the cache.
+
+No extra work is needed!  Your code will not need to change one bit.
+
+
+Limitations
+
+==============
+
+There are no immediate plans to support the following finders:
+      
+      find_by_sql
+      find with one of the following keys:
+           :select
+           :include
+           :joins
+
+                
