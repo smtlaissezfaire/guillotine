@@ -5,7 +5,7 @@ module CacheModel
     end
     
     def find(*args)
-      if_excluded_options?(*args) do
+      if_no_excluded_options?(*args) do
         case args.first
         when :all
           all_records
@@ -22,7 +22,7 @@ module CacheModel
     
   private
     
-    def if_excluded_options?(*args)
+    def if_no_excluded_options?(*args)
       if args.size == 2 && keys = args[1].keys
         if keys.include?(:include)
           target.find(*args)
