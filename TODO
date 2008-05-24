@@ -1,0 +1,14 @@
+
+- find(id, other_options)
+- escaping for :include, :joins, :select
+  (or possible support for select ?)
+- should give a dup copy the objects out of the cache
+- multiple attributes
+- better parsing of sql conditions (remove spaces, and so on)
+- errors in sql parsing
+- escape hatch: throw, catch, so that if something isn't understood,
+  AR gets it as normal
+- update, create, save invalidations
+- DRb, so that multiple mongrels can all talk to the same cache
+
+- AND ?
