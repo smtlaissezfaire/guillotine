@@ -23,15 +23,23 @@ module CacheModel
   private
     
     def if_no_excluded_options?(*args)
-      if args.size == 2 && keys = args[1].keys
-        if keys.include?(:include)
-          target.find(*args)
-        else
-          yield
-        end
+      if args.size == 2 && args_include_excluded_keys?(args[1])
+        target.find(*args)
       else
         yield
       end
+    end
+    
+    def args_include_excluded_keys?(arg)
+      excluded_keys.each do |key|
+        return true if arg.keys.include?(key)
+      end
+      
+      false
+    end
+    
+    def excluded_keys
+      [:include]
     end
     
     def first_finder(options={ })
