@@ -52,9 +52,9 @@ module CacheModel
     end
     
     def narrow_records(conditions)
-      conditions.each { |condition|
+      conditions.each do |condition|
         return find_all_records.find(&condition.to_proc)
-      }
+      end
     end
     
     def conditions
