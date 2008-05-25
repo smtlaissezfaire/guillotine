@@ -13,48 +13,52 @@ module CacheModel
       Person.delete_all
     end
     
-    describe "with an equal condition" do
-      it "should parse it as a hash for the name scott" do
-        @finder.find(:first, :conditions => { :first_name => "Scott" }).should == @scott
+    describe "with one attribute" do
+      describe "with an equal condition" do
+        describe "with a hash" do
+          it "should parse it as a hash for the name scott" do
+            @finder.find(:first, :conditions => { :first_name => "Scott" }).should == @scott
+          end
+          
+          it "should parse it as a hash for the name Matt" do
+            @finder.find(:first, :conditions => { :first_name => "Matt" }).should == @matt
+          end
+          
+          it "should parse it as a hash for the last name Taylor" do
+            @finder.find(:first, :conditions => { :last_name => "Taylor" }).should == @scott
+          end
+          
+          it "should parse it as a hash for the last name Pelletier" do
+            @finder.find(:first, :conditions => { :last_name => "Pelletier" }).should == @matt
+          end
+        end
+        
+        describe "with an array" do
+          it "should parse it as an array with the first name of 'Scott'" do
+            @finder.find(:first, :conditions => ["first_name = ?", "Scott"]).should == @scott
+          end
+          
+          it "should parse it as an array with the first name of 'Matt'" do
+            @finder.find(:first, :conditions => ["first_name = ?", "Matt"]).should == @matt
+          end
+          
+          it "should parse it as an array with the last name of 'Taylor'" do
+            @finder.find(:first, :conditions => ["last_name = ?", "Taylor"]).should == @scott
+          end
+          
+          it "should find none of the records if it does not match" do
+            @finder.find(:first, :conditions => ["first_name = ?", "John"]).should be_nil
+          end
+        end
+        
+        it "should find it from the cache" do
+          @finder.find(:first)
+          @target.should_not_receive(:find).with(:first)
+          @finder.find(:first, :conditions => { :first_name => "Scott"})
+        end
       end
       
-      it "should parse it as a hash for the name Matt" do
-        @finder.find(:first, :conditions => { :first_name => "Matt" }).should == @matt
-      end
-      
-      it "should parse it as a hash for the last name Taylor" do
-        @finder.find(:first, :conditions => { :last_name => "Taylor" }).should == @scott
-      end
-      
-      it "should parse it as a hash for the last name Pelletier" do
-        @finder.find(:first, :conditions => { :last_name => "Pelletier" }).should == @matt
-      end
-      
-      it "should parse it as an array with the first name of 'Scott'" do
-        @finder.find(:first, :conditions => ["first_name = ?", "Scott"]).should == @scott
-      end
-      
-      it "should parse it as an array with the first name of 'Matt'" do
-        @finder.find(:first, :conditions => ["first_name = ?", "Matt"]).should == @matt
-      end
-      
-      it "should parse it as an array with the last name of 'Taylor'" do
-        @finder.find(:first, :conditions => ["last_name = ?", "Taylor"]).should == @scott
-      end
-      
-      it "should find none of the records if it does not match" do
-        @finder.find(:first, :conditions => ["first_name = ?", "John"]).should be_nil
-      end
-      
-      it "should find it from the cache" do
-        @finder.find(:first)
-        @target.should_not_receive(:find).with(:first)
-        @finder.find(:first, :conditions => { :first_name => "Scott"})
-      end
-    end
-    
-    describe "with a != condition" do
-      describe "with an array" do
+      describe "with a != condition" do
         it "should find scott when give not matt" do
           @finder.find(:first, :conditions => ["first_name != ?", "Matt"]).should == @scott
         end
@@ -66,3 +70,4 @@ module CacheModel
     end
   end
 end
+
