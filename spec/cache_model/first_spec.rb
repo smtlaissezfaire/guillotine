@@ -42,6 +42,10 @@ module CacheModel
         @finder.find(:first, :conditions => ["last_name = ?", "Taylor"]).should == @scott
       end
       
+      it "should find none of the records if it does not match" do
+        @finder.find(:first, :conditions => ["first_name = ?", "John"]).should be_nil
+      end
+      
       it "should find it from the cache" do
         @finder.find(:first)
         @target.should_not_receive(:find).with(:first)
