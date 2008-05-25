@@ -45,15 +45,19 @@ module CacheModel
     def first_finder(options={ })
       if options.keys.include?(:conditions)
         @condition_options = options[:conditions]
-        narrow_records(conditions)
+        narrow_records(conditions).first
       else
         find_all_records.first
       end
     end
     
-    def narrow_records(conditions)
-      conditions.each do |condition|
-        return find_all_records.find(&condition.to_proc)
+    def narrow_records(conditions, result_set=all_records)
+      if conditions.empty?
+        return result_set
+      else
+        condition = conditions.pop
+        narrow_records(conditions,
+                       result_set.find_all(&condition))
       end
     end
     

@@ -1,21 +1,27 @@
 class HashConditionConverter < ConditionConverter
   def initialize(hash)
-    @hash = hash
+    @conditions = hash
   end
   
-  attr_reader :hash
+  attr_reader :conditions
   
   def parse
-    @lambda = lambda do |obj|
-      result = false
-      
-      @hash.each do |key, value|
+    @conditions.each do |key, value|
+      lambdas << lambda do |obj|
+        result = false
         result = (obj.send(key) == value)
+        result
       end
-      
-      result
     end
-    
+
     to_proc_array
+  end
+  
+  def to_proc_array
+    lambdas
+  end
+  
+  def lambdas
+    @lambdas ||= []
   end
 end
