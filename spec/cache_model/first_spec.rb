@@ -68,6 +68,40 @@ module CacheModel
         end
       end
     end
+    
+    describe "with two attributes" do
+      describe "with two equalities" do
+        describe "with a hash" do
+        end
+        
+        describe "with an array" do
+          it "should find the user Scott Taylor" do
+            conditions = ["first_name = ? AND last_name = ?", "Scott", "Taylor"]
+            @finder.find(:first, :conditions => conditions).should == @scott
+          end
+          
+          it "should find the user Matt Pelletier" do
+            conditions = ["first_name = ? AND last_name = ?", "Matt", "Pelletier"]
+            @finder.find(:first, :conditions => conditions).should == @matt
+          end
+          
+          it "should not find the user Matt Taylor" do
+            pending 'todo'
+            conditions = ["first_name = ? AND last_name = ?", "Matt", "Taylor"]
+            @finder.find(:first, :conditions => conditions).should be_nil
+          end
+
+        end
+      end
+      
+      describe "with two inequalities" do
+        
+      end
+      
+      describe "with an inequality and an equality" do
+        
+      end
+    end
   end
 end
 
