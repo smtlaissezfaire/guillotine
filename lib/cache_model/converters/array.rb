@@ -6,16 +6,24 @@ class ArrayConditionConverter < ConditionConverter
   attr_reader :array
   
   def parse
-    @lambda = lambda do |obj|
-      map_paramaters { |message, condition, value, negation| 
+    map_paramaters do |message, condition, value, negation| 
+      lambdas << lambda do |obj|
         if negation
           obj.send(message) != value
         else
           obj.send(message).send(condition, value)
         end
-      }
+      end
     end
     to_proc_array
+  end
+  
+  def to_proc_array
+    @lambdas
+  end
+  
+  def lambdas
+    @lambdas ||= []
   end
   
   def map_paramaters
