@@ -15,5 +15,7 @@ class HashConditionConverter < ConditionConverter
       
       result
     end
+    
+    to_proc_array
   end
 end

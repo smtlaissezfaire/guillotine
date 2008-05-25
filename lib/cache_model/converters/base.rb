@@ -14,7 +14,7 @@ class ConditionConverter
     end
   end
   
-  def to_proc
-    @lambda
+  def to_proc_array
+    [@lambda]
   end
 end

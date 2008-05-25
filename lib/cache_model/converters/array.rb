@@ -15,6 +15,7 @@ class ArrayConditionConverter < ConditionConverter
         end
       }
     end
+    to_proc_array
   end
   
   def map_paramaters
