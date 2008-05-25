@@ -51,6 +51,8 @@ module CacheModel
       end
     end
     
+    # Will this tail-recursion be terrible inefficent for
+    # MRI with large models?
     def narrow_records(conditions, result_set=all_records)
       if conditions.empty?
         return result_set
