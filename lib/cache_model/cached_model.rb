@@ -65,13 +65,11 @@ module CacheModel
       ConditionConverter.parse(@condition_options)
     end
     
-    def find_all_records
+    def all_records
       @all_records ||= @target.find(:all).to_a
     end
     
-    def all_records
-      find_all_records
-    end
+    alias_method :find_all_records, :all_records
     
     def find_by_id(id)
       all_records.find { |r| r.id == id.to_i }
