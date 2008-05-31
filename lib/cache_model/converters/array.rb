@@ -33,13 +33,35 @@ class ArrayConditionConverter < ConditionConverter
     key = $2.strip
     condition = $3.strip
     
-    if condition == "="
-      condition = :==
-    elsif condition == "!="
-      condition = :==
-      not_condition = true
-    end
+    condition, not_condition = *SQLConditionConverter.convert(condition)
     
     yield key, condition, array[1], not_condition
+  end
+  
+  class SQLConditionConverter
+    def self.convert(string)
+      converter = new(string)
+      converter.convert
+      [converter.converted_condition, converter.not_condition]
+    end
+    
+    def initialize(condition_string)
+      @condition = condition_string.to_s
+    end
+    
+    attr_reader :condition
+    
+    def convert
+      if condition == "="
+        @converted_condition = :==
+        @not_condition = false
+      elsif condition == "!="
+        @converted_condition = :==
+        @not_condition = true
+      end
+    end
+    
+    attr_reader :converted_condition
+    attr_reader :not_condition
   end
 end
