@@ -27,15 +27,19 @@ class ArrayConditionConverter < ConditionConverter
   end
   
   def map_paramaters(array=self.array)
+    find_keys(array)
+    condition, not_condition = *SQLConditionConverter.convert(@condition)
+    yield @key, condition, array[1], not_condition
+  end
+  
+private
+  
+  def find_keys(array)
     array[0] =~ /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
     
-    whole_matching_expression = $1
-    key = $2.strip
-    condition = $3.strip
-    
-    condition, not_condition = *SQLConditionConverter.convert(condition)
-    
-    yield key, condition, array[1], not_condition
+    @whole_matching_expression = $1
+    @key = $2.strip
+    @condition = $3.strip
   end
   
   class SQLConditionConverter
