@@ -28,11 +28,12 @@ class ArrayConditionConverter < ConditionConverter
   
 private
   
-  attr_reader :array
+  attr_accessor :array
   
   def each_statement
-    find_next_statement
-    yield(@current_key, @current_value, not_condition?)
+    while next_statement?
+      yield(@current_key, @current_value, not_condition?)
+    end
   end
   
   def not_condition?
@@ -41,6 +42,12 @@ private
   
   REGEXP_MATCHER = /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
   
+  def next_statement?
+    find_next_statement
+  rescue
+    false
+  end
+  
   def find_next_statement
     array[0] =~ REGEXP_MATCHER
     
@@ -48,5 +55,19 @@ private
     @current_key = $2.strip
     @current_condition = $3.strip
     @current_value = array[1]
+    
+    destruct_old_array
+  end
+  
+  def destruct_old_array
+    self.array = [rest_of_expression.strip, *rest_of_values]
+  end
+  
+  def rest_of_expression
+    array[0].gsub(@whole_matching_expression, "")
+  end
+  
+  def rest_of_values
+    array[2..array.length-1]
   end
 end
