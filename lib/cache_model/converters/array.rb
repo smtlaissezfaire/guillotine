@@ -27,7 +27,6 @@ class ArrayConditionConverter < ConditionConverter
   end
   
   def map_paramaters(array=self.array)
-    debugger if $debug == true
     negation = false
     array[0] =~ /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
     
