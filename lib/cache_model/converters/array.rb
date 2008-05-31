@@ -26,18 +26,24 @@ class ArrayConditionConverter < ConditionConverter
     @lambdas ||= []
   end
   
-  def map_paramaters(array=self.array)
-    find_keys(array)
-    yield @key, :==, array[1], not_condition?
+  def map_paramaters
+    each_statement do
+      yield @key, :==, array[1], not_condition?
+    end
   end
   
 private
+  
+  def each_statement
+    find_keys
+    yield
+  end
   
   def not_condition?
     @condition == "!=" ? true : false
   end
   
-  def find_keys(array)
+  def find_keys
     array[0] =~ /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
     
     @whole_matching_expression = $1
