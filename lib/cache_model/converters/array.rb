@@ -28,11 +28,14 @@ class ArrayConditionConverter < ConditionConverter
   
   def map_paramaters(array=self.array)
     find_keys(array)
-    condition, not_condition = *SQLConditionConverter.convert(@condition)
-    yield @key, condition, array[1], not_condition
+    yield @key, :==, array[1], not_condition
   end
   
 private
+  
+  def not_condition
+    SQLConditionConverter.convert(@condition)
+  end
   
   def find_keys(array)
     array[0] =~ /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
@@ -46,7 +49,7 @@ private
     def self.convert(string)
       converter = new(string)
       converter.convert
-      [converter.converted_condition, converter.not_condition]
+      converter.not_condition
     end
     
     def initialize(condition_string)
@@ -57,15 +60,12 @@ private
     
     def convert
       if condition == "="
-        @converted_condition = :==
         @not_condition = false
       elsif condition == "!="
-        @converted_condition = :==
         @not_condition = true
       end
     end
     
-    attr_reader :converted_condition
     attr_reader :not_condition
   end
 end
