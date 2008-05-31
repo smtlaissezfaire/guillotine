@@ -26,19 +26,22 @@ class ArrayConditionConverter < ConditionConverter
     @lambdas ||= []
   end
   
-  def map_paramaters
+  def map_paramaters(array=self.array)
+    debugger if $debug == true
     negation = false
-    array[0] =~ /([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?/
-    if $2 == "="
+    array[0] =~ /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
+    
+    whole_matching_expression = $1
+    key = $2.strip
+    condition = $3.strip
+    
+    if condition == "="
       condition = :==
-    else
-      condition = $2.strip
-      if condition == "!="
-        condition = :==
-          not_condition = true
-      end
+    elsif condition == "!="
+      condition = :==
+      not_condition = true
     end
     
-    yield $1.strip, condition, array[1], not_condition
+    yield key, condition, array[1], not_condition
   end
 end
