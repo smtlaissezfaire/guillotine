@@ -26,27 +26,28 @@ class ArrayConditionConverter < ConditionConverter
   alias_method :to_proc_array, :lambdas
   
   def map_paramaters
-    each_statement do
-      yield @key, :==, array[1], not_condition?
+    each_statement do |key, value, negation|
+      yield(key, :==, value, negation)
     end
   end
   
 private
   
   def each_statement
-    find_keys
-    yield
+    find_next_statement
+    yield(@current_key, @current_value, not_condition?)
   end
   
   def not_condition?
-    @condition == "!=" ? true : false
+    @current_condition == "!=" ? true : false
   end
   
-  def find_keys
+  def find_next_statement
     array[0] =~ /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
     
     @whole_matching_expression = $1
-    @key = $2.strip
-    @condition = $3.strip
+    @current_key = $2.strip
+    @current_condition = $3.strip
+    @current_value = array[1]
   end
 end
