@@ -87,8 +87,12 @@ private
       self.array = [rest_of_expression.strip, *rest_of_values]
     end
     
+    def matching_expression
+      @matching_expression ||= ""
+    end
+    
     def rest_of_expression
-      array[0].gsub(@matching_expression, "")
+      array[0].gsub(matching_expression, "")
     end
     
     def rest_of_values
