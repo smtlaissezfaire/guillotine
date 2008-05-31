@@ -28,8 +28,6 @@ class ArrayConditionConverter < ConditionConverter
   
 private
   
-  attr_accessor :array
-  
   def each_statement
     parsed_arrays.each do |key, value, negation|
       yield key, value, negation
