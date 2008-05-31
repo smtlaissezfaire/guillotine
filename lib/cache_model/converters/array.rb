@@ -18,13 +18,11 @@ class ArrayConditionConverter < ConditionConverter
     to_proc_array
   end
   
-  def to_proc_array
-    @lambdas
-  end
-  
   def lambdas
     @lambdas ||= []
   end
+  
+  alias_method :to_proc_array, :lambdas
   
   def map_paramaters
     each_statement do
