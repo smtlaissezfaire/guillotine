@@ -31,43 +31,70 @@ private
   attr_accessor :array
   
   def each_statement
-    while next_statement?
-      yield(@current_key, @current_value, not_condition?)
+    parsed_arrays.each do |key, value, negation|
+      yield key, value, negation
     end
   end
   
-  def not_condition?
-    @current_condition == "!="
+  def parsed_arrays
+    @parsed_arrays ||= sql_array_parser.parse
   end
   
-  REGEXP_MATCHER = /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
-  
-  def next_statement?
-    find_next_statement
-  rescue
-    false
+  def sql_array_parser
+    @sql_array_parser ||= SQLArrayParser.new(@array)
   end
   
-  def find_next_statement
-    array[0] =~ REGEXP_MATCHER
+  class SQLArrayParser
+    def initialize(ar_array)
+      @original_ar_array = ar_array
+      @array = @original_ar_array.dup
+    end
     
-    @whole_matching_expression = $1
-    @current_key = $2.strip
-    @current_condition = $3.strip
-    @current_value = array[1]
+    def parse
+      @statements = []
+      while next_statement?
+        @statements << [@current_key, @current_value, not_condition?]
+      end
+      @statements
+    end
     
-    destruct_old_array
-  end
-  
-  def destruct_old_array
-    self.array = [rest_of_expression.strip, *rest_of_values]
-  end
-  
-  def rest_of_expression
-    array[0].gsub(@whole_matching_expression, "")
-  end
-  
-  def rest_of_values
-    array[2..array.length-1]
+  private
+    
+    attr_accessor :array
+    
+    def not_condition?
+      @current_condition == "!="
+    end
+    
+    REGEXP_MATCHER = /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
+    
+    def next_statement?
+      find_next_statement
+    rescue
+      false
+    end
+    
+    def find_next_statement
+      array[0] =~ REGEXP_MATCHER
+      
+      @whole_matching_expression = $1
+      @current_key = $2.strip
+      @current_condition = $3.strip
+      @current_value = array[1]
+      
+      destruct_old_array
+    end
+    
+    def destruct_old_array
+      self.array = [rest_of_expression.strip, *rest_of_values]
+    end
+    
+    def rest_of_expression
+      array[0].gsub(@whole_matching_expression, "")
+    end
+    
+    def rest_of_values
+      array[2..array.length-1]
+    end
   end
 end
