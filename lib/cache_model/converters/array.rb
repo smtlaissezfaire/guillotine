@@ -73,7 +73,7 @@ private
     end
     
     def find_next_statement
-      array[0] =~ REGEXP_MATCHER
+      expression =~ REGEXP_MATCHER
       
       @matching_expression = $1
       @current_key = $2.strip
@@ -92,7 +92,11 @@ private
     end
     
     def rest_of_expression
-      array[0].gsub(matching_expression, "")
+      expression.gsub(matching_expression, "")
+    end
+    
+    def expression
+      array[0]
     end
     
     def rest_of_values
