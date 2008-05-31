@@ -8,7 +8,6 @@ class HashConditionConverter < ConditionConverter
   def parse
     @conditions.each do |key, value|
       lambdas << lambda do |obj|
-        result = false
         result = (obj.send(key) == value)
         result
       end
