@@ -45,6 +45,8 @@ private
   end
   
   class SQLArrayParser
+    REGEXP_MATCHER = /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
+    
     def initialize(ar_array)
       @original_ar_array = ar_array
       @array = @original_ar_array.dup
@@ -65,8 +67,6 @@ private
     def not_condition?
       @current_condition == "!="
     end
-    
-    REGEXP_MATCHER = /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
     
     def next_statement?
       find_next_statement
