@@ -39,8 +39,10 @@ private
     @current_condition == "!="
   end
   
+  REGEXP_MATCHER = /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
+  
   def find_next_statement
-    array[0] =~ /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
+    array[0] =~ REGEXP_MATCHER
     
     @whole_matching_expression = $1
     @current_key = $2.strip
