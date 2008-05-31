@@ -15,6 +15,7 @@ class ArrayConditionConverter < ConditionConverter
         end
       end
     end
+    
     to_proc_array
   end
   
