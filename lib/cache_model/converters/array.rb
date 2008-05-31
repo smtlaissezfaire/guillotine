@@ -3,16 +3,11 @@ class ArrayConditionConverter < ConditionConverter
     @array = array
   end
   
-  attr_reader :array
-  
   def parse
-    map_paramaters do |message, condition, value, negation| 
+    map_paramaters do |message, value, negation| 
       lambdas << lambda do |obj|
-        if negation
-          obj.send(message) != value
-        else
-          obj.send(message).send(condition, value)
-        end
+        equal_result = obj.send(message) == value
+        negation ? !equal_result : equal_result
       end
     end
     
@@ -27,11 +22,13 @@ class ArrayConditionConverter < ConditionConverter
   
   def map_paramaters
     each_statement do |key, value, negation|
-      yield(key, :==, value, negation)
+      yield(key, value, negation)
     end
   end
   
 private
+  
+  attr_reader :array
   
   def each_statement
     find_next_statement
@@ -39,7 +36,7 @@ private
   end
   
   def not_condition?
-    @current_condition == "!=" ? true : false
+    @current_condition == "!="
   end
   
   def find_next_statement
