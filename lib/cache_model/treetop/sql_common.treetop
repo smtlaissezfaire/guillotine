@@ -1,0 +1,31 @@
+grammar SQLCommon
+
+  rule column
+    table_name dot column_without_tablename / column_without_tablename
+  end
+
+  rule column_without_tablename
+    .+
+  end
+
+  rule table_name
+    backquoted_string
+  end
+
+  rule backquoted_string
+    '`' unquoted_string '`'
+  end
+
+  rule unquoted_string
+    .+
+  end
+
+  rule quoted_string
+    '"' (!'"' . / '\"')* '"'
+  end
+
+  rule dot
+    '.'
+  end
+
+end

@@ -1,0 +1,16 @@
+
+grammar SQL
+
+  include SQLCommon
+
+  include SQLSelect
+  include SQLInsert
+  include SQLUpdate
+  include SQLDelete
+
+  rule expression
+    select / insert / update / delete
+  end
+
+end
+  

@@ -1,0 +1,91 @@
+grammar SQLSelect
+
+  rule select_statement
+    select
+    from
+    where ?
+  end
+
+  rule select
+    'SELECT'
+  end
+
+  rule from
+    'FROM'
+  end
+
+  rule where
+    'WHERE ' where_clause
+  end
+
+  rule order_by
+    'ORDER BY' order_by_clause
+  end
+
+  # Condition Parser
+
+  rule where_clause
+    expression (expression_joiner expression)*
+  end
+
+  rule expression_joiner
+    and / or
+  end
+
+  rule expression
+    '(' expression ') /
+    column condition value /
+    column nullable /
+    column not_nullable /
+  end
+
+  rule condition
+    '=' / '!='
+  end
+
+  rule value
+    number / string / boolean
+  end
+
+  rule number
+    0-9
+  end
+
+  rule boolean
+    true / false
+  end
+
+  rule true
+    1 / true_string / 't' / 'T'
+  end
+
+  rule false
+    0 / false_string / 'f' / 'F'
+  end
+  
+  # Clean this up
+  rule true_string
+    'TRUE'
+  end
+
+  rule false_string
+    'FALSE'
+  end
+
+  rule nullable
+    'IS NULL'
+  end
+
+  rule not_nullable
+    'IS NOT NULL'
+  end
+
+  rule and
+    'AND'
+  end
+
+  rule or
+    'OR'
+  end
+
+end
