@@ -1,6 +1,14 @@
 grammar SQLSelect
   rule primitives
-    string / number
+    backtick_string / string / number
+  end
+
+  rule backtick_string
+    "`" string "`" {
+      def eval(backtick_string_class=BackTickString)
+        backtick_string_class.new(text_value.gsub("`", ""))
+      end
+    }
   end
 
   rule string
