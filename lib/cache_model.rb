@@ -6,6 +6,8 @@ require File.dirname(__FILE__) + "/cache_model/converters"
 require File.dirname(__FILE__) + "/cache_model/active_record"
 
 require "treetop"
+require File.dirname(__FILE__) + "/cache_model/treetop/backtick_string"
 Treetop.load File.dirname(__FILE__) + "/cache_model/treetop/sql_select"
+
 
 
