@@ -7,22 +7,26 @@ module CachedModel
       @parser = SQLSelectParser.new
     end
     
+    def parse(val)
+      @parser.parse(val)
+    end
+    
     describe "number" do
       it "should parse the number 0" do
-        @parser.parse('0').eval.should == 0
+        parse('0').eval.should == 0
       end
       
       it "should parse the number 1" do
-        @parser.parse('1').eval.should == 1
+        parse('1').eval.should == 1
       end
       
       it "should parse multiple numbers" do
-        @parser.parse('123').eval.should == 123
+        parse('123').eval.should == 123
       end
       
       it "should not parse the empty string as a number" do
         lambda { 
-          @parser.parse('').eval
+          parse('').eval
         }.should raise_error
       end
     end
