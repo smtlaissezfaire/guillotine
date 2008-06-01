@@ -43,7 +43,7 @@ private
   end
   
   class SQLArrayParser
-    REGEXP_MATCHER = /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/
+    REGEXP_MATCHER = /(([a-zA-Z1-9_]+)\s*(\=|\!\=)\s*\?)/ unless defined?(REGEXP_MATCHER)
     
     def initialize(ar_array)
       @original_ar_array = ar_array
