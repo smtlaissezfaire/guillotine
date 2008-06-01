@@ -32,9 +32,29 @@ module CachedModel
     end
     
     describe 'string' do
-      it "should be a single char"
+      it "should parse a single char" do
+        parse('a').eval.should == "a"
+      end
       
-      it "should be multitple chars"
+      it "should parse multitple chars" do
+        parse("aaaa").eval.should == "aaaa"
+      end
+      
+      it "should parse different chars" do
+        parse("abcd").eval.should == "abcd"
+      end
+      
+      it "should parse an uppercase char" do
+        parse("A").eval.should == "A"
+      end
+      
+      it "should parse a combination of uppercase and lowercase chars" do
+        parse("ABcdEF").eval.should == "ABcdEF"
+      end
+      
+      it "should parse underscores" do
+        parse("_").eval.should == "_"
+      end
     end
   end
 end

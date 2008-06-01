@@ -1,4 +1,16 @@
 grammar SQLSelect
+  rule primitives
+    string / number
+  end
+
+  rule string
+    [a-zA-Z_]+ {
+      def eval
+        text_value
+      end
+    }
+  end
+
   rule number
     [0-9]+ {
       def eval
