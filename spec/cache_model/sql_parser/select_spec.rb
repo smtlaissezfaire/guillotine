@@ -56,5 +56,15 @@ module CachedModel
         parse("_").should == "_"
       end
     end
+    
+    describe "quoted string" do
+      it "should use single quotes"
+      
+      it "should use double quotes"
+      
+      it "should not parse if it starts with a single quote, but ends in a double quote"
+      
+      it "should properly nest quotes"
+    end
   end
 end
