@@ -68,12 +68,12 @@ module CachedModel
       end
       
       it "should parse a simple string properly" do
-        @backtick_class.should_receive(:new).with("foo").and_return @backtick_string
+        @backtick_class.should_receive(:new).with("`foo`").and_return @backtick_string
         parse_and_eval("`foo`", @backtick_class)
       end
       
       it "should parse a different string properly" do
-        @backtick_class.should_receive(:new).with("foobar").and_return @backtick_string
+        @backtick_class.should_receive(:new).with("`foobar`").and_return @backtick_string
         parse_and_eval("`foobar`", @backtick_class).should == @backtick_string
       end
     end
