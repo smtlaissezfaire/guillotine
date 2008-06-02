@@ -122,7 +122,7 @@ module CachedModel
     
     describe "condition" do
       describe "with '='" do
-        it "should parse foo='bar'
+        it "should parse foo='bar'"
       end
     end
     
