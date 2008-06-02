@@ -1,6 +1,34 @@
 grammar SQLSelect
   rule primitives
-    backtick_string / string / number
+    quoted_string / backtick_string / string / number
+  end
+
+  rule quoted_string
+    single_quoted_string / double_quoted_string
+  end
+
+  rule single_quoted_string
+    single_quote (string_chars)* single_quote {
+      def eval
+        instance_eval text_value
+      end
+    }
+  end
+
+  rule single_quote
+    "'"
+  end
+
+  rule double_quoted_string
+    double_quote (string_chars)* double_quote {
+      def eval
+        instance_eval text_value
+      end
+    }
+  end
+
+  rule double_quote
+    '"'
   end
 
   rule backtick_string
@@ -12,11 +40,15 @@ grammar SQLSelect
   end
 
   rule string
-    [a-zA-Z_]+ {
+    string_chars+ {
       def eval
         text_value
       end
     }
+  end
+
+  rule string_chars
+    [a-zA-Z_]
   end
 
   rule number

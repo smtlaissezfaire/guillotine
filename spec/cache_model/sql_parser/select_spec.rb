@@ -79,13 +79,30 @@ module CachedModel
     end
     
     describe "quoted string" do
-      it "should use single quotes"
+      it "should use single quotes" do
+        parse_and_eval("'foo'").should == "foo"
+      end
       
-      it "should use double quotes"
+      it "should use double quotes" do
+        parse_and_eval("\"foo\"").should == "foo"
+      end
       
-      it "should not parse if it starts with a single quote, but ends in a double quote"
+      it "should not parse if it starts with a single quote, but ends in a double quote" do
+        parse("\"foo'").should be_nil
+      end
       
-      it "should properly nest quotes"
+      it "should match the empty string with single quotes" do
+        parse_and_eval("''").should == ""
+      end
+      
+      it "should match the empty string with double quotes" do
+        parse_and_eval('""').should == ""
+      end
+      
+      it "should properly nest quotes" do
+        pending 'todo'
+        parse_and_eval("\"foo'bar\"").should == "foo'bar"
+      end
     end
   end
 end
