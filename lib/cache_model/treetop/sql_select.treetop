@@ -1,6 +1,6 @@
 grammar SQLSelect
   rule primitives
-    quoted_string / backtick_string / string / number
+    quoted_string / backtick_string / number / string
   end
 
   rule quoted_string
