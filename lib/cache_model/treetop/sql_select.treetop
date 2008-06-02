@@ -8,7 +8,7 @@ grammar SQLSelect
   end
 
   rule single_quoted_string
-    single_quote (string_chars)* single_quote {
+    single_quote (string_chars / double_quote)* single_quote {
       def eval
         instance_eval text_value
       end
@@ -20,7 +20,7 @@ grammar SQLSelect
   end
 
   rule double_quoted_string
-    double_quote (string_chars)* double_quote {
+    double_quote (string_chars / single_quote)* double_quote {
       def eval
         instance_eval text_value
       end

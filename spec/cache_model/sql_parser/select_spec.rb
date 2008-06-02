@@ -91,6 +91,14 @@ module CachedModel
         parse("\"foo'").should be_nil
       end
       
+      it "should not parse if it starts with a double quote and ends in a single quote" do
+        parse("'foo\"").should be_nil
+      end
+      
+      it "should not parse a string which has three double quotes" do
+        parse('"foo"bar"').should be_nil
+      end
+      
       it "should match the empty string with single quotes" do
         parse_and_eval("''").should == ""
       end
@@ -99,9 +107,12 @@ module CachedModel
         parse_and_eval('""').should == ""
       end
       
-      it "should properly nest quotes" do
-        pending 'todo'
+      it "should properly nest single quotes" do
         parse_and_eval("\"foo'bar\"").should == "foo'bar"
+      end
+      
+      it "should properly nest double quotes" do
+        parse_and_eval("'foo\"bar'").should == "foo\"bar"
       end
     end
   end
