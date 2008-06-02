@@ -111,8 +111,12 @@ module CachedModel
         parse_and_eval("\"foo'bar\"").should == "foo'bar"
       end
       
-      it "should properly nest double quotes" do
+      it "should properly nest a signle double quotes" do
         parse_and_eval("'foo\"bar'").should == "foo\"bar"
+      end
+      
+      it "should properly nest two single double quotes" do
+        parse_and_eval("'foo\"bar\"'").should == "foo\"bar\""
       end
     end
   end
