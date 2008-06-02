@@ -119,5 +119,13 @@ module CachedModel
         parse_and_eval("'foo\"bar\"'").should == "foo\"bar\""
       end
     end
+    
+    describe "condition" do
+      describe "with '='" do
+        it "should parse foo='bar'
+      end
+    end
+    
+    describe "condition clause"
   end
 end
