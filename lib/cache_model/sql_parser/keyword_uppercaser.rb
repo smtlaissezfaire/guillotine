@@ -265,6 +265,15 @@ module CacheModel
       def keywords
         @keywords ||= KEYWORDS
       end
+
+      # extract this to object
+      def attr_boolean(*syms)
+        syms.each do |sym|
+          define_method "#{sym}?" do 
+            instance_variable_get("@#{sym}") ? true : false
+          end
+        end
+      end
     end
 
     def initialize(string)
@@ -286,19 +295,32 @@ module CacheModel
     def upcase_word(word)
       upcased_word = word.upcase
 
-      if included_keyword?(upcased_word) && not_quoted?(word)
+      @in_quoted_state = true if quoted?(word)
+
+      if in_quoted_state?
+        if ends_with_quote?(word)
+          @in_quote_state = false
+        end
+        word
+      elsif included_keyword?(upcased_word)
         upcased_word
       else
         word
       end
     end
 
+    attr_boolean :in_quoted_state
+
     def not_quoted?(word)
       !quoted?(word)
     end
 
     def quoted?(word)
-      word[0] == "'"
+      word[0] == "'" || word.first == '"'
+    end
+
+    def ends_with_quote?(word)
+      word.last == "'" || word.last == '"'
     end
 
     def included_keyword?(word)

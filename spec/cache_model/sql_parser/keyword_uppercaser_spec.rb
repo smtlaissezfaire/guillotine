@@ -309,7 +309,6 @@ module CacheModel
     end
 
     it "should not upcase any of the words inside a set of three word double quotes" do
-      pending 'todo'
       upcase('select * from "my sql foo"').should == 'SELECT * FROM "my sql foo"'
     end
     
