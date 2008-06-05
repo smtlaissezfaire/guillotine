@@ -1,6 +1,26 @@
 grammar SQLSelect
   rule primitives
-    quoted_string / backtick_string / number / string
+    boolean / quoted_string / backtick_string / number / string
+  end
+
+  rule boolean
+    true / false
+  end
+
+  rule true
+    "TRUE" {
+      def eval
+        true
+      end
+    }
+  end
+
+  rule false
+    "FALSE" {
+      def eval
+        false
+      end
+    }
   end
 
   rule quoted_string

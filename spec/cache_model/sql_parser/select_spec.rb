@@ -120,9 +120,31 @@ module CachedModel
       end
     end
     
+    describe "booleans" do
+      it "should parse 'TRUE' as true" do
+        parse_and_eval("TRUE").should be_true
+      end
+      
+      it "should parse 'FALSE' as false" do
+        parse_and_eval("FALSE").should be_false
+      end
+      
+      it "should parse '1' as true" do
+        pending 'todo'
+        parse_and_eval("1").should be_true
+      end
+      
+      it "should parse 'true' as true"
+      
+      it "should parse 'False' as false"
+    end
+    
     describe "condition" do
       describe "with '='" do
-        it "should parse foo='bar'"
+        it "should parse foo='bar'" do
+          pending 'todo'
+          parse_and_eval("foo='bar'")
+        end
       end
     end
     
