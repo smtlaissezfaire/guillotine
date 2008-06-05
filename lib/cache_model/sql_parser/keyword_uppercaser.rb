@@ -316,32 +316,45 @@ module CacheModel
 
     attr_boolean :in_quoted_state
 
-    def not_quoted?(word)
-      !quoted?(word)
+    module QuotedHelper
+
+    private
+      
+      def not_quoted?(word)
+        !quoted?(word)
+      end
+
+      def quoted?(word)
+        a_quote?(word.first)
+      end
+
+      def ends_with_quote?(word)
+        a_quote?(word.last)
+      end
+
+      def a_quote?(char)
+        quotes.include?(char)
+      end
+
+      def quotes
+        @quotes ||= self.class.quotes
+      end
     end
 
-    def quoted?(word)
-      a_quote?(word.first)
+    module KeywordHelper
+
+    private
+
+      def included_keyword?(word)
+        keywords.include?(word)
+      end
+
+      def keywords
+        @keywords ||= self.class.keywords
+      end
     end
 
-    def ends_with_quote?(word)
-      a_quote?(word.last)
-    end
-
-    def a_quote?(char)
-      quotes.include?(char)
-    end
-
-    def quotes
-      @quotes ||= self.class.quotes
-    end
-
-    def included_keyword?(word)
-      keywords.include?(word)
-    end
-
-    def keywords
-      @keywords ||= self.class.keywords
-    end
+    include QuotedHelper
+    include KeywordHelper
   end
 end
