@@ -259,9 +259,9 @@ module CacheModel
       "UNDO",
       "UPGRADE",
       "WHILE"
-    ]
+    ] unless defined?(KEYWORDS)
 
-    QUOTES = Set.new ['"', "'"]
+    QUOTES = Set.new ['"', "'"] unless defined?(QUOTES)
 
     
     class << self
