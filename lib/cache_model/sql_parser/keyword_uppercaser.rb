@@ -260,10 +260,17 @@ module CacheModel
       "UPGRADE",
       "WHILE"
     ]
+
+    QUOTES = Set.new ['"', "'"]
+
     
     class << self
       def keywords
         @keywords ||= KEYWORDS
+      end
+
+      def quotes
+        @quotes ||= QUOTES
       end
 
       # extract this to object
@@ -316,11 +323,15 @@ module CacheModel
     end
 
     def quoted?(word)
-      word.first == "'" || word.first == '"'
+      quotes.include?(word.first)
+    end
+
+    def quotes
+      @quotes ||= self.class.quotes
     end
 
     def ends_with_quote?(word)
-      word.last == "'" || word.last == '"'
+      quotes.include?(word.last)
     end
 
     def included_keyword?(word)
