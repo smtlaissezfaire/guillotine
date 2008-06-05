@@ -305,9 +305,7 @@ module CacheModel
       @in_quoted_state = true if quoted?(word)
 
       if in_quoted_state?
-        if ends_with_quote?(word)
-          @in_quote_state = false
-        end
+        @in_quote_state = false if ends_with_quote?(word)
         word
       elsif included_keyword?(upcased_word)
         upcased_word
