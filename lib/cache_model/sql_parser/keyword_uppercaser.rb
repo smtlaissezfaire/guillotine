@@ -266,5 +266,47 @@ module CacheModel
         @keywords ||= KEYWORDS
       end
     end
+
+    def initialize(string)
+      @string = string
+    end
+
+    def upcase
+      words.map do |word|
+        upcase_word(word)
+      end.join(" ")
+    end
+
+    def words(string=@string, array=[])
+      string.split(" ")
+    end
+
+  private
+
+    def upcase_word(word)
+      upcased_word = word.upcase
+
+      if included_keyword?(upcased_word) && not_quoted?(word)
+        upcased_word
+      else
+        word
+      end
+    end
+
+    def not_quoted?(word)
+      !quoted?(word)
+    end
+
+    def quoted?(word)
+      word[0] == "'"
+    end
+
+    def included_keyword?(word)
+      keywords.include?(word)
+    end
+
+    def keywords
+      @keywords ||= self.class.keywords
+    end
   end
 end
