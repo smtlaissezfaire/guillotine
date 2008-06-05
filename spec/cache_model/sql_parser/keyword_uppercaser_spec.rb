@@ -268,7 +268,7 @@ module CacheModel
     
     keywords.each do |keyword|
       it "should have the keyword '#{keyword}'" do
-        @keywords.should include(keyword)
+        @keywords.should include(keyword.to_sym)
       end
     end
 
