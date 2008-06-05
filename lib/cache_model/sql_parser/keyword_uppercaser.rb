@@ -316,7 +316,7 @@ module CacheModel
     end
 
     def quoted?(word)
-      word[0] == "'" || word.first == '"'
+      word.first == "'" || word.first == '"'
     end
 
     def ends_with_quote?(word)
