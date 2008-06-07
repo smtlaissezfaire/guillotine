@@ -41,7 +41,7 @@ module CachedModel
       end
       
       describe LessThan do
-        it "should have to_lambda, in which obj.key > value" do
+        it "should have to_lambda, in which obj.key < value" do
           @ar_object.should_receive("key").and_return @ar_column
           @ar_column.should_receive(:<).with("value")
           lambda = LessThan.new('key', "value").to_lambda
@@ -50,7 +50,7 @@ module CachedModel
       end
       
       describe LessThanOrEqualTo do
-        it "should have to_lambda, in which obj.key > value" do
+        it "should have to_lambda, in which obj.key <= value" do
           @ar_object.should_receive("key").and_return @ar_column
           @ar_column.should_receive(:<=).with("value")
           lambda = LessThanOrEqualTo.new('key', "value").to_lambda
@@ -68,7 +68,7 @@ module CachedModel
       end
       
       describe GreaterThanOrEqualTo do
-        it "should have to_lambda, in which obj.key > value" do
+        it "should have to_lambda, in which obj.key >= value" do
           @ar_object.should_receive("key").and_return @ar_column
           @ar_column.should_receive(:>=).with("value")
           lambda = GreaterThanOrEqualTo.new('key', "value").to_lambda
