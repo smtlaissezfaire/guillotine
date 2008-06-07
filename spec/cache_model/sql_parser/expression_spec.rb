@@ -104,7 +104,6 @@ module CachedModel
         # TODO.  Could use regex's with .* replacing
         # % signs
       end
-
     end
   end
 end
