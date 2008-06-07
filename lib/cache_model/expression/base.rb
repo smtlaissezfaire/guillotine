@@ -15,8 +15,8 @@ module CachedModel
       
     private
       
-      def new_lambda_with_message(message)
-        lambda { |obj| obj.send(self.key).send(message, self.value) }
+      def new_lambda_with_comparison(comparison)
+        lambda { |obj| obj.send(self.key).send(comparison, self.value) }
       end
     end
   end

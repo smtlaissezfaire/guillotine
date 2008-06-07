@@ -1,7 +1,7 @@
 module CachedModel
   module Expression
-    def self.simple_classes_with_corresponding_messages
-      @simple_classes_with_corresponding_messages ||= { 
+    def self.classes_with_comparisons
+      @classes_with_comparisons ||= { 
         :Equal => :==,
         :LessThan => :<,
         :GreaterThan => :>,
@@ -10,11 +10,11 @@ module CachedModel
       }
     end
     
-    simple_classes_with_corresponding_messages.each do |class_name, message|
+    classes_with_comparisons.each do |class_name, comparison|
       unless const_defined?(class_name)
         klass = Class.new(Base) do
           define_method :to_lambda do
-            new_lambda_with_message(message)
+            new_lambda_with_comparison(comparison)
           end
         end
         
@@ -34,7 +34,7 @@ module CachedModel
       end
       
       def to_lambda
-        new_lambda_with_message(:==)
+        new_lambda_with_comparison(:==)
       end
     end
     
