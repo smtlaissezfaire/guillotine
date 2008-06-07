@@ -2,11 +2,11 @@ module CachedModel
   module Expression
     def self.classes_with_comparisons
       @classes_with_comparisons ||= { 
-        :Equal => :==,
-        :LessThan => :<,
-        :GreaterThan => :>,
+        :Equal                => :==,
+        :LessThan             => :<,
+        :GreaterThan          => :>,
         :GreaterThanOrEqualTo => :>=,
-        :LessThanOrEqualTo => :<=
+        :LessThanOrEqualTo    => :<=
       }
     end
     
