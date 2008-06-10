@@ -143,7 +143,7 @@ module CachedModel
       describe "with '='" do
         it "should parse foo='bar'" do
           pending 'todo'
-          parse_and_eval("foo='bar'")
+          parse_and_eval("foo='bar'").should eql(Expression::Equal.new(:foo, "bar"))
         end
       end
     end

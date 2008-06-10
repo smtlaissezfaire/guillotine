@@ -10,4 +10,6 @@ require File.dirname(__FILE__) + "/cache_model/sql_parser/keyword_uppercaser"
 require File.dirname(__FILE__) + "/cache_model/expression"
 require "treetop"
 require File.dirname(__FILE__) + "/cache_model/treetop/backtick_string"
+Treetop.load File.dirname(__FILE__) + "/cache_model/treetop/primitives"
 Treetop.load File.dirname(__FILE__) + "/cache_model/treetop/sql_select"
+

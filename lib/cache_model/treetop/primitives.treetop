@@ -1,0 +1,81 @@
+grammar SQLPrimitives
+  rule primitives
+    boolean / quoted_string / backtick_string / number / string
+  end
+
+  rule boolean
+    true / false
+  end
+
+  rule true
+    "TRUE" {
+      def eval
+        true
+      end
+    }
+  end
+
+  rule false
+    "FALSE" {
+      def eval
+        false
+      end
+    }
+  end
+
+  rule quoted_string
+    single_quoted_string / double_quoted_string
+  end
+
+  rule single_quoted_string
+    single_quote (string_chars / double_quote)* single_quote {
+      def eval
+        instance_eval text_value
+      end
+    }
+  end
+
+  rule single_quote
+    "'"
+  end
+
+  rule double_quoted_string
+    double_quote (string_chars / single_quote)* double_quote {
+      def eval
+        instance_eval text_value
+      end
+    }
+  end
+
+  rule double_quote
+    '"'
+  end
+
+  rule backtick_string
+    "`" string "`" {
+      def eval(backtick_string_class=BackTickString)
+        backtick_string_class.new(text_value)
+      end
+    }
+  end
+
+  rule string
+    string_chars+ {
+      def eval
+        text_value
+      end
+    }
+  end
+
+  rule string_chars
+    [a-zA-Z_]
+  end
+
+  rule number
+    [0-9]+ {
+      def eval
+        text_value.to_i
+      end
+    }
+  end
+end
