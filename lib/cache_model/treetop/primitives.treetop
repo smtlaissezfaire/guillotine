@@ -1,6 +1,14 @@
 grammar SQLPrimitives
-  rule primitives
+  rule primitive
     boolean / quoted_string / backtick_string / number / string
+  end
+
+  rule space
+    " "
+  end
+
+  rule optional_spaces
+    space*
   end
 
   rule boolean
