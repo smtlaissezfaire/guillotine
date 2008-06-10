@@ -13,9 +13,11 @@ module CachedModel
         raise NotImplementedError
       end
       
-      def ==(other)
+      def eql?(other)
         other.value == self.value && other.key == self.key
       end
+      
+      alias_method :==, :eql?
       
     private
       

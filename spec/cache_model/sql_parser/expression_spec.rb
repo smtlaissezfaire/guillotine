@@ -27,6 +27,26 @@ module CachedModel
             Base.new("one", "two").should_not == Base.new("three", "two")
           end
         end
+        
+        describe "eql?" do
+          it "should be eql? if the two objects have the same key and value" do
+            Base.new("foo", "bar").should eql(Base.new("foo", "bar"))
+          end
+          
+          it "should be eql? if the two objects are the same object (they are equal?)" do
+            obj = Base.new("baz", "quxx")
+            obj.should eql(obj)
+          end
+          
+          it "should not be eql? if the two objects have different values" do
+            Base.new("foo", "bar").should_not eql(Base.new("foo", "baz"))
+          end
+          
+          it "should not be eql? if they do not share neither the same key" do
+            Base.new("one", "two").should_not eql(Base.new("three", "two"))
+          end
+        end
+
       end
       
       describe Equal do
