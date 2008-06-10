@@ -13,6 +13,10 @@ module CachedModel
         raise NotImplementedError
       end
       
+      def ==(other)
+        other.value == self.value && other.key == self.key
+      end
+      
     private
       
       def new_lambda_with_comparison(comparison)

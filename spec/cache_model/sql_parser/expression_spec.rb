@@ -8,6 +8,27 @@ module CachedModel
         @ar_object = mock 'ActiveRecord object', :key => @ar_column
       end
       
+      describe Base do
+        describe "==" do
+          it "should be == if the two objects have the same key and value" do
+            Base.new("foo", "bar").should == Base.new("foo", "bar")
+          end
+          
+          it "should be == if the two objects are the same object (they are equal?)" do
+            obj = Base.new("baz", "quxx")
+            obj.should == obj
+          end
+          
+          it "should not be == if the two objects have different values" do
+            Base.new("foo", "bar").should_not == Base.new("foo", "baz")
+          end
+          
+          it "should not be == if they do not share neither the same key" do
+            Base.new("one", "two").should_not == Base.new("three", "two")
+          end
+        end
+      end
+      
       describe Equal do
         it "should have the key which it inits with" do
           Equal.new("foo", "bar").key.should == "foo"
