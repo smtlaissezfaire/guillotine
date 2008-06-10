@@ -14,7 +14,9 @@ module CachedModel
       end
       
       def eql?(other)
-        other.value == self.value && other.key == self.key
+        self.class == other.class &&
+        other.key == self.key &&
+        other.value == self.value
       end
       
       alias_method :==, :eql?

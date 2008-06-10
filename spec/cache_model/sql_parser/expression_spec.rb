@@ -45,6 +45,11 @@ module CachedModel
           it "should not be eql? if they do not share neither the same key" do
             Base.new("one", "two").should_not eql(Base.new("three", "two"))
           end
+          
+          it "should not be eql? if they are of different classes" do
+            Equal.new("foo", "bar").should_not eql(Base.new("foo", "bar"))
+            Base.new("foo", "bar").should_not eql(Equal.new("foo", "bar"))
+          end
         end
 
       end
