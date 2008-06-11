@@ -27,10 +27,6 @@ grammar SQLSelect
     is_not_null / is_null
   end
 
-  rule one_or_more_spaces
-    space+
-  end
-
   rule is_not_null
     "IS" one_or_more_spaces "NOT" one_or_more_spaces "NULL" {
       def eval
