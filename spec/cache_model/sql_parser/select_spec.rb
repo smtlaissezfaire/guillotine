@@ -200,13 +200,15 @@ module CachedModel
           parse_and_eval("foo <= 7").should eql(Expression::LessThanOrEqualTo.new(:foo, 7))
         end
         
+        it "should not parse 'ISNOT NULL" do
+          parse("ISNOT NULL").should be_nil
+        end
+        
         it "should parse foo IS NOT NULL" do
-          pending 'todo'
           parse_and_eval("foo IS NOT NULL").should eql(Expression::IsNotNull.new(:foo))
         end
         
         it "should parse foo IS NULL" do
-          pending 'todo'
           parse_and_eval("foo IS NULL").should eql(Expression::IsNull.new(:foo))
         end
       end

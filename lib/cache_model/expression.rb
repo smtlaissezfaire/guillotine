@@ -10,6 +10,7 @@ module CachedModel
       "<=" => LessThanOrEqualTo,
       ">"  => GreaterThan,
       ">=" => GreaterThanOrEqualTo,
+      "IS NULL" => IsNull,
       "IS NOT NULL" => IsNotNull
     }
     

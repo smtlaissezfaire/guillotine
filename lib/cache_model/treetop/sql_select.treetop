@@ -20,16 +20,17 @@ grammar SQLSelect
   end
 
   rule joiner_or_null
-    joiner_with_value / a_null
+    a_null / joiner_with_value
   end
 
   rule a_null
-    is_not_null {
+    is_not_null / is_null
+  end
+
+  rule is_not_null
+    "IS NOT NULL" {
       def eval
-        { 
-          :joiner => is_not_null.eval,
-          :value => nil
-        }
+        { :joiner => "IS NOT NULL" }
       end
     }
   end
@@ -37,13 +38,11 @@ grammar SQLSelect
   rule is_null
     "IS NULL" {
       def eval
-        "IS NULL"
+        {
+          :joiner => "IS NULL"
+        }
       end
      }
-  end
-
-  rule is_not_null
-    "IS" optional_spaces "NOT" optional_spaces "NULL"
   end
 
   rule joiner_with_value
