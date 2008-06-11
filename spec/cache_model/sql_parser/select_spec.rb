@@ -208,8 +208,32 @@ module CachedModel
           parse_and_eval("foo IS NOT NULL").should eql(Expression::IsNotNull.new(:foo))
         end
         
+        it "should parse foo 'IS  NOT NULL'" do
+          parse_and_eval("foo IS  NOT NULL").should eql(Expression::IsNotNull.new(:foo))
+        end
+        
+        it "should parse foo 'IS NOT  NULL'" do
+          parse_and_eval("foo IS NOT  NULL").should eql(Expression::IsNotNull.new(:foo))
+        end
+        
         it "should parse foo IS NULL" do
           parse_and_eval("foo IS NULL").should eql(Expression::IsNull.new(:foo))
+        end
+        
+        it "should parse foo  IS NULL" do
+          parse_and_eval("foo  IS NULL").should eql(Expression::IsNull.new(:foo))
+        end
+        
+        it "should parse foo IS  NULL" do
+          parse_and_eval("foo IS  NULL").should eql(Expression::IsNull.new(:foo))
+        end
+        
+        it "should not parse fooIS NULL" do
+          parse("fooIS NULL").should be_nil
+        end
+        
+        it "should not parse foo ISNULL" do
+          parse("foo ISNULL").should be_nil
         end
       end
     end

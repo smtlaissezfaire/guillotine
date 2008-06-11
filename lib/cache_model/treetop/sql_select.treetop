@@ -27,8 +27,12 @@ grammar SQLSelect
     is_not_null / is_null
   end
 
+  rule one_or_more_spaces
+    space+
+  end
+
   rule is_not_null
-    "IS NOT NULL" {
+    "IS" one_or_more_spaces "NOT" one_or_more_spaces "NULL" {
       def eval
         { :joiner => "IS NOT NULL" }
       end
@@ -36,7 +40,7 @@ grammar SQLSelect
   end
 
   rule is_null
-    "IS NULL" {
+    "IS" one_or_more_spaces "NULL" {
       def eval
         { :joiner => "IS NULL" }
       end
