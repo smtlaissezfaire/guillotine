@@ -38,9 +38,7 @@ grammar SQLSelect
   rule is_null
     "IS NULL" {
       def eval
-        {
-          :joiner => "IS NULL"
-        }
+        { :joiner => "IS NULL" }
       end
      }
   end
