@@ -84,9 +84,9 @@ module CachedModel
     describe ConjunctionConditionNode do
       describe "when both children are not leafs" do
         before :each do
-          @child_one = mock(ConditionNode, :empty? => false, :evaluate => [:one, :two])
-          @child_two = mock(ConditionNode, :empty? => false, :evaluate => [:two])
-          @root = ConditionNode.new(@child_one, @child_two)
+          @child_one = mock(ConjunctionConditionNode, :empty? => false, :evaluate => [:one, :two])
+          @child_two = mock(ConjunctionConditionNode, :empty? => false, :evaluate => [:two])
+          @root = ConjunctionConditionNode.new(@child_one, @child_two)
         end
         
         it "should return the intersection (with &) of evaluating the two children" do
