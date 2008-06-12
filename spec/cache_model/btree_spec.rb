@@ -27,15 +27,15 @@ module CachedModel
     describe "evaluation" do
       describe "when both children are parents" do
         before :each do
-          @child_one = mock(ConditionNode, :empty? => false, :evaluate => nil)
-          @child_two = mock(ConditionNode, :empty? => false, :evaluate => nil)
+          @child_one = mock(ConditionNode, :empty? => false, :call => nil)
+          @child_two = mock(ConditionNode, :empty? => false, :call => nil)
           @root = ConditionNode.new(@child_one, @child_two)
         end
         
         it "should raise an error" do
           lambda { 
-            @root.evaluate
-          }.should raise_error(NotImplementedError, "Descendents of ConditionNode must implement the method evaluate")
+            @root.call
+          }.should raise_error(NotImplementedError, "Descendents of ConditionNode must implement the method call")
         end
       end
     end
@@ -43,18 +43,18 @@ module CachedModel
     describe ConjunctionConditionNode do
       describe "when both children are not leafs" do
         before :each do
-          @child_one = mock(ConjunctionConditionNode, :empty? => false, :evaluate => [:one, :two])
-          @child_two = mock(ConjunctionConditionNode, :empty? => false, :evaluate => [:two])
+          @child_one = mock(ConjunctionConditionNode, :empty? => false, :call => [:one, :two])
+          @child_two = mock(ConjunctionConditionNode, :empty? => false, :call => [:two])
           @root = ConjunctionConditionNode.new(@child_one, @child_two)
         end
         
         it "should return the intersection (with &) of evaluating the two children" do
-          @root.evaluate.should == [:two]
+          @root.call.should == [:two]
         end
         
         it "should return an empty array when there is no intersection (with different evaluations)" do
-          @child_one.stub!(:evaluate).and_return [:one, :three]
-          @root.evaluate.should == []
+          @child_one.stub!(:call).and_return [:one, :three]
+          @root.call.should == []
         end
       end
     end
@@ -62,18 +62,18 @@ module CachedModel
     describe DisjunctionConditionNode do
       describe "when both children are not leafs" do
         before :each do
-          @child_one = mock(DisjunctionConditionNode, :empty? => false, :evaluate => [:one, :two])
-          @child_two = mock(DisjunctionConditionNode, :empty? => false, :evaluate => [:three])
+          @child_one = mock(DisjunctionConditionNode, :empty? => false, :call => [:one, :two])
+          @child_two = mock(DisjunctionConditionNode, :empty? => false, :call => [:three])
           @root = DisjunctionConditionNode.new(@child_one, @child_two)
         end
         
         it "should return the union (with Array#|) of evaluating the two children" do
-          @root.evaluate.should == [:one, :two, :three]
+          @root.call.should == [:one, :two, :three]
         end
         
         it "should return the union, removing duplicates  (with different evaluations)" do
-          @child_one.stub!(:evaluate).and_return [:one, :three]
-          @root.evaluate.should == [:one, :three]
+          @child_one.stub!(:call).and_return [:one, :three]
+          @root.call.should == [:one, :three]
         end
       end
     end
