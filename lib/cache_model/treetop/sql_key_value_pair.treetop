@@ -1,11 +1,7 @@
 grammar SQLKeyValuePair
   include SQLPrimitives
 
-  rule select
-    select_expression
-  end
-
-  rule select_expression
+  rule key_value_pair
     string optional_spaces joiner_or_null  {
       def eval
         results = joiner_or_null.eval
