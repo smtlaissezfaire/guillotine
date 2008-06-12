@@ -238,6 +238,15 @@ module CachedModel
       end
     end
     
-    describe "condition clause"
+    describe "condition clause" do
+      before :each do
+        @equal_expression = Expression::Equal.new(:foo, 7)
+      end
+      
+      it "should parse a simple where clause with one expression" do
+        pending 'todo'
+        parse_and_eval("where foo = 7")
+      end
+    end
   end
 end
