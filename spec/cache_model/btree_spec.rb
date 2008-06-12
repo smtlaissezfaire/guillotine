@@ -77,7 +77,5 @@ module CachedModel
         end
       end
     end
-
-
   end
 end
