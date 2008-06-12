@@ -99,6 +99,26 @@ module CachedModel
         end
       end
     end
+    
+    describe DisjunctionConditionNode do
+      describe "when both children are not leafs" do
+        before :each do
+          @child_one = mock(DisjunctionConditionNode, :empty? => false, :evaluate => [:one, :two])
+          @child_two = mock(DisjunctionConditionNode, :empty? => false, :evaluate => [:three])
+          @root = DisjunctionConditionNode.new(@child_one, @child_two)
+        end
+        
+        it "should return the union (with Array#|) of evaluating the two children" do
+          @root.evaluate.should == [:one, :two, :three]
+        end
+        
+        it "should return the union, removing duplicates  (with different evaluations)" do
+          @child_one.stub!(:evaluate).and_return [:one, :three]
+          @root.evaluate.should == [:one, :three]
+        end
+      end
+    end
+
 
   end
 end

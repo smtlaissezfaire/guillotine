@@ -63,4 +63,10 @@ module CachedModel
   
   class ConjunctionConditionNode < ConditionNode
   end
+  
+  class DisjunctionConditionNode < ConditionNode
+    def evaluate_children
+      first_child.evaluate | second_child.evaluate
+    end
+  end
 end
