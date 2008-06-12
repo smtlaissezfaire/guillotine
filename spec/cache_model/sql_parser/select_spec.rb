@@ -240,12 +240,30 @@ module CachedModel
     include ParserSpecHelper
     
     before :each do
+      @parser = SQLSelectParser.new
       @equal_expression = Expression::Equal.new(:foo, 7)
+      @bar_equals_eight_expr = Expression::Equal.new(:bar, 8)
     end
     
     it "should parse a simple where clause with one expression" do
+      parse_and_eval("WHERE foo = 7").should eql(@equal_expression)
+    end
+    
+    it "should parse a simple clause with two AND expressions" do
+      @and_expression = ConjunctionConditionNode.new(@equal_expression, @equal_expression)
+      parse_and_eval("WHERE foo = 7 AND foo = 7").should eql(@and_expression)
+    end
+    
+    it "should parse a simple clause with two AND expressions" do
+      @and_expression = ConjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+      parse_and_eval("WHERE foo = 7 AND bar = 8").should eql(@and_expression)
+    end
+    
+    it "should parse a clause with three AND expressions" do
       pending 'todo'
-      parse_and_eval("where foo = 7").should eql(@equal_expression)
+      @first_and_expr = ConjunctionConditionNode.new(@equal_expression, @equal_expression)
+      @second_and_expr = ConjunctionConditionNode.new(@first_and_expr, @bar_equals_eight_expr)
+      parse_and_eval("WHERE foo = 7 AND foo = 7 AND bar = 8").should eql(@second_and_expr)
     end
   end
 end

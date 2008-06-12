@@ -6,6 +6,12 @@ module CachedModel
     
     attr_reader :children
     
+    def eql?(other)
+      other.children == self.children
+    end
+    
+    alias_method :==, :eql?
+    
   private
     
     def first_child

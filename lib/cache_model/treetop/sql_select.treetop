@@ -1,3 +1,30 @@
 grammar SQLSelect
   include SQLKeyValuePair
+
+  rule where_condition
+    "WHERE" space where_clause {
+       def eval
+         where_clause.eval
+       end
+     }
+  end
+
+  rule where_clause
+    many_where_clauses / one_where_clause
+  end
+
+  rule many_where_clauses
+    expr1:key_value_pair one_or_more_spaces "AND" one_or_more_spaces expr2:key_value_pair {
+      def eval
+        ::CachedModel::ConjunctionConditionNode.new(
+          expr1.eval, 
+          expr2.eval
+        )
+      end
+    }
+  end
+
+  rule one_where_clause
+    key_value_pair
+  end
 end
