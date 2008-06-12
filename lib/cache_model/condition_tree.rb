@@ -52,8 +52,12 @@ module CachedModel
       elsif second_child.empty?
         first_child.evaluate
       else
-        first_child.evaluate & second_child.evaluate
+        evaluate_children
       end
+    end
+    
+    def evaluate_children
+      first_child.evaluate & second_child.evaluate
     end
   end
 end
