@@ -2,17 +2,21 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 
 module CachedModel
   
-  describe SQLPrimitivesParser do
-    before :each do
-      @parser = SQLPrimitivesParser.new
-    end
-    
+  module ParserSpecHelper
     def parse(string)
       @parser.parse(string)
     end
     
     def parse_and_eval(string, *eval_args)
       parse(string).eval(*eval_args)
+    end
+  end
+  
+  describe SQLPrimitivesParser do
+    include ParserSpecHelper
+    
+    before :each do
+      @parser = SQLPrimitivesParser.new
     end
     
     describe "number" do
@@ -141,16 +145,10 @@ module CachedModel
   end
   
   describe SQLKeyValuePairParser do
+    include ParserSpecHelper
+    
     before :each do
       @parser = SQLKeyValuePairParser.new
-    end
-    
-    def parse(string)
-      @parser.parse(string)
-    end
-    
-    def parse_and_eval(string, *eval_args)
-      parse(string).eval(*eval_args)
     end
     
     describe "condition" do
@@ -239,6 +237,8 @@ module CachedModel
   end
     
   describe SQLSelectParser do
+    include ParserSpecHelper
+    
     before :each do
       @equal_expression = Expression::Equal.new(:foo, 7)
     end
