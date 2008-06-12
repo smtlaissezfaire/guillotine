@@ -12,7 +12,7 @@ module CachedModel
       ">=" => GreaterThanOrEqualTo,
       "IS NULL" => IsNull,
       "IS NOT NULL" => IsNotNull
-    }
+    } unless defined?(SYNTAX_CLASSES)
     
     def self.find_class_for(joiner)
       if syntax_class = SYNTAX_CLASSES[joiner]
