@@ -138,12 +138,11 @@ module CachedModel
       
       it "should parse 'False' as false"
     end
-    
   end
   
-  describe SQLSelectParser do
+  describe SQLKeyValuePairParser do
     before :each do
-      @parser = SQLSelectParser.new
+      @parser = SQLKeyValuePairParser.new
     end
     
     def parse(string)
