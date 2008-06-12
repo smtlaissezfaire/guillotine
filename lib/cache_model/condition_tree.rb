@@ -45,22 +45,18 @@ module CachedModel
   
   class ConditionNode < ProperBinaryTree
     def evaluate
-      evaluate_children
-    end
-    
-    def evaluate_children
       raise NotImplementedError, "Descendents of ConditionNode must implement the method evaluate_children"
     end
   end
   
   class ConjunctionConditionNode < ConditionNode
-    def evaluate_children
+    def evaluate
       first_child.evaluate & second_child.evaluate
     end
   end
   
   class DisjunctionConditionNode < ConditionNode
-    def evaluate_children
+    def evaluate
       first_child.evaluate | second_child.evaluate
     end
   end
