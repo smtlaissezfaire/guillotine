@@ -1,18 +1,10 @@
 module CachedModel
   class ProperBinaryTree
-    def initialize(*children)
-      @children = children
-      raise ArgumentError unless two_or_zero_children?
+    def initialize(child_one, child_two)
+      @children = [child_one, child_two]
     end
     
     attr_reader :children
-    
-    def empty?
-      children.empty?
-    end
-    
-    alias_method :leaf?, :empty?
-    alias_method :is_a_leaf?, :leaf?
     
   private
     
@@ -21,26 +13,12 @@ module CachedModel
     end
     
     def second_child
-      if children
-        children[1]
-      else
-        nil
-      end
-    end
-    
-    def second_child?
-      second_child ? true : false
-    end
-    
-    def two_or_zero_children?
-      two_children? || zero_children?
+      children[1]
     end
     
     def two_children?
       children.size == 2
     end
-    
-    alias_method :zero_children?, :leaf?
   end
   
   class ConditionNode < ProperBinaryTree
