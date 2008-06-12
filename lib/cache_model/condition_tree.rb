@@ -57,11 +57,16 @@ module CachedModel
     end
     
     def evaluate_children
-      first_child.evaluate & second_child.evaluate
+      raise NotImplementedError, "Descendents of ConditionNode must implement the method evaluate_children"
     end
+    
   end
   
   class ConjunctionConditionNode < ConditionNode
+    def evaluate_children
+      first_child.evaluate & second_child.evaluate
+    end
+
   end
   
   class DisjunctionConditionNode < ConditionNode
