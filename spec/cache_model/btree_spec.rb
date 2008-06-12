@@ -66,7 +66,6 @@ module CachedModel
           @child_two.should_receive(:call).with([:a, :collection]).and_return []
           @root.call([:a, :collection])
         end
-
       end
     end
     
