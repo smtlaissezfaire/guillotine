@@ -62,9 +62,10 @@ module CachedModel
           @root.call([:a, :collection])
         end
         
-        it "should call the second child with the collection" do
-          @child_two.should_receive(:call).with([:a, :collection]).and_return []
-          @root.call([:a, :collection])
+        it "should call the second child with the *resulting collection* from the first call" do
+          @child_one.should_receive(:call).with([:one, :two]).and_return [:two]
+          @child_two.should_receive(:call).with([:two]).and_return [:two]
+          @root.call([:one, :two])
         end
       end
     end
