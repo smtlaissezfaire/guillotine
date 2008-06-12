@@ -44,23 +44,6 @@ module CachedModel
     end
     
     describe "evaluation" do
-      describe "when both children are not leafs" do
-        before :each do
-          @child_one = mock(ConditionNode, :empty? => false, :evaluate => [:one, :two])
-          @child_two = mock(ConditionNode, :empty? => false, :evaluate => [:two])
-          @root = ConditionNode.new(@child_one, @child_two)
-        end
-        
-        it "should return the intersection (with &) of evaluating the two children" do
-          @root.evaluate.should == [:two]
-        end
-        
-        it "should return an empty array when there is no intersection (with different evaluations)" do
-          @child_one.stub!(:evaluate).and_return [:one, :three]
-          @root.evaluate.should == []
-        end
-      end
-      
       describe "when both children are leafs" do
         before :each do
           @child_one = mock(ConditionNode, :empty? => true, :evaluate => nil)
@@ -95,7 +78,25 @@ module CachedModel
         it "should return the evaluation of the first child" do
           @root.evaluate.should == [:child_one_evaluation]
         end
+      end
+    end
+    
+    describe ConjunctionConditionNode do
+      describe "when both children are not leafs" do
+        before :each do
+          @child_one = mock(ConditionNode, :empty? => false, :evaluate => [:one, :two])
+          @child_two = mock(ConditionNode, :empty? => false, :evaluate => [:two])
+          @root = ConditionNode.new(@child_one, @child_two)
+        end
         
+        it "should return the intersection (with &) of evaluating the two children" do
+          @root.evaluate.should == [:two]
+        end
+        
+        it "should return an empty array when there is no intersection (with different evaluations)" do
+          @child_one.stub!(:evaluate).and_return [:one, :three]
+          @root.evaluate.should == []
+        end
       end
     end
 

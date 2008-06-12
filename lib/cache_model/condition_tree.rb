@@ -60,4 +60,7 @@ module CachedModel
       first_child.evaluate & second_child.evaluate
     end
   end
+  
+  class ConjunctionConditionNode < ConditionNode
+  end
 end
