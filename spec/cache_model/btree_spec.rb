@@ -57,48 +57,6 @@ module CachedModel
           }.should raise_error(NotImplementedError, "Descendents of ConditionNode must implement the method evaluate_children")
         end
       end
-      
-      describe "when both children are leafs" do
-        before :each do
-          @child_one = mock(ConditionNode, :empty? => true, :evaluate => nil)
-          @child_two = mock(ConditionNode, :empty? => true, :evaluate => nil)
-          @root = ConditionNode.new(@child_one, @child_two)
-        end
-        
-        it "should raise an InvalidNodeError" do
-          lambda { 
-            @root.evaluate
-          }.should raise_error(ConditionNode::InvalidNodeError)
-        end
-      end
-      
-      describe "when the first child is empty" do
-        before :each do
-          @child_one = mock(ConditionNode, :empty? => true, :evaluate => nil)
-          @child_two = mock(ConditionNode, :empty? => false, :evaluate => [:child_two_evaluation])
-          @root = ConditionNode.new(@child_one, @child_two)
-        end
-        
-        it "should raise an InvalidNodeError" do
-          lambda { 
-            @root.evaluate
-          }.should raise_error(ConditionNode::InvalidNodeError)
-        end
-      end
-      
-      describe "when the second child is empty" do
-        before :each do
-          @child_one = mock(ConditionNode, :empty? => false, :evaluate => [:child_one_evaluation])
-          @child_two = mock(ConditionNode, :empty? => true, :evaluate => nil)
-          @root = ConditionNode.new(@child_one, @child_two)
-        end
-        
-        it "should raise an InvalidNodeError" do
-          lambda { 
-            @root.evaluate
-          }.should raise_error(ConditionNode::InvalidNodeError)
-        end
-      end
     end
     
     describe ConjunctionConditionNode do

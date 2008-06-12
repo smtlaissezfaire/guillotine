@@ -44,15 +44,8 @@ module CachedModel
   end
   
   class ConditionNode < ProperBinaryTree
-    class InvalidNodeError < StandardError
-    end
-    
     def evaluate
-      if first_child.empty? || second_child.empty?
-        raise InvalidNodeError
-      else
-        evaluate_children
-      end
+      evaluate_children
     end
     
     def evaluate_children
