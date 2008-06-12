@@ -65,8 +65,10 @@ module CachedModel
           @root = ConditionNode.new(@child_one, @child_two)
         end
         
-        it "should return nil" do
-          @root.evaluate.should be_nil
+        it "should raise an InvalidNodeError" do
+          lambda { 
+            @root.evaluate
+          }.should raise_error(ConditionNode::InvalidNodeError)
         end
       end
       
@@ -77,8 +79,10 @@ module CachedModel
           @root = ConditionNode.new(@child_one, @child_two)
         end
         
-        it "should return the evaluation of the second child" do
-          @root.evaluate.should == [:child_two_evaluation]
+        it "should raise an InvalidNodeError" do
+          lambda { 
+            @root.evaluate
+          }.should raise_error(ConditionNode::InvalidNodeError)
         end
       end
       
@@ -89,8 +93,10 @@ module CachedModel
           @root = ConditionNode.new(@child_one, @child_two)
         end
         
-        it "should return the evaluation of the first child" do
-          @root.evaluate.should == [:child_one_evaluation]
+        it "should raise an InvalidNodeError" do
+          lambda { 
+            @root.evaluate
+          }.should raise_error(ConditionNode::InvalidNodeError)
         end
       end
     end
