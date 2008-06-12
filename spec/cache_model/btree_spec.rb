@@ -56,6 +56,17 @@ module CachedModel
           @child_one.stub!(:call).and_return [:one, :three]
           @root.call.should == []
         end
+        
+        it "should call the first child with the collection" do
+          @child_one.should_receive(:call).with([:a, :collection])
+          @root.call([:a, :collection])
+        end
+        
+        it "should call the second child with the collection" do
+          @child_two.should_receive(:call).with([:a, :collection]).and_return []
+          @root.call([:a, :collection])
+        end
+
       end
     end
     
@@ -74,6 +85,16 @@ module CachedModel
         it "should return the union, removing duplicates  (with different evaluations)" do
           @child_one.stub!(:call).and_return [:one, :three]
           @root.call.should == [:one, :three]
+        end
+        
+        it "should call the first child with the collection" do
+          @child_one.should_receive(:call).with([:a, :collection])
+          @root.call([:a, :collection])
+        end
+        
+        it "should call the second child with the collection" do
+          @child_two.should_receive(:call).with([:a, :collection]).and_return []
+          @root.call([:a, :collection])
         end
       end
     end

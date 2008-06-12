@@ -22,20 +22,20 @@ module CachedModel
   end
   
   class ConditionNode < ProperBinaryTree
-    def call
+    def call(*args)
       raise NotImplementedError, "Descendents of ConditionNode must implement the method call"
     end
   end
   
   class ConjunctionConditionNode < ConditionNode
-    def call
-      first_child.call & second_child.call
+    def call(*args)
+      first_child.call(*args) & second_child.call(*args)
     end
   end
   
   class DisjunctionConditionNode < ConditionNode
-    def call
-      first_child.call | second_child.call
+    def call(*args)
+      first_child.call(*args) | second_child.call(*args)
     end
   end
 end
