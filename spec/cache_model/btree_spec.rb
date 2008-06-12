@@ -54,7 +54,7 @@ module CachedModel
         it "should raise an error" do
           lambda { 
             @root.evaluate
-          }.should raise_error(NotImplementedError, "Descendents of ConditionNode must implement the method evaluate_children")
+          }.should raise_error(NotImplementedError, "Descendents of ConditionNode must implement the method evaluate")
         end
       end
     end

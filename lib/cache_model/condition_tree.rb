@@ -45,7 +45,7 @@ module CachedModel
   
   class ConditionNode < ProperBinaryTree
     def evaluate
-      raise NotImplementedError, "Descendents of ConditionNode must implement the method evaluate_children"
+      raise NotImplementedError, "Descendents of ConditionNode must implement the method evaluate"
     end
   end
   
