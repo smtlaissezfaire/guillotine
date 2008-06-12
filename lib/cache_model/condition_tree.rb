@@ -16,6 +16,22 @@ module CachedModel
     
   private
     
+    def first_child
+      children.first
+    end
+    
+    def second_child
+      if children
+        children[1]
+      else
+        nil
+      end
+    end
+    
+    def second_child?
+      second_child ? true : false
+    end
+    
     def two_or_zero_children?
       two_children? || zero_children?
     end
@@ -28,6 +44,16 @@ module CachedModel
   end
   
   class ConditionNode < ProperBinaryTree
-    
+    def evaluate
+      if first_child.empty? && second_child.empty?
+        nil
+      elsif first_child.empty?
+        second_child.evaluate
+      elsif second_child.empty?
+        first_child.evaluate
+      else
+        first_child.evaluate & second_child.evaluate
+      end
+    end
   end
 end
