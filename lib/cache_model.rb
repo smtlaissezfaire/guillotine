@@ -11,5 +11,6 @@ require File.dirname(__FILE__) + "/cache_model/expression"
 require "treetop"
 require File.dirname(__FILE__) + "/cache_model/treetop/backtick_string"
 Treetop.load File.dirname(__FILE__) + "/cache_model/treetop/primitives"
+Treetop.load File.dirname(__FILE__) + "/cache_model/treetop/sql_key_value_pair"
 Treetop.load File.dirname(__FILE__) + "/cache_model/treetop/sql_select"
 

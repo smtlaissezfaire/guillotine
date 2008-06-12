@@ -1,113 +1,30 @@
 grammar SQLSelect
-  include SQLPrimitives
+  include SQLKeyValuePair
 
-  rule select
-    select_expression
-  end
-
-  rule select_expression
-    string optional_spaces joiner_or_null  {
-      def eval
-        results = joiner_or_null.eval
-        klass = CachedModel::Expression.find_class_for(results[:joiner])
-        if value = results[:value]
-          klass.new(string.eval.to_sym, results[:value])
-        else
-          klass.new(string.eval.to_sym)
-        end
-      end
-    }
-  end
-
-  rule joiner_or_null
-    a_null / joiner_with_value
-  end
-
-  rule a_null
-    is_not_null / is_null
-  end
-
-  rule is_not_null
-    "IS" one_or_more_spaces "NOT" one_or_more_spaces "NULL" {
-      def eval
-        { :joiner => "IS NOT NULL" }
-      end
-    }
-  end
-
-  rule is_null
-    "IS" one_or_more_spaces "NULL" {
-      def eval
-        { :joiner => "IS NULL" }
-      end
+  rule where_condition
+    "WHERE" space where_clause {
+       def eval
+         where_clause.eval
+       end
      }
   end
 
-  rule joiner_with_value
-    condition_joiner optional_spaces primitive {
+  rule where_clause
+    many_where_clauses / one_where_clause
+  end
+
+  rule many_where_clauses
+    expr1:key_value_pair one_or_more_spaces "AND" one_or_more_spaces expr2:key_value_pair {
       def eval
-        { 
-          :joiner => condition_joiner.eval,
-          :value => primitive.eval
-        }
+        ::CachedModel::ConjunctionConditionNode.new(
+          expr1.eval, 
+          expr2.eval
+        )
       end
     }
   end
 
-  rule condition_joiner
-    greater_than_or_equal / 
-    less_than_or_equal / 
-    equals / 
-    not_equals / 
-    less_than / 
-    greater_than
-  end
-
-  rule less_than_or_equal
-    "<=" {
-      def eval
-        "<="
-      end
-    }
-  end
-
-  rule greater_than_or_equal
-    ">=" {
-      def eval
-        ">="
-      end
-    }
-  end
-
-  rule less_than
-    "<" {
-      def eval
-        "<"
-      end
-    }
-  end
-
-  rule greater_than
-    ">" {
-      def eval
-        ">"
-      end
-    }
-  end
-
-  rule not_equals
-    "!=" {
-      def eval
-        "!="
-      end
-    }
-  end
-
-  rule equals
-    "=" {
-      def eval
-        "="
-      end
-    }
+  rule one_where_clause
+    key_value_pair
   end
 end

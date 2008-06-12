@@ -1,18 +1,16 @@
 module CachedModel
   class ProperBinaryTree
-    def initialize(*children)
-      @children = children
-      raise ArgumentError unless two_or_zero_children?
+    def initialize(child_one, child_two)
+      @children = [child_one, child_two]
     end
     
     attr_reader :children
     
-    def empty?
-      children.empty?
+    def eql?(other)
+      other.children == self.children
     end
     
-    alias_method :leaf?, :empty?
-    alias_method :is_a_leaf?, :leaf?
+    alias_method :==, :eql?
     
   private
     
@@ -21,39 +19,32 @@ module CachedModel
     end
     
     def second_child
-      if children
-        children[1]
-      else
-        nil
-      end
-    end
-    
-    def second_child?
-      second_child ? true : false
-    end
-    
-    def two_or_zero_children?
-      two_children? || zero_children?
+      children[1]
     end
     
     def two_children?
       children.size == 2
     end
-    
-    alias_method :zero_children?, :leaf?
   end
   
   class ConditionNode < ProperBinaryTree
-    def evaluate
-      if first_child.empty? && second_child.empty?
-        nil
-      elsif first_child.empty?
-        second_child.evaluate
-      elsif second_child.empty?
-        first_child.evaluate
-      else
-        first_child.evaluate & second_child.evaluate
-      end
+    def call(*args)
+      raise NotImplementedError, "Descendents of ConditionNode must implement the method call"
+    end
+  end
+  
+  class ConjunctionConditionNode < ConditionNode
+    # If we can a-priori figure out whether call one or call two 
+    # returns less records, we'll be building a real in-memory database!
+    def call(*args)
+      results_of_first_call = first_child.call(*args)
+      results_of_first_call & second_child.call(results_of_first_call)
+    end
+  end
+  
+  class DisjunctionConditionNode < ConditionNode
+    def call(*args)
+      first_child.call(*args) | second_child.call(*args)
     end
   end
 end
