@@ -6,18 +6,21 @@ CachedModel
 Provide transparent, row level cache to ActiveRecord.
 
 
-Philosophical problems to current
-caching schemes in ActiveRecord:
-================================
+
+Philosophical problems to current caching 
+
+schemes available to ActiveRecord:
+
+==========================================
 
 1.  Rails Query cache is dead simple.  It's great, but it only caches 
     queries per request.  At the start of a new request, the cache
     is invalidated.
 
-2.  Memcached: cached_model, acts_as_cached.  This works on a time basis
+2.  Memcached: cached_model, acts_as_cached, etc..  This works on a time basis
     (expiring automatically after X minutes).  Works great, except that
-    you'll need to modify your code to use it.  Plus, it is not intelligent,
-    so, for example, if you want to perform these two queries in two seperate
+    you'll need to modify your code to use it - in no way is it transparent.  
+    If you want to perform these two queries in two seperate
     places:
 
         User.find(:all, :limit => 10)
@@ -26,7 +29,13 @@ caching schemes in ActiveRecord:
     
     You'll either need to write the logic to grab the first 10 from the cache
     for the second query, or you'll need to store both sets of records in 
-    memcached, which is just a waste of memory.
+    memcached.  Storing the whole table in one memcached key/value pair is impossible
+    if your table goes over 1 meg (which it will).  Otherwise, unique naming schemes
+    need to be devised for the cache.  The records will also get invalidated
+    even if you don't update them, causing a new fetch every X minutes.
+
+    Time based cache expiry is great for caching html fragments, and *should*
+    be used on top of this plugin.  
 
 3.  Mysql has it's own query cache, which works great for sites which are
     90% (or more) reads to writes.  The cache is per table, and gets invalidated
@@ -49,16 +58,36 @@ only gets written to the database, but also updated in the cache.
 No extra work is needed!  Your code will not need to change one bit.
 
 
+Specs / Tests
+
+==============
+
+Integration tests *should* hit the database, but a large test suite which hits
+the database often will really kill the performance of that suite, which will 
+cause tests to either be run less frequently, leading to hard to track down bugs,
+or just as frequently as before, but with decreased productivity.  
+
+Some have used sqlite's in memory test database to speed up their suite.  I've
+seen a 40-50% improvement on a larger suite before.  Unfortunately, an in memory
+database is not always an option; If any custom sql is present, a sqlite in memory test
+database will be out of the question.  CachedModel will allow use of it's cache
+for in memory tests without writing to a real database.
+
+
 Limitations
 
 ==============
 
-There are no immediate plans to support the following finders:
-      
-      find_by_sql
-      find with one of the following keys:
-           :select
-           :include
-           :joins
+There are no immediate plans to support the following:
 
-                
+      joins
+      group_by
+      select row1, row2...row n (only select *'s are planned to be supported)
+      
+Which rules out the following type of ActiveRecord Queries:
+
+      ModelName.find(:all, :joins => "...")
+      ModelName.find(:all, :group => "...")
+      ModelName.find(:all, :include => "...")
+
+At this time, there are only plans to support Mysql 5, and possibly SQLite
