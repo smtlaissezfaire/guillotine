@@ -2,7 +2,7 @@ grammar SQLSelect
   include SQLKeyValuePair
 
   rule where_condition
-    "WHERE" space where_clause {
+    "WHERE" space+ where_clause {
        def eval
          where_clause.eval
        end
@@ -10,21 +10,30 @@ grammar SQLSelect
   end
 
   rule where_clause
-    many_where_clauses / one_where_clause
-  end
-
-  rule many_where_clauses
-    expr1:key_value_pair one_or_more_spaces "AND" one_or_more_spaces expr2:key_value_pair {
+    open_parens optional_spaces where_clause optional_spaces close_parens {
       def eval
-        ::CachedModel::ConjunctionConditionNode.new(
-          expr1.eval, 
-          expr2.eval
-        )
+        where_clause.eval
       end
     }
+    /
+    clause1:single_expression_where_clause space+ "AND" space+ clause2:where_clause {
+      def eval
+        CachedModel::ConjunctionConditionNode.new(clause1.eval, clause2.eval)
+      end
+    } 
+    / 
+    single_expression_where_clause
   end
 
-  rule one_where_clause
+  rule open_parens
+    "("
+  end
+
+  rule close_parens
+    ")"
+  end
+
+  rule single_expression_where_clause
     key_value_pair
   end
 end
