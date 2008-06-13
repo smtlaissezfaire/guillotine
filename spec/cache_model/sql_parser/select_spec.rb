@@ -365,4 +365,26 @@ module CachedModel
       end
     end
   end
+  
+  describe SQLSelectParser do
+    describe "SELECT clause" do
+      it "should parse SELECT *"
+      
+      it "should parse SELECT * (with spaces in front of the star)"
+      
+      it "should parse SELECT * (with spaces at the end of the star)"
+      
+      it "should not parse SELECT*"
+      
+      it "should parse SELECT column_name"
+      
+      it "should parse SELECT table_name.column_name"
+      
+      it "should parse SELECT column1, column2"
+      
+      it "should parse SELECT table_name.column1, table_name.column2"
+      
+      it "should parse SELECT table_name1.column1, table_name2.column2"
+    end
+  end
 end
