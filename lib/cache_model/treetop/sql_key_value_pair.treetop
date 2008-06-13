@@ -60,50 +60,26 @@ grammar SQLKeyValuePair
   end
 
   rule less_than_or_equal
-    "<=" {
-      def eval
-        :<=
-      end
-    }
+    "<="  {   def eval;   :<=;   end }
   end
 
   rule greater_than_or_equal
-    ">=" {
-      def eval
-        :>=
-      end
-    }
+    ">="  {   def eval;   :>=    end }
   end
 
   rule less_than
-    "<" {
-      def eval
-        :<
-      end
-    }
+    "<"   {   def eval;   :<     end }
   end
 
   rule greater_than
-    ">" {
-      def eval
-        :>
-      end
-    }
+    ">"   {   def eval;   :>     end }
   end
 
   rule not_equals
-    "!=" {
-      def eval
-        :"!="
-      end
-    }
+    "!="  {  def eval;   :"!="   end }
   end
 
   rule equals
-    "=" {
-      def eval
-        :"="
-      end
-    }
+    "="   {   def eval;  :"="    end }
   end
 end
