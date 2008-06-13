@@ -2,7 +2,15 @@ grammar SQLSelect
   include SQLWhereCondition
 
   rule select_expression
-    select / from
+    select / from / order_by
+  end
+
+  rule order_by
+    "ORDER BY" one_or_more_spaces one_or_more_column_names { 
+      def eval
+        CachedModel::Expression::OrderBy.new(one_or_more_column_names.eval)
+      end
+    }
   end
 
   rule from
