@@ -67,6 +67,11 @@ module CachedModel
           @child_two.should_receive(:call).with([:two]).and_return [:two]
           @root.call([:one, :two])
         end
+        
+        it "should not be equal to a DisjunctionConditionNode, even if the two have the same children" do
+          disjunction_condition_node = DisjunctionConditionNode.new(*@root.children)
+          @root.should_not eql(disjunction_condition_node)
+        end
       end
     end
     

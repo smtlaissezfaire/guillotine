@@ -7,7 +7,7 @@ module CachedModel
     attr_reader :children
     
     def eql?(other)
-      other.children == self.children
+      other.children == self.children && self.class == other.class
     end
     
     alias_method :==, :eql?
