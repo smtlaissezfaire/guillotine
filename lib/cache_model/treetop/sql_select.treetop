@@ -16,7 +16,9 @@ grammar SQLSelect
       end
     }
     /
-    clause1:single_expression_where_clause space+ disjunction_or_conjunction_joiner space+ clause2:where_clause {
+    clause1:single_expression_where_clause      one_or_more_spaces 
+            disjunction_or_conjunction_joiner   one_or_more_spaces 
+    clause2:where_clause {
       def eval
         klass = CachedModel::Expression.find_class_for(disjunction_or_conjunction_joiner.eval)
         klass.new(clause1.eval, clause2.eval)
