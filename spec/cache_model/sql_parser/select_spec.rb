@@ -236,11 +236,11 @@ module CachedModel
     end
   end
     
-  describe SQLSelectParser do
+  describe SQLWhereConditionParser do
     include ParserSpecHelper
     
     before :each do
-      @parser = SQLSelectParser.new
+      @parser = SQLWhereConditionParser.new
       @equal_expression = Expression::Equal.new(:foo, 7)
 
       @foo_7 = @equal_expression
