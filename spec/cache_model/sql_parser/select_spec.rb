@@ -484,7 +484,6 @@ module CachedModel
       it "should not parse ORDER BYcolumn_name" do
         parse("ORDER BYcolumn_name").should be_nil
       end
-
     end
   end
 end
