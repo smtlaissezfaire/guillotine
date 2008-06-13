@@ -506,6 +506,14 @@ module CachedModel
       it "should not parse LIMIT30" do
         parse("LIMIT30").should be_nil
       end
+      
+      it "should parse LIMIT 0" do
+        parse_and_eval("LIMIT 0").should == Expression::Limit.new(0)
+      end
+      
+      it "should not parse LIMIT -1" do
+        parse("LIMIT -1").should be_nil
+      end
     end
   end
 end
