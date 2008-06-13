@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + "/expression/expressions"
 require File.dirname(__FILE__) + "/expression/select"
 require File.dirname(__FILE__) + "/expression/from"
 require File.dirname(__FILE__) + "/expression/order_by"
+require File.dirname(__FILE__) + "/expression/limit"
 
 module CachedModel
   module Expression
