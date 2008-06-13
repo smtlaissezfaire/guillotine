@@ -2,7 +2,7 @@ grammar SQLSelect
   include SQLKeyValuePair
 
   rule where_condition
-    "WHERE" space+ where_clause {
+    "WHERE" one_or_more_spaces where_clause {
        def eval
          where_clause.eval
        end
