@@ -26,7 +26,7 @@ grammar SQLKeyValuePair
   rule is_not_null
     "IS" one_or_more_spaces "NOT" one_or_more_spaces "NULL" {
       def eval
-        { :joiner => "IS NOT NULL" }
+        { :joiner => :"IS NOT NULL" }
       end
     }
   end
@@ -34,7 +34,7 @@ grammar SQLKeyValuePair
   rule is_null
     "IS" one_or_more_spaces "NULL" {
       def eval
-        { :joiner => "IS NULL" }
+        { :joiner => :"IS NULL" }
       end
      }
   end

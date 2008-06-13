@@ -10,8 +10,8 @@ module CachedModel
       :<= => LessThanOrEqualTo,
       :>  => GreaterThan,
       :>= => GreaterThanOrEqualTo,
-      "IS NULL" => IsNull,
-      "IS NOT NULL" => IsNotNull,
+      :"IS NULL" => IsNull,
+      :"IS NOT NULL" => IsNotNull,
       :AND => CachedModel::ConjunctionConditionNode,
       :OR => CachedModel::DisjunctionConditionNode
     } unless defined?(SYNTAX_CLASSES)
