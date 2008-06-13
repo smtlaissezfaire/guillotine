@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + "/expression/base"
 require File.dirname(__FILE__) + "/expression/expressions"
+require File.dirname(__FILE__) + "/expression/select"
 
 module CachedModel
   module Expression
