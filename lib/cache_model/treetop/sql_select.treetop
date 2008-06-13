@@ -16,13 +16,26 @@ grammar SQLSelect
       end
     }
     /
-    clause1:single_expression_where_clause space+ "AND" space+ clause2:where_clause {
+    clause1:single_expression_where_clause space+ disjunction_or_conjunction_joiner space+ clause2:where_clause {
       def eval
-        CachedModel::ConjunctionConditionNode.new(clause1.eval, clause2.eval)
+        klass = CachedModel::Expression.find_class_for(disjunction_or_conjunction_joiner.eval)
+        klass.new(clause1.eval, clause2.eval)
       end
     } 
     / 
     single_expression_where_clause
+  end
+
+  rule disjunction_or_conjunction_joiner
+    and / or
+  end
+
+  rule and
+    "AND" { def eval; "AND"; end }
+  end
+
+  rule or
+    "OR" { def eval; "OR"; end }
   end
 
   rule open_parens

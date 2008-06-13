@@ -11,7 +11,9 @@ module CachedModel
       ">"  => GreaterThan,
       ">=" => GreaterThanOrEqualTo,
       "IS NULL" => IsNull,
-      "IS NOT NULL" => IsNotNull
+      "IS NOT NULL" => IsNotNull,
+      "AND" => CachedModel::ConjunctionConditionNode,
+      "OR" => CachedModel::DisjunctionConditionNode
     } unless defined?(SYNTAX_CLASSES)
     
     def self.find_class_for(joiner)
