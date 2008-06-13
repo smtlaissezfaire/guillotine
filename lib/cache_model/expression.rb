@@ -4,16 +4,16 @@ require File.dirname(__FILE__) + "/expression/expressions"
 module CachedModel
   module Expression
     SYNTAX_CLASSES = { 
-      :"="  => Equal,
-      :"!=" => NotEqual,
-      :<  => LessThan,
-      :<= => LessThanOrEqualTo,
-      :>  => GreaterThan,
-      :>= => GreaterThanOrEqualTo,
-      :"IS NULL" => IsNull,
+      :"="           => Equal,
+      :"!="          => NotEqual,
+      :<             => LessThan,
+      :<=            => LessThanOrEqualTo,
+      :>             => GreaterThan,
+      :>=            => GreaterThanOrEqualTo,
+      :"IS NULL"     => IsNull,
       :"IS NOT NULL" => IsNotNull,
-      :AND => CachedModel::ConjunctionConditionNode,
-      :OR => CachedModel::DisjunctionConditionNode
+      :AND           => CachedModel::ConjunctionConditionNode,
+      :OR            => CachedModel::DisjunctionConditionNode
     } unless defined?(SYNTAX_CLASSES)
     
     def self.find_class_for(joiner)
