@@ -2,7 +2,25 @@ grammar SQLSelect
   include SQLWhereCondition
 
   rule select_expression
-    select
+    select / from
+  end
+
+  rule from
+    "FROM" one_or_more_spaces one_or_more_table_names {
+      def eval
+        CachedModel::Expression::From.new(one_or_more_table_names.eval)
+      end
+    }
+  end
+
+  rule one_or_more_table_names
+    table_name "," space one_or_more_table_names {
+      def eval
+        [table_name.eval, one_or_more_table_names.eval]
+      end
+    } 
+    / 
+    table_name
   end
 
   rule select
