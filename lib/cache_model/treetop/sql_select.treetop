@@ -33,11 +33,11 @@ grammar SQLSelect
   end
 
   rule and
-    "AND" { def eval; "AND"; end }
+    "AND" { def eval; :AND; end }
   end
 
   rule or
-    "OR" { def eval; "OR"; end }
+    "OR" { def eval; :OR; end }
   end
 
   rule open_parens

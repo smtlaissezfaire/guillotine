@@ -62,7 +62,7 @@ grammar SQLKeyValuePair
   rule less_than_or_equal
     "<=" {
       def eval
-        "<="
+        :<=
       end
     }
   end
@@ -70,7 +70,7 @@ grammar SQLKeyValuePair
   rule greater_than_or_equal
     ">=" {
       def eval
-        ">="
+        :>=
       end
     }
   end
@@ -78,7 +78,7 @@ grammar SQLKeyValuePair
   rule less_than
     "<" {
       def eval
-        "<"
+        :<
       end
     }
   end
@@ -86,7 +86,7 @@ grammar SQLKeyValuePair
   rule greater_than
     ">" {
       def eval
-        ">"
+        :>
       end
     }
   end
@@ -94,7 +94,7 @@ grammar SQLKeyValuePair
   rule not_equals
     "!=" {
       def eval
-        "!="
+        :"!="
       end
     }
   end
@@ -102,7 +102,7 @@ grammar SQLKeyValuePair
   rule equals
     "=" {
       def eval
-        "="
+        :"="
       end
     }
   end
