@@ -1,7 +1,6 @@
 
 require "rubygems"
 require "set"
-require "active_record"
 
 require File.dirname(__FILE__) + "/cache_model/condition_tree"
 require File.dirname(__FILE__) + "/cache_model/sql_parser/keyword_uppercaser"
