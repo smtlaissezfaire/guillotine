@@ -204,7 +204,13 @@ module CachedModel
       end
     end
     
-    describe "FROM" do
+    describe SQLFromClauseParser  do
+      include ParserSpecHelper
+
+      before :each do
+        @parser = SQLFromClauseParser.new
+      end
+
       it "should parse FROM table_name" do
         parse_and_eval("FROM table_name").should == Expression::From.new("table_name")
       end
