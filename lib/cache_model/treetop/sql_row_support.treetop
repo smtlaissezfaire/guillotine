@@ -1,0 +1,55 @@
+grammar SQLRowSupport
+  rule one_or_more_table_names
+    table_name "," space one_or_more_table_names {
+      def eval
+        [table_name.eval, one_or_more_table_names.eval]
+      end
+    } 
+    / 
+    table_name
+  end
+
+  rule one_or_more_column_names
+    one_column_name "," space  one_or_more_column_names {
+      def eval
+        result1, result2 = one_column_name.eval, one_or_more_column_names.eval
+        [result1, result2].flatten
+      end
+    }
+    / 
+    one_column_name
+  end
+
+  rule one_column_name
+    table_name dot column_name {
+      def eval
+        table_name.eval + dot.eval + column_name.eval
+      end
+    } 
+    / 
+    column_name
+  end
+
+  rule column_name
+    string / all_columns
+  end
+
+  # TODO: Clean this up
+  rule table_name
+    backtick_string {
+      def eval 
+        CachedModel::BackTickString.new(text_value).value
+      end
+    }
+    /
+    string
+  end
+
+  rule dot
+    "." { def eval; "."; end }
+  end
+
+  rule all_columns
+    "*" { def eval; "*"; end }
+  end
+end
