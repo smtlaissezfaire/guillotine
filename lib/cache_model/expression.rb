@@ -4,6 +4,8 @@ require File.dirname(__FILE__) + "/expression/select"
 require File.dirname(__FILE__) + "/expression/from"
 require File.dirname(__FILE__) + "/expression/order_by"
 require File.dirname(__FILE__) + "/expression/limit"
+require File.dirname(__FILE__) + "/expression/backtick_string"
+
 
 module CachedModel
   module Expression
