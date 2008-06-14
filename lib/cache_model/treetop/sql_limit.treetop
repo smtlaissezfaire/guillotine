@@ -1,0 +1,7 @@
+grammar SQLLimit
+  include SQLPrimitives
+
+  rule limit
+    "LIMIT" one_or_more_spaces number { def eval; CachedModel::Expression::Limit.new(number.eval); end }
+  end
+end
