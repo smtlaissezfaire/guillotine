@@ -2,17 +2,10 @@ grammar SQLSelect
   include SQLWhereCondition
   include SQLLimit
   include SQLOrderByClause
+  include SQLFromClause
 
   rule select_expression
     limit / select / from / order_by
-  end
-
-  rule from
-    "FROM" one_or_more_spaces one_or_more_table_names {
-      def eval
-        CachedModel::Expression::From.new(one_or_more_table_names.eval)
-      end
-    }
   end
 
   rule one_or_more_table_names
