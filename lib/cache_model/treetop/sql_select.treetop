@@ -3,6 +3,7 @@ grammar SQLSelect
   include SQLLimit
   include SQLOrderByClause
   include SQLFromClause
+  include SQLSelectClause
 
   rule select_expression
     limit / select / from / order_by
@@ -16,19 +17,6 @@ grammar SQLSelect
     } 
     / 
     table_name
-  end
-
-  rule select
-    "SELECT" one_or_more_spaces one_or_more_column_names optional_spaces { 
-       def eval
-         result = one_or_more_column_names.eval
-         if result.kind_of?(Array)
-           CachedModel::Expression::Select.new(*result)
-         else
-           CachedModel::Expression::Select.new(result)
-         end
-       end 
-    }
   end
 
   rule one_or_more_column_names
