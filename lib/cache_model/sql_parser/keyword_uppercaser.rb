@@ -1,8 +1,8 @@
 module CacheModel
-  class KeywordUppercaser
+  module Keywords
     # Taken from the mysql docs:
     # http://dev.mysql.com/doc/refman/5.0/en/reserved-words.html
-    KEYWORDS = Set.new [
+    SQL_KEYWORDS = Set.new [
       :ADD,
       :ALL,
       :ALTER,
@@ -259,8 +259,13 @@ module CacheModel
       :UNDO,
       :UPGRADE,
       :WHILE
-    ] unless defined?(KEYWORDS)
+    ] unless defined?(SQL_KEYWORDS)
+  end
+  
+  class KeywordUppercaser
 
+    KEYWORDS = CacheModel::Keywords::SQL_KEYWORDS
+    
     QUOTES = Set.new ['"', "'"] unless defined?(QUOTES)
 
     
