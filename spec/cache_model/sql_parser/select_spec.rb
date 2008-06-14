@@ -237,7 +237,13 @@ module CachedModel
       end
     end
     
-    describe "ORDER BY" do
+    describe SQLOrderByClauseParser do
+      include ParserSpecHelper
+
+      before :each do
+        @parser = SQLOrderByClauseParser.new
+      end
+
       it "should order by a column name" do
         result = Expression::OrderBy.new("column")
         parse_and_eval("ORDER BY column").should == result

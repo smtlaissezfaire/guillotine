@@ -1,5 +1,6 @@
 grammar SQLOrderByClause
   include SQLPrimitives
+  include SQLRowSupport
 
   rule order_by
     "ORDER BY" one_or_more_spaces one_or_more_column_names { 
