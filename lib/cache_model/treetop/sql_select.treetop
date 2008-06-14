@@ -7,6 +7,18 @@ grammar SQLSelect
   include SQLSelectClause
 
   rule select_expression
-    limit / select / from / order_by
+    select 
+    from 
+    one_or_more_spaces where_condition {
+      def eval
+        where = where_condition.eval
+
+        CachedModel::SelectExpression.new({
+          :select => select.eval,
+          :from   => from.eval,
+          :where  => where
+        })
+      end
+    }
   end
 end
