@@ -2,6 +2,12 @@
 require "rubygems"
 require "set"
 
+require "facets/indexable"
+
+class String
+  include Indexable
+end
+
 require File.dirname(__FILE__) + "/cache_model/condition_tree"
 require File.dirname(__FILE__) + "/cache_model/sql_parser/keyword_uppercaser"
 require File.dirname(__FILE__) + "/cache_model/expression"
