@@ -1,10 +1,9 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module CacheModel
-  describe KeywordUppercaser do
+  describe Keywords do
     before :each do
-      @upper_caser = KeywordUppercaser
-      @keywords = @upper_caser.keywords
+      @keywords = Keywords::SQL_KEYWORDS
     end
     
     keywords = [
@@ -271,46 +270,5 @@ module CacheModel
         @keywords.should include(keyword.to_sym)
       end
     end
-
-    def upcase(string)
-      @upper_caser.new(string).upcase
-    end
-    
-    it "should upcase the word 'select'" do
-      upcase("select").should == "SELECT"
-    end
-    
-    it "should not upcase a word which is not a keyword" do
-      upcase("foobar").should == "foobar"
-    end
-    
-    it "should only upcase the keyword in a string" do
-      upcase("select foobar").should == "SELECT foobar"
-    end
-
-    it "should not upcase a word inside single quotes" do
-      upcase("select * from 'sql'").should == "SELECT * FROM 'sql'"
-    end
-
-    it "should not upcase a word inside double (backslash) quotes" do
-      upcase("select * from \"sql\"").should == "SELECT * FROM \"sql\""
-    end
-
-    it "should upcase the word SQL" do
-      upcase("sql").should == "SQL"
-    end
-
-    it "should not upcase a word inside double quotes" do 
-      upcase('select * from "sql"').should == "SELECT * FROM \"sql\""
-    end
-
-    it "should not upcase any of the words inside a set of two word double quotes" do
-      upcase('select * from "my sql"').should == 'SELECT * FROM "my sql"'
-    end
-
-    it "should not upcase any of the words inside a set of three word double quotes" do
-      upcase('select * from "my sql foo"').should == 'SELECT * FROM "my sql foo"'
-    end
-    
   end
 end 
