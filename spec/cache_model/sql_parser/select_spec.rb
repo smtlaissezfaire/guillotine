@@ -138,7 +138,13 @@ module CachedModel
       @parser = SQLSelectParser.new      
     end
     
-    describe "SELECT clause" do
+    describe SQLSelectClauseParser  do
+      include ParserSpecHelper
+
+      before :each do
+        @parser = SQLSelectClauseParser.new
+      end
+      
       it "should parse SELECT *" do
         parse_and_eval("SELECT *").should == Expression::Select.new("*")
       end

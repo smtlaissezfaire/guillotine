@@ -1,4 +1,7 @@
 grammar SQLSelectClause
+  include SQLPrimitives
+  include SQLRowSupport
+
   rule select
     "SELECT" one_or_more_spaces one_or_more_column_names optional_spaces { 
        def eval
