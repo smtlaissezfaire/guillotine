@@ -8,5 +8,4 @@ grammar SQLOrderByClause
       end
     }
   end
-
 end
