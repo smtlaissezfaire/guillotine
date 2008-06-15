@@ -14,7 +14,7 @@ module CachedModel
 
     it "should parse and evaluate 'SELECT * from events'" do
       expression = SelectExpression.new(:select => Expression::Select.new("*"), :from => Expression::From.new("events"))
-      parse_and_eval("SELECT * FROM events").should == expression
+      parse_and_eval("SELECT * FROM events").should eql(expression)
     end
 
     it "should parse 'SELECT * from events where user = 'foo''" do
@@ -26,7 +26,7 @@ module CachedModel
       from   = Expression::From.new("events")
       where  = Expression::Equal.new(:user, "foo")
       expression = SelectExpression.new(:select => select, :from => from, :where => where)
-      parse_and_eval("SELECT * FROM events WHERE user = 'foo'").should == expression
+      parse_and_eval("SELECT * FROM events WHERE user = 'foo'").should eql(expression)
     end
     
     it "should parse and evaluate SELECT   *    FROM     events     where user = 'foo'" do
@@ -34,7 +34,7 @@ module CachedModel
       from   = Expression::From.new("events")
       where  = Expression::Equal.new(:user, "foo")
       expression = SelectExpression.new(:select => select, :from => from, :where => where)
-      parse_and_eval("SELECT * FROM events WHERE user = 'foo'").should == expression
+      parse_and_eval("SELECT * FROM events WHERE user = 'foo'").should eql(expression)
     end
     
     it "should parse_and_eval SELECT * FROM events LIMIT 10" do
@@ -61,7 +61,7 @@ module CachedModel
       order_by  = Expression::OrderBy.new("foo")
       expression = SelectExpression.new(:select => select, :from => from, :order_by => order_by)
 
-      parse_and_eval("SELECT * FROM events ORDER BY foo").should == expression
+      parse_and_eval("SELECT * FROM events ORDER BY foo").should eql(expression)
     end
 
     it "should parse_and_eval SELECT * FROM events              ORDER BY foo" do
@@ -70,7 +70,7 @@ module CachedModel
       order_by  = Expression::OrderBy.new("foo")
       expression = SelectExpression.new(:select => select, :from => from, :order_by => order_by)
 
-      parse_and_eval("SELECT * FROM events ORDER BY foo").should == expression
+      parse_and_eval("SELECT * FROM events ORDER BY foo").should eql(expression)
     end
   end
 end
