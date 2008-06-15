@@ -44,7 +44,8 @@ module CachedModel
   
   class DisjunctionConditionNode < ConditionNode
     def call(*args)
-      first_child.call(*args) | second_child.call(*args)
+      results_of_first_call = first_child.call(*args)
+      results_of_first_call | second_child.call(results_of_first_call)
     end
   end
 end
