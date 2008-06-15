@@ -1,7 +1,6 @@
 module CachedModel
   class SelectExpression
     def initialize(hash)
-      @initial_hash = hash
       @select = hash[:select]
       @from = hash[:from]
       @where = hash[:where]
@@ -35,10 +34,6 @@ module CachedModel
     # SELECT * FROM `events` WHERE foo = 'Scott'
     alias_method :eql?, :==
 
-  protected
-
-    attr_reader :initial_hash
-    
     module Assertions
       
     private
