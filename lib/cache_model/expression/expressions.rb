@@ -26,6 +26,10 @@ module CachedModel
       def to_lambda
         lambda { |obj| ! super.call(obj) }
       end
+      
+      def call(collection)
+        collection.select { |obj| self.to_lambda.call(obj) }
+      end
     end
     
     class IsNull < Base

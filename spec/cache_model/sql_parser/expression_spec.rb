@@ -81,6 +81,23 @@ module CachedModel
           lambda = NotEqual.new('key', "value").to_lambda
           lambda.call(@ar_object_hash).should == true
         end
+        
+        describe "calling" do
+          it "should only find values which match the criteria in the collection" do
+            hash = [{ :key => "value" }, { :key => "not_value" }]
+            NotEqual.new('key', "value").call(hash).should == [{ :key => "not_value"}]
+          end
+          
+          it "should only find values which match the criteria in the collection (with a different key / value comparison)" do
+            hash = [{ :foo => "bar" }, { :foo => "baz" }]
+            NotEqual.new('foo', "bar").call(hash).should == [{ :foo => "baz"}]
+          end
+          
+          it "should return all the results which match the criteria" do
+            hash = [{ :foo => "bar", :irrelevant => "key" }, { :foo => "baz" }, { :foo => "baz", :this_key => "doesn't matter"}]
+            NotEqual.new('foo', "bar").call(hash).should == [{ :foo => "baz"}, { :foo => "baz", :this_key => "doesn't matter"}]
+          end
+        end
       end
       
       describe LessThan do
