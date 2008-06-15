@@ -1,0 +1,11 @@
+grammar SQLTruncate
+  include SQLRowSupport
+
+  rule truncate
+    "TRUNCATE" one_or_more_spaces ("TABLE" one_or_more_spaces)? table_name {
+      def eval
+        CachedModel::Expression::Truncate.new(table_name.eval)
+      end
+    }
+  end
+end

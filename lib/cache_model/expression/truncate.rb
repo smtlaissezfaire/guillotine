@@ -18,6 +18,10 @@ module CachedModel
       def call(collection)
         collection.clear
       end
+      
+      def ==(other)
+        self.table_name == other.table_name
+      end
     end
   end
 end
