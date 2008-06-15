@@ -54,6 +54,13 @@ module CachedModel
 
       parse_and_eval("SELECT * FROM events           LIMIT 10").should eql(expression)
     end
+    
+    it "should not parse_and_eval SELECT * FROM events LIMIT 1 the same as SELECT * FROM events LIMIT 10" do
+      first_statement = "SELECT * FROM events LIMIT 1"
+      second_statement = "SELECT * FROM events LIMIT 10"
+      parse_and_eval(first_statement).should_not == parse_and_eval(second_statement)
+      parse_and_eval(second_statement).should_not == parse_and_eval(first_statement)
+    end
 
     it "should parse_and_eval SELECT * FROM events ORDER BY foo" do
       select = Expression::Select.new("*")
