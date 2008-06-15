@@ -40,6 +40,10 @@ module CachedModel
       def to_lambda
         new_lambda_with_comparison(:==)
       end
+      
+      def call(collection)
+        collection.select { |obj| self.to_lambda.call(obj) }
+      end
     end
     
     class IsNotNull < IsNull

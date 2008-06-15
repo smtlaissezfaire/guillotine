@@ -21,6 +21,10 @@ module CachedModel
       
       alias_method :==, :eql?
       
+      def call(collection)
+        collection.select { |obj| self.to_lambda.call(obj) }
+      end
+      
     private
       
       def new_lambda_with_comparison(comparison)
