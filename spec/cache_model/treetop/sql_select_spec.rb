@@ -43,7 +43,7 @@ module CachedModel
       limit  = Expression::Limit.new(10)
       expression = SelectExpression.new(:select => select, :from => from, :limit => limit)
 
-      parse_and_eval("SELECT * FROM events LIMIT 10")
+      parse_and_eval("SELECT * FROM events LIMIT 10").should eql(expression)
     end
     
     it "should parse_and_eval SELECT * FROM events        LIMIT 10" do
@@ -52,7 +52,7 @@ module CachedModel
       limit  = Expression::Limit.new(10)
       expression = SelectExpression.new(:select => select, :from => from, :limit => limit)
 
-      parse_and_eval("SELECT * FROM events           LIMIT 10")
+      parse_and_eval("SELECT * FROM events           LIMIT 10").should eql(expression)
     end
 
     it "should parse_and_eval SELECT * FROM events ORDER BY foo" do
