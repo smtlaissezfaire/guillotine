@@ -2,6 +2,7 @@
 require "rubygems"
 require "set"
 
+require File.dirname(__FILE__) + "/cache_model/assertions"
 require File.dirname(__FILE__) + "/cache_model/extensions"
 require File.dirname(__FILE__) + "/cache_model/condition_tree"
 require File.dirname(__FILE__) + "/cache_model/keywords"
