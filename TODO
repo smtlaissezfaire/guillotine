@@ -1,14 +1,57 @@
 
-- find(id, other_options)
-- escaping for :include, :joins, :select
-  (or possible support for select ?)
-- should give a dup copy the objects out of the cache
-- multiple attributes
-- better parsing of sql conditions (remove spaces, and so on)
-- errors in sql parsing
-- escape hatch: throw, catch, so that if something isn't understood,
-  AR gets it as normal
-- update, create, save invalidations
-- DRb, so that multiple mongrels can all talk to the same cache
+- INSERT
+- UPDATE
+- DELETE (3 forms, see: http://dev.mysql.com/doc/refman/5.0/en/delete.html)
+- TRANSACTIONS
+- Support for other SQL Statements.  What percentage of keywords
+  are covered?
+- SELECT:
+    - Joins
+    - GROUP BY
+    - LIMIT with offset
+    - mysql procedures (for GROUP BY)
+    - mysql modifiers  (i.e. DISTINCT)
+- Write all database access to a log
 
-- AND ?
+
+- Integration with rails
+  - Intercept/Override Mysql Adapter:
+    - SELECT => #select
+    - model declarations (to add to ActiveRecord::Base)
+- Security: simple key value pairs of username, password,
+  with all access to data.  Can we encrypt this over SSL
+  (or another secure protocol) to get to the DRB process?
+
+- Is there a way to see the memory size of an object in Ruby?
+  It sure would be nice to be able to limit how big in RAM these
+  objects will get, i.e.:
+  
+  class MyClass < ActiveRecord::Base
+    cache_model :limit_memory => 100.megabytes
+  end
+
+- Efficiency issues: Indexes ?
+- Joins
+- should we give a dup of hashes out of the cache?  Does AR modify 
+  the values inside the hash of #select?
+- Treetop doesn't support case insensitive matching.  Need to provide
+  a patch for this
+- errors in sql parsing 
+  - SQLNotUnderstood (a parsing error)
+  - NotImplementedErrors (for selects which aren't implemented)
+- DRb, so that multiple mongrels can all talk to the same cache
+- Threading for the drb/data access
+- Database formats.  Is one big array per table really a good format?
+  - Should Set be used instead of Array?
+- Other database adapters?  SQLite?  Decouple design
+- Option to disconnect from database entirely in tests.
+  - if NotImplementedError, then we *should* use the real database!
+- Could we make this lazy, as opposed to eager?
+  - seems that we could, if we could figure out that certain queries
+    are subsets of other queries.  For instance:
+        SELECT * FROM users WHERE user_name = "scott"
+        SELECT * FROM users WHERE user_name = "scott" AND first_name = "Scott"
+   Or, that queries could be combined:
+        SELECT * FROM users WHERE first_name = "Scott"
+        SELECT * FROM users WHERE last_name = "Taylor"
+        SELECT * FROM users WHERE first_name = "Scott" AND last_name = "Taylor"
