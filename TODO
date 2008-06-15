@@ -1,4 +1,4 @@
-
+s
 High Priority
 ===============
 
@@ -74,13 +74,15 @@ Unclassified:
         SELECT * FROM users WHERE first_name = "Scott"
         SELECT * FROM users WHERE last_name = "Taylor"
         SELECT * FROM users WHERE first_name = "Scott" AND last_name = "Taylor"
-- Is there a way to see the memory size of an object in Ruby?
-  It sure would be nice to be able to limit how big in RAM these
+- It sure would be nice to be able to limit how big in RAM these
   objects will get, i.e.:
   
   class MyClass < ActiveRecord::Base
     cache_model :limit_memory => 100.megabytes
   end
+  
+  We now have Object#object_size
+
 - Split this project into two (or three) parts:
    - A parser
    - A gem
