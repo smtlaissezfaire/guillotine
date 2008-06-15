@@ -25,75 +25,71 @@ module CachedModel
     end
     
     describe ConjunctionConditionNode do
-      describe "when both children are not leafs" do
-        before :each do
-          @child_one = mock(ConjunctionConditionNode, :empty? => false, :call => [:one, :two])
-          @child_two = mock(ConjunctionConditionNode, :empty? => false, :call => [:two])
-          @root = ConjunctionConditionNode.new(@child_one, @child_two)
-        end
-        
-        it "should return the intersection (with &) of evaluating the two children" do
-          @root.call([:one, :two, :three, :four]).should == [:two]
-        end
-        
-        it "should return an empty array when there is no intersection (with different evaluations)" do
-          @child_one.stub!(:call).and_return [:one, :three]
-          @root.call([:one, :two, :three, :four]).should == []
-        end
-        
-        it "should call the first child with the collection" do
-          @child_one.should_receive(:call).with([:a, :collection])
-          @root.call([:a, :collection])
-        end
-        
-        it "should call the second child with the *resulting collection* from the first call" do
-          @child_one.should_receive(:call).with([:one, :two]).and_return [:two]
-          @child_two.should_receive(:call).with([:two]).and_return [:two]
-          @root.call([:one, :two])
-        end
-        
-        it "should not be equal to a DisjunctionConditionNode, even if the two have the same children" do
-          disjunction_condition_node = DisjunctionConditionNode.new(*@root.children)
-          @root.should_not eql(disjunction_condition_node)
-        end
-        
-        it "should be empty when given an empty array" do
-          @root.call([]).should eql([])
-        end
+      before :each do
+        @child_one = mock(ConjunctionConditionNode, :empty? => false, :call => [:one, :two])
+        @child_two = mock(ConjunctionConditionNode, :empty? => false, :call => [:two])
+        @root = ConjunctionConditionNode.new(@child_one, @child_two)
+      end
+      
+      it "should return the intersection (with &) of evaluating the two children" do
+        @root.call([:one, :two, :three, :four]).should == [:two]
+      end
+      
+      it "should return an empty array when there is no intersection (with different evaluations)" do
+        @child_one.stub!(:call).and_return [:one, :three]
+        @root.call([:one, :two, :three, :four]).should == []
+      end
+      
+      it "should call the first child with the collection" do
+        @child_one.should_receive(:call).with([:a, :collection])
+        @root.call([:a, :collection])
+      end
+      
+      it "should call the second child with the *resulting collection* from the first call" do
+        @child_one.should_receive(:call).with([:one, :two]).and_return [:two]
+        @child_two.should_receive(:call).with([:two]).and_return [:two]
+        @root.call([:one, :two])
+      end
+      
+      it "should not be equal to a DisjunctionConditionNode, even if the two have the same children" do
+        disjunction_condition_node = DisjunctionConditionNode.new(*@root.children)
+        @root.should_not eql(disjunction_condition_node)
+      end
+      
+      it "should be empty when given an empty array" do
+        @root.call([]).should eql([])
       end
     end
     
     describe DisjunctionConditionNode do
-      describe "when both children are not leafs" do
-        before :each do
-          @child_one = mock(DisjunctionConditionNode, :empty? => false, :call => [:one, :two])
-          @child_two = mock(DisjunctionConditionNode, :empty? => false, :call => [:three])
-          @root = DisjunctionConditionNode.new(@child_one, @child_two)
-        end
-        
-        it "should return the union (with Array#|) of evaluating the two children" do
-          @root.call([:one, :two, :three]).should == [:one, :two, :three]
-        end
-        
-        it "should return the union, removing duplicates  (with different evaluations)" do
-          @child_one.stub!(:call).and_return [:one, :three]
-          @root.call([:one, :two, :three]).should == [:one, :three]
-        end
-        
-        it "should call the first child with the collection" do
-          @child_one.should_receive(:call).with([:a, :collection])
-          @root.call([:a, :collection])
-        end
-        
-        it "should call the second child with the results of the first call" do
-          @child_one.stub!(:call).and_return [:parts_of_a_collection]
-          @child_two.should_receive(:call).with([:parts_of_a_collection]).and_return []
-          @root.call([:a, :collection])
-        end
-        
-        it "should be empty when given an empty array" do
-          @root.call([]).should eql([])
-        end
+      before :each do
+        @child_one = mock(DisjunctionConditionNode, :empty? => false, :call => [:one, :two])
+        @child_two = mock(DisjunctionConditionNode, :empty? => false, :call => [:three])
+        @root = DisjunctionConditionNode.new(@child_one, @child_two)
+      end
+      
+      it "should return the union (with Array#|) of evaluating the two children" do
+        @root.call([:one, :two, :three]).should == [:one, :two, :three]
+      end
+      
+      it "should return the union, removing duplicates  (with different evaluations)" do
+        @child_one.stub!(:call).and_return [:one, :three]
+        @root.call([:one, :two, :three]).should == [:one, :three]
+      end
+      
+      it "should call the first child with the collection" do
+        @child_one.should_receive(:call).with([:a, :collection])
+        @root.call([:a, :collection])
+      end
+      
+      it "should call the second child with the results of the first call" do
+        @child_one.stub!(:call).and_return [:parts_of_a_collection]
+        @child_two.should_receive(:call).with([:parts_of_a_collection]).and_return []
+        @root.call([:a, :collection])
+      end
+      
+      it "should be empty when given an empty array" do
+        @root.call([]).should eql([])
       end
     end
   end
