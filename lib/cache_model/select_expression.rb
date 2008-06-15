@@ -19,7 +19,8 @@ module CachedModel
       self.select == other.select
       self.from   == other.from
       self.where  == other.where
-      self.limit  == other.limit
+      self.limit  == other.limit && 
+      self.order_by == other.order_by
     end
 
     # TODO: In the future, eql? and == should not be the

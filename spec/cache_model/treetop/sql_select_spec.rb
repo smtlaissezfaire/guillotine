@@ -79,5 +79,12 @@ module CachedModel
 
       parse_and_eval("SELECT * FROM events ORDER BY foo").should eql(expression)
     end
+    
+    it "should not parse_and_eval SELECT * FROM events ORDER BY foo the same as SELECT * FROM events ORDER BY bar" do
+      first_statement = "SELECT * FROM events ORDER BY foo"
+      second_statement = "SELECT * FROM events ORDER BY bar"
+      parse_and_eval(first_statement).should_not == parse_and_eval(second_statement)
+      parse_and_eval(second_statement).should_not == parse_and_eval(first_statement)
+    end
   end
 end
