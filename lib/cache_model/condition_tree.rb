@@ -35,7 +35,7 @@ module CachedModel
   
   class ConjunctionConditionNode < ConditionNode
     # If we can a-priori figure out whether call one or call two 
-    # returns less records, we'll be building a real in-memory database!
+    # returns fewer records, we'll be building a real in-memory database!
     def call(*args)
       results_of_first_call = first_child.call(*args)
       results_of_first_call & second_child.call(results_of_first_call)
