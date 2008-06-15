@@ -16,11 +16,11 @@ module CachedModel
 
     def ==(other)
       assert_each_expression do
-        assert(self.select == other.select)
-        assert self.where  == other.where
-        assert self.from   == other.from
-        assert self.limit  == other.limit
-        assert self.order_by == other.order_by
+        assert_equal self.select,   other.select
+        assert_equal self.where,    other.where
+        assert_equal self.from,     other.from
+        assert_equal self.limit,    other.limit
+        assert_equal self.order_by, other.order_by
       end
     end
 
@@ -47,6 +47,10 @@ module CachedModel
       
       def assert(expression)
         Assertion.assert(expression)
+      end
+      
+      def assert_equal(expr1, expr2)
+        Assertion.assert(expr1 == expr2)
       end
       
       class Assertion
