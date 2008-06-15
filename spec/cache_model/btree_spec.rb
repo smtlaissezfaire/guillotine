@@ -24,22 +24,6 @@ module CachedModel
       }.should raise_error(ArgumentError)
     end
     
-    describe "evaluation" do
-      describe "when both children are parents" do
-        before :each do
-          @child_one = mock(ConditionNode, :empty? => false, :call => nil)
-          @child_two = mock(ConditionNode, :empty? => false, :call => nil)
-          @root = ConditionNode.new(@child_one, @child_two)
-        end
-        
-        it "should raise an error" do
-          lambda { 
-            @root.call([])
-          }.should raise_error(NotImplementedError, "Descendents of ConditionNode must implement the method call")
-        end
-      end
-    end
-    
     describe ConjunctionConditionNode do
       describe "when both children are not leafs" do
         before :each do

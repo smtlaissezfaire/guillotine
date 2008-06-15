@@ -28,9 +28,6 @@ module CachedModel
   end
   
   class ConditionNode < ProperBinaryTree
-    def call(collection)
-      raise NotImplementedError, "Descendents of ConditionNode must implement the method call"
-    end
   end
   
   class ConjunctionConditionNode < ConditionNode
