@@ -60,11 +60,7 @@ module CachedModel
       end
       
       def assert(expression)
-        if expression
-          return true
-        else
-          raise Assertion::AssertionFailedError
-        end
+        expression ? true : (raise AssertionFailedError)
       end
     end
   end
