@@ -1,4 +1,7 @@
 
+High Priority
+===============
+
 - INSERT
 - UPDATE
 - DELETE (3 forms, see: http://dev.mysql.com/doc/refman/5.0/en/delete.html)
@@ -14,6 +17,9 @@
 - Write all database access to a log
 
 
+Medium Priority
+================
+
 - Integration with rails
   - Intercept/Override Mysql Adapter:
     - SELECT => #select
@@ -21,15 +27,18 @@
 - Security: simple key value pairs of username, password,
   with all access to data.  Can we encrypt this over SSL
   (or another secure protocol) to get to the DRB process?
+- DRb, so that multiple mongrels can all talk to the same cache
+- Threading for the drb/data access
 
-- Is there a way to see the memory size of an object in Ruby?
-  It sure would be nice to be able to limit how big in RAM these
-  objects will get, i.e.:
-  
-  class MyClass < ActiveRecord::Base
-    cache_model :limit_memory => 100.megabytes
-  end
 
+Miscelaneous:
+===============
+
+
+Unclassified:
+===============
+
+- We *need* 100 % coverage of all ways data can be modified under MySQL
 - Efficiency issues: Indexes ?
 - Joins
 - should we give a dup of hashes out of the cache?  Does AR modify 
@@ -39,8 +48,6 @@
 - errors in sql parsing 
   - SQLNotUnderstood (a parsing error)
   - NotImplementedErrors (for selects which aren't implemented)
-- DRb, so that multiple mongrels can all talk to the same cache
-- Threading for the drb/data access
 - Database formats.  Is one big array per table really a good format?
   - Should Set be used instead of Array?
 - Other database adapters?  SQLite?  Decouple design
@@ -55,3 +62,10 @@
         SELECT * FROM users WHERE first_name = "Scott"
         SELECT * FROM users WHERE last_name = "Taylor"
         SELECT * FROM users WHERE first_name = "Scott" AND last_name = "Taylor"
+- Is there a way to see the memory size of an object in Ruby?
+  It sure would be nice to be able to limit how big in RAM these
+  objects will get, i.e.:
+  
+  class MyClass < ActiveRecord::Base
+    cache_model :limit_memory => 100.megabytes
+  end
