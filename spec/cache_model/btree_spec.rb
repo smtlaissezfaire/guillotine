@@ -56,6 +56,10 @@ module CachedModel
           disjunction_condition_node = DisjunctionConditionNode.new(*@root.children)
           @root.should_not eql(disjunction_condition_node)
         end
+        
+        it "should be empty when given an empty array" do
+          @root.call([]).should eql([])
+        end
       end
     end
     
@@ -85,6 +89,10 @@ module CachedModel
           @child_one.stub!(:call).and_return [:parts_of_a_collection]
           @child_two.should_receive(:call).with([:parts_of_a_collection]).and_return []
           @root.call([:a, :collection])
+        end
+        
+        it "should be empty when given an empty array" do
+          @root.call([]).should eql([])
         end
       end
     end
