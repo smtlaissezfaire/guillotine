@@ -51,7 +51,6 @@ module CachedModel
             Base.new("foo", "bar").should_not eql(Equal.new("foo", "bar"))
           end
         end
-
       end
       
       describe Equal do
