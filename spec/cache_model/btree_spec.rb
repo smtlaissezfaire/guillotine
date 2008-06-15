@@ -34,7 +34,7 @@ module CachedModel
         
         it "should raise an error" do
           lambda { 
-            @root.call
+            @root.call([])
           }.should raise_error(NotImplementedError, "Descendents of ConditionNode must implement the method call")
         end
       end
@@ -49,12 +49,12 @@ module CachedModel
         end
         
         it "should return the intersection (with &) of evaluating the two children" do
-          @root.call.should == [:two]
+          @root.call([:one, :two, :three, :four]).should == [:two]
         end
         
         it "should return an empty array when there is no intersection (with different evaluations)" do
           @child_one.stub!(:call).and_return [:one, :three]
-          @root.call.should == []
+          @root.call([:one, :two, :three, :four]).should == []
         end
         
         it "should call the first child with the collection" do
@@ -84,12 +84,12 @@ module CachedModel
         end
         
         it "should return the union (with Array#|) of evaluating the two children" do
-          @root.call.should == [:one, :two, :three]
+          @root.call([:one, :two, :three]).should == [:one, :two, :three]
         end
         
         it "should return the union, removing duplicates  (with different evaluations)" do
           @child_one.stub!(:call).and_return [:one, :three]
-          @root.call.should == [:one, :three]
+          @root.call([:one, :two, :three]).should == [:one, :three]
         end
         
         it "should call the first child with the collection" do

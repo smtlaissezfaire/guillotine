@@ -28,7 +28,7 @@ module CachedModel
   end
   
   class ConditionNode < ProperBinaryTree
-    def call(*args)
+    def call(collection)
       raise NotImplementedError, "Descendents of ConditionNode must implement the method call"
     end
   end
@@ -36,15 +36,15 @@ module CachedModel
   class ConjunctionConditionNode < ConditionNode
     # If we can a-priori figure out whether call one or call two 
     # returns fewer records, we'll be building a real in-memory database!
-    def call(*args)
-      results_of_first_call = first_child.call(*args)
+    def call(collection)
+      results_of_first_call = first_child.call(collection)
       results_of_first_call & second_child.call(results_of_first_call)
     end
   end
   
   class DisjunctionConditionNode < ConditionNode
-    def call(*args)
-      results_of_first_call = first_child.call(*args)
+    def call(collection)
+      results_of_first_call = first_child.call(collection)
       results_of_first_call | second_child.call(results_of_first_call)
     end
   end
