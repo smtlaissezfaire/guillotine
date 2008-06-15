@@ -24,7 +24,11 @@ module CachedModel
     private
       
       def new_lambda_with_comparison(comparison)
-        lambda { |obj| obj[self.key.to_sym].send(comparison, self.value) }
+        lambda { |obj| obj[key_as_symbol].send(comparison, self.value) }
+      end
+      
+      def key_as_symbol
+        key.to_sym
       end
     end
   end
