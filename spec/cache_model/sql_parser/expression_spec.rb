@@ -123,7 +123,6 @@ module CachedModel
             NotEqual.new('foo', 10).call(hash).should == [{ :foo => 9, :irrelevant => "key" }, { :foo => 9, :this_key => "doesn't matter"}]
           end
         end
-
       end
       
       describe LessThanOrEqualTo do
