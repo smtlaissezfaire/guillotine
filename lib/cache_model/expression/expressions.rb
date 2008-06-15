@@ -26,10 +26,6 @@ module CachedModel
       def to_lambda
         lambda { |obj| ! super.call(obj) }
       end
-      
-      def call(collection)
-        collection.select { |obj| self.to_lambda.call(obj) }
-      end
     end
     
     class IsNull < Base
@@ -39,10 +35,6 @@ module CachedModel
       
       def to_lambda
         new_lambda_with_comparison(:==)
-      end
-      
-      def call(collection)
-        collection.select { |obj| self.to_lambda.call(obj) }
       end
     end
     
