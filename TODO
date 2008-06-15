@@ -8,18 +8,12 @@ High Priority
 - TRANSACTIONS
 - Support for other SQL Statements.  What percentage of keywords
   are covered?
-- SELECT:
-    - Joins
-    - GROUP BY
-    - LIMIT with offset
-    - mysql procedures (for GROUP BY)
-    - mysql modifiers  (i.e. DISTINCT)
-- Write all database access to a log
 
 
 Medium Priority
 ================
 
+- We *need* 100 % coverage of all ways data can be modified under MySQL
 - Integration with rails
   - Intercept/Override Mysql Adapter:
     - SELECT => #select
@@ -29,25 +23,43 @@ Medium Priority
   (or another secure protocol) to get to the DRB process?
 - DRb, so that multiple mongrels can all talk to the same cache
 - Threading for the drb/data access
+- Write all database access to a log
+
+
+Low Priority:
+===============
+
+- SELECT:
+    - Joins
+    - GROUP BY
+    - LIMIT with offset
+    - mysql procedures (for GROUP BY)
+    - mysql modifiers  (i.e. DISTINCT)
+- Joins
+- errors in sql parsing 
+  - SQLNotUnderstood (a parsing error)
+  - NotImplementedErrors (for selects which aren't implemented)
+- Treetop doesn't support case insensitive matching.  Need to provide
+  a patch for this
 
 
 Miscelaneous:
 ===============
 
+- rake tasks:
+    - building gem
+    - running rspec
+    - running rcov
+    - github gem integration
+- profiling reports on large tables
+    
 
 Unclassified:
 ===============
 
-- We *need* 100 % coverage of all ways data can be modified under MySQL
 - Efficiency issues: Indexes ?
-- Joins
 - should we give a dup of hashes out of the cache?  Does AR modify 
   the values inside the hash of #select?
-- Treetop doesn't support case insensitive matching.  Need to provide
-  a patch for this
-- errors in sql parsing 
-  - SQLNotUnderstood (a parsing error)
-  - NotImplementedErrors (for selects which aren't implemented)
 - Database formats.  Is one big array per table really a good format?
   - Should Set be used instead of Array?
 - Other database adapters?  SQLite?  Decouple design
@@ -69,3 +81,7 @@ Unclassified:
   class MyClass < ActiveRecord::Base
     cache_model :limit_memory => 100.megabytes
   end
+- Split this project into two (or three) parts:
+   - A parser
+   - A gem
+   - A rails plugin
