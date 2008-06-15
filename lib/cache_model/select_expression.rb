@@ -16,10 +16,10 @@ module CachedModel
     attr_reader :order_by    
 
     def ==(other)
-      self.select == other.select
-      self.from   == other.from
-      self.where  == other.where
-      self.limit  == other.limit && 
+      self.select == other.select &&
+      self.where  == other.where &&
+      self.from   == other.from &&
+      self.limit  == other.limit &&
       self.order_by == other.order_by
     end
 

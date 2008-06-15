@@ -11,6 +11,20 @@ module CachedModel
     it "should parse 'SELECT * from events'" do
       parse("SELECT * FROM events").should_not be_nil
     end
+    
+    it "should not parse 'SELECT * from events' the same as 'SELECT * FROM foo'" do
+      first_statement  = "SELECT * FROM events"
+      second_statement = "SELECT * FROM foo"
+      parse_and_eval(first_statement).should_not == parse_and_eval(second_statement)
+      parse_and_eval(second_statement).should_not == parse_and_eval(first_statement)
+    end
+    
+    it "should not parse 'SELECT foo from events' the same as 'SELECT foo, bar FROM events'" do
+      first_statement  = "SELECT foo      FROM events"
+      second_statement = "SELECT foo, bar FROM events"
+      parse_and_eval(first_statement).should_not == parse_and_eval(second_statement)
+      parse_and_eval(second_statement).should_not == parse_and_eval(first_statement)
+    end
 
     it "should parse and evaluate 'SELECT * from events'" do
       expression = SelectExpression.new(:select => Expression::Select.new("*"), :from => Expression::From.new("events"))
@@ -19,6 +33,13 @@ module CachedModel
 
     it "should parse 'SELECT * from events where user = 'foo''" do
       parse("SELECT * FROM events WHERE user = 'foo'").should_not be_nil
+    end
+    
+    it "should parse 'SELECT * from events where user = 'foo'' the same as 'SELECT * FROM events WHERE user = 'bar''" do
+      first_statement  = "SELECT * FROM events WHERE user = 'foo'"
+      second_statement = "SELECT * FROM events WHERE user = 'bar'"
+      parse_and_eval(first_statement).should_not == parse_and_eval(second_statement)
+      parse_and_eval(second_statement).should_not == parse_and_eval(first_statement)
     end
 
     it "should parse and evaluate 'SELECT * from events where user = 'foo''" do
