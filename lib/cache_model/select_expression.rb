@@ -39,29 +39,35 @@ module CachedModel
 
     attr_reader :initial_hash
     
-  private
-    
-    def assert_each_expression(&blk)
-      yield
-      return true
-    rescue Assertion::AssertionFailedError
-      return false
-    end
-    
-    def assert(expression)
-      Assertion.assert(expression)
-    end
-    
-    class Assertion
-      class AssertionFailedError < StandardError; end
+    module Assertions
       
-      def self.assert(expression)
-        new.assert(expression)
+    private
+      
+      def assert_each_expression(&blk)
+        yield
+        return true
+      rescue Assertion::AssertionFailedError
+        return false
       end
       
       def assert(expression)
-        expression ? true : (raise AssertionFailedError)
+        Assertion.assert(expression)
+      end
+      
+      class Assertion
+        class AssertionFailedError < StandardError; end
+        
+        def self.assert(expression)
+          new.assert(expression)
+        end
+        
+        def assert(expression)
+          expression ? true : (raise AssertionFailedError)
+        end
       end
     end
+    
+    include Assertions
+    
   end
 end
