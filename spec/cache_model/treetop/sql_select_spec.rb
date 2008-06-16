@@ -31,6 +31,11 @@ module CachedModel
       expression = SelectExpression.new(:select => Expression::Select.new("*"), :from => Expression::From.new("events"))
       parse_and_eval(string).should eql(expression)
     end
+    
+    it "should have the proper query string" do
+      string = "SELECT * FROM events"
+      parse_and_eval(string).query_string.should == string
+    end
 
     it "should parse 'SELECT * from events where user = 'foo''" do
       parse("SELECT * FROM events WHERE user = 'foo'").should_not be_nil
