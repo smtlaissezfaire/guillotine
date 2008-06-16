@@ -20,7 +20,8 @@ grammar SQLSelect
           :from   => from.eval,
           :where  => where_condition_or_empty.eval,
           :limit  => limit_condition_or_empty.eval,
-          :order_by => order_by_condition_or_empty.eval
+          :order_by => order_by_condition_or_empty.eval,
+          :string => self.text_value
         })
       end
     }

@@ -8,6 +8,7 @@ module CachedModel
       @where = hash[:where]
       @limit = hash[:limit]
       @order_by = hash[:order_by]
+      @query_string = hash[:string]
     end
 
     attr_reader :select
@@ -15,6 +16,11 @@ module CachedModel
     attr_reader :where
     attr_reader :limit
     attr_reader :order_by    
+    attr_reader :query_string
+    
+    def inspect
+      "#{self.class}: #{query_string}"
+    end
 
     def ==(other)
       assert_each_expression do
