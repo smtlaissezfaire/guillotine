@@ -27,8 +27,9 @@ module CachedModel
     end
 
     it "should parse and evaluate 'SELECT * from events'" do
+      string = "SELECT * FROM events"
       expression = SelectExpression.new(:select => Expression::Select.new("*"), :from => Expression::From.new("events"))
-      parse_and_eval("SELECT * FROM events").should eql(expression)
+      parse_and_eval(string).should eql(expression)
     end
 
     it "should parse 'SELECT * from events where user = 'foo''" do
@@ -43,37 +44,41 @@ module CachedModel
     end
 
     it "should parse and evaluate 'SELECT * from events where user = 'foo''" do
+      string = "SELECT * FROM events WHERE user = 'foo'"
       select = Expression::Select.new("*")
       from   = Expression::From.new("events")
       where  = Expression::Equal.new(:user, "foo")
       expression = SelectExpression.new(:select => select, :from => from, :where => where)
-      parse_and_eval("SELECT * FROM events WHERE user = 'foo'").should eql(expression)
+      parse_and_eval(string).should eql(expression)
     end
     
     it "should parse and evaluate SELECT   *    FROM     events     where user = 'foo'" do
+      string = "SELECT * FROM events WHERE user = 'foo'"
       select = Expression::Select.new("*")
       from   = Expression::From.new("events")
       where  = Expression::Equal.new(:user, "foo")
       expression = SelectExpression.new(:select => select, :from => from, :where => where)
-      parse_and_eval("SELECT * FROM events WHERE user = 'foo'").should eql(expression)
+      parse_and_eval(string).should eql(expression)
     end
     
     it "should parse_and_eval SELECT * FROM events LIMIT 10" do
+      string = "SELECT * FROM events LIMIT 10"
       select = Expression::Select.new("*")
       from   = Expression::From.new("events")
       limit  = Expression::Limit.new(10)
       expression = SelectExpression.new(:select => select, :from => from, :limit => limit)
 
-      parse_and_eval("SELECT * FROM events LIMIT 10").should eql(expression)
+      parse_and_eval(string).should eql(expression)
     end
     
     it "should parse_and_eval SELECT * FROM events        LIMIT 10" do
+      string = "SELECT * FROM events           LIMIT 10"
       select = Expression::Select.new("*")
       from   = Expression::From.new("events")
       limit  = Expression::Limit.new(10)
       expression = SelectExpression.new(:select => select, :from => from, :limit => limit)
 
-      parse_and_eval("SELECT * FROM events           LIMIT 10").should eql(expression)
+      parse_and_eval(string).should eql(expression)
     end
     
     it "should not parse_and_eval SELECT * FROM events LIMIT 1 the same as SELECT * FROM events LIMIT 10" do
@@ -93,12 +98,13 @@ module CachedModel
     end
 
     it "should parse_and_eval SELECT * FROM events              ORDER BY foo" do
+      string = "SELECT * FROM events ORDER BY foo"
       select = Expression::Select.new("*")
       from   = Expression::From.new("events")
       order_by  = Expression::OrderBy.new("foo")
       expression = SelectExpression.new(:select => select, :from => from, :order_by => order_by)
 
-      parse_and_eval("SELECT * FROM events ORDER BY foo").should eql(expression)
+      parse_and_eval(string).should eql(expression)
     end
     
     it "should not parse_and_eval SELECT * FROM events ORDER BY foo the same as SELECT * FROM events ORDER BY bar" do
