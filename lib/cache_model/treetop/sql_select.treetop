@@ -16,12 +16,13 @@ grammar SQLSelect
     {
       def eval
         CachedModel::SelectExpression.new({
+          :string => self.text_value,
+
           :select => select.eval,
           :from   => from.eval,
           :where  => where_condition_or_empty.eval,
           :limit  => limit_condition_or_empty.eval,
-          :order_by => order_by_condition_or_empty.eval,
-          :string => self.text_value
+          :order_by => order_by_condition_or_empty.eval
         })
       end
     }
