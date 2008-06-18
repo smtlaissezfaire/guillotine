@@ -6,6 +6,7 @@ grammar SQLSelect
   include SQLWhereCondition
   include SQLOrderByClause
   include SQLLimit
+  include SQLHelpers
 
   rule select_expression
     select 
@@ -26,27 +27,5 @@ grammar SQLSelect
         })
       end
     }
-  end
-
-  rule where_condition_or_empty
-    space where_condition {
-      def eval
-        where_condition.eval
-      end
-    }
-    /  
-    empty_string
-  end
-
-  rule limit_condition_or_empty
-    one_or_more_spaces limit { def eval; limit.eval; end } / empty_string
-  end
-
-  rule order_by_condition_or_empty
-    one_or_more_spaces order_by { def eval; order_by.eval; end } / empty_string
-  end
-
-  rule empty_string
-    '' { def eval; nil; end }
   end
 end

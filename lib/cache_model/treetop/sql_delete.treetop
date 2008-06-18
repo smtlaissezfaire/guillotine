@@ -1,0 +1,12 @@
+grammar SQLDelete
+  include SQLRowSupport
+  include SQLWhereCondition
+  include SQLHelpers
+
+  rule delete
+    "DELETE" one_or_more_spaces 
+    "FROM" one_or_more_spaces 
+    table_name
+    where_condition_or_empty
+  end
+end
