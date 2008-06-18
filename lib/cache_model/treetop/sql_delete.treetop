@@ -6,6 +6,10 @@ grammar SQLDelete
   include SQLHelpers
 
   rule delete
+    single_table_delete
+  end
+
+  rule single_table_delete
     "DELETE" one_or_more_spaces 
     optional_delete_directives
     "FROM" one_or_more_spaces 
