@@ -1,12 +1,47 @@
 grammar SQLDelete
   include SQLRowSupport
   include SQLWhereCondition
+  include SQLOrderByClause
+  include SQLLimit
   include SQLHelpers
 
   rule delete
     "DELETE" one_or_more_spaces 
+    optional_delete_directives
     "FROM" one_or_more_spaces 
     table_name
     where_condition_or_empty
+    order_by_condition_or_empty
+    limit_condition_or_empty
+  end
+
+  rule optional_delete_directives
+    optional_low_priority
+    optional_quick
+    optional_ignore
+  end
+
+  rule optional_low_priority
+    low_priority / empty_string
+  end
+
+  rule optional_quick
+    quick / empty_string
+  end
+
+  rule optional_ignore
+    ignore / empty_string
+  end
+
+  rule ignore
+    "IGNORE" one_or_more_spaces
+  end
+
+  rule quick
+    "QUICK" one_or_more_spaces
+  end
+
+  rule low_priority
+    "LOW_PRIORITY" one_or_more_spaces
   end
 end

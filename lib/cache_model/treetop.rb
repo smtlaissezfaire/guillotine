@@ -12,4 +12,5 @@ Treetop.load File.dirname(__FILE__) + "/treetop/sql_select_clause"
 Treetop.load File.dirname(__FILE__) + "/treetop/sql_select"
 
 Treetop.load File.dirname(__FILE__) + "/treetop/truncate"
+Treetop.load File.dirname(__FILE__) + "/treetop/sql_delete"
 
