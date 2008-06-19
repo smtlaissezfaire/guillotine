@@ -31,5 +31,17 @@ module CachedModel
     it "should not parse ORDER BYcolumn_name" do
       parse("ORDER BYcolumn_name").should be_nil
     end
+    
+    it "should parse ORDER BY column_name ASC" do
+      pending 'todo'
+      parse("ORDER BY column_name ASC").should_not be_nil
+    end
+    
+    it "should parse ORDER BY column_name DESC"
+    
+    it "should parse ORDER BY col_one, col_two DESC"
+    
+    it "should parse ORDER BY col_one DESC, col_two"
+
   end
 end
