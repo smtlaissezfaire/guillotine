@@ -3,7 +3,47 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 module CachedModel
   module Expression
     describe OrderBy do
+      before :each do
+        @pair1 = mock 'order by pair 1'
+        @pair2 = mock 'order by pair 2'
+      end
       
+      it "should initialize with a splatted array of OrderByPairs, and have the pairs" do
+        order_by = OrderBy.new @pair1, @pair2
+        order_by.pairs.should == [@pair1, @pair2]
+      end
+      
+      it "should have the pair if given only one" do
+        order_by = OrderBy.new @pair1
+        order_by.pair.should == @pair1
+      end
+      
+      it "should return the array of pairs if #pair is called, but there are multiple pairs" do
+        order_by = OrderBy.new @pair1, @pair2
+        order_by.pair.should == [@pair1, @pair2]
+      end
+      
+      describe "==" do
+        before :each do
+          @pair_one = OrderByPair.new(:foo)
+          @pair_two = OrderByPair.new(:foo)
+          @pair_three = OrderByPair.new(:baz)
+        end
+        
+        it "should be true if the other array has the same (==) elements" do
+          one = OrderBy.new(@pair_one)
+          two = OrderBy.new(@pair_two)
+          one.should == two
+          two.should == one
+        end
+        
+        it "should be false if the other array is not the same"do
+          one = OrderBy.new(@pair_one)
+          two = OrderBy.new(@pair_three)
+          one.should_not == two
+          two.should_not == one
+        end
+      end
     end
     
     describe OrderByPair do

@@ -11,7 +11,14 @@ module CachedModel
       include SortOptions
       
       def initialize(*columns)
+        @pairs = columns
         @columns = columns.flatten
+      end
+      
+      attr_reader :pairs
+      
+      def pair
+        pairs.size == 1 ? pairs.first : pairs
       end
       
       attr_reader :columns
