@@ -2,8 +2,10 @@ module CacheModel
   module Keywords
     IMPLEMENTED_KEYWORDS = Set.new [
       :AND,
+      :ASC,
       :BY,
       :DELETE,
+      :DESC,
       :FROM,
       :IS,
       :NOT,
@@ -20,7 +22,6 @@ module CacheModel
       :ALTER,
       :ANALYZE,
       :AS,
-      :ASC,
       :ASENSITIVE,
       :BEFORE,
       :BETWEEN,
@@ -59,7 +60,6 @@ module CacheModel
       :DECLARE,
       :DEFAULT,
       :DELAYED,
-      :DESC,
       :DESCRIBE,
       :DETERMINISTIC,
       :DISTINCT,
