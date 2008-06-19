@@ -43,11 +43,7 @@ module CachedModel
       
       def call(collection)
         results = collection.sort { |x, y|  x[column] <=> y[column] }
-        if desc?
-          results.reverse
-        else
-          results
-        end
+        desc? ? results.reverse : results
       end
       
     protected
