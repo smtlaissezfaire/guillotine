@@ -3,10 +3,42 @@ grammar SQLOrderByClause
   include SQLRowSupport
 
   rule order_by
-    "ORDER" space+ "BY" space+ one_or_more_column_names { 
+    "ORDER" space+ "BY" space+ one_or_more_column_names_with_sort { 
       def eval
-        CachedModel::Expression::OrderBy.new(one_or_more_column_names.eval)
+        CachedModel::Expression::OrderBy.new(one_or_more_column_names_with_sort.eval)
       end
     }
   end
+
+  rule one_or_more_column_names_with_sort
+    one_column_name_with_sort "," space+ one_or_more_column_names_with_sort {
+      def eval
+        result1, result2 = one_column_name_with_sort.eval, one_or_more_column_names_with_sort.eval
+        [result1, result2].flatten
+      end
+    }
+    / 
+    one_column_name_with_sort
+  end
+
+  rule one_column_name_with_sort
+    one_column_name optional_sort_condition { def eval; one_column_name.eval; end }
+  end
+
+  rule optional_sort_condition
+    space+ sort_condition / ''
+  end
+
+  rule sort_condition
+    ascending / descending
+  end
+
+  rule ascending
+    "ASC"
+  end
+
+  rule descending
+    "DESC"
+  end
+
 end
