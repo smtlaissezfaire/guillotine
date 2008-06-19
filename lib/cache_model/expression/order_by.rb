@@ -40,6 +40,25 @@ module CachedModel
         return false if !other.kind_of?(self.class)
         self.column.equal?(other.column) && self.sort == other.sort
       end
+      
+      def call(collection)
+        results = collection.sort { |x, y|  x[column] <=> y[column] }
+        if desc?
+          results.reverse
+        else
+          results
+        end
+      end
+      
+    protected
+      
+      def desc?
+        @sort == DESC
+      end
+      
+      def asc?
+        @sort == ASC
+      end
     end
   end
 end

@@ -96,6 +96,40 @@ module CachedModel
           two.should_not == one
         end
       end
+      
+      describe "sorting (calling with a collection)" do
+        describe "when ASC" do
+          before :each do
+            @pair = OrderByPair.new(:id, OrderByPair::ASC)
+          end
+          
+          it "should return [{:id => 1}, {:id => 2}] unchanged" do
+            collection = [{ :id => 1 }, { :id => 2 }]
+            @pair.call(collection).should == collection
+          end
+          
+          it "should return [{:id => 2}, {:id => 1}] with the id's in order" do
+            collection = [{ :id => 2 }, { :id => 1 }]
+            @pair.call(collection).should == [{ :id => 1 }, { :id => 2 }]
+          end
+        end
+        
+        describe "when DESC" do
+          before :each do
+            @pair = OrderByPair.new(:id, OrderByPair::DESC)
+          end
+          
+          it "should return [{:id => 1}, {:id => 2}] reversed" do
+            collection = [{ :id => 1 }, { :id => 2 }]
+            @pair.call(collection).should == collection.reverse
+          end
+          
+          it "should return [{:id => 2}, {:id => 1}] with the id's in reverse order" do
+            collection = [{ :id => 2 }, { :id => 1 }]
+            @pair.call(collection).should == [{ :id => 2 }, { :id => 1 }]
+          end
+        end
+      end
     end
   end
 end
