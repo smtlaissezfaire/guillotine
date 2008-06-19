@@ -44,6 +44,50 @@ module CachedModel
           two.should_not == one
         end
       end
+      
+      describe "sorting" do
+        before :each do
+          @pair_1 = mock 'order by pair 1'
+        end
+        
+        describe "with one order by pair" do
+          before :each do
+            @collection = []
+            @order_by = OrderBy.new(@pair_1)
+          end
+          
+          it "should proxy the order by pairs call method" do
+            @pair_1.should_receive(:call).with(@collection).and_return []
+            @order_by.call(@collection)
+          end
+          
+          it "should proxy the order by pair with the correct collection" do
+            @pair_1.should_receive(:call).with([1,2,3]).and_return []
+            @order_by.call([1,2,3])
+          end
+        end
+        
+        describe "with two order by pairs" do
+          before :each do
+            @pair_one = OrderByPair.new(:first_name)
+            @pair_two = OrderByPair.new(:id)
+            @collection = [
+              { :id => 1, :first_name => "Scott", :last_name => "Taylor" },
+              { :id => 3, :first_name => "Scott", :last_name => "Foobar" },
+              { :id => 2, :first_name => "Matt",  :last_name => "Pelletier" }
+            ]
+            @order_by = OrderBy.new(@pair_one, @pair_two)
+          end
+          
+          it "should apply them in reverse sequence" do
+            @order_by.call(@collection).should == [
+              { :id => 2, :first_name => "Matt",  :last_name => "Pelletier" },
+              { :id => 1, :first_name => "Scott", :last_name => "Taylor" },
+              { :id => 3, :first_name => "Scott", :last_name => "Foobar" }
+            ]
+          end
+        end
+      end
     end
     
     describe OrderByPair do

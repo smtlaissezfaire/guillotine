@@ -23,6 +23,12 @@ module CachedModel
       def ==(other)
         pairs == other.pairs
       end
+      
+      # TODO: This must be awful in terms of efficiency
+      # Fixit when it actually becomes a problem
+      def call(collection)
+        pairs.reverse.inject(collection) { |collection, pair| pair.call(collection) }
+      end
     end
     
     class OrderByPair
