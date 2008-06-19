@@ -14,8 +14,6 @@ module CacheModel
       :SELECT,
     ] unless defined?(IMPLEMENTED_KEYWORDS)
     
-    # Taken from the mysql docs:
-    # http://dev.mysql.com/doc/refman/5.0/en/reserved-words.html
     NOT_IMPLEMENTED_KEYWORDS = Set.new [
       :ADD,
       :ALL,
@@ -263,7 +261,9 @@ module CacheModel
       :UPGRADE,
       :WHILE
     ] unless defined?(SQL_KEYWORDS)
-    
+
+    # Taken from the mysql docs:
+    # http://dev.mysql.com/doc/refman/5.0/en/reserved-words.html
     SQL_KEYWORDS = IMPLEMENTED_KEYWORDS.merge(NOT_IMPLEMENTED_KEYWORDS) unless defined?(SQL_KEYWORDS)
   end
 end
