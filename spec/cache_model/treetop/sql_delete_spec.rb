@@ -50,7 +50,7 @@ module CachedModel
     end
     
     it "should parse an optional order by clause" do
-      order_by_clause = Expression::OrderBy.new("foo")
+      order_by_clause = Expression::OrderBy.new(Expression::OrderByPair.new(:foo))
       parse_and_eval("DELETE FROM table_name ORDER BY foo").should == Expression::DeleteStatement.new(:table_name, nil, order_by_clause)
     end
     

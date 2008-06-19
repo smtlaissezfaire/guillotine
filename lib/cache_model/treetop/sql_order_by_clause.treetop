@@ -22,7 +22,7 @@ grammar SQLOrderByClause
   end
 
   rule one_column_name_with_sort
-    one_column_name optional_sort_condition { def eval; one_column_name.eval; end }
+    one_column_name optional_sort_condition { def eval; CachedModel::Expression::OrderByPair.new(one_column_name.eval); end }
   end
 
   rule optional_sort_condition

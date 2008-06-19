@@ -96,7 +96,7 @@ module CachedModel
     it "should parse_and_eval SELECT * FROM events ORDER BY foo" do
       select = Expression::Select.new("*")
       from   = Expression::From.new("events")
-      order_by  = Expression::OrderBy.new("foo")
+      order_by  = Expression::OrderBy.new(Expression::OrderByPair.new(:foo))
       expression = SelectExpression.new(:select => select, :from => from, :order_by => order_by)
 
       parse_and_eval("SELECT * FROM events ORDER BY foo").should eql(expression)
@@ -106,7 +106,7 @@ module CachedModel
       string = "SELECT * FROM events ORDER BY foo"
       select = Expression::Select.new("*")
       from   = Expression::From.new("events")
-      order_by  = Expression::OrderBy.new("foo")
+      order_by  = Expression::OrderBy.new(Expression::OrderByPair.new(:foo))
       expression = SelectExpression.new(:select => select, :from => from, :order_by => order_by)
 
       parse_and_eval(string).should eql(expression)

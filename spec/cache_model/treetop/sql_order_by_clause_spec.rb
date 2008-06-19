@@ -9,22 +9,28 @@ module CachedModel
     end
 
     it "should order by a column name" do
-      result = Expression::OrderBy.new("column")
+      pair = Expression::OrderByPair.new("column")
+      result = Expression::OrderBy.new(pair)
       parse_and_eval("ORDER BY column").should == result
     end
     
     it "should order by a different name" do
-      result = Expression::OrderBy.new("different_col")
+      pair = Expression::OrderByPair.new("different_col")
+      result = Expression::OrderBy.new(pair)
       parse_and_eval("ORDER BY different_col").should == result
     end
     
     it "should order by two columns" do
-      result = Expression::OrderBy.new("different_col", 'column_two')
+      pair1 = Expression::OrderByPair.new(:different_col)
+      pair2 = Expression::OrderByPair.new(:column_two)
+      result = Expression::OrderBy.new(pair1, pair2)
       parse_and_eval("ORDER BY different_col, column_two").should == result
     end
     
     it "should allow any number of spaces after the ORDER BY clause" do
-      result = Expression::OrderBy.new("different_col", 'column_two')
+      pair1 = Expression::OrderByPair.new(:different_col)
+      pair2 = Expression::OrderByPair.new(:column_two)
+      result = Expression::OrderBy.new(pair1, pair2)
       parse_and_eval("ORDER BY             different_col, column_two").should == result
     end
     
