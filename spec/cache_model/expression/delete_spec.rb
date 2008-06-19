@@ -189,7 +189,6 @@ module CachedModel
               @delete.call(@array).should == [1,2,3]
             end
           end
-          
         end
       end
     end
