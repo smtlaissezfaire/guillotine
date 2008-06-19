@@ -11,7 +11,7 @@ module CachedModel
       include SortOptions
       
       def initialize(*columns)
-        @pairs = columns
+        @pairs = columns.flatten
         # TODO: Remove this
         @columns = columns.flatten
       end
