@@ -5,7 +5,7 @@ module CachedModel
       end
       
       def ==(other)
-        true
+        false
       end
     end
   end
