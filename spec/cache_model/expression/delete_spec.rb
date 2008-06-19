@@ -190,6 +190,19 @@ module CachedModel
             end
           end
         end
+        
+        describe "calling with order by and limit" do
+          before :each do
+            @collection = [{ :foo => "bar", :id => 3}, { :foo => "bar", :id => 2}]
+            order_by = Expression::OrderBy.new(OrderByPair.new(:id, :ASC))
+            @delete = DeleteStatement.new(:table_name, nil, order_by, Limit.new(1))
+          end
+          
+          it "should return the results with the first element deleted by the order clause" do
+            pending 'todo'
+            @delete.call(@collection).should == [{ :foo => "bar", :id => 3}]
+          end
+        end
       end
     end
   end
