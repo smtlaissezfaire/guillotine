@@ -56,7 +56,7 @@ module CachedModel
       end
       
       def call(collection)
-        results = collection.sort { |x, y|  x[column] <=> y[column] }
+        results = collection.sort_by { |x| x[column] }
         desc? ? results.reverse : results
       end
       

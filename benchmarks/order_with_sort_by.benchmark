@@ -1,0 +1,704 @@
+
+******** With CachedModel ***************************
+
+Thread ID: 218880
+Total Time: 1.525991
+
+  %total   %self     total      self      wait     child            calls   Name
+--------------------------------------------------------------------------------
+ 100.00%   0.00%      1.53      0.00      0.00      1.53                0     Global#[No method] (ordering.rb:50}  ordering.rb:50
+                      1.53      0.00      0.00      1.53              1/1     CachedModel::Expression::OrderBy#call
+--------------------------------------------------------------------------------
+                      1.53      0.00      0.00      1.53              1/1     Global#[No method]
+ 100.00%   0.00%      1.53      0.00      0.00      1.53                1     CachedModel::Expression::OrderBy#call (./../lib/cache_model/expression/order_by.rb:29}  ./../lib/cache_model/expression/order_by.rb:29
+                      1.53      0.00      0.00      1.53              1/1     Enumerable#inject
+                      0.00      0.00      0.00      0.00              1/2     Array#reverse
+--------------------------------------------------------------------------------
+                      1.53      0.00      0.00      1.53              1/1     CachedModel::Expression::OrderBy#call
+ 100.00%   0.00%      1.53      0.00      0.00      1.53                1     Enumerable#inject (ruby_runtime:0}  ruby_runtime:0
+                      1.53      0.00      0.00      1.53              1/1     Array#each
+--------------------------------------------------------------------------------
+                      1.53      0.00      0.00      1.53              1/1     Enumerable#inject
+ 100.00%   0.00%      1.53      0.00      0.00      1.53                1     Array#each (ruby_runtime:0}  ruby_runtime:0
+                      1.53      0.00      0.00      1.53              2/2     CachedModel::Expression::OrderByPair#call
+--------------------------------------------------------------------------------
+                      1.53      0.00      0.00      1.53              2/2     Array#each
+ 100.00%   0.00%      1.53      0.00      0.00      1.53                2     CachedModel::Expression::OrderByPair#call (./../lib/cache_model/expression/order_by.rb:58}  ./../lib/cache_model/expression/order_by.rb:58
+                      0.00      0.00      0.00      0.00              2/2     CachedModel::Expression::OrderByPair#desc?
+                      0.00      0.00      0.00      0.00              1/2     Array#reverse
+                      1.53      0.67      0.00      0.86              2/2     Enumerable#sort_by
+--------------------------------------------------------------------------------
+                      1.53      0.67      0.00      0.86              2/2     CachedModel::Expression::OrderByPair#call
+  99.98%  43.82%      1.53      0.67      0.00      0.86                2     Enumerable#sort_by (ruby_runtime:0}  ruby_runtime:0
+                      0.22      0.17      0.00      0.05              2/2     Array#each-1
+                      0.63      0.63      0.00      0.00    260769/260769     String#<=>
+--------------------------------------------------------------------------------
+                      0.63      0.63      0.00      0.00    260769/260769     Enumerable#sort_by
+  41.44%  41.44%      0.63      0.63      0.00      0.00           260769     String#<=> (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.22      0.17      0.00      0.05              2/2     Enumerable#sort_by
+  14.73%  11.26%      0.22      0.17      0.00      0.05                2     Array#each-1 (ruby_runtime:0}  ruby_runtime:0
+                      0.05      0.05      0.00      0.00      20000/20000     Hash#[]
+--------------------------------------------------------------------------------
+                      0.05      0.05      0.00      0.00      20000/20000     Array#each-1
+   3.47%   3.47%      0.05      0.05      0.00      0.00            20000     Hash#[] (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/2     CachedModel::Expression::OrderByPair#call
+                      0.00      0.00      0.00      0.00              1/2     CachedModel::Expression::OrderBy#call
+   0.01%   0.01%      0.00      0.00      0.00      0.00                2     Array#reverse (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/2     CachedModel::Expression::OrderByPair#call
+   0.00%   0.00%      0.00      0.00      0.00      0.00                2     CachedModel::Expression::OrderByPair#desc? (./../lib/cache_model/expression/order_by.rb:65}  ./../lib/cache_model/expression/order_by.rb:65
+                      0.00      0.00      0.00      0.00              2/2     Kernel#==
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/2     CachedModel::Expression::OrderByPair#desc?
+   0.00%   0.00%      0.00      0.00      0.00      0.00                2     Kernel#== (ruby_runtime:0}  ruby_runtime:0
+
+
+
+******** With Sqlite/rails in memory database ***************************
+
+Thread ID: 218880
+Total Time: 7.126974
+
+  %total   %self     total      self      wait     child            calls   Name
+--------------------------------------------------------------------------------
+ 100.00%   0.00%      7.13      0.00      0.00      7.13                0     Global#[No method] (ordering.rb:63}  ordering.rb:63
+                      7.13      0.00      0.00      7.13              1/1     <Class::ActiveRecord::Base>#find
+--------------------------------------------------------------------------------
+                      7.13      0.00      0.00      7.13              1/1     Global#[No method]
+ 100.00%   0.00%      7.13      0.00      0.00      7.13                1     <Class::ActiveRecord::Base>#find (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:528}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:528
+                      0.00      0.00      0.00      0.00              1/1     ActiveSupport::CoreExtensions::Array::ExtractOptions#extract_options!
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#set_readonly_option!
+                      0.00      0.00      0.00      0.00              3/3     Symbol#===
+                      0.00      0.00      0.00      0.00              1/1     Array#first
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#validate_find_options
+                      7.13      0.00      0.00      7.13              1/1     <Class::ActiveRecord::Base>#find_every
+--------------------------------------------------------------------------------
+                      7.13      0.00      0.00      7.13              1/1     <Class::ActiveRecord::Base>#find
+ 100.00%   0.00%      7.13      0.00      0.00      7.13                1     <Class::ActiveRecord::Base>#find_every (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1335}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1335
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#merge_includes
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#construct_finder_sql
+                      7.13      0.00      0.00      7.13              1/1     <Class::ActiveRecord::Base>#find_by_sql
+                      0.00      0.00      0.00      0.00              2/2     Enumerable#any?
+                      0.00      0.00      0.00      0.00          2/40015     Hash#[]
+                      0.00      0.00      0.00      0.00              1/3     <Class::ActiveRecord::Base>#scope
+--------------------------------------------------------------------------------
+                      7.13      0.00      0.00      7.13              1/1     <Class::ActiveRecord::Base>#find_every
+  99.98%   0.00%      7.13      0.00      0.00      7.13                1     <Class::ActiveRecord::Base>#find_by_sql (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:581}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:581
+                      0.96      0.06      0.00      0.91              1/1     Array#collect!
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#sanitize_sql
+                      6.16      0.00      0.00      6.16              1/1     ActiveRecord::ConnectionAdapters::QueryCache#select_all
+                      0.00      0.00      0.00      0.00              1/4     <Class::ActiveRecord::Base>#connection
+                      0.00      0.00      0.00      0.00              1/1     Module#name
+--------------------------------------------------------------------------------
+                      6.16      0.00      0.00      6.16              1/1     <Class::ActiveRecord::Base>#find_by_sql
+  86.48%   0.00%      6.16      0.00      0.00      6.16                1     ActiveRecord::ConnectionAdapters::QueryCache#select_all (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/query_cache.rb:57}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/query_cache.rb:57
+                      6.16      0.00      0.00      6.16              1/1     ActiveRecord::ConnectionAdapters::DatabaseStatements#select_all_without_query_cache
+--------------------------------------------------------------------------------
+                      6.16      0.00      0.00      6.16              1/1     ActiveRecord::ConnectionAdapters::QueryCache#select_all
+  86.48%   0.00%      6.16      0.00      0.00      6.16                1     ActiveRecord::ConnectionAdapters::DatabaseStatements#select_all_without_query_cache (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/database_statements.rb:6}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/database_statements.rb:6
+                      6.16      0.00      0.00      6.16              1/1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#select
+--------------------------------------------------------------------------------
+                      6.16      0.00      0.00      6.16              1/1     ActiveRecord::ConnectionAdapters::DatabaseStatements#select_all_without_query_cache
+  86.48%   0.00%      6.16      0.00      0.00      6.16                1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#select (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:262}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:262
+                      4.82      0.00      0.00      4.82              1/1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#execute
+                      1.35      0.11      0.00      1.23              1/1     Array#map
+--------------------------------------------------------------------------------
+                      4.82      0.00      0.00      4.82              1/1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#select
+  67.58%   0.00%      4.82      0.00      0.00      4.82                1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#execute (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:131}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:131
+                      4.82      0.00      0.00      4.82              1/1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#catch_schema_changes
+--------------------------------------------------------------------------------
+                      4.82      0.00      0.00      4.82              1/1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#execute
+  67.58%   0.00%      4.82      0.00      0.00      4.82                1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#catch_schema_changes (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:359}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:359
+                      4.82      0.00      0.00      4.82              1/1     ActiveRecord::ConnectionAdapters::AbstractAdapter#log
+--------------------------------------------------------------------------------
+                      4.82      0.00      0.00      4.82              1/1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#catch_schema_changes
+  67.58%   0.00%      4.82      0.00      0.00      4.82                1     ActiveRecord::ConnectionAdapters::AbstractAdapter#log (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:129}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:129
+                      0.00      0.00      0.00      0.00              1/1     ActiveRecord::ConnectionAdapters::AbstractAdapter#log_info
+                      0.00      0.00      0.00      0.00              1/1     Float#+
+                      4.82      0.00      0.00      4.82              1/1     <Module::Benchmark>#realtime
+                      0.00      0.00      0.00      0.00              1/4     Kernel#block_given?
+--------------------------------------------------------------------------------
+                      4.82      0.00      0.00      4.82              1/1     ActiveRecord::ConnectionAdapters::AbstractAdapter#log
+  67.58%   0.00%      4.82      0.00      0.00      4.82                1     <Module::Benchmark>#realtime (/Library/Ruby/Gems/1.8/gems/activesupport-2.1.0/lib/active_support/core_ext/benchmark.rb:6}  /Library/Ruby/Gems/1.8/gems/activesupport-2.1.0/lib/active_support/core_ext/benchmark.rb:6
+                      0.00      0.00      0.00      0.00              1/1     Float#-
+                      4.82      0.00      0.00      4.82              1/1     SQLite3::Database#execute
+                      0.00      0.00      0.00      0.00              2/2     <Class::Time>#now
+                      0.00      0.00      0.00      0.00              2/2     Time#to_f
+--------------------------------------------------------------------------------
+                      4.82      0.00      0.00      4.82              1/1     <Module::Benchmark>#realtime
+  67.58%   0.00%      4.82      0.00      0.00      4.82                1     SQLite3::Database#execute (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/database.rb:180}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/database.rb:180
+                      4.82      0.00      0.00      4.82              1/1     SQLite3::Database#prepare
+--------------------------------------------------------------------------------
+                      4.82      0.00      0.00      4.82              1/1     SQLite3::Database#execute
+  67.58%   0.00%      4.82      0.00      0.00      4.82                1     SQLite3::Database#prepare (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/database.rb:153}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/database.rb:153
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Statement#close
+                      4.74      0.00      0.00      4.74              1/1     Enumerable#inject
+                      0.08      0.00      0.00      0.08              1/1     SQLite3::Statement#execute
+                      0.00      0.00      0.00      0.00          1/10002     Class#new
+                      0.00      0.00      0.00      0.00              2/4     Kernel#block_given?
+--------------------------------------------------------------------------------
+                      4.74      0.00      0.00      4.74              1/1     SQLite3::Database#prepare
+  66.45%   0.00%      4.74      0.00      0.00      4.74                1     Enumerable#inject (ruby_runtime:0}  ruby_runtime:0
+                      4.74      0.21      0.00      4.53              1/1     SQLite3::ResultSet#each
+--------------------------------------------------------------------------------
+                      4.74      0.21      0.00      4.53              1/1     Enumerable#inject
+  66.45%   2.94%      4.74      0.21      0.00      4.53                1     SQLite3::ResultSet#each (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/resultset.rb:134}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/resultset.rb:134
+                      4.50      0.99      0.00      3.51      10001/10001     SQLite3::ResultSet#next
+                      0.03      0.03      0.00      0.00      10000/40006     Array#<<
+--------------------------------------------------------------------------------
+                      4.50      0.99      0.00      3.51      10001/10001     SQLite3::ResultSet#each
+  63.16%  13.93%      4.50      0.99      0.00      3.51            10001     SQLite3::ResultSet#next (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/resultset.rb:80}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/resultset.rb:80
+                      0.27      0.22      0.00      0.05      10000/10001     SQLite3::ResultSet#check
+                      0.35      0.06      0.00      0.30      10000/10000     Enumerable#each_with_index
+                      1.95      0.80      0.00      1.15      10000/10001     Integer#times
+                      0.07      0.07      0.00      0.00      10001/10004     SQLite3::Statement#must_be_open!
+                      0.09      0.09      0.00      0.00      10000/10000     SQLite3::Statement#columns
+                      0.09      0.09      0.00      0.00      10000/10000     SQLite3::Statement#types
+                      0.19      0.09      0.00      0.10      10000/10000     Kernel#extend
+                      0.14      0.08      0.00      0.06      10000/10001     SQLite3::Driver::Native::Driver#step
+                      0.04      0.04      0.00      0.00      10000/10000     <Class::Hash>#[]
+                      0.15      0.15      0.00      0.00      10000/10001     Array#flatten
+                      0.04      0.04      0.00      0.00      10000/10000     Array#zip
+                      0.11      0.08      0.00      0.03      10000/10000     SQLite3::Driver::Native::Driver#data_count
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00          1/10001     SQLite3::Statement#get_metadata
+                      1.95      0.80      0.00      1.15      10000/10001     SQLite3::ResultSet#next
+  27.37%  11.27%      1.95      0.80      0.00      1.15            10001     Integer#times (ruby_runtime:0}  ruby_runtime:0
+                      0.12      0.12      0.00      0.00      50000/70005     Fixnum#==
+                      0.32      0.23      0.00      0.09      30000/30000     SQLite3::Driver::Native::Driver#column_type
+                      0.00      0.00      0.00      0.00              3/3     SQLite3::Driver::Native::Driver#column_decltype
+                      0.63      0.36      0.00      0.27      30000/30000     SQLite3::Driver::Native::Driver#column_text
+                      0.00      0.00      0.00      0.00              3/3     SQLite3::Driver::Native::Driver#column_name
+                      0.08      0.08      0.00      0.00      30006/40006     Array#<<
+--------------------------------------------------------------------------------
+                      1.35      0.11      0.00      1.23              1/1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#select
+  18.90%   1.59%      1.35      0.11      0.00      1.23                1     Array#map (ruby_runtime:0}  ruby_runtime:0
+                      1.23      0.82      0.00      0.41      10000/10000     Hash#each_key
+--------------------------------------------------------------------------------
+                      1.23      0.82      0.00      0.41      10000/10000     Array#map
+  17.30%  11.50%      1.23      0.82      0.00      0.41            10000     Hash#each_key (ruby_runtime:0}  ruby_runtime:0
+                      0.15      0.15      0.00      0.00      60000/60001     Kernel#is_a?
+                      0.09      0.09      0.00      0.00      30000/60000     Hash#[]=
+                      0.10      0.10      0.00      0.00      30000/30000     String#sub
+                      0.08      0.08      0.00      0.00      30000/40015     Hash#[]
+--------------------------------------------------------------------------------
+                      0.96      0.06      0.00      0.91              1/1     <Class::ActiveRecord::Base>#find_by_sql
+  13.50%   0.80%      0.96      0.06      0.00      0.91                1     Array#collect! (ruby_runtime:0}  ruby_runtime:0
+                      0.91      0.46      0.00      0.45      10000/10000     <Class::ActiveRecord::Base>#instantiate
+--------------------------------------------------------------------------------
+                      0.91      0.46      0.00      0.45      10000/10000     Array#collect!
+  12.70%   6.45%      0.91      0.46      0.00      0.45            10000     <Class::ActiveRecord::Base>#instantiate (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1413}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1413
+                      0.05      0.05      0.00      0.00      10000/10000     <Class::ActiveRecord::Base>#inheritance_column
+                      0.07      0.07      0.00      0.00      20000/20000     Kernel#instance_variable_set
+                      0.13      0.08      0.00      0.05      10000/10002     Class#new
+                      0.08      0.05      0.00      0.02      10000/40015     Hash#[]
+                      0.05      0.05      0.00      0.00      20000/20000     Kernel#respond_to_without_attributes?
+                      0.07      0.05      0.00      0.02      10000/10000     Class#allocate
+--------------------------------------------------------------------------------
+                      0.63      0.36      0.00      0.27      30000/30000     Integer#times
+   8.85%   5.06%      0.63      0.36      0.00      0.27            30000     SQLite3::Driver::Native::Driver#column_text (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/driver/native/driver.rb:96}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/driver/native/driver.rb:96
+                      0.27      0.15      0.00      0.12      30000/30007     Kernel#send
+--------------------------------------------------------------------------------
+                      0.35      0.06      0.00      0.30      10000/10000     SQLite3::ResultSet#next
+   4.94%   0.77%      0.35      0.06      0.00      0.30            10000     Enumerable#each_with_index (ruby_runtime:0}  ruby_runtime:0
+                      0.30      0.21      0.00      0.09      10000/10004     Array#each
+--------------------------------------------------------------------------------
+                      0.32      0.23      0.00      0.09      30000/30000     Integer#times
+   4.50%   3.22%      0.32      0.23      0.00      0.09            30000     SQLite3::Driver::Native::Driver#column_type ((eval):1}  (eval):1
+                      0.09      0.09      0.00      0.00      30000/30000     <Module::SQLite3::Driver::Native::API>#sqlite3_column_type
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00          1/10004     <Class::ActiveRecord::Base>#merge_conditions
+                      0.30      0.21      0.00      0.09      10000/10004     Enumerable#each_with_index
+                      0.00      0.00      0.00      0.00          1/10004     <Class::ActiveRecord::Base>#add_joins!
+                      0.00      0.00      0.00      0.00          2/10004     Enumerable#any?
+   4.17%   2.98%      0.30      0.21      0.00      0.09            10004     Array#each (ruby_runtime:0}  ruby_runtime:0
+                      0.00      0.00      0.00      0.00              2/4     String#<<
+                      0.00      0.00      0.00      0.00              1/3     NilClass#blank?
+                      0.09      0.09      0.00      0.00      30000/60000     Hash#[]=
+                      0.00      0.00      0.00      0.00              2/2     NilClass#to_s
+                      0.00      0.00      0.00      0.00             6/10     Module#===
+--------------------------------------------------------------------------------
+                      0.27      0.22      0.00      0.05      10000/10001     SQLite3::ResultSet#next
+                      0.00      0.00      0.00      0.00          1/10001     SQLite3::ResultSet#commence
+   3.80%   3.13%      0.27      0.22      0.00      0.05            10001     SQLite3::ResultSet#check (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/resultset.rb:44}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/resultset.rb:44
+                      0.05      0.05      0.00      0.00      20002/70005     Fixnum#==
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00          3/30007     SQLite3::Driver::Native::Driver#column_decltype
+                      0.27      0.15      0.00      0.12      30000/30007     SQLite3::Driver::Native::Driver#column_text
+                      0.00      0.00      0.00      0.00          3/30007     SQLite3::Driver::Native::Driver#column_name
+                      0.00      0.00      0.00      0.00          1/30007     SQLite3::Driver::Native::Driver#prepare
+   3.79%   2.15%      0.27      0.15      0.00      0.12            30007     Kernel#send (ruby_runtime:0}  ruby_runtime:0
+                      0.00      0.00      0.00      0.00              3/3     <Module::SQLite3::Driver::Native::API>#sqlite3_column_decltype
+                      0.00      0.00      0.00      0.00              1/1     <Module::SQLite3::Driver::Native::API>#sqlite3_prepare
+                      0.00      0.00      0.00      0.00              3/3     <Module::SQLite3::Driver::Native::API>#sqlite3_column_name
+                      0.12      0.12      0.00      0.00      30000/30000     <Module::SQLite3::Driver::Native::API>#sqlite3_column_text
+--------------------------------------------------------------------------------
+                      0.14      0.08      0.00      0.06      10000/10001     SQLite3::ResultSet#next
+                      0.08      0.00      0.00      0.08          1/10001     SQLite3::ResultSet#commence
+   3.11%   1.10%      0.22      0.08      0.00      0.14            10001     SQLite3::Driver::Native::Driver#step ((eval):1}  (eval):1
+                      0.14      0.14      0.00      0.00      10001/10001     <Module::SQLite3::Driver::Native::API>#sqlite3_step
+--------------------------------------------------------------------------------
+                      0.08      0.00      0.00      0.08          1/10002     SQLite3::Statement#execute
+                      0.13      0.08      0.00      0.05      10000/10002     <Class::ActiveRecord::Base>#instantiate
+                      0.00      0.00      0.00      0.00          1/10002     SQLite3::Database#prepare
+   2.95%   1.06%      0.21      0.08      0.00      0.13            10002     Class#new (ruby_runtime:0}  ruby_runtime:0
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Statement#initialize
+                      0.00      0.00      0.00      0.00          2/10002     <Class::Object>#allocate
+                      0.02      0.02      0.00      0.00      10000/10000     Hash#initialize
+                      0.03      0.03      0.00      0.00      10000/10000     <Class::Hash>#allocate
+                      0.08      0.00      0.00      0.08              1/1     SQLite3::ResultSet#initialize
+--------------------------------------------------------------------------------
+                      0.19      0.09      0.00      0.10      10000/10000     SQLite3::ResultSet#next
+   2.73%   1.27%      0.19      0.09      0.00      0.10            10000     Kernel#extend (ruby_runtime:0}  ruby_runtime:0
+                      0.02      0.02      0.00      0.00      10000/10000     Module#extended
+                      0.08      0.08      0.00      0.00      10000/10000     Module#extend_object
+--------------------------------------------------------------------------------
+                      0.09      0.09      0.00      0.00      30000/60000     Array#each
+                      0.09      0.09      0.00      0.00      30000/60000     Hash#each_key
+   2.46%   2.46%      0.17      0.17      0.00      0.00            60000     Hash#[]= (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.05      0.05      0.00      0.00      20002/70005     SQLite3::ResultSet#check
+                      0.12      0.12      0.00      0.00      50000/70005     Integer#times
+                      0.00      0.00      0.00      0.00          1/70005     <Module::SQLite3::Error>#check
+                      0.00      0.00      0.00      0.00          1/70005     SQLite3::ResultSet#commence
+                      0.00      0.00      0.00      0.00          1/70005     Array#flatten
+   2.36%   2.36%      0.17      0.17      0.00      0.00            70005     Fixnum#== (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.08      0.08      0.00      0.00      30000/40015     Hash#each_key
+                      0.00      0.00      0.00      0.00          6/40015     <Class::ActiveRecord::Base>#construct_finder_sql
+                      0.00      0.00      0.00      0.00          1/40015     <Class::ActiveRecord::Base>#add_joins!
+                      0.00      0.00      0.00      0.00          1/40015     <Class::ActiveRecord::Base>#set_readonly_option!
+                      0.00      0.00      0.00      0.00          4/40015     <Class::ActiveRecord::Base>#connection
+                      0.08      0.05      0.00      0.02      10000/40015     <Class::ActiveRecord::Base>#instantiate
+                      0.00      0.00      0.00      0.00          2/40015     <Class::ActiveRecord::Base>#find_every
+                      0.00      0.00      0.00      0.00          1/40015     ActiveRecord::ConnectionAdapters::DatabaseStatements#add_limit_offset!
+   2.17%   1.82%      0.15      0.13      0.00      0.02            40015     Hash#[] (ruby_runtime:0}  ruby_runtime:0
+                      0.02      0.02      0.00      0.00      10010/10010     Hash#default
+--------------------------------------------------------------------------------
+                      0.15      0.15      0.00      0.00      10000/10001     SQLite3::ResultSet#next
+                      0.00      0.00      0.00      0.00          1/10001     ActiveSupport::CoreExtensions::Hash::Keys#assert_valid_keys
+   2.15%   2.15%      0.15      0.15      0.00      0.00            10001     Array#flatten (ruby_runtime:0}  ruby_runtime:0
+                      0.00      0.00      0.00      0.00          1/70005     Fixnum#==
+--------------------------------------------------------------------------------
+                      0.15      0.15      0.00      0.00      60000/60001     Hash#each_key
+                      0.00      0.00      0.00      0.00          1/60001     ActiveSupport::CoreExtensions::Array::ExtractOptions#extract_options!
+   2.08%   2.08%      0.15      0.15      0.00      0.00            60001     Kernel#is_a? (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.14      0.14      0.00      0.00      10001/10001     SQLite3::Driver::Native::Driver#step
+   2.01%   2.01%      0.14      0.14      0.00      0.00            10001     <Module::SQLite3::Driver::Native::API>#sqlite3_step (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.12      0.12      0.00      0.00      30000/30000     Kernel#send
+   1.63%   1.63%      0.12      0.12      0.00      0.00            30000     <Module::SQLite3::Driver::Native::API>#sqlite3_column_text (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.11      0.08      0.00      0.03      10000/10000     SQLite3::ResultSet#next
+   1.54%   1.09%      0.11      0.08      0.00      0.03            10000     SQLite3::Driver::Native::Driver#data_count ((eval):1}  (eval):1
+                      0.03      0.03      0.00      0.00      10000/10000     <Module::SQLite3::Driver::Native::API>#sqlite3_data_count
+--------------------------------------------------------------------------------
+                      0.08      0.08      0.00      0.00      30006/40006     Integer#times
+                      0.03      0.03      0.00      0.00      10000/40006     SQLite3::ResultSet#each
+   1.42%   1.42%      0.10      0.10      0.00      0.00            40006     Array#<< (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.10      0.10      0.00      0.00      30000/30000     Hash#each_key
+   1.39%   1.39%      0.10      0.10      0.00      0.00            30000     String#sub (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.09      0.09      0.00      0.00      10000/10000     SQLite3::ResultSet#next
+   1.32%   1.31%      0.09      0.09      0.00      0.00            10000     SQLite3::Statement#columns (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:187}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:187
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Statement#get_metadata
+--------------------------------------------------------------------------------
+                      0.09      0.09      0.00      0.00      10000/10000     SQLite3::ResultSet#next
+   1.30%   1.30%      0.09      0.09      0.00      0.00            10000     SQLite3::Statement#types (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:195}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:195
+--------------------------------------------------------------------------------
+                      0.09      0.09      0.00      0.00      30000/30000     SQLite3::Driver::Native::Driver#column_type
+   1.28%   1.28%      0.09      0.09      0.00      0.00            30000     <Module::SQLite3::Driver::Native::API>#sqlite3_column_type (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.08      0.00      0.00      0.08              1/1     SQLite3::Database#prepare
+   1.13%   0.00%      0.08      0.00      0.00      0.08                1     SQLite3::Statement#execute (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:130}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:130
+                      0.00      0.00      0.00      0.00          1/10004     SQLite3::Statement#must_be_open!
+                      0.08      0.00      0.00      0.08          1/10002     Class#new
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Statement#active?
+                      0.00      0.00      0.00      0.00              1/4     Kernel#block_given?
+                      0.00      0.00      0.00      0.00              1/3     Array#empty?
+--------------------------------------------------------------------------------
+                      0.08      0.00      0.00      0.08              1/1     Class#new
+   1.12%   0.00%      0.08      0.00      0.00      0.08                1     SQLite3::ResultSet#initialize (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/resultset.rb:25}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/resultset.rb:25
+                      0.08      0.00      0.00      0.08              1/1     SQLite3::ResultSet#commence
+--------------------------------------------------------------------------------
+                      0.08      0.00      0.00      0.08              1/1     SQLite3::ResultSet#initialize
+   1.12%   0.00%      0.08      0.00      0.00      0.08                1     SQLite3::ResultSet#commence (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/resultset.rb:34}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/resultset.rb:34
+                      0.00      0.00      0.00      0.00          1/10001     SQLite3::ResultSet#check
+                      0.00      0.00      0.00      0.00          1/70005     Fixnum#==
+                      0.08      0.00      0.00      0.08          1/10001     SQLite3::Driver::Native::Driver#step
+--------------------------------------------------------------------------------
+                      0.08      0.08      0.00      0.00      10000/10000     Kernel#extend
+   1.12%   1.12%      0.08      0.08      0.00      0.00            10000     Module#extend_object (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.07      0.05      0.00      0.02      10000/10000     <Class::ActiveRecord::Base>#instantiate
+   1.03%   0.69%      0.07      0.05      0.00      0.02            10000     Class#allocate (ruby_runtime:0}  ruby_runtime:0
+                      0.02      0.02      0.00      0.00      10000/10002     <Class::Object>#allocate
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00          1/10004     SQLite3::Statement#close
+                      0.00      0.00      0.00      0.00          1/10004     SQLite3::Statement#get_metadata
+                      0.00      0.00      0.00      0.00          1/10004     SQLite3::Statement#execute
+                      0.07      0.07      0.00      0.00      10001/10004     SQLite3::ResultSet#next
+   0.95%   0.95%      0.07      0.07      0.00      0.00            10004     SQLite3::Statement#must_be_open! (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:222}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:222
+--------------------------------------------------------------------------------
+                      0.07      0.07      0.00      0.00      20000/20000     <Class::ActiveRecord::Base>#instantiate
+   0.93%   0.93%      0.07      0.07      0.00      0.00            20000     Kernel#instance_variable_set (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.05      0.05      0.00      0.00      20000/20000     <Class::ActiveRecord::Base>#instantiate
+   0.71%   0.71%      0.05      0.05      0.00      0.00            20000     Kernel#respond_to_without_attributes? (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.05      0.05      0.00      0.00      10000/10000     <Class::ActiveRecord::Base>#instantiate
+   0.67%   0.67%      0.05      0.05      0.00      0.00            10000     <Class::ActiveRecord::Base>#inheritance_column (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1057}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1057
+--------------------------------------------------------------------------------
+                      0.04      0.04      0.00      0.00      10000/10000     SQLite3::ResultSet#next
+   0.60%   0.60%      0.04      0.04      0.00      0.00            10000     <Class::Hash>#[] (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.04      0.04      0.00      0.00      10000/10000     SQLite3::ResultSet#next
+   0.53%   0.53%      0.04      0.04      0.00      0.00            10000     Array#zip (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.03      0.03      0.00      0.00      10000/10000     SQLite3::Driver::Native::Driver#data_count
+   0.45%   0.45%      0.03      0.03      0.00      0.00            10000     <Module::SQLite3::Driver::Native::API>#sqlite3_data_count (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.03      0.03      0.00      0.00      10000/10000     Class#new
+   0.42%   0.42%      0.03      0.03      0.00      0.00            10000     <Class::Hash>#allocate (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.02      0.02      0.00      0.00      10010/10010     Hash#[]
+   0.35%   0.35%      0.02      0.02      0.00      0.00            10010     Hash#default (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.02      0.02      0.00      0.00      10000/10000     Kernel#extend
+   0.34%   0.34%      0.02      0.02      0.00      0.00            10000     Module#extended (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00          2/10002     Class#new
+                      0.02      0.02      0.00      0.00      10000/10002     Class#allocate
+   0.34%   0.34%      0.02      0.02      0.00      0.00            10002     <Class::Object>#allocate (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.02      0.02      0.00      0.00      10000/10000     Class#new
+   0.34%   0.34%      0.02      0.02      0.00      0.00            10000     Hash#initialize (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#find_every
+   0.01%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#construct_finder_sql (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1466}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1466
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#add_order!
+                      0.00      0.00      0.00      0.00              1/4     String#<<
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#add_joins!
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#add_limit!
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#quoted_table_name
+                      0.00      0.00      0.00      0.00          6/40015     Hash#[]
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#add_group!
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#add_lock!
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#add_conditions!
+                      0.00      0.00      0.00      0.00              1/3     <Class::ActiveRecord::Base>#scope
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Statement#columns
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     SQLite3::Statement#get_metadata (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:203}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:203
+                      0.00      0.00      0.00      0.00              2/2     Kernel#freeze
+                      0.00      0.00      0.00      0.00          1/10001     Integer#times
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Driver::Native::Driver#column_count
+                      0.00      0.00      0.00      0.00          1/10004     SQLite3::Statement#must_be_open!
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#construct_finder_sql
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#add_conditions! (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1571}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1571
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#merge_conditions
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#finder_needs_type_condition?
+                      0.00      0.00      0.00      0.00              1/3     NilClass#blank?
+                      0.00      0.00      0.00      0.00              1/7     Kernel#==
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     Class#new
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     SQLite3::Statement#initialize (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:33}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:33
+                      0.00      0.00      0.00      0.00              1/1     <Module::SQLite3::Error>#check
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Driver::Native::Driver#prepare
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#construct_finder_sql
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#add_joins! (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1556}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1556
+                      0.00      0.00      0.00      0.00          1/10004     Array#each
+                      0.00      0.00      0.00      0.00          1/40015     Hash#[]
+                      0.00      0.00      0.00      0.00              1/7     Kernel#==
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/4     <Class::ActiveRecord::Base>#find_by_sql
+                      0.00      0.00      0.00      0.00              1/4     <Class::ActiveRecord::Base>#add_limit!
+                      0.00      0.00      0.00      0.00              1/4     <Class::ActiveRecord::Base>#quoted_table_name
+                      0.00      0.00      0.00      0.00              1/4     <Class::ActiveRecord::Base>#add_lock!
+   0.00%   0.00%      0.00      0.00      0.00      0.00                4     <Class::ActiveRecord::Base>#connection (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:73}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:73
+                      0.00      0.00      0.00      0.00          4/40015     Hash#[]
+                      0.00      0.00      0.00      0.00              4/4     <Class::ActiveRecord::Base>#active_connections
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Statement#initialize
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     SQLite3::Driver::Native::Driver#prepare (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/driver/native/driver.rb:75}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/driver/native/driver.rb:75
+                      0.00      0.00      0.00      0.00          1/30007     Kernel#send
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/3     <Class::ActiveRecord::Base>#construct_finder_sql
+                      0.00      0.00      0.00      0.00              1/3     <Class::ActiveRecord::Base>#set_readonly_option!
+                      0.00      0.00      0.00      0.00              1/3     <Class::ActiveRecord::Base>#find_every
+   0.00%   0.00%      0.00      0.00      0.00      0.00                3     <Class::ActiveRecord::Base>#scope (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1876}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1876
+                      0.00      0.00      0.00      0.00              3/3     <Class::ActiveRecord::Base>#current_scoped_methods
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#find
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#set_readonly_option! (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:2101}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:2101
+                      0.00      0.00      0.00      0.00              1/3     NilClass#blank?
+                      0.00      0.00      0.00      0.00          1/40015     Hash#[]
+                      0.00      0.00      0.00      0.00              1/1     Hash#has_key?
+                      0.00      0.00      0.00      0.00              1/3     <Class::ActiveRecord::Base>#scope
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#construct_finder_sql
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#add_limit! (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1536}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1536
+                      0.00      0.00      0.00      0.00              1/4     <Class::ActiveRecord::Base>#connection
+                      0.00      0.00      0.00      0.00              1/1     ActiveRecord::ConnectionAdapters::DatabaseStatements#add_limit_offset!
+                      0.00      0.00      0.00      0.00              1/7     Kernel#==
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     Kernel#send
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Module::SQLite3::Driver::Native::API>#sqlite3_prepare (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#construct_finder_sql
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#quoted_table_name (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:2692}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:2692
+                      0.00      0.00      0.00      0.00              1/1     ActiveRecord::ConnectionAdapters::AbstractAdapter#quote_table_name
+                      0.00      0.00      0.00      0.00              1/1     <Class::User(id: integer, username: string, last_name: string)>#table_name
+                      0.00      0.00      0.00      0.00              1/4     <Class::ActiveRecord::Base>#connection
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#find
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#validate_find_options (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:2097}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:2097
+                      0.00      0.00      0.00      0.00              1/1     ActiveSupport::CoreExtensions::Hash::Keys#assert_valid_keys
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#find_every
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#merge_includes (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1483}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1483
+                      0.00      0.00      0.00      0.00              1/1     Array#+
+                      0.00      0.00      0.00      0.00              1/1     Array#uniq
+                      0.00      0.00      0.00      0.00              2/2     <Class::ActiveRecord::Base>#safe_to_array
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              3/3     Integer#times
+   0.00%   0.00%      0.00      0.00      0.00      0.00                3     SQLite3::Driver::Native::Driver#column_name (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/driver/native/driver.rb:85}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/driver/native/driver.rb:85
+                      0.00      0.00      0.00      0.00          3/30007     Kernel#send
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              3/3     Integer#times
+   0.00%   0.00%      0.00      0.00      0.00      0.00                3     SQLite3::Driver::Native::Driver#column_decltype (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/driver/native/driver.rb:90}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/driver/native/driver.rb:90
+                      0.00      0.00      0.00      0.00          3/30007     Kernel#send
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#add_conditions!
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#finder_needs_type_condition? (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1207}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1207
+                      0.00      0.00      0.00      0.00              1/7     Kernel#==
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#descends_from_active_record?
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#construct_finder_sql
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#add_lock! (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1549}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1549
+                      0.00      0.00      0.00      0.00              1/4     <Class::ActiveRecord::Base>#connection
+                      0.00      0.00      0.00      0.00              1/1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#add_lock!
+                      0.00      0.00      0.00      0.00              1/7     Kernel#==
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#validate_find_options
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     ActiveSupport::CoreExtensions::Hash::Keys#assert_valid_keys (/Library/Ruby/Gems/1.8/gems/activesupport-2.1.0/lib/active_support/core_ext/hash/keys.rb:45}  /Library/Ruby/Gems/1.8/gems/activesupport-2.1.0/lib/active_support/core_ext/hash/keys.rb:45
+                      0.00      0.00      0.00      0.00              1/1     Array#-
+                      0.00      0.00      0.00      0.00              1/1     Hash#keys
+                      0.00      0.00      0.00      0.00          1/10001     Array#flatten
+                      0.00      0.00      0.00      0.00              1/3     Array#empty?
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              3/3     <Class::ActiveRecord::Base>#scope
+   0.00%   0.00%      0.00      0.00      0.00      0.00                3     <Class::ActiveRecord::Base>#current_scoped_methods (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1898}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1898
+                      0.00      0.00      0.00      0.00              3/4     Array#last
+                      0.00      0.00      0.00      0.00              3/3     <Class::ActiveRecord::Base>#scoped_methods
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Database#prepare
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     SQLite3::Statement#close (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:44}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:44
+                      0.00      0.00      0.00      0.00          1/10004     SQLite3::Statement#must_be_open!
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Driver::Native::Driver#finalize
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#find_by_sql
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#sanitize_sql (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1934}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1934
+                      0.00      0.00      0.00      0.00              1/1     String#blank?
+                      0.00      0.00      0.00      0.00             2/10     Module#===
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#finder_needs_type_condition?
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#descends_from_active_record? (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1199}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1199
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#abstract_class?
+                      0.00      0.00      0.00      0.00              2/2     Class#superclass
+                      0.00      0.00      0.00      0.00              1/1     Module#==
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#add_conditions!
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#merge_conditions (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1488}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1488
+                      0.00      0.00      0.00      0.00          1/10004     Array#each
+                      0.00      0.00      0.00      0.00              1/3     Array#empty?
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/2     <Class::ActiveRecord::Base>#merge_includes
+   0.00%   0.00%      0.00      0.00      0.00      0.00                2     <Class::ActiveRecord::Base>#safe_to_array (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1502}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1502
+                      0.00      0.00      0.00      0.00             2/10     Module#===
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/2     <Module::Benchmark>#realtime
+   0.00%   0.00%      0.00      0.00      0.00      0.00                2     <Class::Time>#now (ruby_runtime:0}  ruby_runtime:0
+                      0.00      0.00      0.00      0.00              2/2     Time#initialize
+                      0.00      0.00      0.00      0.00              2/2     <Class::Time>#allocate
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#construct_finder_sql
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#add_order! (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1513}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1513
+                      0.00      0.00      0.00      0.00              1/4     String#<<
+                      0.00      0.00      0.00      0.00              1/7     Kernel#==
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#find
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     ActiveSupport::CoreExtensions::Array::ExtractOptions#extract_options! (/Library/Ruby/Gems/1.8/gems/activesupport-2.1.0/lib/active_support/core_ext/array/extract_options.rb:14}  /Library/Ruby/Gems/1.8/gems/activesupport-2.1.0/lib/active_support/core_ext/array/extract_options.rb:14
+                      0.00      0.00      0.00      0.00          1/60001     Kernel#is_a?
+                      0.00      0.00      0.00      0.00              1/1     Array#pop
+                      0.00      0.00      0.00      0.00              1/4     Array#last
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00             2/10     <Class::ActiveRecord::Base>#sanitize_sql
+                      0.00      0.00      0.00      0.00             6/10     Array#each
+                      0.00      0.00      0.00      0.00             2/10     <Class::ActiveRecord::Base>#safe_to_array
+   0.00%   0.00%      0.00      0.00      0.00      0.00               10     Module#=== (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/2     <Class::ActiveRecord::Base>#find_every
+   0.00%   0.00%      0.00      0.00      0.00      0.00                2     Enumerable#any? (ruby_runtime:0}  ruby_runtime:0
+                      0.00      0.00      0.00      0.00          2/10004     Array#each
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#construct_finder_sql
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#add_group! (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1524}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1524
+                      0.00      0.00      0.00      0.00              1/7     Kernel#==
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              4/4     <Class::ActiveRecord::Base>#connection
+   0.00%   0.00%      0.00      0.00      0.00      0.00                4     <Class::ActiveRecord::Base>#active_connections (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:29}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/connection_specification.rb:29
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Statement#close
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     SQLite3::Driver::Native::Driver#finalize ((eval):1}  (eval):1
+                      0.00      0.00      0.00      0.00              1/1     <Module::SQLite3::Driver::Native::API>#sqlite3_finalize
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#add_limit!
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     ActiveRecord::ConnectionAdapters::DatabaseStatements#add_limit_offset! (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/database_statements.rb:107}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/database_statements.rb:107
+                      0.00      0.00      0.00      0.00          1/40015     Hash#[]
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              3/3     <Class::ActiveRecord::Base>#current_scoped_methods
+   0.00%   0.00%      0.00      0.00      0.00      0.00                3     <Class::ActiveRecord::Base>#scoped_methods (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1887}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1887
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Statement#get_metadata
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     SQLite3::Driver::Native::Driver#column_count ((eval):1}  (eval):1
+                      0.00      0.00      0.00      0.00              1/1     <Module::SQLite3::Driver::Native::API>#sqlite3_column_count
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/7     <Class::ActiveRecord::Base>#add_order!
+                      0.00      0.00      0.00      0.00              1/7     <Class::ActiveRecord::Base>#finder_needs_type_condition?
+                      0.00      0.00      0.00      0.00              1/7     <Class::ActiveRecord::Base>#add_joins!
+                      0.00      0.00      0.00      0.00              1/7     <Class::ActiveRecord::Base>#add_limit!
+                      0.00      0.00      0.00      0.00              1/7     <Class::ActiveRecord::Base>#add_group!
+                      0.00      0.00      0.00      0.00              1/7     <Class::ActiveRecord::Base>#add_lock!
+                      0.00      0.00      0.00      0.00              1/7     <Class::ActiveRecord::Base>#add_conditions!
+   0.00%   0.00%      0.00      0.00      0.00      0.00                7     Kernel#== (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#quoted_table_name
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     ActiveRecord::ConnectionAdapters::AbstractAdapter#quote_table_name (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:70}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:70
+                      0.00      0.00      0.00      0.00              1/1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#quote_column_name
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Statement#initialize
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Module::SQLite3::Error>#check (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/errors.rb:59}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/errors.rb:59
+                      0.00      0.00      0.00      0.00          1/70005     Fixnum#==
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              3/3     Kernel#send
+   0.00%   0.00%      0.00      0.00      0.00      0.00                3     <Module::SQLite3::Driver::Native::API>#sqlite3_column_name (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/3     Array#each
+                      0.00      0.00      0.00      0.00              1/3     <Class::ActiveRecord::Base>#set_readonly_option!
+                      0.00      0.00      0.00      0.00              1/3     <Class::ActiveRecord::Base>#add_conditions!
+   0.00%   0.00%      0.00      0.00      0.00      0.00                3     NilClass#blank? (/Library/Ruby/Gems/1.8/gems/activesupport-2.1.0/lib/active_support/core_ext/blank.rb:18}  /Library/Ruby/Gems/1.8/gems/activesupport-2.1.0/lib/active_support/core_ext/blank.rb:18
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Statement#execute
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     SQLite3::Statement#active? (/Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:180}  /Library/Ruby/Gems/1.8/gems/sqlite3-ruby-1.2.2/lib/sqlite3/statement.rb:180
+                      0.00      0.00      0.00      0.00              1/1     NilClass#nil?
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              3/3     Kernel#send
+   0.00%   0.00%      0.00      0.00      0.00      0.00                3     <Module::SQLite3::Driver::Native::API>#sqlite3_column_decltype (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#sanitize_sql
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     String#blank? (/Library/Ruby/Gems/1.8/gems/activesupport-2.1.0/lib/active_support/core_ext/blank.rb:44}  /Library/Ruby/Gems/1.8/gems/activesupport-2.1.0/lib/active_support/core_ext/blank.rb:44
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/4     ActiveSupport::CoreExtensions::Array::ExtractOptions#extract_options!
+                      0.00      0.00      0.00      0.00              3/4     <Class::ActiveRecord::Base>#current_scoped_methods
+   0.00%   0.00%      0.00      0.00      0.00      0.00                4     Array#last (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Driver::Native::Driver#finalize
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Module::SQLite3::Driver::Native::API>#sqlite3_finalize (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/4     Array#each
+                      0.00      0.00      0.00      0.00              1/4     <Class::ActiveRecord::Base>#add_order!
+                      0.00      0.00      0.00      0.00              1/4     <Class::ActiveRecord::Base>#construct_finder_sql
+   0.00%   0.00%      0.00      0.00      0.00      0.00                4     String#<< (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/4     SQLite3::Statement#execute
+                      0.00      0.00      0.00      0.00              2/4     SQLite3::Database#prepare
+                      0.00      0.00      0.00      0.00              1/4     ActiveRecord::ConnectionAdapters::AbstractAdapter#log
+   0.00%   0.00%      0.00      0.00      0.00      0.00                4     Kernel#block_given? (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     ActiveRecord::ConnectionAdapters::AbstractAdapter#log
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     ActiveRecord::ConnectionAdapters::AbstractAdapter#log_info (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:121}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:121
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/2     <Class::Time>#now
+   0.00%   0.00%      0.00      0.00      0.00      0.00                2     Time#initialize (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/2     Array#each
+   0.00%   0.00%      0.00      0.00      0.00      0.00                2     NilClass#to_s (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/3     <Class::ActiveRecord::Base>#merge_conditions
+                      0.00      0.00      0.00      0.00              1/3     SQLite3::Statement#execute
+                      0.00      0.00      0.00      0.00              1/3     ActiveSupport::CoreExtensions::Hash::Keys#assert_valid_keys
+   0.00%   0.00%      0.00      0.00      0.00      0.00                3     Array#empty? (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              3/3     <Class::ActiveRecord::Base>#find
+   0.00%   0.00%      0.00      0.00      0.00      0.00                3     Symbol#=== (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/2     <Module::Benchmark>#realtime
+   0.00%   0.00%      0.00      0.00      0.00      0.00                2     Time#to_f (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/2     SQLite3::Statement#get_metadata
+   0.00%   0.00%      0.00      0.00      0.00      0.00                2     Kernel#freeze (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     ActiveSupport::CoreExtensions::Hash::Keys#assert_valid_keys
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     Array#- (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/2     <Class::Time>#now
+   0.00%   0.00%      0.00      0.00      0.00      0.00                2     <Class::Time>#allocate (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#descends_from_active_record?
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::ActiveRecord::Base>#abstract_class? (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1285}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1285
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     ActiveRecord::ConnectionAdapters::AbstractAdapter#quote_table_name
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#quote_column_name (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:124}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:124
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#add_lock!
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     ActiveRecord::ConnectionAdapters::SQLiteAdapter#add_lock! (/Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:169}  /Library/Ruby/Gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:169
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#quoted_table_name
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Class::User(id: integer, username: string, last_name: string)>#table_name ((eval):1}  (eval):1
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     ActiveRecord::ConnectionAdapters::AbstractAdapter#log
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     Float#+ (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Driver::Native::Driver#column_count
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     <Module::SQLite3::Driver::Native::API>#sqlite3_column_count (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#merge_includes
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     Array#uniq (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              2/2     <Class::ActiveRecord::Base>#descends_from_active_record?
+   0.00%   0.00%      0.00      0.00      0.00      0.00                2     Class#superclass (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#descends_from_active_record?
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     Module#== (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#merge_includes
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     Array#+ (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#set_readonly_option!
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     Hash#has_key? (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     SQLite3::Statement#active?
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     NilClass#nil? (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     ActiveSupport::CoreExtensions::Hash::Keys#assert_valid_keys
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     Hash#keys (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#find_by_sql
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     Module#name (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Module::Benchmark>#realtime
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     Float#- (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     ActiveSupport::CoreExtensions::Array::ExtractOptions#extract_options!
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     Array#pop (ruby_runtime:0}  ruby_runtime:0
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00              1/1     <Class::ActiveRecord::Base>#find
+   0.00%   0.00%      0.00      0.00      0.00      0.00                1     Array#first (ruby_runtime:0}  ruby_runtime:0
+
+
