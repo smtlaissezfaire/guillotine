@@ -76,10 +76,11 @@ module CachedModel
       end
       
       describe "call" do
-        describe "with only the table name" do
+        describe "with only the table name and no conditions" do
           before :each do
             @delete = DeleteStatement.new(:foo)
             @array = [1, 2, 3]
+            @truncate = Truncate.new(:foo)
           end
           
           it "should return an empty array" do
@@ -91,7 +92,17 @@ module CachedModel
             @array.should be_empty
           end
           
-          it "should truncate the table"
+          it "should call truncate with the right constructor argument" do
+            delete = DeleteStatement.new(:foo_bar)
+            Truncate.should_receive(:new).with(:foo_bar).and_return @truncate
+            delete.call(@array)
+          end
+          
+          it "should truncate the table" do
+            Truncate.should_receive(:new).with(:foo).and_return @truncate
+            @truncate.should_receive(:call).with([1,2,3]).and_return []
+            @delete.call(@array)
+          end
         end
         
         describe "with a limit clause, with three elements in the table" do

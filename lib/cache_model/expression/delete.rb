@@ -28,7 +28,7 @@ module CachedModel
           collection.slice!(0..limit.limit-1)
           collection
         else
-          collection.clear
+          Truncate.new(table_name).call(collection)
         end
       end
     end
