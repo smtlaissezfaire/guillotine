@@ -12,20 +12,14 @@ module CachedModel
       
       def initialize(*columns)
         @pairs = columns.flatten
-        # TODO: Remove this
-        @columns = columns.flatten
       end
       
-      # TODO: remove this
       attr_reader :pairs
       
       def pair
         pairs.size == 1 ? pairs.first : pairs
       end
       
-      attr_reader :columns
-      
-      # TODO: fix this implementation
       def ==(other)
         pairs == other.pairs
       end
