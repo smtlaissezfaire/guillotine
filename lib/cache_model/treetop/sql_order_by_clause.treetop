@@ -1,6 +1,7 @@
 grammar SQLOrderByClause
   include SQLPrimitives
   include SQLRowSupport
+  include SQLHelpers
 
   rule order_by
     "ORDER" space+ "BY" space+ one_or_more_column_names_with_sort { 
@@ -22,11 +23,20 @@ grammar SQLOrderByClause
   end
 
   rule one_column_name_with_sort
-    one_column_name optional_sort_condition { def eval; CachedModel::Expression::OrderByPair.new(one_column_name.eval); end }
+    one_column_name optional_sort_condition { 
+      def eval
+        column = one_column_name.eval
+        if value = optional_sort_condition.eval
+          CachedModel::Expression::OrderByPair.new(column, value)
+        else
+          CachedModel::Expression::OrderByPair.new(column)
+        end
+      end 
+    }
   end
 
   rule optional_sort_condition
-    space+ sort_condition / ''
+    space+ sort_condition { def eval; sort_condition.eval; end } / empty_string
   end
 
   rule sort_condition
@@ -34,11 +44,11 @@ grammar SQLOrderByClause
   end
 
   rule ascending
-    "ASC"
+    "ASC" { def eval; CachedModel::Expression::OrderBy::ASC; end }
   end
 
   rule descending
-    "DESC"
+    "DESC" { def eval; CachedModel::Expression::OrderBy::DESC; end }
   end
 
 end
