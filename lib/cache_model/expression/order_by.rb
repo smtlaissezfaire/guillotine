@@ -12,9 +12,11 @@ module CachedModel
       
       def initialize(*columns)
         @pairs = columns
+        # TODO: Remove this
         @columns = columns.flatten
       end
       
+      # TODO: remove this
       attr_reader :pairs
       
       def pair
@@ -23,6 +25,7 @@ module CachedModel
       
       attr_reader :columns
       
+      # TODO: fix this implementation
       def ==(other)
         other.columns == self.columns
       end
