@@ -10,9 +10,7 @@ grammar SQLDelete
   end
 
   rule single_table_delete
-    "DELETE" space+ 
-    optional_delete_directives
-    "FROM" space+ 
+    common_delete_clause
     table_name
     where_condition_or_empty
     order_by_condition_or_empty
@@ -21,6 +19,12 @@ grammar SQLDelete
         CachedModel::Expression::DeleteStatement.new(table_name.eval, where_condition_or_empty.eval, order_by_condition_or_empty.eval, limit_condition_or_empty.eval)
       end
     }
+  end
+
+  rule common_delete_clause
+    "DELETE" space+ 
+    optional_delete_directives
+    "FROM" space+ 
   end
 
   rule optional_delete_directives
