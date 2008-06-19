@@ -6,7 +6,7 @@ grammar SQLOrderByClause
   rule order_by
     "ORDER" space+ "BY" space+ one_or_more_column_names_with_sort { 
       def eval
-        CachedModel::Expression::OrderBy.new(one_or_more_column_names_with_sort.eval)
+        CachedModel::Expression::OrderBy.new(*Array(one_or_more_column_names_with_sort.eval).flatten)
       end
     }
   end

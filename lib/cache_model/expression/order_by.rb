@@ -27,7 +27,7 @@ module CachedModel
       
       # TODO: fix this implementation
       def ==(other)
-        other.columns == self.columns
+        pairs == other.pairs
       end
     end
     
