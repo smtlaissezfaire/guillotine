@@ -32,5 +32,10 @@ module CachedModel
       result = Expression::From.new("table_one", "table_two", "table_three")
       parse_and_eval("FROM table_one, table_two, table_three").should == result
     end
+    
+    it "shuld parse table names with spaces between the commas" do
+      result = Expression::From.new("table_one", "table_two", "table_three")
+      parse_and_eval("FROM table_one,         table_two,    table_three").should == result
+    end
   end
 end
