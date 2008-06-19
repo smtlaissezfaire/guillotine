@@ -28,8 +28,18 @@ module CachedModel
           collection.slice!(0..limit.limit-1)
           collection
         else
-          Truncate.new(table_name).call(collection)
+          truncate(collection)
         end
+      end
+      
+    private
+      
+      def truncate(collection)
+        truncator.call(collection)
+      end
+      
+      def truncator
+        @truncator ||= Truncate.new(table_name)
       end
     end
   end
