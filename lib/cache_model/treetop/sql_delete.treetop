@@ -16,7 +16,11 @@ grammar SQLDelete
     table_name
     where_condition_or_empty
     order_by_condition_or_empty
-    limit_condition_or_empty
+    limit_condition_or_empty {
+      def eval
+        CachedModel::Expression::DeleteStatement.new("a table name")
+      end
+    }
   end
 
   rule optional_delete_directives

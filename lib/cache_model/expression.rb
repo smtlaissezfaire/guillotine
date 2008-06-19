@@ -6,6 +6,7 @@ require File.dirname(__FILE__) + "/expression/order_by"
 require File.dirname(__FILE__) + "/expression/limit"
 require File.dirname(__FILE__) + "/expression/backtick_string"
 require File.dirname(__FILE__) + "/expression/truncate"
+require File.dirname(__FILE__) + "/expression/delete"
 
 
 module CachedModel
