@@ -19,6 +19,12 @@ module CachedModel
         order_by == other.order_by &&
         limit == other.limit
       end
+      
+      # TODO: This currently acts just like TRUNCATE TABLE
+      # We need to implement the where_clause, the order_by and limit
+      def call(collection)
+        collection.clear
+      end
     end
   end
 end
