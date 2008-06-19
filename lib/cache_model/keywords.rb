@@ -1,8 +1,10 @@
 module CacheModel
   module Keywords
+    IMPLEMENTED_KEYWORDS = Set.new unless defined?(IMPLEMENTED_KEYWORDS)
+    
     # Taken from the mysql docs:
     # http://dev.mysql.com/doc/refman/5.0/en/reserved-words.html
-    SQL_KEYWORDS = Set.new [
+    UNIMPLEMENTED_KEYWORDS = Set.new [
       :ADD,
       :ALL,
       :ALTER,
@@ -260,5 +262,7 @@ module CacheModel
       :UPGRADE,
       :WHILE
     ] unless defined?(SQL_KEYWORDS)
+    
+    SQL_KEYWORDS = IMPLEMENTED_KEYWORDS.merge(UNIMPLEMENTED_KEYWORDS) unless defined?(SQL_KEYWORDS)
   end
 end
