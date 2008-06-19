@@ -59,7 +59,6 @@ module CachedModel
     end
     
     it "should have order by with many spaces" do
-      pending "ORDER BY REGRESSION: ORDER...BY needs as many spaces as it can get" 
       parse("DELETE FROM table_name          ORDER         BY foo").should_not be_nil      
     end
     
