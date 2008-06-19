@@ -26,6 +26,36 @@ module CachedModel
       it "should have ASC as the default sort option" do
         OrderByPair.new("foobar").sort.should == :ASC
       end
+      
+      describe "==" do
+        it "should be equal to a different pair if it has the same column and sorts" do
+          one = OrderByPair.new(:foo, OrderBy::ASC)
+          two = OrderByPair.new(:foo, OrderBy::ASC)
+          one.should == two
+          two.should == one
+        end
+        
+        it "should not be equal to another if it does not have the same column (but it has the same sort)" do
+          one = OrderByPair.new(:foo, OrderBy::ASC)
+          two = OrderByPair.new(:bar, OrderBy::ASC)
+          one.should_not == two
+          two.should_not == one
+        end
+        
+        it "should not be equal to another if it does not have the same sort (but it has the same column)" do
+          one = OrderByPair.new(:foo, OrderBy::ASC)
+          two = OrderByPair.new(:foo, OrderBy::DESC)
+          one.should_not == two
+          two.should_not == one
+        end
+        
+        it "should not be equal to a generic object (and it should not raise an error)" do
+          two = Object.new
+          one = OrderByPair.new(:foo)
+          one.should_not == two
+          two.should_not == one
+        end
+      end
     end
   end
 end

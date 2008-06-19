@@ -31,6 +31,11 @@ module CachedModel
       
       attr_reader :column
       attr_reader :sort
+      
+      def ==(other)
+        return false if !other.kind_of?(self.class)
+        self.column.equal?(other.column) && self.sort == other.sort
+      end
     end
   end
 end
