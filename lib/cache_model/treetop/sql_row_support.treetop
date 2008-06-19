@@ -12,7 +12,7 @@ grammar SQLRowSupport
   end
 
   rule one_or_more_column_names
-    one_column_name "," space  one_or_more_column_names {
+    one_column_name "," space+ one_or_more_column_names {
       def eval
         result1, result2 = one_column_name.eval, one_or_more_column_names.eval
         [result1, result2].flatten
