@@ -26,10 +26,9 @@ module CachedModel
         if limit
           return collection if limit.limit == 0
           if order_by
-            # TODO...
-          else
-            collection.slice!(0..limit.limit-1)
+            collection = order_by.call!(collection)
           end
+          collection.slice!(0..limit.limit-1)
           collection
         else
           truncate(collection)

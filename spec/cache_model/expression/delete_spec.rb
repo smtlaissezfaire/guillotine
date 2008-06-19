@@ -199,8 +199,12 @@ module CachedModel
           end
           
           it "should return the results with the first element deleted by the order clause" do
-            pending 'todo'
             @delete.call(@collection).should == [{ :foo => "bar", :id => 3}]
+          end
+          
+          it "should modify the array given" do
+            @delete.call(@collection)
+            @collection.should == [{ :foo => "bar", :id => 3}]
           end
         end
       end
