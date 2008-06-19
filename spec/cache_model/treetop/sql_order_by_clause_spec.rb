@@ -9,13 +9,13 @@ module CachedModel
     end
 
     it "should order by a column name" do
-      pair = Expression::OrderByPair.new("column")
+      pair = Expression::OrderByPair.new(:column)
       result = Expression::OrderBy.new(pair)
       parse_and_eval("ORDER BY column").should == result
     end
     
     it "should order by a different name" do
-      pair = Expression::OrderByPair.new("different_col")
+      pair = Expression::OrderByPair.new(:different_col)
       result = Expression::OrderBy.new(pair)
       parse_and_eval("ORDER BY different_col").should == result
     end
