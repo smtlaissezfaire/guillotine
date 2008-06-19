@@ -76,18 +76,20 @@ module CachedModel
       end
       
       describe "call" do
-        before :each do
-          @delete = DeleteStatement.new(:foo)
-          @array = [1, 2, 3]
-        end
-        
-        it "should return an empty array" do
-          @delete.call(@array).should be_empty
-        end
-        
-        it "should destructively clear the array" do
-          @delete.call(@array)
-          @array.should be_empty
+        describe "with only the table name" do
+          before :each do
+            @delete = DeleteStatement.new(:foo)
+            @array = [1, 2, 3]
+          end
+          
+          it "should return an empty array" do
+            @delete.call(@array).should be_empty
+          end
+          
+          it "should destructively clear the array" do
+            @delete.call(@array)
+            @array.should be_empty
+          end
         end
       end
     end
