@@ -2,7 +2,7 @@ grammar SQLWhereCondition
   include SQLKeyValuePair
 
   rule where_condition
-    "WHERE" one_or_more_spaces where_clause {
+    "WHERE" space+ where_clause {
        def eval
          where_clause.eval
        end
@@ -16,8 +16,8 @@ grammar SQLWhereCondition
       end
     }
     /
-    clause1:single_expression_where_clause      one_or_more_spaces 
-            disjunction_or_conjunction_joiner   one_or_more_spaces 
+    clause1:single_expression_where_clause      space+ 
+            disjunction_or_conjunction_joiner   space+ 
     clause2:where_clause {
       def eval
         klass = CachedModel::Expression.find_class_for(disjunction_or_conjunction_joiner.eval)

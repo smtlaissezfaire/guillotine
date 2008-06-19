@@ -3,7 +3,7 @@ grammar SQLFromClause
   include SQLRowSupport
 
   rule from
-    "FROM" one_or_more_spaces one_or_more_table_names {
+    "FROM" space+ one_or_more_table_names {
       def eval
         CachedModel::Expression::From.new(one_or_more_table_names.eval)
       end

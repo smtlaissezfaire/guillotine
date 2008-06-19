@@ -10,9 +10,9 @@ grammar SQLDelete
   end
 
   rule single_table_delete
-    "DELETE" one_or_more_spaces 
+    "DELETE" space+ 
     optional_delete_directives
-    "FROM" one_or_more_spaces 
+    "FROM" space+ 
     table_name
     where_condition_or_empty
     order_by_condition_or_empty
@@ -42,14 +42,14 @@ grammar SQLDelete
   end
 
   rule ignore
-    "IGNORE" one_or_more_spaces
+    "IGNORE" space+
   end
 
   rule quick
-    "QUICK" one_or_more_spaces
+    "QUICK" space+
   end
 
   rule low_priority
-    "LOW_PRIORITY" one_or_more_spaces
+    "LOW_PRIORITY" space+
   end
 end
