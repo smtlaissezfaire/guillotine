@@ -23,7 +23,13 @@ module CachedModel
       # TODO: This currently acts just like TRUNCATE TABLE
       # We need to implement the where_clause, the order_by and limit
       def call(collection)
-        collection.clear
+        if limit
+          return collection if limit.limit == 0
+          collection.slice!(0..limit.limit-1)
+          collection
+        else
+          collection.clear
+        end
       end
     end
   end

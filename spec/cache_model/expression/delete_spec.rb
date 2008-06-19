@@ -93,6 +93,93 @@ module CachedModel
           
           it "should truncate the table"
         end
+        
+        describe "with a limit clause, with three elements in the table" do
+          before :each do
+            @array = [1,2,3]
+          end
+          
+          describe "with a limit of 1" do
+            before :each do
+              @limit = Limit.new(1)
+              @delete = DeleteStatement.new(:table_name, nil, nil, @limit)
+            end
+            
+            it "should remove the first element with a limit 1" do
+              @delete.call(@array)
+              @array.should == [2,3]
+            end
+              
+            it "should return the second and third elements of the table with a limit of 1" do
+              @delete.call(@array).should == [2, 3]
+            end
+          end
+          
+          describe "with a limit of 2" do
+            before :each do
+              @limit = Limit.new(2)
+              @delete = DeleteStatement.new(:table_name, nil, nil, @limit)
+            end
+            
+            it "should remove the first and second elements with a limit of 2" do
+              @delete.call(@array)
+              @array.should == [3]
+            end
+              
+            it "should return the third element of the table with a limit of 1" do
+              @delete.call(@array).should == [3]
+            end
+          end
+          
+          describe "with a limit of 3" do
+            before :each do
+              @limit = Limit.new(3)
+              @delete = DeleteStatement.new(:table_name, nil, nil, @limit)
+            end
+            
+            it "should remove the whole array" do
+              @delete.call(@array)
+              @array.should be_empty
+            end
+              
+            it "should return an empty array" do
+              @delete.call(@array).should be_empty
+            end
+          end
+          
+          describe "with a limit of 4" do
+            before :each do
+              @limit = Limit.new(4)
+              @delete = DeleteStatement.new(:table_name, nil, nil, @limit)
+            end
+            
+            it "should remove the whole array" do
+              @delete.call(@array)
+              @array.should be_empty
+            end
+              
+            it "should return an empty array" do
+              @delete.call(@array).should be_empty
+            end
+          end
+          
+          describe "with a limit of 0" do
+            before :each do
+              @limit = Limit.new(0)
+              @delete = DeleteStatement.new(:table_name, nil, nil, @limit)
+            end
+            
+            it "should NOT change the array" do
+              @delete.call(@array)
+              @array.should == [1,2,3]
+            end
+              
+            it "should return the array" do
+              @delete.call(@array).should == [1,2,3]
+            end
+          end
+          
+        end
       end
     end
   end
