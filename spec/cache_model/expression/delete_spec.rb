@@ -90,6 +90,8 @@ module CachedModel
             @delete.call(@array)
             @array.should be_empty
           end
+          
+          it "should truncate the table"
         end
       end
     end
