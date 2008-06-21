@@ -11,7 +11,15 @@ namespace "tags" do
   end
 end
 
+namespace :treetop do
+  task :compile do
+    TASKS::Treetop.compile
+  end
+end
+
 desc "Build the emacs tags file"
 task :tags => ["tags:emacs"]
 
+desc "Recompile the treetop files"
+task :treetop => ["treetop:compile"]
 
