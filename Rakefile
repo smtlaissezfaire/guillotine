@@ -3,9 +3,11 @@ require File.dirname(__FILE__) + "/lib/cache_model"
 TASKS = CachedModel::RakeTasks
 
 namespace "tags" do
-  task :emacs => TASKS::Emacs::Tags::RUBY_FILES do
+  ruby_files = TASKS::Emacs::Tags::RUBY_FILES
+  
+  task :emacs => ruby_files do
     puts "Making Emacs TAGS file"
-    sh "ctags -e #{TASKS::Emacs::Tags::RUBY_FILES}", :verbose => false
+    sh "ctags -e #{ruby_files}", :verbose => false
   end
 end
 
