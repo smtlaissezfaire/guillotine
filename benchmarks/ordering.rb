@@ -1,6 +1,6 @@
 require "rubygems"
 require "ruby-prof"
-require File.dirname(__FILE__) + "/../lib/cache_model"
+require File.dirname(__FILE__) + "/../lib/guillotine"
 require 'sqlite3'
 require "active_record"
 
