@@ -1,236 +1,242 @@
 
 benchmarks/ordering.rb,114
-class User < ActiveRecord::BaseUser17,402
-class StringString21,486
-  def self.random(length=10)random22,499
+class User < ActiveRecord::BaseUser17,401
+class StringString21,485
+  def self.random(length=10)random22,498
 
-lib/cache_model/assertions.rb,442
-module CachedModelCachedModel1,0
-  module AssertionsAssertions2,19
-    def assert_each_expression(&blk)assert_each_expression5,56
-    def assert(expression)assert12,198
-    def assert_equal(expr1, expr2)assert_equal16,273
-    class AssertionAssertion20,360
-      class AssertionFailedError < StandardError; endAssertionFailedError21,380
-      def self.assert(expression)assert23,441
-      def assert(expression)assert27,523
+lib/guillotine/assertions.rb,440
+module GuillotineGuillotine1,0
+  module AssertionsAssertions2,18
+    def assert_each_expression(&blk)assert_each_expression5,55
+    def assert(expression)assert12,197
+    def assert_equal(expr1, expr2)assert_equal16,272
+    class AssertionAssertion20,359
+      class AssertionFailedError < StandardError; endAssertionFailedError21,379
+      def self.assert(expression)assert23,440
+      def assert(expression)assert27,522
 
-lib/cache_model/condition_tree.rb,591
-module CachedModelCachedModel1,0
-  class ProperBinaryTreeProperBinaryTree2,19
-    def initialize(child_one, child_two)initialize3,44
-    def eql?(other)eql?9,170
-    def first_childfirst_child17,318
-    def second_childsecond_child21,372
-    def two_children?two_children?25,424
-  class ConditionNode < ProperBinaryTreeConditionNode30,488
-  class ConjunctionConditionNode < ConditionNodeConjunctionConditionNode33,538
-    def call(collection)call36,727
-  class DisjunctionConditionNode < ConditionNodeDisjunctionConditionNode43,936
-    def call(collection)call44,985
+lib/guillotine/condition_tree.rb,589
+module GuillotineGuillotine1,0
+  class ProperBinaryTreeProperBinaryTree2,18
+    def initialize(child_one, child_two)initialize3,43
+    def eql?(other)eql?9,169
+    def first_childfirst_child17,317
+    def second_childsecond_child21,371
+    def two_children?two_children?25,423
+  class ConditionNode < ProperBinaryTreeConditionNode30,487
+  class ConjunctionConditionNode < ConditionNodeConjunctionConditionNode33,537
+    def call(collection)call36,726
+  class DisjunctionConditionNode < ConditionNodeDisjunctionConditionNode43,935
+    def call(collection)call44,984
 
-lib/cache_model/expression/backtick_string.rb,282
-module CachedModelCachedModel1,0
-  class BackTickStringBackTickString2,19
-    class InvalidString < StandardError; endInvalidString3,42
-    def initialize(string)initialize7,144
-    def valuevalue12,240
-    def check_string_for_backtickscheck_string_for_backticks18,321
+lib/guillotine/expression/backtick_string.rb,280
+module GuillotineGuillotine1,0
+  class BackTickStringBackTickString2,18
+    class InvalidString < StandardError; endInvalidString3,41
+    def initialize(string)initialize7,143
+    def valuevalue12,239
+    def check_string_for_backtickscheck_string_for_backticks18,320
 
-lib/cache_model/expression/base.rb,383
-module CachedModelCachedModel1,0
-  module ExpressionExpression2,19
-    class BaseBase3,39
-      def initialize(key, value)initialize4,54
-      def to_lambdato_lambda12,201
-      def eql?(other)eql?16,272
-      def call(collection)call24,452
-      def new_lambda_with_comparison(comparison)new_lambda_with_comparison30,576
-      def key_as_symbolkey_as_symbol34,715
+lib/guillotine/expression/base.rb,381
+module GuillotineGuillotine1,0
+  module ExpressionExpression2,18
+    class BaseBase3,38
+      def initialize(key, value)initialize4,53
+      def to_lambdato_lambda12,200
+      def eql?(other)eql?16,271
+      def call(collection)call24,451
+      def new_lambda_with_comparison(comparison)new_lambda_with_comparison30,575
+      def key_as_symbolkey_as_symbol34,714
 
-lib/cache_model/expression/delete.rb,365
-module CachedModelCachedModel1,0
-  module ExpressionExpression2,19
-    class DeleteStatementDeleteStatement3,39
-      def initialize(table_name, where_clause=nil, order_by=nil, limit=nil)initialize4,65
-      def ==(other)==16,395
-      def call(collection)call25,707
-      def truncate(collection)truncate40,1046
-      def truncatortruncator44,1129
+lib/guillotine/expression/delete.rb,363
+module GuillotineGuillotine1,0
+  module ExpressionExpression2,18
+    class DeleteStatementDeleteStatement3,38
+      def initialize(table_name, where_clause=nil, order_by=nil, limit=nil)initialize4,64
+      def ==(other)==16,394
+      def call(collection)call25,706
+      def truncate(collection)truncate40,1045
+      def truncatortruncator44,1128
 
-lib/cache_model/expression/expressions.rb,494
-module CachedModelCachedModel1,0
-  module ExpressionExpression2,19
-    def self.classes_with_comparisonsclasses_with_comparisons3,39
-    class NotEqual < EqualNotEqual25,642
-      def to_lambdato_lambda26,669
-    class IsNull < BaseIsNull31,755
-      def initialize(key)initialize32,779
-      def to_lambdato_lambda36,846
-    class IsNotNull < IsNullIsNotNull41,929
-      def to_lambdato_lambda42,958
-    class Like < BaseLike47,1044
-      def to_lambdato_lambda48,1066
+lib/guillotine/expression/expressions.rb,492
+module GuillotineGuillotine1,0
+  module ExpressionExpression2,18
+    def self.classes_with_comparisonsclasses_with_comparisons3,38
+    class NotEqual < EqualNotEqual25,641
+      def to_lambdato_lambda26,668
+    class IsNull < BaseIsNull31,754
+      def initialize(key)initialize32,778
+      def to_lambdato_lambda36,845
+    class IsNotNull < IsNullIsNotNull41,928
+      def to_lambdato_lambda42,957
+    class Like < BaseLike47,1043
+      def to_lambdato_lambda48,1065
 
-lib/cache_model/expression/from.rb,177
-module CachedModelCachedModel1,0
-  module ExpressionExpression2,19
-    class FromFrom3,39
-      def initialize(*table_names)initialize4,54
-      def ==(other)==10,196
+lib/guillotine/expression/from.rb,175
+module GuillotineGuillotine1,0
+  module ExpressionExpression2,18
+    class FromFrom3,38
+      def initialize(*table_names)initialize4,53
+      def ==(other)==10,195
 
-lib/cache_model/expression/limit.rb,173
-module CachedModelCachedModel1,0
-  module ExpressionExpression2,19
-    class LimitLimit3,39
-      def initialize(number)initialize4,55
-      def ==(other)==10,157
+lib/guillotine/expression/limit.rb,171
+module GuillotineGuillotine1,0
+  module ExpressionExpression2,18
+    class LimitLimit3,38
+      def initialize(number)initialize4,54
+      def ==(other)==10,156
 
-lib/cache_model/expression/order_by.rb,561
-module CachedModelCachedModel1,0
-  module ExpressionExpression2,19
-    class OrderByOrderBy3,39
-      module SortOptionsSortOptions4,57
-      def initialize(*columns)initialize13,243
-      def pairpair19,356
-      def ==(other)==23,434
-      def call(collection)call29,605
-      def call!(collection)call!35,857
-    class OrderByPairOrderByPair42,1002
-      def initialize(column, sort = ASC)initialize45,1066
-      def ==(other)==53,1234
-      def call(collection)call58,1391
-      def desc?desc?65,1553
-      def asc?asc?69,1608
+lib/guillotine/expression/order_by.rb,559
+module GuillotineGuillotine1,0
+  module ExpressionExpression2,18
+    class OrderByOrderBy3,38
+      module SortOptionsSortOptions4,56
+      def initialize(*columns)initialize13,242
+      def pairpair19,355
+      def ==(other)==23,433
+      def call(collection)call29,604
+      def call!(collection)call!35,856
+    class OrderByPairOrderByPair42,1001
+      def initialize(column, sort = ASC)initialize45,1065
+      def ==(other)==53,1233
+      def call(collection)call58,1390
+      def desc?desc?65,1552
+      def asc?asc?69,1607
 
-lib/cache_model/expression/select.rb,177
-module CachedModelCachedModel1,0
-  module ExpressionExpression2,19
-    class SelectSelect3,39
-      def initialize(*columns)initialize4,56
-      def ==(other)==11,211
+lib/guillotine/expression/select.rb,175
+module GuillotineGuillotine1,0
+  module ExpressionExpression2,18
+    class SelectSelect3,38
+      def initialize(*columns)initialize4,55
+      def ==(other)==11,210
 
-lib/cache_model/expression/truncate.rb,308
-module CachedModelCachedModel1,0
-  module ExpressionExpression2,19
-    class TruncateTruncate3,39
-      def initialize(arg1)initialize4,58
-      def table_name_as_stringtable_name_as_string10,173
-      def inspectinspect14,246
-      def call(collection)call18,348
-      def ==(other)==22,417
+lib/guillotine/expression/truncate.rb,306
+module GuillotineGuillotine1,0
+  module ExpressionExpression2,18
+    class TruncateTruncate3,38
+      def initialize(arg1)initialize4,57
+      def table_name_as_stringtable_name_as_string10,172
+      def inspectinspect14,245
+      def call(collection)call18,347
+      def ==(other)==22,416
 
-lib/cache_model/expression.rb,135
-module CachedModelCachedModel12,501
-  module ExpressionExpression13,520
-    def self.find_class_for(joiner)find_class_for27,1024
+lib/guillotine/expression.rb,133
+module GuillotineGuillotine12,501
+  module ExpressionExpression13,519
+    def self.find_class_for(joiner)find_class_for27,1021
 
-lib/cache_model/extensions/object.rb,167
-module CachedModelCachedModel1,0
-  module ExtensionsExtensions2,19
-    module ObjectObject3,39
-      def object_sizeobject_size4,57
-class ObjectObject13,175
+lib/guillotine/extensions/object.rb,165
+module GuillotineGuillotine1,0
+  module ExtensionsExtensions2,18
+    module ObjectObject3,38
+      def object_sizeobject_size4,56
+class ObjectObject13,174
 
-lib/cache_model/extensions/string.rb,24
+lib/guillotine/extensions/string.rb,24
 class StringString1,0
 
-lib/cache_model/extensions.rb,0
+lib/guillotine/extensions.rb,0
 
-lib/cache_model/keywords.rb,65
-module CacheModelCacheModel1,0
+lib/guillotine/keywords.rb,65
+module GuillotineGuillotine1,0
   module KeywordsKeywords2,18
 
-lib/cache_model/pre_parser.rb,101
-module CachedModelCachedModel1,0
-  class PreParserPreParser2,19
-    def parse(string)parse3,37
+lib/guillotine/pre_parser.rb,99
+module GuillotineGuillotine1,0
+  class PreParserPreParser2,18
+    def parse(string)parse3,36
 
-lib/cache_model/rake/emacs.rb,127
-module CachedModelCachedModel1,0
-  module RakeTasksRakeTasks2,19
-    module EmacsEmacs8,231
-      module TagsTags9,248
+lib/guillotine/rake/emacs.rb,125
+module GuillotineGuillotine1,0
+  module RakeTasksRakeTasks2,18
+    module EmacsEmacs8,230
+      module TagsTags9,247
 
-lib/cache_model/rake.rb,0
+lib/guillotine/rake/treetop.rb,132
+module GuillotineGuillotine1,0
+  module RakeTasksRakeTasks2,18
+    class TreetopTreetop3,37
+        def compilecompile7,123
 
-lib/cache_model/select_expression.rb,182
-module CachedModelCachedModel1,0
-  class SelectExpressionSelectExpression2,19
-    def initialize(hash)initialize5,72
-    def inspectinspect21,445
-    def ==(other)==25,509
+lib/guillotine/rake.rb,0
 
-lib/cache_model/treetop.rb,0
+lib/guillotine/select_expression.rb,180
+module GuillotineGuillotine1,0
+  class SelectExpressionSelectExpression2,18
+    def initialize(hash)initialize5,71
+    def inspectinspect21,444
+    def ==(other)==25,508
 
-lib/cache_model.rb,41
-module CachedModel; endCachedModel5,35
+lib/guillotine/treetop.rb,0
 
-spec/cache_model/btree_spec.rb,36
-module CachedModelCachedModel3,52
+lib/guillotine.rb,39
+module Guillotine; endGuillotine5,35
 
-spec/cache_model/expression/delete_spec.rb,72
-module CachedModelCachedModel3,55
-  module ExpressionExpression4,74
+spec/guillotine/btree_spec.rb,34
+module GuillotineGuillotine3,52
 
-spec/cache_model/expression/order_by_spec.rb,72
-module CachedModelCachedModel3,55
-  module ExpressionExpression4,74
+spec/guillotine/expression/delete_spec.rb,70
+module GuillotineGuillotine3,55
+  module ExpressionExpression4,73
 
-spec/cache_model/expression/select_spec.rb,36
-module CachedModelCachedModel3,55
+spec/guillotine/expression/order_by_spec.rb,70
+module GuillotineGuillotine3,55
+  module ExpressionExpression4,73
 
-spec/cache_model/expression/truncate_spec.rb,72
-module CachedModelCachedModel3,55
-  module ExpressionExpression4,74
+spec/guillotine/expression/select_spec.rb,34
+module GuillotineGuillotine3,55
 
-spec/cache_model/extensions/object_spec.rb,0
+spec/guillotine/expression/truncate_spec.rb,70
+module GuillotineGuillotine3,55
+  module ExpressionExpression4,73
 
-spec/cache_model/keywords_spec.rb,34
-module CacheModelCacheModel3,52
+spec/guillotine/extensions/object_spec.rb,0
 
-spec/cache_model/pre_parser_spec.rb,70
-module CachedModelCachedModel3,52
-    def parse(string)parse9,162
+spec/guillotine/keywords_spec.rb,34
+module GuillotineGuillotine3,52
 
-spec/cache_model/sql_parser/backtick_string_spec.rb,36
-module CachedModelCachedModel3,55
+spec/guillotine/pre_parser_spec.rb,68
+module GuillotineGuillotine3,52
+    def parse(string)parse9,161
 
-spec/cache_model/sql_parser/expression_spec.rb,72
-module CachedModelCachedModel3,55
-  module ExpressionExpression4,74
+spec/guillotine/sql_parser/backtick_string_spec.rb,34
+module GuillotineGuillotine3,55
 
-spec/cache_model/treetop/sql_delete_spec.rb,36
-module CachedModelCachedModel3,55
+spec/guillotine/sql_parser/expression_spec.rb,70
+module GuillotineGuillotine3,55
+  module ExpressionExpression4,73
 
-spec/cache_model/treetop/sql_from_clause_spec.rb,36
-module CachedModelCachedModel3,55
+spec/guillotine/treetop/sql_delete_spec.rb,34
+module GuillotineGuillotine3,55
 
-spec/cache_model/treetop/sql_key_value_pair_spec.rb,36
-module CachedModelCachedModel3,55
+spec/guillotine/treetop/sql_from_clause_spec.rb,34
+module GuillotineGuillotine3,55
 
-spec/cache_model/treetop/sql_limit_parser_spec.rb,36
-module CachedModelCachedModel3,55
+spec/guillotine/treetop/sql_key_value_pair_spec.rb,34
+module GuillotineGuillotine3,55
 
-spec/cache_model/treetop/sql_order_by_clause_spec.rb,36
-module CachedModelCachedModel3,55
+spec/guillotine/treetop/sql_limit_parser_spec.rb,34
+module GuillotineGuillotine3,55
 
-spec/cache_model/treetop/sql_primitives_spec.rb,36
-module CachedModelCachedModel3,55
+spec/guillotine/treetop/sql_order_by_clause_spec.rb,34
+module GuillotineGuillotine3,55
 
-spec/cache_model/treetop/sql_select_clause_spec.rb,36
-module CachedModelCachedModel4,56
+spec/guillotine/treetop/sql_primitives_spec.rb,34
+module GuillotineGuillotine3,55
 
-spec/cache_model/treetop/sql_select_spec.rb,36
-module CachedModelCachedModel3,55
+spec/guillotine/treetop/sql_select_clause_spec.rb,34
+module GuillotineGuillotine4,56
 
-spec/cache_model/treetop/sql_truncate_spec.rb,36
-module CachedModelCachedModel3,55
+spec/guillotine/treetop/sql_select_spec.rb,34
+module GuillotineGuillotine3,55
 
-spec/cache_model/treetop/sql_where_clause_spec.rb,36
-module CachedModelCachedModel3,55
+spec/guillotine/treetop/sql_truncate_spec.rb,34
+module GuillotineGuillotine3,55
+
+spec/guillotine/treetop/sql_where_clause_spec.rb,34
+module GuillotineGuillotine3,55
 
 spec/spec_helper.rb,139
-module ParserSpecHelperParserSpecHelper4,57
-  def parse(string)parse5,81
-  def parse_and_eval(string, *eval_args)parse_and_eval9,136
+module ParserSpecHelperParserSpecHelper4,56
+  def parse(string)parse5,80
+  def parse_and_eval(string, *eval_args)parse_and_eval9,135
