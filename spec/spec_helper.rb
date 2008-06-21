@@ -1,5 +1,5 @@
 
-require File.dirname(__FILE__) + "/../lib/cache_model"
+require File.dirname(__FILE__) + "/../lib/guillotine"
 
 module ParserSpecHelper
   def parse(string)
