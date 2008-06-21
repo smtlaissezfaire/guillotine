@@ -2,7 +2,7 @@
 require File.dirname(__FILE__) + "/lib/cache_model"
 TASKS = CachedModel::RakeTasks
 
-namespace "tags" do
+namespace :tags do
   ruby_files = TASKS::Emacs::Tags::RUBY_FILES
   
   task :emacs => ruby_files do
