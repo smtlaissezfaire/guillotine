@@ -1,6 +1,6 @@
 
 module CachedModel
-  module BuildScripts
+  module RakeTasks
     # Build the TAGS file for Emacs
     # Taken with slight modifications from 
     # http://blog.lathi.net/articles/2007/11/07/navigating-your-projects-in-emacs
@@ -15,9 +15,9 @@ module CachedModel
 end
 
 namespace "tags" do
-  task :emacs => CachedModel::BuildScripts::Emacs::Tags::RUBY_FILES do
+  task :emacs => CachedModel::RakeTasks::Emacs::Tags::RUBY_FILES do
     puts "Making Emacs TAGS file"
-    sh "ctags -e #{CachedModel::BuildScripts::Emacs::Tags::RUBY_FILES}", :verbose => false
+    sh "ctags -e #{CachedModel::RakeTasks::Emacs::Tags::RUBY_FILES}", :verbose => false
   end
 end
 
