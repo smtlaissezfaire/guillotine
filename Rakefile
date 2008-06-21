@@ -17,12 +17,16 @@ namespace :treetop do
   end
 end
 
-desc "Run all specs"
-Spec::Rake::SpecTask.new(:spec) do |t|
-  t.spec_files = FileList['spec/**/*.rb']
-  t.spec_opts = ["--diff", "--color", "--reverse", "--format", "profile"]
+namespace :spec do
+  Spec::Rake::SpecTask.new(:examples) do |t|
+    t.spec_files = FileList['spec/**/*.rb']
+    t.spec_opts = ["--diff", "--color", "--reverse", "--format", "profile"]
+  end
 end
 
+
+desc "Run all specs"
+task :spec => ["spec:examples"]
 
 desc "Build the emacs tags file"
 task :tags => ["tags:emacs"]
