@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   module Expression
     class Truncate
       def initialize(arg1)

@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   class PreParser
     def parse(string)
       string.strip.gsub("\r", "").squeeze("\n").gsub("\n", " ")

@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module CachedModel
+module Guillotine
   describe SelectExpression do
     it "should have the query string" do
       SelectExpression.new(:string => "foo bar").query_string.should == "foo bar"
@@ -13,7 +13,7 @@ module CachedModel
     it "should have a pretty inspect" do
       query = "SELECT * FROM events"
       expr = SelectExpression.new(:string => query)
-      expr.inspect.should == "CachedModel::SelectExpression: SELECT * FROM events"
+      expr.inspect.should == "Guillotine::SelectExpression: SELECT * FROM events"
     end
   end
 end

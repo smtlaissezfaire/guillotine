@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   module RakeTasks
     # Build the TAGS file for Emacs
     # Taken with slight modifications from 

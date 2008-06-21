@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   module Expression
     def self.classes_with_comparisons
       @classes_with_comparisons ||= { 

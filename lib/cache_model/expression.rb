@@ -9,7 +9,7 @@ require File.dirname(__FILE__) + "/expression/truncate"
 require File.dirname(__FILE__) + "/expression/delete"
 
 
-module CachedModel
+module Guillotine
   module Expression
     SYNTAX_CLASSES = { 
       :"="           => Equal,
@@ -20,8 +20,8 @@ module CachedModel
       :>=            => GreaterThanOrEqualTo,
       :"IS NULL"     => IsNull,
       :"IS NOT NULL" => IsNotNull,
-      :AND           => CachedModel::ConjunctionConditionNode,
-      :OR            => CachedModel::DisjunctionConditionNode
+      :AND           => Guillotine::ConjunctionConditionNode,
+      :OR            => Guillotine::DisjunctionConditionNode
     } unless defined?(SYNTAX_CLASSES)
     
     def self.find_class_for(joiner)

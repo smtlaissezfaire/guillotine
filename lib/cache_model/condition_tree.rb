@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   class ProperBinaryTree
     def initialize(child_one, child_two)
       @children = [child_one, child_two]

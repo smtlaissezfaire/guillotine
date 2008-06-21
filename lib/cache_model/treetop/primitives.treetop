@@ -61,7 +61,7 @@ grammar SQLPrimitives
 
   rule backtick_string
     "`" string "`" {
-      def eval(backtick_string_class=CachedModel::BackTickString)
+      def eval(backtick_string_class=Guillotine::BackTickString)
         backtick_string_class.new(text_value)
       end
     }

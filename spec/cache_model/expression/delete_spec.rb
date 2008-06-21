@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module CachedModel
+module Guillotine
   module Expression
     describe DeleteStatement do
       before :each do

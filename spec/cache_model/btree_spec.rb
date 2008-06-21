@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../spec_helper"
 
-module CachedModel
+module Guillotine
   describe ConditionNode do
     before :each do
       @node1 = mock 'node'

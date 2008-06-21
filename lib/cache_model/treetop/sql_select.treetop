@@ -16,7 +16,7 @@ grammar SQLSelect
     order_by_condition_or_empty
     {
       def eval
-        CachedModel::SelectExpression.new({
+        Guillotine::SelectExpression.new({
           :string => self.text_value,
 
           :select => select.eval,

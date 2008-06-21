@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   module Expression
     class Base
       def initialize(key, value)

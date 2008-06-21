@@ -2,7 +2,7 @@
 require "rubygems"
 require "set"
 
-module CachedModel; end
+module Guillotine; end
 
 require File.dirname(__FILE__) + "/cache_model/assertions"
 require File.dirname(__FILE__) + "/cache_model/pre_parser"
@@ -13,4 +13,4 @@ require File.dirname(__FILE__) + "/cache_model/expression"
 require File.dirname(__FILE__) + "/cache_model/treetop"
 require File.dirname(__FILE__) + "/cache_model/select_expression"
 
-CachedModel.autoload :RakeTasks, File.dirname(__FILE__) + "/cache_model/rake"
+Guillotine.autoload :RakeTasks, File.dirname(__FILE__) + "/cache_model/rake"

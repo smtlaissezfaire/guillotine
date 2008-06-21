@@ -52,7 +52,7 @@ grammar SQLRowSupport
   rule table_name
     backtick_string {
       def eval 
-        CachedModel::BackTickString.new(text_value).value
+        Guillotine::BackTickString.new(text_value).value
       end
     }
     /

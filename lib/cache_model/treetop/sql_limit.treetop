@@ -2,6 +2,6 @@ grammar SQLLimit
   include SQLPrimitives
 
   rule limit
-    "LIMIT" space+ number { def eval; CachedModel::Expression::Limit.new(number.eval); end }
+    "LIMIT" space+ number { def eval; Guillotine::Expression::Limit.new(number.eval); end }
   end
 end

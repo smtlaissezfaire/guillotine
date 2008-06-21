@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   module Expression
     class From
       def initialize(*table_names)

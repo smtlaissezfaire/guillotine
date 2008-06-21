@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module CachedModel
+module Guillotine
   module Expression
     describe OrderBy do
       before :each do

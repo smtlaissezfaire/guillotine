@@ -4,7 +4,7 @@ grammar SQLTruncate
   rule truncate
     "TRUNCATE" space+ ("TABLE" space+)? table_name {
       def eval
-        CachedModel::Expression::Truncate.new(table_name.eval)
+        Guillotine::Expression::Truncate.new(table_name.eval)
       end
     }
   end

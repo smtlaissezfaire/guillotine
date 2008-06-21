@@ -1,7 +1,7 @@
 
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-module CachedModel
+module Guillotine
   describe SQLSelectClauseParser  do
     include ParserSpecHelper
 

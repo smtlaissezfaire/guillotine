@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   module Assertions
     private
     

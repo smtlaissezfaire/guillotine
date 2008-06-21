@@ -5,7 +5,7 @@ grammar SQLKeyValuePair
     string optional_spaces joiner_or_null  {
       def eval
         results = joiner_or_null.eval
-        klass = CachedModel::Expression.find_class_for(results[:joiner])
+        klass = Guillotine::Expression.find_class_for(results[:joiner])
         if value = results[:value]
           klass.new(string.eval.to_sym, results[:value])
         else

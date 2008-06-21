@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   class BackTickString
     class InvalidString < StandardError; end
     

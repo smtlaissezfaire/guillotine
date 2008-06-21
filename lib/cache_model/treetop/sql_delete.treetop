@@ -16,7 +16,7 @@ grammar SQLDelete
     order_by_condition_or_empty
     limit_condition_or_empty {
       def eval
-        CachedModel::Expression::DeleteStatement.new(table_name.eval, where_condition_or_empty.eval, order_by_condition_or_empty.eval, limit_condition_or_empty.eval)
+        Guillotine::Expression::DeleteStatement.new(table_name.eval, where_condition_or_empty.eval, order_by_condition_or_empty.eval, limit_condition_or_empty.eval)
       end
     }
   end

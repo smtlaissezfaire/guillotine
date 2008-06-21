@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   module Expression
     class Select
       def initialize(*columns)

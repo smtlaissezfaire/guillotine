@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   module Extensions
     module Object
       def object_size
@@ -11,5 +11,5 @@ module CachedModel
 end
 
 class Object
-  include CachedModel::Extensions::Object
+  include Guillotine::Extensions::Object
 end

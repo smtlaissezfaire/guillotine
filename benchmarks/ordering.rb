@@ -35,14 +35,14 @@ table = []
   User.create!(hash)
 }
 
-first_sort = CachedModel::Expression::OrderByPair.new(:username, :DESC)
-second_sort = CachedModel::Expression::OrderByPair.new(:last_name, :ASC)
+first_sort = Guillotine::Expression::OrderByPair.new(:username, :DESC)
+second_sort = Guillotine::Expression::OrderByPair.new(:last_name, :ASC)
 
-sorter = CachedModel::Expression::OrderBy.new(first_sort, second_sort)
+sorter = Guillotine::Expression::OrderBy.new(first_sort, second_sort)
 
 
 puts ""
-puts "******** With CachedModel ***************************"
+puts "******** With Guillotine ***************************"
 puts ""
 
 # run it!

@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   module Expression
     class DeleteStatement
       def initialize(table_name, where_clause=nil, order_by=nil, limit=nil)

@@ -1,4 +1,4 @@
-module CachedModel
+module Guillotine
   module RakeTasks
     class Treetop
       TREETOP_FILES = FileList['**/*.treetop']
