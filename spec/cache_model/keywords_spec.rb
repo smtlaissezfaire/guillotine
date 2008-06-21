@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../spec_helper"
 
-module CacheModel
+module Guillotine
   describe Keywords do
     before :each do
       @keywords = Keywords::SQL_KEYWORDS

@@ -1,4 +1,4 @@
-module CacheModel
+module Guillotine
   module Keywords
     IMPLEMENTED_KEYWORDS = Set.new [
       :AND,
