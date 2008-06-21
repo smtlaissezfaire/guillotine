@@ -1,5 +1,5 @@
 
-CachedModel 
+Guillotine 
 
 =================
 
@@ -70,7 +70,7 @@ or just as frequently as before, but with decreased productivity.
 Some have used sqlite's in memory test database to speed up their suite.  I've
 seen a 40-50% improvement on a larger suite before.  Unfortunately, an in memory
 database is not always an option; If any custom sql is present, a sqlite in memory test
-database will be out of the question.  CachedModel will allow use of it's cache
+database will be out of the question.  Guillotine will allow use of it's cache
 for in memory tests without writing to a real database.
 
 

@@ -1,6 +1,6 @@
 
 require File.dirname(__FILE__) + "/lib/cache_model"
-TASKS = CachedModel::RakeTasks
+TASKS = Guillotine::RakeTasks
 
 namespace :tags do
   ruby_files = TASKS::Emacs::Tags::RUBY_FILES
