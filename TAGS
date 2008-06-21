@@ -1,4 +1,9 @@
 
+benchmarks/ordering.rb,114
+class User < ActiveRecord::BaseUser17,402
+class StringString21,486
+  def self.random(length=10)random22,499
+
 lib/cache_model/assertions.rb,442
 module CachedModelCachedModel1,0
   module AssertionsAssertions2,19
@@ -10,7 +15,7 @@ module CachedModelCachedModel1,0
       def self.assert(expression)assert23,441
       def assert(expression)assert27,523
 
-lib/cache_model/condition_tree.rb,615
+lib/cache_model/condition_tree.rb,591
 module CachedModelCachedModel1,0
   class ProperBinaryTreeProperBinaryTree2,19
     def initialize(child_one, child_two)initialize3,44
@@ -19,11 +24,10 @@ module CachedModelCachedModel1,0
     def second_childsecond_child21,372
     def two_children?two_children?25,424
   class ConditionNode < ProperBinaryTreeConditionNode30,488
-    def call(*args)call31,529
-  class ConjunctionConditionNode < ConditionNodeConjunctionConditionNode36,661
-    def call(*args)call39,849
-  class DisjunctionConditionNode < ConditionNodeDisjunctionConditionNode45,1011
-    def call(*args)call46,1060
+  class ConjunctionConditionNode < ConditionNodeConjunctionConditionNode33,538
+    def call(collection)call36,727
+  class DisjunctionConditionNode < ConditionNodeDisjunctionConditionNode43,936
+    def call(collection)call44,985
 
 lib/cache_model/expression/backtick_string.rb,282
 module CachedModelCachedModel1,0
@@ -33,14 +37,26 @@ module CachedModelCachedModel1,0
     def valuevalue12,240
     def check_string_for_backtickscheck_string_for_backticks18,321
 
-lib/cache_model/expression/base.rb,299
+lib/cache_model/expression/base.rb,383
 module CachedModelCachedModel1,0
   module ExpressionExpression2,19
     class BaseBase3,39
       def initialize(key, value)initialize4,54
       def to_lambdato_lambda12,201
       def eql?(other)eql?16,272
-      def new_lambda_with_comparison(comparison)new_lambda_with_comparison26,471
+      def call(collection)call24,452
+      def new_lambda_with_comparison(comparison)new_lambda_with_comparison30,576
+      def key_as_symbolkey_as_symbol34,715
+
+lib/cache_model/expression/delete.rb,365
+module CachedModelCachedModel1,0
+  module ExpressionExpression2,19
+    class DeleteStatementDeleteStatement3,39
+      def initialize(table_name, where_clause=nil, order_by=nil, limit=nil)initialize4,65
+      def ==(other)==16,395
+      def call(collection)call25,707
+      def truncate(collection)truncate40,1046
+      def truncatortruncator44,1129
 
 lib/cache_model/expression/expressions.rb,494
 module CachedModelCachedModel1,0
@@ -70,12 +86,22 @@ module CachedModelCachedModel1,0
       def initialize(number)initialize4,55
       def ==(other)==10,157
 
-lib/cache_model/expression/order_by.rb,179
+lib/cache_model/expression/order_by.rb,561
 module CachedModelCachedModel1,0
   module ExpressionExpression2,19
     class OrderByOrderBy3,39
-      def initialize(*columns)initialize4,57
-      def ==(other)==10,174
+      module SortOptionsSortOptions4,57
+      def initialize(*columns)initialize13,243
+      def pairpair19,356
+      def ==(other)==23,434
+      def call(collection)call29,605
+      def call!(collection)call!35,857
+    class OrderByPairOrderByPair42,1002
+      def initialize(column, sort = ASC)initialize45,1066
+      def ==(other)==53,1234
+      def call(collection)call58,1391
+      def desc?desc?65,1553
+      def asc?asc?69,1608
 
 lib/cache_model/expression/select.rb,177
 module CachedModelCachedModel1,0
@@ -84,10 +110,27 @@ module CachedModelCachedModel1,0
       def initialize(*columns)initialize4,56
       def ==(other)==11,211
 
-lib/cache_model/expression.rb,134
-module CachedModelCachedModel10,391
-  module ExpressionExpression11,410
-    def self.find_class_for(joiner)find_class_for25,914
+lib/cache_model/expression/truncate.rb,308
+module CachedModelCachedModel1,0
+  module ExpressionExpression2,19
+    class TruncateTruncate3,39
+      def initialize(arg1)initialize4,58
+      def table_name_as_stringtable_name_as_string10,173
+      def inspectinspect14,246
+      def call(collection)call18,348
+      def ==(other)==22,417
+
+lib/cache_model/expression.rb,135
+module CachedModelCachedModel12,501
+  module ExpressionExpression13,520
+    def self.find_class_for(joiner)find_class_for27,1024
+
+lib/cache_model/extensions/object.rb,167
+module CachedModelCachedModel1,0
+  module ExtensionsExtensions2,19
+    module ObjectObject3,39
+      def object_sizeobject_size4,57
+class ObjectObject13,175
 
 lib/cache_model/extensions/string.rb,24
 class StringString1,0
@@ -98,24 +141,57 @@ lib/cache_model/keywords.rb,65
 module CacheModelCacheModel1,0
   module KeywordsKeywords2,18
 
-lib/cache_model/select_expression.rb,151
+lib/cache_model/pre_parser.rb,101
+module CachedModelCachedModel1,0
+  class PreParserPreParser2,19
+    def parse(string)parse3,37
+
+lib/cache_model/rake/emacs.rb,127
+module CachedModelCachedModel1,0
+  module RakeTasksRakeTasks2,19
+    module EmacsEmacs8,231
+      module TagsTags9,248
+
+lib/cache_model/rake.rb,0
+
+lib/cache_model/select_expression.rb,182
 module CachedModelCachedModel1,0
   class SelectExpressionSelectExpression2,19
     def initialize(hash)initialize5,72
-    def ==(other)==19,375
+    def inspectinspect21,445
+    def ==(other)==25,509
 
 lib/cache_model/treetop.rb,0
 
-lib/cache_model.rb,0
+lib/cache_model.rb,41
+module CachedModel; endCachedModel5,35
 
 spec/cache_model/btree_spec.rb,36
 module CachedModelCachedModel3,52
 
-spec/cache_model/exceptions_spec.rb,34
-module CacheModelCacheModel3,52
+spec/cache_model/expression/delete_spec.rb,72
+module CachedModelCachedModel3,55
+  module ExpressionExpression4,74
+
+spec/cache_model/expression/order_by_spec.rb,72
+module CachedModelCachedModel3,55
+  module ExpressionExpression4,74
+
+spec/cache_model/expression/select_spec.rb,36
+module CachedModelCachedModel3,55
+
+spec/cache_model/expression/truncate_spec.rb,72
+module CachedModelCachedModel3,55
+  module ExpressionExpression4,74
+
+spec/cache_model/extensions/object_spec.rb,0
 
 spec/cache_model/keywords_spec.rb,34
 module CacheModelCacheModel3,52
+
+spec/cache_model/pre_parser_spec.rb,70
+module CachedModelCachedModel3,52
+    def parse(string)parse9,162
 
 spec/cache_model/sql_parser/backtick_string_spec.rb,36
 module CachedModelCachedModel3,55
@@ -123,6 +199,9 @@ module CachedModelCachedModel3,55
 spec/cache_model/sql_parser/expression_spec.rb,72
 module CachedModelCachedModel3,55
   module ExpressionExpression4,74
+
+spec/cache_model/treetop/sql_delete_spec.rb,36
+module CachedModelCachedModel3,55
 
 spec/cache_model/treetop/sql_from_clause_spec.rb,36
 module CachedModelCachedModel3,55
@@ -143,6 +222,9 @@ spec/cache_model/treetop/sql_select_clause_spec.rb,36
 module CachedModelCachedModel4,56
 
 spec/cache_model/treetop/sql_select_spec.rb,36
+module CachedModelCachedModel3,55
+
+spec/cache_model/treetop/sql_truncate_spec.rb,36
 module CachedModelCachedModel3,55
 
 spec/cache_model/treetop/sql_where_clause_spec.rb,36
