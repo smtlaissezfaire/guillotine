@@ -14,10 +14,12 @@ module CachedModel
   end
 end
 
+TASKS = CachedModel::RakeTasks
+
 namespace "tags" do
-  task :emacs => CachedModel::RakeTasks::Emacs::Tags::RUBY_FILES do
+  task :emacs => TASKS::Emacs::Tags::RUBY_FILES do
     puts "Making Emacs TAGS file"
-    sh "ctags -e #{CachedModel::RakeTasks::Emacs::Tags::RUBY_FILES}", :verbose => false
+    sh "ctags -e #{TASKS::Emacs::Tags::RUBY_FILES}", :verbose => false
   end
 end
 
