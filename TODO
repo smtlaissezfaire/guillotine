@@ -2,10 +2,8 @@
 High Priority
 ===============
 
-- ASC, DESC to order by
 - DELETE (3 forms, see: http://dev.mysql.com/doc/refman/5.0/en/delete.html)
   - first form:
-    - order by clause
     - where clause
   - second form
   - third form
