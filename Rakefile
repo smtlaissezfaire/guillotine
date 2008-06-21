@@ -17,6 +17,13 @@ namespace :treetop do
   end
 end
 
+desc "Run all specs"
+Spec::Rake::SpecTask.new(:spec) do |t|
+  t.spec_files = FileList['spec/**/*.rb']
+  t.spec_opts = ["--diff", "--color", "--reverse", "--format", "profile"]
+end
+
+
 desc "Build the emacs tags file"
 task :tags => ["tags:emacs"]
 
