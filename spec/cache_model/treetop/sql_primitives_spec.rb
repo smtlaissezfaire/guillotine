@@ -131,5 +131,19 @@ module CachedModel
       
       it "should parse 'False' as false"
     end
+    
+    describe "floating point numbers" do
+      it "should parse 10.0 as 10" do
+        parse_and_eval("10.0").should == 10
+      end
+      
+      it "should parse 10.4 as 10.4" do
+        parse_and_eval("10.4").should == 10.4
+      end
+      
+      it "should parse 10.123456789 as the correct number" do
+        parse_and_eval("10.123456789").should == 10.123456789
+      end
+    end
   end
 end

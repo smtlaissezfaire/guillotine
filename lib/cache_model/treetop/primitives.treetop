@@ -80,9 +80,21 @@ grammar SQLPrimitives
   end
 
   rule number
+    float / integer
+  end
+
+  rule integer
     [0-9]+ {
       def eval
         text_value.to_i
+      end
+    }
+  end
+
+  rule float
+    integer "." integer {
+      def eval
+        text_value.to_f
       end
     }
   end
