@@ -1,7 +1,21 @@
 
 # Need to module eval here to get the require from
 # Guillotine
-Guillotine.module_eval do
+module Guillotine
+  
+  module Parser
+    Expression        = Guillotine::Expression      unless defined?(Expression)
+    DeleteStatement   = Expression::DeleteStatement unless defined?(DeleteStatement)
+    Select            = Expression::Select          unless defined?(Select)
+    From              = Expression::From            unless defined?(From)
+    Limit             = Expression::Limit           unless defined?(Limit)
+    OrderBy           = Expression::OrderBy         unless defined?(OrderBy)
+    OrderByPair       = Expression::OrderByPair     unless defined?(OrderByPair)
+    BacktickString    = BackTickString              unless defined?(BacktickString)
+    SelectExpression  = SelectExpression            unless defined?(SelectExpression)
+    Truncate          = Expression::Truncate        unless defined?(Truncate)
+  end
+  
   parser = File.dirname(__FILE__) + "/parser"
   
   require "#{parser}/primitives"

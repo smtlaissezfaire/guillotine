@@ -18,7 +18,7 @@ module Guillotine
         order_by_condition_or_empty
         {
           def eval
-            Guillotine::SelectExpression.new({
+            SelectExpression.new({
               :string => self.text_value,
     
               :select => select.eval,

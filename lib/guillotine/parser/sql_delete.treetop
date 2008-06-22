@@ -18,7 +18,7 @@ module Guillotine
         order_by_condition_or_empty
         limit_condition_or_empty {
           def eval
-            Guillotine::Expression::DeleteStatement.new(
+            DeleteStatement.new(
               table_name.eval, 
               where_condition_or_empty.eval, 
               order_by_condition_or_empty.eval, 

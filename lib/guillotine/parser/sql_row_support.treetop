@@ -54,7 +54,7 @@ module Guillotine
       rule table_name
         backtick_string {
           def eval 
-            Guillotine::BackTickString.new(text_value).value
+            BacktickString.new(text_value).value
           end
         }
         /

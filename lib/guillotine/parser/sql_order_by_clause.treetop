@@ -8,7 +8,7 @@ module Guillotine
       rule order_by
         "ORDER" space+ "BY" space+ one_or_more_column_names_with_sort { 
           def eval
-            Guillotine::Expression::OrderBy.new(one_or_more_column_names_with_sort.eval)
+            OrderBy.new(one_or_more_column_names_with_sort.eval)
           end
         }
       end
@@ -29,9 +29,9 @@ module Guillotine
           def eval
             column = one_column_name.eval
             if value = optional_sort_condition.eval
-              Guillotine::Expression::OrderByPair.new(column, value)
+              OrderByPair.new(column, value)
             else
-              Guillotine::Expression::OrderByPair.new(column)
+              OrderByPair.new(column)
             end
           end 
         }
