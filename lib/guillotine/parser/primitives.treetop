@@ -63,7 +63,7 @@ module Guillotine
     
       rule backtick_string
         "`" string "`" {
-          def eval(backtick_string_class=Guillotine::BackTickString)
+          def eval(backtick_string_class=BacktickString)
             backtick_string_class.new(text_value)
           end
         }
