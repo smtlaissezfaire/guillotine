@@ -43,6 +43,14 @@ module Guillotine
           one.should_not == two
           two.should_not == one
         end
+        
+        it "should be false with the same name, but one has asc and the other desc" do
+          one = OrderByPair.new(:foo, OrderByPair::ASC)
+          two = OrderByPair.new(:foo, OrderByPair::DESC)
+          
+          one.should_not == two
+          two.should_not == one
+        end
       end
       
       describe "sorting" do
