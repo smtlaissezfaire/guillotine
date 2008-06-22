@@ -10,24 +10,23 @@ module GuillotineGuillotine1,0
     def assert_each_expression(&blk)assert_each_expression5,55
     def assert(expression)assert12,197
     def assert_equal(expr1, expr2)assert_equal16,272
-    class AssertionAssertion20,359
-      class AssertionFailedError < StandardError; endAssertionFailedError21,379
-      def self.assert(expression)assert23,440
-      def assert(expression)assert27,522
+    class AssertionAssertion20,349
+      class AssertionFailedError < StandardError; endAssertionFailedError21,369
+      def self.assert(expression)assert23,430
+      def assert(expression)assert27,512
 
-lib/guillotine/condition_tree.rb,589
+lib/guillotine/condition_tree.rb,546
 module GuillotineGuillotine1,0
   class ProperBinaryTreeProperBinaryTree2,18
     def initialize(child_one, child_two)initialize3,43
     def eql?(other)eql?9,169
     def first_childfirst_child17,317
     def second_childsecond_child21,371
-    def two_children?two_children?25,423
-  class ConditionNode < ProperBinaryTreeConditionNode30,487
-  class ConjunctionConditionNode < ConditionNodeConjunctionConditionNode33,537
-    def call(collection)call36,726
-  class DisjunctionConditionNode < ConditionNodeDisjunctionConditionNode43,935
-    def call(collection)call44,984
+  class ConditionNode < ProperBinaryTreeConditionNode26,427
+  class ConjunctionConditionNode < ConditionNodeConjunctionConditionNode29,477
+    def call(collection)call32,666
+  class DisjunctionConditionNode < ConditionNodeDisjunctionConditionNode39,875
+    def call(collection)call40,924
 
 lib/guillotine/expression/backtick_string.rb,280
 module GuillotineGuillotine1,0
@@ -37,16 +36,15 @@ module GuillotineGuillotine1,0
     def valuevalue12,239
     def check_string_for_backtickscheck_string_for_backticks18,320
 
-lib/guillotine/expression/base.rb,381
+lib/guillotine/expression/base.rb,344
 module GuillotineGuillotine1,0
   module ExpressionExpression2,18
     class BaseBase3,38
       def initialize(key, value)initialize4,53
-      def to_lambdato_lambda12,200
-      def eql?(other)eql?16,271
-      def call(collection)call24,451
-      def new_lambda_with_comparison(comparison)new_lambda_with_comparison30,575
-      def key_as_symbolkey_as_symbol34,714
+      def eql?(other)eql?12,200
+      def call(collection)call20,380
+      def new_lambda_with_comparison(comparison)new_lambda_with_comparison26,504
+      def key_as_symbolkey_as_symbol30,643
 
 lib/guillotine/expression/delete.rb,363
 module GuillotineGuillotine1,0
@@ -58,7 +56,7 @@ module GuillotineGuillotine1,0
       def truncate(collection)truncate40,1045
       def truncatortruncator44,1128
 
-lib/guillotine/expression/expressions.rb,492
+lib/guillotine/expression/expressions.rb,419
 module GuillotineGuillotine1,0
   module ExpressionExpression2,18
     def self.classes_with_comparisonsclasses_with_comparisons3,38
@@ -69,8 +67,6 @@ module GuillotineGuillotine1,0
       def to_lambdato_lambda36,845
     class IsNotNull < IsNullIsNotNull41,928
       def to_lambdato_lambda42,957
-    class Like < BaseLike47,1043
-      def to_lambdato_lambda48,1065
 
 lib/guillotine/expression/from.rb,175
 module GuillotineGuillotine1,0
@@ -91,17 +87,17 @@ module GuillotineGuillotine1,0
   module ExpressionExpression2,18
     class OrderByOrderBy3,38
       module SortOptionsSortOptions4,56
-      def initialize(*columns)initialize13,242
-      def pairpair19,355
-      def ==(other)==23,433
-      def call(collection)call29,604
-      def call!(collection)call!35,856
-    class OrderByPairOrderByPair42,1001
-      def initialize(column, sort = ASC)initialize45,1065
-      def ==(other)==53,1233
-      def call(collection)call58,1390
-      def desc?desc?65,1552
-      def asc?asc?69,1607
+      def initialize(*columns)initialize12,283
+      def pairpair18,396
+      def ==(other)==22,474
+      def call(collection)call28,645
+      def call!(collection)call!34,897
+    class OrderByPairOrderByPair41,1042
+      def initialize(column, sort = ASC)initialize44,1106
+      def ==(other)==52,1274
+      def call(collection)call57,1431
+      def asc?asc?62,1572
+      def desc?desc?66,1625
 
 lib/guillotine/expression/select.rb,175
 module GuillotineGuillotine1,0
@@ -120,10 +116,12 @@ module GuillotineGuillotine1,0
       def call(collection)call18,347
       def ==(other)==22,416
 
-lib/guillotine/expression.rb,133
+lib/guillotine/expression.rb,252
 module GuillotineGuillotine12,501
   module ExpressionExpression13,519
-    def self.find_class_for(joiner)find_class_for27,1021
+    class UnknownSyntaxError < StandardError; endUnknownSyntaxError14,539
+      def find_class_for(joiner)find_class_for17,612
+      def syntax_classessyntax_classes27,850
 
 lib/guillotine/extensions/object.rb,165
 module GuillotineGuillotine1,0
@@ -167,6 +165,323 @@ module GuillotineGuillotine1,0
     def inspectinspect21,444
     def ==(other)==25,508
 
+lib/guillotine/treetop/primitives.rb,1986
+module SQLPrimitivesSQLPrimitives1,0
+  def rootroot4,49
+  def _nt_primitive_nt_primitive8,91
+  def _nt_space_nt_space50,858
+  def _nt_optional_spaces_nt_optional_spaces71,1299
+  def _nt_boolean_nt_boolean95,1775
+  module True0True0122,2229
+    def evaleval123,2244
+  def _nt_true_nt_true128,2283
+  module False0False0150,2749
+    def evaleval151,2765
+  def _nt_false_nt_false156,2805
+  def _nt_quoted_string_nt_quoted_string178,3278
+  module SingleQuotedString0SingleQuotedString0205,3787
+    def single_quotesingle_quote206,3816
+    def single_quotesingle_quote210,3864
+  module SingleQuotedString1SingleQuotedString1215,3918
+    def evaleval216,3947
+  def _nt_single_quoted_string_nt_single_quoted_string221,4006
+  def _nt_single_quote_nt_single_quote275,5109
+  module DoubleQuotedString0DoubleQuotedString0296,5578
+    def double_quotedouble_quote297,5607
+    def double_quotedouble_quote301,5655
+  module DoubleQuotedString1DoubleQuotedString1306,5709
+    def evaleval307,5738
+  def _nt_double_quoted_string_nt_double_quoted_string312,5797
+  def _nt_double_quote_nt_double_quote366,6900
+  module BacktickString0BacktickString0387,7369
+    def stringstring388,7394
+  module BacktickString1BacktickString1394,7443
+    def eval(backtick_string_class=Guillotine::BackTickString)eval395,7468
+  def _nt_backtick_string_nt_backtick_string400,7590
+  module String0String0445,8595
+    def evaleval446,8612
+  def _nt_string_nt_string451,8657
+  def _nt_string_chars_nt_string_chars481,9202
+  def _nt_number_nt_number501,9657
+  module Integer0Integer0528,10110
+    def evaleval529,10128
+  def _nt_integer_nt_integer534,10178
+  module Float0Float0569,10874
+    def integerinteger570,10890
+    def integerinteger574,10933
+  module Float1Float1579,10982
+    def evaleval580,10998
+  def _nt_float_nt_float585,11048
+class SQLPrimitivesParser < Treetop::Runtime::CompiledParserSQLPrimitivesParser626,11830
+
+lib/guillotine/treetop/sql_delete.rb,1563
+module SQLDeleteSQLDelete1,0
+  def rootroot4,45
+  def _nt_delete_nt_delete18,208
+  module SingleTableDelete0SingleTableDelete033,506
+    def common_delete_clausecommon_delete_clause34,534
+    def table_nametable_name38,590
+    def where_condition_or_emptywhere_condition_or_empty42,636
+    def order_by_condition_or_emptyorder_by_condition_or_empty46,696
+    def limit_condition_or_emptylimit_condition_or_empty50,759
+  module SingleTableDelete1SingleTableDelete155,825
+    def evaleval56,853
+  def _nt_single_table_delete_nt_single_table_delete61,1044
+  module CommonDeleteClause0CommonDeleteClause0102,1952
+    def optional_delete_directivesoptional_delete_directives103,1981
+  def _nt_common_delete_clause_nt_common_delete_clause109,2050
+  module OptionalDeleteDirectives0OptionalDeleteDirectives0189,3840
+    def optional_low_priorityoptional_low_priority190,3875
+    def optional_quickoptional_quick194,3932
+    def optional_ignoreoptional_ignore198,3982
+  def _nt_optional_delete_directives_nt_optional_delete_directives203,4039
+  def _nt_optional_low_priority_nt_optional_low_priority235,4753
+  def _nt_optional_quick_nt_optional_quick262,5278
+  def _nt_optional_ignore_nt_optional_ignore289,5768
+  module Ignore0Ignore0316,6263
+  def _nt_ignore_nt_ignore319,6287
+  module Quick0Quick0367,7234
+  def _nt_quick_nt_quick370,7257
+  module LowPriority0LowPriority0418,8197
+  def _nt_low_priority_nt_low_priority421,8226
+class SQLDeleteParser < Treetop::Runtime::CompiledParserSQLDeleteParser471,9221
+
+lib/guillotine/treetop/sql_from_clause.rb,324
+module SQLFromClauseSQLFromClause1,0
+  def rootroot4,49
+  module From0From012,136
+    def one_or_more_table_namesone_or_more_table_names13,151
+  module From1From118,216
+    def evaleval19,231
+  def _nt_from_nt_from24,328
+class SQLFromClauseParser < Treetop::Runtime::CompiledParserSQLFromClauseParser79,1369
+
+lib/guillotine/treetop/sql_helpers.rb,1099
+module SQLHelpersSQLHelpers1,0
+  def rootroot4,46
+  module WhereConditionOrEmpty0WhereConditionOrEmpty08,103
+    def where_conditionwhere_condition9,135
+  module WhereConditionOrEmpty1WhereConditionOrEmpty114,192
+    def evaleval15,224
+  def _nt_where_condition_or_empty_nt_where_condition_or_empty20,279
+  module LimitConditionOrEmpty0LimitConditionOrEmpty075,1338
+    def limitlimit76,1370
+  module LimitConditionOrEmpty1LimitConditionOrEmpty181,1417
+    def eval; limit.eval; endeval82,1449
+  def _nt_limit_condition_or_empty_nt_limit_condition_or_empty85,1486
+  module OrderByConditionOrEmpty0OrderByConditionOrEmpty0140,2535
+    def order_byorder_by141,2569
+  module OrderByConditionOrEmpty1OrderByConditionOrEmpty1146,2619
+    def eval; order_by.eval; endeval147,2653
+  def _nt_order_by_condition_or_empty_nt_order_by_condition_or_empty150,2693
+  module EmptyString0EmptyString0205,3761
+    def eval; nil; endeval206,3783
+  def _nt_empty_string_nt_empty_string209,3813
+class SQLHelpersParser < Treetop::Runtime::CompiledParserSQLHelpersParser233,4315
+
+lib/guillotine/treetop/sql_key_value_pair.rb,2022
+module SQLKeyValuePairSQLKeyValuePair1,0
+  def rootroot4,51
+  module KeyValuePair0KeyValuePair010,123
+    def stringstring11,146
+    def optional_spacesoptional_spaces15,188
+    def joiner_or_nulljoiner_or_null19,239
+  module KeyValuePair1KeyValuePair124,295
+    def evaleval25,318
+  def _nt_key_value_pair_nt_key_value_pair36,599
+  def _nt_joiner_or_null_nt_joiner_or_null69,1269
+  def _nt_a_null_nt_a_null96,1765
+  module IsNotNull0IsNotNull0123,2224
+  module IsNotNull1IsNotNull1126,2251
+    def evaleval127,2271
+  def _nt_is_not_null_nt_is_not_null132,2335
+  module IsNull0IsNull0219,4252
+  module IsNull1IsNull1222,4276
+    def evaleval223,4293
+  def _nt_is_null_nt_is_null228,4353
+  module JoinerWithValue0JoinerWithValue0287,5574
+    def condition_joinercondition_joiner288,5600
+    def optional_spacesoptional_spaces292,5652
+    def primitiveprimitive296,5703
+  module JoinerWithValue1JoinerWithValue1301,5754
+    def evaleval302,5780
+  def _nt_joiner_with_value_nt_joiner_with_value310,5900
+  def _nt_condition_joiner_nt_condition_joiner343,6593
+  module LessThanOrEqual0LessThanOrEqual0390,7526
+    def eval;   :<=;   endeval391,7552
+  def _nt_less_than_or_equal_nt_less_than_or_equal394,7586
+  module GreaterThanOrEqual0GreaterThanOrEqual0416,8115
+    def eval;   :>=    endeval417,8144
+  def _nt_greater_than_or_equal_nt_greater_than_or_equal420,8178
+  module LessThan0LessThan0442,8722
+    def eval;   :<     endeval443,8741
+  def _nt_less_than_nt_less_than446,8775
+  module GreaterThan0GreaterThan0468,9259
+    def eval;   :>     endeval469,9281
+  def _nt_greater_than_nt_greater_than472,9315
+  module NotEquals0NotEquals0494,9814
+    def eval;   :"!="   endeval495,9834
+  def _nt_not_equals_nt_not_equals498,9869
+  module Equals0Equals0520,10360
+    def eval;  :"="    endeval521,10377
+  def _nt_equals_nt_equals524,10411
+class SQLKeyValuePairParser < Treetop::Runtime::CompiledParserSQLKeyValuePairParser548,10886
+
+lib/guillotine/treetop/sql_limit.rb,329
+module SQLLimitSQLLimit1,0
+  def rootroot4,44
+  module Limit0Limit010,107
+    def numbernumber11,123
+  module Limit1Limit116,171
+    def eval; Guillotine::Expression::Limit.new(number.eval); endeval17,187
+  def _nt_limit_nt_limit20,260
+class SQLLimitParser < Treetop::Runtime::CompiledParserSQLLimitParser75,1292
+
+lib/guillotine/treetop/sql_order_by_clause.rb,1818
+module SQLOrderByClauseSQLOrderByClause1,0
+  def rootroot4,52
+  module OrderBy0OrderBy014,165
+    def one_or_more_column_names_with_sortone_or_more_column_names_with_sort15,183
+  module OrderBy1OrderBy120,259
+    def evaleval22,278
+  def _nt_order_by_nt_order_by27,389
+  module OneOrMoreColumnNamesWithSort0OneOrMoreColumnNamesWithSort0108,2108
+    def one_column_name_with_sortone_column_name_with_sort109,2147
+    def one_or_more_column_names_with_sortone_or_more_column_names_with_sort113,2208
+  module OneOrMoreColumnNamesWithSort1OneOrMoreColumnNamesWithSort1118,2284
+    def evaleval119,2323
+  def _nt_one_or_more_column_names_with_sort_nt_one_or_more_column_names_with_sort125,2481
+  module OneColumnNameWithSort0OneColumnNameWithSort0194,4007
+    def one_column_nameone_column_name195,4039
+    def optional_sort_conditionoptional_sort_condition199,4090
+  module OneColumnNameWithSort1OneColumnNameWithSort1204,4155
+    def evaleval206,4188
+  def _nt_one_column_name_with_sort_nt_one_column_name_with_sort216,4438
+  module OptionalSortCondition0OptionalSortCondition0245,5116
+    def sort_conditionsort_condition246,5148
+  module OptionalSortCondition1OptionalSortCondition1251,5204
+    def eval; sort_condition.eval; endeval252,5236
+  def _nt_optional_sort_condition_nt_optional_sort_condition255,5282
+  def _nt_sort_condition_nt_sort_condition310,6336
+  module Ascending0Ascending0337,6828
+    def eval; Guillotine::Expression::OrderBy::ASC; endeval338,6848
+  def _nt_ascending_nt_ascending341,6911
+  module Descending0Descending0363,7400
+    def eval; Guillotine::Expression::OrderBy::DESC; endeval364,7421
+  def _nt_descending_nt_descending367,7485
+class SQLOrderByClauseParser < Treetop::Runtime::CompiledParserSQLOrderByClauseParser391,7986
+
+lib/guillotine/treetop/sql_row_support.rb,1875
+module SQLRowSupportSQLRowSupport1,0
+  def rootroot4,49
+  module OneOrMoreTableNames0OneOrMoreTableNames010,130
+    def table_nametable_name11,160
+    def one_or_more_table_namesone_or_more_table_names15,206
+  module OneOrMoreTableNames1OneOrMoreTableNames120,271
+    def evaleval21,301
+  def _nt_one_or_more_table_names_nt_one_or_more_table_names26,383
+  module OneOrMoreColumnNamesWithSort0OneOrMoreColumnNamesWithSort095,1806
+    def one_column_name_with_sortone_column_name_with_sort96,1845
+    def one_or_more_column_namesone_or_more_column_names100,1906
+  module OneOrMoreColumnNamesWithSort1OneOrMoreColumnNamesWithSort1105,1972
+    def evaleval106,2011
+  def _nt_one_or_more_column_names_with_sort_nt_one_or_more_column_names_with_sort112,2149
+  module OneOrMoreColumnNames0OneOrMoreColumnNames0181,3665
+    def one_column_nameone_column_name182,3696
+    def one_or_more_column_namesone_or_more_column_names186,3747
+  module OneOrMoreColumnNames1OneOrMoreColumnNames1191,3813
+    def evaleval192,3844
+  def _nt_one_or_more_column_names_nt_one_or_more_column_names198,3982
+  module OneColumnName0OneColumnName0267,5422
+    def table_nametable_name268,5446
+    def dotdot272,5492
+    def column_namecolumn_name276,5531
+  module OneColumnName1OneColumnName1281,5584
+    def evaleval282,5608
+  def _nt_one_column_name_nt_one_column_name287,5688
+  def _nt_column_name_nt_column_name332,6526
+  module TableName0TableName0359,7004
+    def eval eval360,7024
+  def _nt_table_name_nt_table_name365,7108
+  module Dot0Dot0393,7612
+    def eval; "."; endeval394,7626
+  def _nt_dot_nt_dot397,7656
+  module AllColumns0AllColumns0419,8111
+    def eval; "*"; endeval420,8132
+  def _nt_all_columns_nt_all_columns423,8162
+class SQLRowSupportParser < Treetop::Runtime::CompiledParserSQLRowSupportParser447,8661
+
+lib/guillotine/treetop/sql_select.rb,575
+module SQLSelectSQLSelect1,0
+  def rootroot4,45
+  module SelectExpression0SelectExpression022,271
+    def selectselect23,298
+    def fromfrom27,340
+    def where_condition_or_emptywhere_condition_or_empty31,380
+    def limit_condition_or_emptylimit_condition_or_empty35,440
+    def order_by_condition_or_emptyorder_by_condition_or_empty39,500
+  module SelectExpression1SelectExpression144,569
+    def evaleval45,596
+  def _nt_select_expression_nt_select_expression58,927
+class SQLSelectParser < Treetop::Runtime::CompiledParserSQLSelectParser101,1810
+
+lib/guillotine/treetop/sql_select_clause.rb,393
+module SQLSelectClauseSQLSelectClause1,0
+  def rootroot4,51
+  module Select0Select012,140
+    def one_or_more_column_namesone_or_more_column_names13,157
+    def optional_spacesoptional_spaces17,217
+  module Select1Select122,274
+    def evaleval24,292
+  def _nt_select_nt_select34,521
+class SQLSelectClauseParser < Treetop::Runtime::CompiledParserSQLSelectClauseParser93,1659
+
+lib/guillotine/treetop/sql_where_condition.rb,1489
+module SQLWhereConditionSQLWhereCondition1,0
+  def rootroot4,53
+  module WhereCondition0WhereCondition010,128
+    def where_clausewhere_clause11,153
+  module WhereCondition1WhereCondition116,207
+    def evaleval17,232
+  def _nt_where_condition_nt_where_condition22,284
+  module WhereClause0WhereClause075,1375
+    def open_parensopen_parens76,1397
+    def optional_spacesoptional_spaces80,1444
+    def where_clausewhere_clause84,1495
+    def optional_spacesoptional_spaces88,1543
+    def close_parensclose_parens92,1594
+  module WhereClause1WhereClause197,1648
+    def evaleval98,1670
+  module WhereClause2WhereClause2103,1722
+    def clause1clause1104,1744
+    def disjunction_or_conjunction_joinerdisjunction_or_conjunction_joiner108,1787
+    def clause2clause2112,1856
+  module WhereClause3WhereClause3117,1905
+    def evaleval118,1927
+  def _nt_where_clause_nt_where_clause124,2091
+  def _nt_disjunction_or_conjunction_joiner_nt_disjunction_or_conjunction_joiner236,4438
+  module And0And0263,4992
+    def eval; :AND; endeval264,5006
+  def _nt_and_nt_and267,5037
+  module Or0Or0289,5496
+    def eval; :OR; endeval290,5509
+  def _nt_or_nt_or293,5539
+  def _nt_open_parens_nt_open_parens315,5991
+  def _nt_close_parens_nt_close_parens336,6456
+  def _nt_single_expression_where_clause_nt_single_expression_where_clause357,6925
+class SQLWhereConditionParser < Treetop::Runtime::CompiledParserSQLWhereConditionParser374,7319
+
+lib/guillotine/treetop/truncate.rb,351
+module SQLTruncateSQLTruncate1,0
+  def rootroot4,47
+  module Truncate0Truncate010,113
+  module Truncate1Truncate113,139
+    def table_nametable_name14,158
+  module Truncate2Truncate219,210
+    def evaleval20,229
+  def _nt_truncate_nt_truncate25,317
+class SQLTruncateParser < Treetop::Runtime::CompiledParserSQLTruncateParser122,2351
+
 lib/guillotine/treetop.rb,0
 
 lib/guillotine.rb,39
@@ -189,6 +504,9 @@ module GuillotineGuillotine3,55
 spec/guillotine/expression/truncate_spec.rb,70
 module GuillotineGuillotine3,55
   module ExpressionExpression4,73
+
+spec/guillotine/expression_spec.rb,34
+module GuillotineGuillotine3,52
 
 spec/guillotine/extensions/object_spec.rb,0
 
