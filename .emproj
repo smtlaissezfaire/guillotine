@@ -1,1 +1,1 @@
-"find * | grep -v '~' | grep -v '#'"
+"find * | grep -v '~' | grep -v '#' | grep -v 'doc'"
