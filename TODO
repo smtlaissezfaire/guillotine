@@ -52,10 +52,9 @@ Miscelaneous:
 
 - rake tasks:
     - building gem
-    - running rspec
-    - running rcov
     - github gem integration
 - profiling reports on large tables
+- when 0.1 release is done, publish gem to github & rubyforge
     
 
 Unclassified:
