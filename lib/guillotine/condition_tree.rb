@@ -21,10 +21,6 @@ module Guillotine
     def second_child
       children[1]
     end
-    
-    def two_children?
-      children.size == 2
-    end
   end
   
   class ConditionNode < ProperBinaryTree
