@@ -24,11 +24,13 @@ module Guillotine
       :OR            => Guillotine::DisjunctionConditionNode
     } unless defined?(SYNTAX_CLASSES)
     
+    class UnknownSyntaxError < StandardError; end
+    
     def self.find_class_for(joiner)
       if syntax_class = SYNTAX_CLASSES[joiner.to_sym]
         syntax_class
       else
-        raise "Unknown joiner #{joiner}"
+        raise UnknownSyntaxError, "Unknown joiner '#{joiner}'"
       end
     end
   end

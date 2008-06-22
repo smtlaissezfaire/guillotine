@@ -42,6 +42,12 @@ module Guillotine
       it "should find the syntax class for the OR than sign" do
         Expression.find_class_for("OR").should == Guillotine::DisjunctionConditionNode
       end
+      
+      it "should raise an error if it is given a syntax class it doesn't know how to dispatch on" do
+        lambda { 
+          Expression.find_class_for("FOO BAR BAZ")
+        }.should raise_error(Expression::UnknownSyntaxError, "Unknown joiner 'FOO BAR BAZ'")
+      end
     end
   end
 end
