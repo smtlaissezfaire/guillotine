@@ -46,6 +46,8 @@ Low Priority:
   - NotImplementedErrors (for selects which aren't implemented)
 - Treetop doesn't support case insensitive matching.  Need to provide
   a patch for this
+- Reorganize expression class.  Conjunction & Disjunction should be
+  Compound conditions.  
 
 
 Miscelaneous:
