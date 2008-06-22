@@ -1,101 +1,105 @@
-grammar SQLPrimitives
-  rule primitive
-    boolean / quoted_string / backtick_string / number / string
-  end
-
-  rule space
-    " "
-  end
-
-  rule optional_spaces
-    space*
-  end
-
-  rule boolean
-    true / false
-  end
-
-  rule true
-    "TRUE" {
-      def eval
-        true
+module Guillotine
+  module Parser
+    grammar SQLPrimitives
+      rule primitive
+        boolean / quoted_string / backtick_string / number / string
       end
-    }
-  end
-
-  rule false
-    "FALSE" {
-      def eval
-        false
+    
+      rule space
+        " "
       end
-    }
-  end
-
-  rule quoted_string
-    single_quoted_string / double_quoted_string
-  end
-
-  rule single_quoted_string
-    single_quote (string_chars / double_quote)* single_quote {
-      def eval
-        instance_eval text_value
+    
+      rule optional_spaces
+        space*
       end
-    }
-  end
-
-  rule single_quote
-    "'"
-  end
-
-  rule double_quoted_string
-    double_quote (string_chars / single_quote)* double_quote {
-      def eval
-        instance_eval text_value
+    
+      rule boolean
+        true / false
       end
-    }
-  end
-
-  rule double_quote
-    '"'
-  end
-
-  rule backtick_string
-    "`" string "`" {
-      def eval(backtick_string_class=Guillotine::BackTickString)
-        backtick_string_class.new(text_value)
+    
+      rule true
+        "TRUE" {
+          def eval
+            true
+          end
+        }
       end
-    }
-  end
-
-  rule string
-    string_chars+ {
-      def eval
-        text_value
+    
+      rule false
+        "FALSE" {
+          def eval
+            false
+          end
+        }
       end
-    }
-  end
-
-  rule string_chars
-    [a-zA-Z_]
-  end
-
-  rule number
-    float / integer
-  end
-
-  rule integer
-    [0-9]+ {
-      def eval
-        text_value.to_i
+    
+      rule quoted_string
+        single_quoted_string / double_quoted_string
       end
-    }
-  end
-
-  rule float
-    integer "." integer {
-      def eval
-        text_value.to_f
+    
+      rule single_quoted_string
+        single_quote (string_chars / double_quote)* single_quote {
+          def eval
+            instance_eval text_value
+          end
+        }
       end
-    }
+    
+      rule single_quote
+        "'"
+      end
+    
+      rule double_quoted_string
+        double_quote (string_chars / single_quote)* double_quote {
+          def eval
+            instance_eval text_value
+          end
+        }
+      end
+    
+      rule double_quote
+        '"'
+      end
+    
+      rule backtick_string
+        "`" string "`" {
+          def eval(backtick_string_class=Guillotine::BackTickString)
+            backtick_string_class.new(text_value)
+          end
+        }
+      end
+    
+      rule string
+        string_chars+ {
+          def eval
+            text_value
+          end
+        }
+      end
+    
+      rule string_chars
+        [a-zA-Z_]
+      end
+    
+      rule number
+        float / integer
+      end
+    
+      rule integer
+        [0-9]+ {
+          def eval
+            text_value.to_i
+          end
+        }
+      end
+    
+      rule float
+        integer "." integer {
+          def eval
+            text_value.to_f
+          end
+        }
+      end
+    end
   end
 end

@@ -1,17 +1,22 @@
-grammar SQLSelectClause
-  include SQLPrimitives
-  include SQLRowSupport
-
-  rule select
-    "SELECT" space+ one_or_more_column_names optional_spaces { 
-       def eval
-         result = one_or_more_column_names.eval
-         if result.kind_of?(Array)
-           Guillotine::Expression::Select.new(*result)
-         else
-           Guillotine::Expression::Select.new(result)
-         end
-       end 
-    }
+module Guillotine
+  module Parser
+    grammar SQLSelectClause
+      include SQLPrimitives
+      include SQLRowSupport
+    
+      rule select
+        "SELECT" space+ one_or_more_column_names optional_spaces { 
+           def eval
+             result = one_or_more_column_names.eval
+             if result.kind_of?(Array)
+               Guillotine::Expression::Select.new(*result)
+             else
+               Guillotine::Expression::Select.new(result)
+             end
+           end 
+        }
+      end
+    end
   end
 end
+

@@ -1,12 +1,16 @@
-grammar SQLFromClause
-  include SQLPrimitives
-  include SQLRowSupport
-
-  rule from
-    "FROM" space+ one_or_more_table_names {
-      def eval
-        Guillotine::Expression::From.new(one_or_more_table_names.eval)
+module Guillotine
+  module Parser
+    grammar SQLFromClause
+      include SQLPrimitives
+      include SQLRowSupport
+    
+      rule from
+        "FROM" space+ one_or_more_table_names {
+          def eval
+            Guillotine::Expression::From.new(one_or_more_table_names.eval)
+          end
+        }
       end
-    }
+    end
   end
 end

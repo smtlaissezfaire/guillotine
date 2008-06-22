@@ -1,31 +1,35 @@
-grammar SQLSelect
-  include SQLRowSupport
-
-  include SQLSelectClause
-  include SQLFromClause
-  include SQLWhereCondition
-  include SQLOrderByClause
-  include SQLLimit
-  include SQLHelpers
-
-  rule select_expression
-    select 
-    from 
-    where_condition_or_empty
-    limit_condition_or_empty
-    order_by_condition_or_empty
-    {
-      def eval
-        Guillotine::SelectExpression.new({
-          :string => self.text_value,
-
-          :select => select.eval,
-          :from   => from.eval,
-          :where  => where_condition_or_empty.eval,
-          :limit  => limit_condition_or_empty.eval,
-          :order_by => order_by_condition_or_empty.eval
-        })
+module Guillotine
+  module Parser
+    grammar SQLSelect
+      include SQLRowSupport
+    
+      include SQLSelectClause
+      include SQLFromClause
+      include SQLWhereCondition
+      include SQLOrderByClause
+      include SQLLimit
+      include SQLHelpers
+    
+      rule select_expression
+        select 
+        from 
+        where_condition_or_empty
+        limit_condition_or_empty
+        order_by_condition_or_empty
+        {
+          def eval
+            Guillotine::SelectExpression.new({
+              :string => self.text_value,
+    
+              :select => select.eval,
+              :from   => from.eval,
+              :where  => where_condition_or_empty.eval,
+              :limit  => limit_condition_or_empty.eval,
+              :order_by => order_by_condition_or_empty.eval
+            })
+          end
+        }
       end
-    }
+    end
   end
 end

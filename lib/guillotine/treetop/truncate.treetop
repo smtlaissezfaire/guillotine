@@ -1,11 +1,15 @@
-grammar SQLTruncate
-  include SQLRowSupport
-
-  rule truncate
-    "TRUNCATE" space+ ("TABLE" space+)? table_name {
-      def eval
-        Guillotine::Expression::Truncate.new(table_name.eval)
+module Guillotine
+  module Parser
+    grammar SQLTruncate
+      include SQLRowSupport
+    
+      rule truncate
+        "TRUNCATE" space+ ("TABLE" space+)? table_name {
+          def eval
+            Guillotine::Expression::Truncate.new(table_name.eval)
+          end
+        }
       end
-    }
+    end
   end
 end
