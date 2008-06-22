@@ -14,7 +14,7 @@ module Guillotine
     end
     
     def assert_equal(expr1, expr2)
-      Assertion.assert(expr1 == expr2)
+      assert(expr1 == expr2)
     end
     
     class Assertion
