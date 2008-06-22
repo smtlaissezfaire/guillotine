@@ -53,6 +53,35 @@ module Guillotine
         end
       end
       
+      describe "asc?" do
+        it "should be asc? if initialized as so" do
+          obj = OrderByPair.new(:foo, OrderBy::ASC)
+          obj.should be_ascending
+          obj.should be_asc
+        end
+        
+        it "should not be descending" do
+          obj = OrderByPair.new(:foo, OrderBy::ASC)
+          obj.should_not be_descending
+          obj.should_not be_desc
+        end
+      end
+      
+      describe "desc?" do
+        it "should be desc? if initialized as so" do
+          obj = OrderByPair.new(:foo, OrderBy::DESC)
+          obj.should be_descending
+          obj.should be_desc
+        end
+        
+        it "should not be ascending" do
+          obj = OrderByPair.new(:foo, OrderBy::DESC)
+          obj.should_not be_ascending
+          obj.should_not be_asc
+        end
+      end
+
+      
       describe "sorting" do
         before :each do
           @pair_1 = mock 'order by pair 1'

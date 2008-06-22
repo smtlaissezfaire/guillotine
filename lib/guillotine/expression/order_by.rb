@@ -60,15 +60,16 @@ module Guillotine
         desc? ? results.reverse : results
       end
       
-    protected
-      
-      def desc?
-        @sort == DESC
-      end
-      
       def asc?
         @sort == ASC
       end
+      
+      def desc?
+        !asc?
+      end
+      
+      alias_method :descending?, :desc?
+      alias_method :ascending?, :asc?
     end
   end
 end
