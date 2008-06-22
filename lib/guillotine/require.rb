@@ -16,14 +16,8 @@ module Guillotine
       begin
         Treetop.load(file)
       rescue Errno::ENOENT
-        raise_require_error(file)
+        raise(LoadError, "Could not load the file '#{file}' with a rb, treetop, or tt extension")
       end
-    end
-    
-  private
-    
-    def raise_require_error(file)
-      raise(LoadError, "Could not load the file '#{file}' with a rb, treetop, or tt extension")
     end
   end
 end
