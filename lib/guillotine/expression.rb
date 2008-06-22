@@ -11,26 +11,32 @@ require File.dirname(__FILE__) + "/expression/delete"
 
 module Guillotine
   module Expression
-    SYNTAX_CLASSES = { 
-      :"="           => Equal,
-      :"!="          => NotEqual,
-      :<             => LessThan,
-      :<=            => LessThanOrEqualTo,
-      :>             => GreaterThan,
-      :>=            => GreaterThanOrEqualTo,
-      :"IS NULL"     => IsNull,
-      :"IS NOT NULL" => IsNotNull,
-      :AND           => Guillotine::ConjunctionConditionNode,
-      :OR            => Guillotine::DisjunctionConditionNode
-    }.freeze unless defined?(SYNTAX_CLASSES)
-    
     class UnknownSyntaxError < StandardError; end
     
-    def self.find_class_for(joiner)
-      if syntax_class = SYNTAX_CLASSES[joiner.to_sym]
-        syntax_class
-      else
-        raise UnknownSyntaxError, "Unknown joiner '#{joiner}'"
+    class << self
+      def find_class_for(joiner)
+        if syntax_class = syntax_classes[joiner.to_sym]
+          syntax_class
+        else
+          raise UnknownSyntaxError, "Unknown joiner '#{joiner}'"
+        end
+      end
+      
+    private
+      
+      def syntax_classes
+        @syntax_classes ||= { 
+          :"="           => Equal,
+          :"!="          => NotEqual,
+          :<             => LessThan,
+          :<=            => LessThanOrEqualTo,
+          :>             => GreaterThan,
+          :>=            => GreaterThanOrEqualTo,
+          :"IS NULL"     => IsNull,
+          :"IS NOT NULL" => IsNotNull,
+          :AND           => Guillotine::ConjunctionConditionNode,
+          :OR            => Guillotine::DisjunctionConditionNode
+        }
       end
     end
   end

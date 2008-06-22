@@ -49,11 +49,9 @@ module Guillotine
         }.should raise_error(Expression::UnknownSyntaxError, "Unknown joiner 'FOO BAR BAZ'")
       end
       
-      describe "syntax classes constant" do
-        it "should not allow an element to be added to it" do
-          lambda { 
-            Expression::SYNTAX_CLASSES[:foo] = "bar"          
-          }.should raise_error(TypeError, "can't modify frozen hash")
+      describe "syntax classes dispatcher" do
+        it "should have syntax classes as a private method" do
+          Expression.private_methods.should include("syntax_classes")
         end
       end
     end
