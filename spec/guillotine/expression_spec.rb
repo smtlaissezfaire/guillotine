@@ -48,6 +48,14 @@ module Guillotine
           Expression.find_class_for("FOO BAR BAZ")
         }.should raise_error(Expression::UnknownSyntaxError, "Unknown joiner 'FOO BAR BAZ'")
       end
+      
+      describe "syntax classes constant" do
+        it "should not allow an element to be added to it" do
+          lambda { 
+            Expression::SYNTAX_CLASSES[:foo] = "bar"          
+          }.should raise_error(TypeError, "can't modify frozen hash")
+        end
+      end
     end
   end
 end

@@ -22,7 +22,7 @@ module Guillotine
       :"IS NOT NULL" => IsNotNull,
       :AND           => Guillotine::ConjunctionConditionNode,
       :OR            => Guillotine::DisjunctionConditionNode
-    } unless defined?(SYNTAX_CLASSES)
+    }.freeze unless defined?(SYNTAX_CLASSES)
     
     class UnknownSyntaxError < StandardError; end
     
