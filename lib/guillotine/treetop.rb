@@ -1,4 +1,6 @@
 
+# Need to module eval here to get the require from
+# Guillotine
 Guillotine.module_eval do
   treetop = File.dirname(__FILE__) + "/treetop"
   
