@@ -3,18 +3,19 @@ require "rubygems"
 require "set"
 require "treetop"
 
-guillotine = File.dirname(__FILE__) + "/guillotine"
 
-require "#{guillotine}/extensions"
-require "#{guillotine}/treetop"
+project = File.dirname(__FILE__) + "/guillotine"
+
+require "#{project}/extensions"
+require "#{project}/treetop"
 
 Guillotine.module_eval do
-  autoload :Assertions,       "#{guillotine}/assertions"
-  autoload :PreParser,        "#{guillotine}/pre_parser"
-  autoload :ConditionNode,    "#{guillotine}/condition_tree"
-  autoload :Keywords,         "#{guillotine}/keywords"
-  autoload :Expression,       "#{guillotine}/expression"
-  autoload :SelectExpression, "#{guillotine}/select_expression"
-  autoload :RakeTasks,        "#{guillotine}/rake"
+  autoload :Assertions,       "#{project}/assertions"
+  autoload :PreParser,        "#{project}/pre_parser"
+  autoload :ConditionNode,    "#{project}/condition_tree"
+  autoload :Keywords,         "#{project}/keywords"
+  autoload :Expression,       "#{project}/expression"
+  autoload :SelectExpression, "#{project}/select_expression"
+  autoload :RakeTasks,        "#{project}/rake"
 end
 
