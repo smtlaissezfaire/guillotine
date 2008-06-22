@@ -81,7 +81,6 @@ module Guillotine
         end
       end
 
-      
       describe "sorting" do
         before :each do
           @pair_1 = mock 'order by pair 1'
