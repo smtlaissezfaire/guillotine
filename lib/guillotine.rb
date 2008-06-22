@@ -2,14 +2,18 @@
 require "rubygems"
 require "set"
 
-module Guillotine; end
+guillotine = File.dirname(__FILE__) + "/guillotine"
 
-require File.dirname(__FILE__) + "/guillotine/extensions"
-Guillotine.autoload :Assertions,     File.dirname(__FILE__) + "/guillotine/assertions"
-Guillotine.autoload :PreParser,      File.dirname(__FILE__) + "/guillotine/pre_parser"
-Guillotine.autoload :ConditionNode,  File.dirname(__FILE__) + "/guillotine/condition_tree"
-Guillotine.autoload :Keywords,  File.dirname(__FILE__) + "/guillotine/keywords"
-Guillotine.autoload :Expression, File.dirname(__FILE__) + "/guillotine/expression"
-require File.dirname(__FILE__) + "/guillotine/treetop"
-Guillotine.autoload :SelectExpression, File.dirname(__FILE__) + "/guillotine/select_expression"
-Guillotine.autoload :RakeTasks, File.dirname(__FILE__) + "/guillotine/rake"
+require "#{guillotine}/extensions"
+require "#{guillotine}/treetop"
+
+Guillotine.module_eval do
+  autoload :Assertions,       "#{guillotine}/assertions"
+  autoload :PreParser,        "#{guillotine}/pre_parser"
+  autoload :ConditionNode,    "#{guillotine}/condition_tree"
+  autoload :Keywords,         "#{guillotine}/keywords"
+  autoload :Expression,       "#{guillotine}/expression"
+  autoload :SelectExpression, "#{guillotine}/select_expression"
+  autoload :RakeTasks,        "#{guillotine}/rake"
+end
+
