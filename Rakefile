@@ -46,3 +46,5 @@ task :tags => ["tags:emacs"]
 desc "Recompile the treetop files"
 task :treetop => ["treetop:compile"]
 
+desc "Build the project"
+task :build => ["spec:verify_rcov", :treetop, :tags]
