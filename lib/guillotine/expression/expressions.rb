@@ -43,11 +43,5 @@ module Guillotine
         lambda { |obj| ! super.call(obj) }
       end
     end
-    
-    class Like < Base
-      def to_lambda
-        raise NotImplementedError
-      end
-    end
   end
 end

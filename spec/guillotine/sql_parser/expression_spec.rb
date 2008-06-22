@@ -170,11 +170,6 @@ module Guillotine
           lambda.call(@ar_object_hash).should == true
         end
       end
-      
-      describe Like do
-        # TODO.  Could use regex's with .* replacing
-        # % signs
-      end
     end
   end
 end
