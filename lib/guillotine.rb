@@ -1,6 +1,7 @@
 
 require "rubygems"
 require "set"
+require "treetop"
 
 guillotine = File.dirname(__FILE__) + "/guillotine"
 

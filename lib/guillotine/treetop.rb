@@ -1,5 +1,4 @@
 
-require "treetop"
 require File.dirname(__FILE__) + "/treetop/primitives"
 require File.dirname(__FILE__) + "/treetop/sql_helpers"
 require File.dirname(__FILE__) + "/treetop/sql_row_support"
