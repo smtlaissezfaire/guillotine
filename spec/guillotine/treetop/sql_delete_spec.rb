@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module Guillotine
+  module Parser
   describe SQLDeleteParser do
     include ParserSpecHelper
 
@@ -98,5 +99,7 @@ module Guillotine
     it "should parse the optional IGNORE keyword with spaces" do
       parse("DELETE     IGNORE          FROM table_name").should_not be_nil      
     end
+  end
+    
   end
 end

@@ -1,64 +1,68 @@
-grammar SQLDelete
-  include SQLRowSupport
-  include SQLWhereCondition
-  include SQLOrderByClause
-  include SQLLimit
-  include SQLHelpers
-
-  rule delete
-    single_table_delete
-  end
-
-  rule single_table_delete
-    common_delete_clause
-    table_name
-    where_condition_or_empty
-    order_by_condition_or_empty
-    limit_condition_or_empty {
-      def eval
-        Guillotine::Expression::DeleteStatement.new(
-          table_name.eval, 
-          where_condition_or_empty.eval, 
-          order_by_condition_or_empty.eval, 
-          limit_condition_or_empty.eval
-        )
+module Guillotine
+  module Parser
+    grammar SQLDelete
+      include SQLRowSupport
+      include SQLWhereCondition
+      include SQLOrderByClause
+      include SQLLimit
+      include SQLHelpers
+    
+      rule delete
+        single_table_delete
       end
-    }
-  end
-
-  rule common_delete_clause
-    "DELETE" space+ 
-    optional_delete_directives
-    "FROM" space+ 
-  end
-
-  rule optional_delete_directives
-    optional_low_priority
-    optional_quick
-    optional_ignore
-  end
-
-  rule optional_low_priority
-    low_priority / empty_string
-  end
-
-  rule optional_quick
-    quick / empty_string
-  end
-
-  rule optional_ignore
-    ignore / empty_string
-  end
-
-  rule ignore
-    "IGNORE" space+
-  end
-
-  rule quick
-    "QUICK" space+
-  end
-
-  rule low_priority
-    "LOW_PRIORITY" space+
+    
+      rule single_table_delete
+        common_delete_clause
+        table_name
+        where_condition_or_empty
+        order_by_condition_or_empty
+        limit_condition_or_empty {
+          def eval
+            Guillotine::Expression::DeleteStatement.new(
+              table_name.eval, 
+              where_condition_or_empty.eval, 
+              order_by_condition_or_empty.eval, 
+              limit_condition_or_empty.eval
+            )
+          end
+        }
+      end
+    
+      rule common_delete_clause
+        "DELETE" space+ 
+        optional_delete_directives
+        "FROM" space+ 
+      end
+    
+      rule optional_delete_directives
+        optional_low_priority
+        optional_quick
+        optional_ignore
+      end
+    
+      rule optional_low_priority
+        low_priority / empty_string
+      end
+    
+      rule optional_quick
+        quick / empty_string
+      end
+    
+      rule optional_ignore
+        ignore / empty_string
+      end
+    
+      rule ignore
+        "IGNORE" space+
+      end
+    
+      rule quick
+        "QUICK" space+
+      end
+    
+      rule low_priority
+        "LOW_PRIORITY" space+
+      end
+    end
   end
 end
