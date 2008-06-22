@@ -1,3 +1,6 @@
+# Ignore doc directory
+doc
+
 # Ignore emacs files
 *#
 *~
