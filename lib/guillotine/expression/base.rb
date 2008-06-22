@@ -9,10 +9,6 @@ module Guillotine
       attr_reader :key
       attr_reader :value
       
-      def to_lambda
-        raise NotImplementedError
-      end
-      
       def eql?(other)
         self.class == other.class &&
         other.key == self.key &&
