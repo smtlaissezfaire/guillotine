@@ -6,6 +6,7 @@ require "treetop"
 
 project = File.dirname(__FILE__) + "/guillotine"
 
+require "#{project}/require"
 require "#{project}/extensions"
 require "#{project}/treetop"
 
