@@ -2,10 +2,9 @@ module Guillotine
   module Expression
     class OrderBy
       module SortOptions
-        SORT_OPTIONS = [
-          DESC = :DESC,
-          ASC  = :ASC
-        ] unless defined?(SORT_OPTIONS)
+        ASC  = :ASC   unless defined? ASC
+        DESC = :DESC  unless defined? DESC
+        SORT_OPTIONS = [ ASC, DESC ] unless defined?(SORT_OPTIONS)
       end
       
       include SortOptions
