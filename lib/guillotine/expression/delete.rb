@@ -25,25 +25,36 @@ module Guillotine
       def call(collection)
         return truncate(collection) if !where && !limit
         return collection if limit && limit.limit == 0
-        
+
+        to_delete = limit_results(order_by_results(where_results(collection)))
+        collection.delete_if { |obj| to_delete.include?(obj) }
+       end
+      
+    private
+      
+      def where_results(collection)
         if where
           to_delete = where.call(collection)
         else
           to_delete = collection
         end
-        
-        if order_by
-          to_delete = order_by.call(to_delete)
-        end
-        
-        if limit
-          to_delete = to_delete.slice(0..limit.limit-1)
-        end
-        
-        collection.delete_if { |obj| to_delete.include?(obj) }
-       end
+      end
       
-    private
+      def order_by_results(collection)
+        if order_by        
+          order_by.call(collection)
+        else
+          collection
+        end
+      end
+      
+      def limit_results(collection)
+        if limit
+          collection.slice(0..limit.limit-1)
+        else
+          collection
+        end
+      end
       
       def truncate(collection)
         truncator.call(collection)
