@@ -37,7 +37,9 @@ module Guillotine
       def order!(collection)
         filter_by(order_by, collection) { order_by.call(collection) }
       end
-      
+
+      # TODO: Limit should have a call method, just like the rest of
+      # the expressions
       def limit!(collection)
         filter_by(limit, collection) { collection.slice(0..limit.limit-1) }
       end
