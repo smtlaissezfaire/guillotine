@@ -21,7 +21,7 @@ module Guillotine
       end
       
       def create_table(table_name)
-        if table(table_name)
+        if table_exists?(table_name)
           raise TableAlreadyExists
         else
           data[sym(table_name)] = []
@@ -29,7 +29,7 @@ module Guillotine
       end
       
       def drop_table(table_name)
-        if table(table_name)
+        if table_exists?(table_name)
           data.delete(sym(table_name))
         else
           raise UnknownTable
@@ -41,6 +41,10 @@ module Guillotine
       end
       
     private
+      
+      def table_exists?(table_name)
+        table(table_name) ? true : false
+      end
       
       def sym(string_or_symbol)
         string_or_symbol.to_sym
