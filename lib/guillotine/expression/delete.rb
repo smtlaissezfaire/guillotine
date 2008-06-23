@@ -5,6 +5,10 @@ module Guillotine
         limit!(order!(where!(collection)))
       end
       
+      attr_reader :where
+      attr_reader :limit
+      attr_reader :order_by    
+
     private
       
       def empty_limit?
@@ -39,9 +43,6 @@ module Guillotine
       end
       
       attr_reader :table_name
-      attr_reader :where
-      attr_reader :order_by
-      attr_reader :limit
       
       def ==(other)
         table_name.equal?(other.table_name) &&
