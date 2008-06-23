@@ -33,27 +33,19 @@ module Guillotine
     private
       
       def where!(collection)
-        if where
-          to_delete = where.call(collection)
-        else
-          to_delete = collection
-        end
+        filter_by(where, collection) { where.call(collection) }
       end
       
       def order!(collection)
-        if order_by        
-          order_by.call(collection)
-        else
-          collection
-        end
+        filter_by(order_by, collection) { order_by.call(collection) }
       end
       
       def limit!(collection)
-        if limit
-          collection.slice(0..limit.limit-1)
-        else
-          collection
-        end
+        filter_by(limit, collection) { collection.slice(0..limit.limit-1) }
+      end
+      
+      def filter_by(boolean_condition, collection)
+        boolean_condition ? yield : collection
       end
       
       def truncate(collection)
