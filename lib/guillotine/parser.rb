@@ -31,4 +31,5 @@ module Guillotine
   require "#{parser}/sql_select"
   require "#{parser}/truncate"
   require "#{parser}/sql_delete"
+  require "#{parser}/sql_drop_table"
 end

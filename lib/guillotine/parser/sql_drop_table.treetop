@@ -1,0 +1,16 @@
+module Guillotine
+  module Parser
+    grammar DropTable
+      include SQLPrimitives
+      include SQLRowSupport
+
+      rule drop_table
+        "DROP" space+ "TABLE" space+ table_name {
+          def eval
+            DataStore.drop_table(table_name.eval.to_sym)
+          end
+        }
+      end
+    end
+  end
+end
