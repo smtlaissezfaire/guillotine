@@ -20,8 +20,6 @@ module Guillotine
         limit == other.limit
       end
       
-      # TODO: This currently acts just like TRUNCATE TABLE
-      # We need to implement the where_clause, the order_by and limit
       def call(collection)
         return truncate(collection) if !where && !limit
         return collection if limit && limit.limit == 0
