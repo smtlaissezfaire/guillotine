@@ -100,6 +100,5 @@ module Guillotine
         parse("DELETE     IGNORE          FROM table_name").should_not be_nil      
       end
     end
-    
   end
 end
