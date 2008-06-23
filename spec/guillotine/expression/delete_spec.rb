@@ -207,6 +207,42 @@ module Guillotine
             @collection.should == [{ :foo => "bar", :id => 3}]
           end
         end
+        
+        describe "with a where clause" do
+          before :each do
+            @collection = [{ :foo => "baz", :id => 3}, { :foo => "bar", :id => 2}]
+            @where_clause = Expression::Equal.new(:foo, "baz")
+            @delete = DeleteStatement.new(:table_name, @where_clause)
+          end
+          
+          it "should filter the records with the matching element deleted" do
+            @delete.call(@collection).should == [{ :foo => "bar", :id => 2 }]
+          end
+          
+          it "should modify the array, removing the elements" do
+            @delete.call(@collection)
+            @collection.should == [{ :foo => "bar", :id => 2 }]
+          end
+        end
+        
+        describe "with a limit and a where clause" do
+          before :each do
+            @collection = [{ :foo => "baz", :id => 3}, { :foo => "bar", :id => 2}, { :foo => "bar", :id => 23}]
+            @where_clause = Expression::Equal.new(:foo, "bar")
+            @limit_clause = Expression::Limit.new(1)
+            @delete = DeleteStatement.new(:table_name, @where_clause, nil, @limit_clause)
+          end
+          
+          it "should filter the records with one element deleted" do
+            @delete.call(@collection).should == [{ :foo => "baz", :id => 3 }, { :foo => "bar", :id => 23 }]
+          end
+          
+          it "should modify the array, removing the elements" do
+            pending 'todo'
+            @delete.call(@collection)
+            @collection.should == [{ :foo => "bar", :id => 2 }]
+          end
+        end
       end
     end
   end

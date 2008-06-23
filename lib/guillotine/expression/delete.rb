@@ -23,17 +23,25 @@ module Guillotine
       # TODO: This currently acts just like TRUNCATE TABLE
       # We need to implement the where_clause, the order_by and limit
       def call(collection)
-        if limit
-          return collection if limit.limit == 0
-          if order_by
-            collection = order_by.call!(collection)
-          end
-          collection.slice!(0..limit.limit-1)
-          collection
+        return truncate(collection) if !where && !limit
+        return collection if limit && limit.limit == 0
+        
+        if where
+          to_delete = where.call(collection)
         else
-          truncate(collection)
+          to_delete = collection
         end
-      end
+        
+        if order_by
+          to_delete = order_by.call(to_delete)
+        end
+        
+        if limit
+          to_delete = to_delete.slice(0..limit.limit-1)
+        end
+        
+        collection.delete_if { |obj| to_delete.include?(obj) }
+       end
       
     private
       
