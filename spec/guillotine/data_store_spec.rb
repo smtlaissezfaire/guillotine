@@ -14,7 +14,7 @@ module Guillotine
       describe "with one table" do
         before :each do
           DataStore.__clear_all_tables!
-          DataStore.add_table(:tbl_one)
+          DataStore.create_table(:tbl_one)
         end
         
         it "should have the table :tbl_one" do
@@ -30,14 +30,14 @@ module Guillotine
         end
         
         it "should be able to access the table by a symbol, even if created with a string" do
-          DataStore.add_table("my_table")
+          DataStore.create_table("my_table")
           DataStore.table(:my_table).should_not be_nil
         end
       end
       
       describe "clearing all tables" do
         it "should reset the tables to empty" do
-          DataStore.add_table(:foo)
+          DataStore.create_table(:foo)
           DataStore.__clear_all_tables!
           DataStore.tables.should be_empty
         end

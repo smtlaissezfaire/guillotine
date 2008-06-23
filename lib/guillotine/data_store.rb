@@ -17,7 +17,7 @@ module Guillotine
         data[sym(table_name)]
       end
       
-      def add_table(tbl_name)
+      def create_table(tbl_name)
         data[sym(tbl_name)] = []
       end
       
