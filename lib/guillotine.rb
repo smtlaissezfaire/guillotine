@@ -18,7 +18,6 @@ Guillotine.module_eval do
   autoload :DisjunctionConditionNode, "#{project}/condition_tree"
   autoload :Keywords,         "#{project}/keywords"
   autoload :Expression,       "#{project}/expression"
-  autoload :SelectExpression, "#{project}/select_expression"
   autoload :RakeTasks,        "#{project}/rake"
 end
 

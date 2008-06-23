@@ -7,6 +7,7 @@ module Guillotine
       
       before :each do
         @parser = SQLSelectParser.new
+        @select_expression = Guillotine::Expression::SelectExpression
       end
       
       it "should parse 'SELECT * from events'" do
@@ -29,7 +30,7 @@ module Guillotine
 
       it "should parse and evaluate 'SELECT * from events'" do
         string = "SELECT * FROM events"
-        expression = SelectExpression.new(:select => Expression::Select.new("*"), :from => Expression::From.new("events"))
+        expression = @select_expression.new(:select => Expression::Select.new("*"), :from => Expression::From.new("events"))
         parse_and_eval(string).should eql(expression)
       end
       
@@ -54,7 +55,7 @@ module Guillotine
         select = Expression::Select.new("*")
         from   = Expression::From.new("events")
         where  = Expression::Equal.new(:user, "foo")
-        expression = SelectExpression.new(:select => select, :from => from, :where => where)
+        expression = @select_expression.new(:select => select, :from => from, :where => where)
         parse_and_eval(string).should eql(expression)
       end
       
@@ -63,7 +64,7 @@ module Guillotine
         select = Expression::Select.new("*")
         from   = Expression::From.new("events")
         where  = Expression::Equal.new(:user, "foo")
-        expression = SelectExpression.new(:select => select, :from => from, :where => where)
+        expression = @select_expression.new(:select => select, :from => from, :where => where)
         parse_and_eval(string).should eql(expression)
       end
       
@@ -72,7 +73,7 @@ module Guillotine
         select = Expression::Select.new("*")
         from   = Expression::From.new("events")
         limit  = Expression::Limit.new(10)
-        expression = SelectExpression.new(:select => select, :from => from, :limit => limit)
+        expression = @select_expression.new(:select => select, :from => from, :limit => limit)
 
         parse_and_eval(string).should eql(expression)
       end
@@ -82,7 +83,7 @@ module Guillotine
         select = Expression::Select.new("*")
         from   = Expression::From.new("events")
         limit  = Expression::Limit.new(10)
-        expression = SelectExpression.new(:select => select, :from => from, :limit => limit)
+        expression = @select_expression.new(:select => select, :from => from, :limit => limit)
 
         parse_and_eval(string).should eql(expression)
       end
@@ -98,7 +99,7 @@ module Guillotine
         select = Expression::Select.new("*")
         from   = Expression::From.new("events")
         order_by  = Expression::OrderBy.new(Expression::OrderByPair.new(:foo))
-        expression = SelectExpression.new(:select => select, :from => from, :order_by => order_by)
+        expression = @select_expression.new(:select => select, :from => from, :order_by => order_by)
 
         parse_and_eval("SELECT * FROM events ORDER BY foo").should eql(expression)
       end
@@ -108,7 +109,7 @@ module Guillotine
         select = Expression::Select.new("*")
         from   = Expression::From.new("events")
         order_by  = Expression::OrderBy.new(Expression::OrderByPair.new(:foo))
-        expression = SelectExpression.new(:select => select, :from => from, :order_by => order_by)
+        expression = @select_expression.new(:select => select, :from => from, :order_by => order_by)
 
         parse_and_eval(string).should eql(expression)
       end
