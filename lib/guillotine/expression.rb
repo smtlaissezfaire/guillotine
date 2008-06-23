@@ -7,7 +7,7 @@ require File.dirname(__FILE__) + "/expression/limit"
 require File.dirname(__FILE__) + "/expression/backtick_string"
 require File.dirname(__FILE__) + "/expression/truncate"
 require File.dirname(__FILE__) + "/expression/delete"
-require File.dirname(__FILE__) + "/select_expression"
+require File.dirname(__FILE__) + "/expression/select_expression"
 
 
 module Guillotine
