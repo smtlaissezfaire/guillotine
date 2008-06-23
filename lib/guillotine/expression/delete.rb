@@ -26,13 +26,13 @@ module Guillotine
         return truncate(collection) if !where && !limit
         return collection if limit && limit.limit == 0
 
-        to_delete = limit_results(order_by_results(where_results(collection)))
+        to_delete = limit!(order!(where!(collection)))
         collection.delete_if { |obj| to_delete.include?(obj) }
        end
       
     private
       
-      def where_results(collection)
+      def where!(collection)
         if where
           to_delete = where.call(collection)
         else
@@ -40,7 +40,7 @@ module Guillotine
         end
       end
       
-      def order_by_results(collection)
+      def order!(collection)
         if order_by        
           order_by.call(collection)
         else
@@ -48,7 +48,7 @@ module Guillotine
         end
       end
       
-      def limit_results(collection)
+      def limit!(collection)
         if limit
           collection.slice(0..limit.limit-1)
         else
