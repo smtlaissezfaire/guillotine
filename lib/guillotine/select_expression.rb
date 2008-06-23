@@ -13,9 +13,6 @@ module Guillotine
 
     attr_reader :select
     attr_reader :from
-    attr_reader :where
-    attr_reader :limit
-    attr_reader :order_by    
     attr_reader :query_string
     
     def inspect
@@ -37,10 +34,6 @@ module Guillotine
       super
     end
     
-    def empty_limit?
-      limit && limit.limit == 0
-    end
-
     # TODO: In the future, eql? and == should not be the
     # same in all cases.  For now, they are aliased, but
     # in the future eql? should be the case in which two queries
