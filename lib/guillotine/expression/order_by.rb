@@ -28,14 +28,6 @@ module Guillotine
       def call(collection)
         pairs.reverse.inject(collection) { |collection, pair| pair.call(collection) }
       end
-      
-      # TODO: This could also be more efficient.  Deal
-      # with it when it becomes pressing (and benchmarks are made)
-      def call!(collection)
-        results = call(collection)
-        collection.clear
-        collection.push(*results)
-      end
     end
     
     class OrderByPair
