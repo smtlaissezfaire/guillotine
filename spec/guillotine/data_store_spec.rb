@@ -48,6 +48,31 @@ module Guillotine
           Guillotine::DataStore.inspect.should == "Singleton Guillotine::DataStore"
         end
       end
+      
+      describe "drop_table" do
+        before :each do
+          DataStore.__clear_all_tables!
+        end
+        
+        it "should remove the table" do
+          DataStore.create_table(:foo)
+          DataStore.drop_table(:foo)
+          DataStore.tables.should be_empty
+        end
+        
+        it "should not remove other tables" do
+          DataStore.create_table(:bar)
+          DataStore.create_table(:foo)
+          DataStore.drop_table(:foo)
+          DataStore.tables.should == [:bar]
+        end
+        
+        it "should be able to use strings instead of symbols" do
+          DataStore.create_table(:foo)
+          DataStore.drop_table("foo")
+          DataStore.tables.should == []
+        end
+      end
     end
   end
 end

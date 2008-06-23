@@ -21,6 +21,10 @@ module Guillotine
         data[sym(tbl_name)] = []
       end
       
+      def drop_table(table_name)
+        data.delete(sym(table_name))
+      end
+      
       def inspect
         "Singleton #{self}"
       end
