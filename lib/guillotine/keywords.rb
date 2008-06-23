@@ -13,6 +13,7 @@ module Guillotine
       :NULL,
       :OR,
       :ORDER,
+      :TABLE,
       :WHERE,
       :SELECT,
     ] unless defined?(IMPLEMENTED_KEYWORDS)
@@ -189,7 +190,6 @@ module Guillotine
       :SSL,
       :STARTING,
       :STRAIGHT_JOIN,
-      :TABLE,
       :TERMINATED,
       :THEN,
       :TINYBLOB,
