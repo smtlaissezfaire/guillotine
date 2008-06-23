@@ -72,6 +72,21 @@ module Guillotine
           DataStore.drop_table("foo")
           DataStore.tables.should == []
         end
+        
+        it "should raise an error if the table doesn't exist" do
+          lambda { 
+            DataStore.drop_table(:a_table_never_seen_before)
+          }.should raise_error(DataStore::UnknownTable)
+        end
+      end
+      
+      describe "create_table" do
+        it "should raise an error if the table is already there" do
+          DataStore.create_table(:foo)
+          lambda { 
+            DataStore.create_table(:foo)
+          }.should raise_error(DataStore::TableAlreadyExists)
+        end
       end
     end
   end

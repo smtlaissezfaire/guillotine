@@ -1,5 +1,9 @@
 module Guillotine
   module DataStore
+    class UnknownTable < StandardError; end
+    class TableAlreadyExists < StandardError; end    
+    
+    
     class << self
       def __clear_all_tables!
         @data = nil
@@ -18,11 +22,19 @@ module Guillotine
       end
       
       def create_table(table_name)
-        data[sym(table_name)] = []
+        if table(table_name)
+          raise TableAlreadyExists
+        else
+          data[sym(table_name)] = []
+        end
       end
       
       def drop_table(table_name)
-        data.delete(sym(table_name))
+        if table(table_name)
+          data.delete(sym(table_name))
+        else
+          raise UnknownTable
+        end
       end
       
       def inspect
