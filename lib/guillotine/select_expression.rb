@@ -1,5 +1,5 @@
 module Guillotine
-  class SelectExpression
+  class SelectExpression < Expression::TopLevelExpression
     include Assertions
     
     def initialize(hash)
@@ -30,6 +30,11 @@ module Guillotine
         assert_equal self.limit,    other.limit
         assert_equal self.order_by, other.order_by
       end
+    end
+    
+    def call(collection)
+      return [] if limit && limit.limit == 0
+      super
     end
 
     # TODO: In the future, eql? and == should not be the
