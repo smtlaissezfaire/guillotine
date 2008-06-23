@@ -7,6 +7,10 @@ module Guillotine
       
     private
       
+      def empty_limit?
+        limit && limit.limit == 0
+      end
+      
       def where!(collection)
         filter_by(where, collection) { where.call(collection) }
       end
@@ -48,7 +52,7 @@ module Guillotine
       
       def call(collection)
         return truncate(collection) if !where && !limit
-        return collection if limit && limit.limit == 0
+        return collection if empty_limit?
         
         collection.delete_if { |obj| super.include?(obj) }
       end

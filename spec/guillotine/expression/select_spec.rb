@@ -114,6 +114,16 @@ module Guillotine
           @select.call(@collection).should == [{ :foo => "bar", :id => 3}]
         end
       end
+      
+      describe "with an empty collection" do
+        before :each do
+          @select = SelectExpression.new({ })
+        end
+        
+        it "should return empty" do
+          @select.call([]).should be_empty
+        end
+      end
     end
   end
 end

@@ -33,8 +33,12 @@ module Guillotine
     end
     
     def call(collection)
-      return [] if limit && limit.limit == 0
+      return [] if empty_limit? || collection.empty?
       super
+    end
+    
+    def empty_limit?
+      limit && limit.limit == 0
     end
 
     # TODO: In the future, eql? and == should not be the
