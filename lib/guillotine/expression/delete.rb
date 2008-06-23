@@ -2,7 +2,7 @@ module Guillotine
   module Expression
     class TopLevelExpression
       def call(collection)
-        to_delete = limit!(order!(where!(collection)))
+        limit!(order!(where!(collection)))
       end
       
     private
