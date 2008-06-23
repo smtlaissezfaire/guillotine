@@ -11,6 +11,7 @@ require "#{project}/extensions"
 
 Guillotine.module_eval do
   autoload :Assertions,       "#{project}/assertions"
+  autoload :DataStore,        "#{project}/data_store"
   autoload :PreParser,        "#{project}/pre_parser"
   autoload :ConditionNode,    "#{project}/condition_tree"
   autoload :ProperBinaryTree, "#{project}/condition_tree"
