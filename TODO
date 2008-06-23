@@ -34,6 +34,8 @@ Medium Priority
 Low Priority:
 ===============
 
+- DROP TABLE
+_ CREATE TABLE
 - SELECT:
     - Joins
     - GROUP BY
