@@ -3,7 +3,6 @@ module Guillotine
     class UnknownTable < StandardError; end
     class TableAlreadyExists < StandardError; end    
     
-    
     class << self
       def __clear_all_tables!
         @data = nil
