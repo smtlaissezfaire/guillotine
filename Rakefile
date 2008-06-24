@@ -50,4 +50,4 @@ desc "Verify the sanity of the project (run rake spec and verify rcov report)"
 task :test => ["spec:rcov", "spec:verify_rcov"]
 
 desc "Build the project"
-task :build => [:test, :treetop, :tags]
+task :build => [:treetop, :tags, :test]
