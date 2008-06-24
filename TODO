@@ -8,8 +8,6 @@ High Priority
 - INSERT
 - UPDATE
 - TRANSACTIONS
-- Support for other SQL Statements.  What percentage of keywords
-  are covered?
 - Better WHERE class
 
 
