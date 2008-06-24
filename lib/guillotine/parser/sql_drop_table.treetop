@@ -5,11 +5,25 @@ module Guillotine
       include SQLRowSupport
 
       rule drop_table
-        "DROP" space+ "TABLE" space+ table_name {
+        "DROP" (temporary)? space+ "TABLE" space+ 
+        table_name
+        (restrict / cascade)? {
           def eval
             DataStore.drop_table(table_name.eval.to_sym)
           end
         }
+      end
+
+      rule temporary
+        space+ "TEMPORARY"
+      end
+
+      rule restrict
+        space+ "RESTRICT"
+      end
+
+      rule cascade
+        space+ "CASCADE"
       end
     end
   end

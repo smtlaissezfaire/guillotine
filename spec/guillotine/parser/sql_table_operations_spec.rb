@@ -31,6 +31,34 @@ module Guillotine
       it "should parse DROP TABLE    foo" do
         parse("DROP TABLE          foo").should_not be_nil
       end
+      
+      it "should parse DROP TEMPORARY TABLE foo" do
+        parse("DROP TEMPORARY TABLE foo").should_not be_nil
+      end
+      
+      it "should parse DROP    TEMPORARY TABLE foo" do
+        parse("DROP    TEMPORARY TABLE foo").should_not be_nil
+      end
+      
+      it "should parse DROP TABLE foo RESTRICT" do
+        parse("DROP TABLE foo RESTRICT").should_not be_nil
+      end
+      
+      it "should parse DROP TABLE foo    RESTRICT" do
+        parse("DROP TABLE foo        RESTRICT").should_not be_nil
+      end
+      
+      it "should parse DROP TABLE foo CASCADE" do
+        parse("DROP TABLE foo CASCADE").should_not be_nil
+      end
+      
+      it "should parse DROP TABLE foo      CASCADE" do
+        parse("DROP TABLE foo         CASCADE").should_not be_nil
+      end
+      
+      it "should not parse DROP TABLE foo RESTRICT CASCADE" do
+        parse("DROP TABLE foo RESTRICT CASCADE").should be_nil
+      end
     end
   end
 end
