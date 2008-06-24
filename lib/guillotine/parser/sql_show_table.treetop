@@ -1,0 +1,26 @@
+module Guillotine
+  module Parser
+    grammar SQLShowTable
+      include SQLPrimitives
+      include SQLRowSupport
+      include SQLWhereCondition
+
+      rule show_tables
+        "SHOW" space+ (full)? "TABLES" from_table?
+        (like_pattern / (space+ where_condition))?
+      end
+
+      rule full
+        "FULL" space+
+      end
+
+      rule from_table
+        space+ "FROM" space+ table_name
+      end
+
+      rule like_pattern
+        space+ "LIKE" space+ single_quoted_string
+      end
+    end
+  end
+end
