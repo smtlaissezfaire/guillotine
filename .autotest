@@ -44,10 +44,14 @@ Autotest.add_hook :initialize do |mapper|
   project_files       = regex "^lib/.*"
   any_project_file    = project_files
 
-  ignored_files       = [
-                          regex("^\.git/.*")
-                        ]
-
+  ignored_files       = %w(.git
+                           TODO
+                           README
+                           .emproj
+                           benchmarks
+                           doc
+                           Rakefile
+                           TAGS)
 
   ##########################
   #                        #
@@ -73,9 +77,8 @@ Autotest.add_hook :initialize do |mapper|
     mapper.files_matching(all_spec_files)
   end
 
-  # For these files, do nothing
-  ignored_files.each do |file| 
-    map.add(file) { }
+  # Ignore files we don't care about
+  ignored_files.each do |file|
+    map.add_exception(file)
   end
-
 end
