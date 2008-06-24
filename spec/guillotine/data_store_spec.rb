@@ -78,6 +78,20 @@ module Guillotine
             DataStore.drop_table(:a_table_never_seen_before)
           }.should raise_error(DataStore::UnknownTable)
         end
+        
+        describe "with :if_exists => true" do
+          it "should drop the table if it exists" do
+            DataStore.create_table(:foo)
+            DataStore.drop_table(:foo, :if_exists => true)
+            DataStore.tables.should == []
+          end
+          
+          it "should do nothing if the table does not exist" do
+            DataStore.drop_table(:foo, :if_exists => true)
+            DataStore.tables.should == []
+          end
+        end
+
       end
       
       describe "create_table" do

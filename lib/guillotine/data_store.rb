@@ -28,8 +28,8 @@ module Guillotine
         end
       end
       
-      def drop_table(table_name)
-        if table_exists?(table_name)
+      def drop_table(table_name, options = { :if_exists => false })
+        if options[:if_exists] || table_exists?(table_name)
           data.delete(sym(table_name))
         else
           raise UnknownTable
