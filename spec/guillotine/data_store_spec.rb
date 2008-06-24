@@ -87,6 +87,19 @@ module Guillotine
             DataStore.create_table(:foo)
           }.should raise_error(DataStore::TableAlreadyExists)
         end
+        
+        describe "with :if_exists => true" do
+          it "should not do anything if the table is already there" do
+            DataStore.create_table(:foo)
+            DataStore.create_table(:foo, :if_exists => true)
+            DataStore.tables.should == [:foo]
+          end
+          
+          it "should create the table if the table does not exist" do
+            DataStore.create_table(:foo, :if_exists => true)
+            DataStore.tables.should == [:foo]
+          end
+        end
       end
     end
   end
