@@ -46,5 +46,8 @@ task :tags => ["tags:emacs"]
 desc "Recompile the treetop files"
 task :treetop => ["treetop:compile"]
 
+desc "Verify the sanity of the project (run rake spec and verify rcov report)"
+task :test => ["spec:rcov", "spec:verify_rcov"]
+
 desc "Build the project"
-task :build => ["spec:rcov", "spec:verify_rcov", :treetop, :tags]
+task :build => [:test, :treetop, :tags]
