@@ -1,6 +1,6 @@
 module Guillotine
   module Parser
-    grammar SQLShowTable
+    grammar SQLShowTables
       include SQLPrimitives
       include SQLRowSupport
       include SQLWhereCondition

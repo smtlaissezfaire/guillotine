@@ -1,10 +1,10 @@
 module Guillotine
   module Parser
-    describe SQLShowTableParser do
+    describe SQLShowTablesParser do
       include ParserSpecHelper
       
       before :each do
-        @parser = SQLShowTableParser.new
+        @parser = SQLShowTablesParser.new
       end
       
       it "should parse 'SHOW TABLES'" do
