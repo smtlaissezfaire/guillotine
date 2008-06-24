@@ -66,18 +66,11 @@ Autotest.add_hook :initialize do |mapper|
   #  - spec/spec_helper.rb
   #  - spec/spec.opts
 
-  map.add(autotest_file) do
-    mapper.files_matching(all_spec_files)
+  [autotest_file, spec_helper, spec_dot_opts].each do |file|
+    map.add(autotest_file) do
+      mapper.files_matching(all_spec_files)
+    end
   end
-
-  map.add(spec_helper) do
-    mapper.files_matching(all_spec_files)
-  end
-
-  map.add(spec_dot_opts) do
-    mapper.files_matching(all_spec_files)
-  end
-
 
 
   map.add(any_spec_file) do |filename, match|
