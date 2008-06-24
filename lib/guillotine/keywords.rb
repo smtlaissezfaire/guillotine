@@ -1,10 +1,14 @@
 module Guillotine
   module Keywords
+    PARSED_KEYWORDS = Set.new [
+      :CASCADE,
+      :RESTRICT
+    ]
+    
     IMPLEMENTED_KEYWORDS = Set.new [
       :AND,
       :ASC,
       :BY,
-      :CASCADE,
       :DELETE,
       :DESC,
       :DROP,
@@ -14,7 +18,6 @@ module Guillotine
       :NULL,
       :OR,
       :ORDER,
-      :RESTRICT,
       :TABLE,
       :WHERE,
       :SELECT,
@@ -264,6 +267,8 @@ module Guillotine
 
     # Taken from the mysql docs:
     # http://dev.mysql.com/doc/refman/5.0/en/reserved-words.html
-    SQL_KEYWORDS = IMPLEMENTED_KEYWORDS.merge(NOT_IMPLEMENTED_KEYWORDS) unless defined?(SQL_KEYWORDS)
+    unless defined?(SQL_KEYWORDS)
+      SQL_KEYWORDS = PARSED_KEYWORDS.merge(IMPLEMENTED_KEYWORDS).merge(NOT_IMPLEMENTED_KEYWORDS) 
+    end
   end
 end
