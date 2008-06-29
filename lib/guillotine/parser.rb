@@ -1,4 +1,6 @@
 
+require "treetop"
+
 # Need to module eval here to get the require from
 # Guillotine
 module Guillotine
