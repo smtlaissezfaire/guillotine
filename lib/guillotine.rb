@@ -21,6 +21,18 @@ Guillotine.module_eval do
   autoload :Expression,       				"#{project}/expression"
   autoload :RakeTasks,        				"#{project}/rake"
   autoload :Transactions,             "#{project}/transactions"
+  
+  class << self
+    def execute(string)
+      Guillotine::Parser::SQLParser.new().parse(pre_process(string)).eval
+    end
+    
+  private
+    
+    def pre_process(string)
+      Guillotine::PreParser.parse(string)    
+    end
+  end
 end
 
 require "#{project}/parser"
