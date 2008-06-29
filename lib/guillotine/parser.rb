@@ -6,17 +6,18 @@ require "treetop"
 module Guillotine
   
   module Parser
-    Expression        = Guillotine::Expression      unless defined?(Expression)
-    SelectExpression  = Expression::SelectExpression unless defined?(SelectExpression)
-    DeleteStatement   = Expression::DeleteStatement unless defined?(DeleteStatement)
-    Truncate          = Expression::Truncate        unless defined?(Truncate)
+    Expression       = Guillotine::Expression       unless defined?(Expression)
     
-    Select            = Expression::Select          unless defined?(Select)
-    From              = Expression::From            unless defined?(From)
-    Limit             = Expression::Limit           unless defined?(Limit)
-    OrderBy           = Expression::OrderBy         unless defined?(OrderBy)
-    OrderByPair       = Expression::OrderByPair     unless defined?(OrderByPair)
-    BacktickString    = Expression::BacktickString              unless defined?(BacktickString)
+    SelectExpression = Expression::SelectExpression unless defined?(SelectExpression)
+    DeleteStatement  = Expression::DeleteStatement  unless defined?(DeleteStatement)
+    Truncate         = Expression::Truncate         unless defined?(Truncate)
+    
+    Select           = Expression::Select           unless defined?(Select)
+    From             = Expression::From             unless defined?(From)
+    Limit            = Expression::Limit            unless defined?(Limit)
+    OrderBy          = Expression::OrderBy          unless defined?(OrderBy)
+    OrderByPair      = Expression::OrderByPair      unless defined?(OrderByPair)
+    BacktickString   = Expression::BacktickString   unless defined?(BacktickString)
   end
   
   parser = File.dirname(__FILE__) + "/parser"
