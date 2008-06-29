@@ -34,6 +34,12 @@ module Guillotine
         t1.commit
         Store.instances.should == [t2]
       end
+      
+      it "should remove the instance after a rollback" do
+        t = Transaction.new
+        t.rollback
+        Store.instances.should be_empty
+      end
     end
   end
 end

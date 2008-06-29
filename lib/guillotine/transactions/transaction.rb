@@ -9,6 +9,10 @@ module Guillotine
         unregister
       end
       
+      def rollback
+        unregister
+      end
+      
     private
       
       def unregister
