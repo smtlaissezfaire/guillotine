@@ -1,5 +1,5 @@
 module Guillotine
-  class BackTickString
+  class BacktickString
     class InvalidString < StandardError; end
     
     BACK_TICK = "`" unless defined?(BACK_TICK)

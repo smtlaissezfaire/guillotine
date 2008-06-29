@@ -1,6 +1,6 @@
 expression = File.dirname(__FILE__) + "/expression"
 
-Guillotine.autoload             :BackTickString,       "#{expression}/backtick_string"
+Guillotine.autoload             :BacktickString,       "#{expression}/backtick_string"
 
 module Guillotine
   module Expression
