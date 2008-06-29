@@ -1,8 +1,13 @@
 module Guillotine
   module Parser
     grammar SQL
+      include SQLSelect
+      include SQLDelete
+      include SQLTruncate
+      include DropTable #TODO: Fix my name
+
       rule statement
-        .*
+        select_expression / delete / truncate / drop_table
       end
     end
   end
