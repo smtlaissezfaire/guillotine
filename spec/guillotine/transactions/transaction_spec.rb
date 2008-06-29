@@ -23,7 +23,7 @@ module Guillotine
         t.transaction_id.should be_a_kind_of(Symbol)
       end
       
-      it "should create the transaction id on initializtion" do
+      it "should create the transaction id on initialization" do
         IdGenerator.should_receive(:generate)
         Transaction.new
       end
