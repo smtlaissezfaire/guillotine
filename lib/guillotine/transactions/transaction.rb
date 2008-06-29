@@ -2,17 +2,21 @@ module Guillotine
   module Transactions
     class Transaction
       def initialize
-        Store.register(self)
+        register
       end
       
       def commit
-        remove_instance
+        unregister
       end
       
     private
       
-      def remove_instance
+      def unregister
         Store.remove_instance(self)
+      end
+      
+      def register
+        Store.register(self)
       end
     end
   end
