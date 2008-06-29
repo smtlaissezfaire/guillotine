@@ -37,6 +37,23 @@ module Guillotine
     it "should collapse multiple \n's into one space" do
       parse("foo\n\n\nbar").should == "foo bar"
     end
+    
+    describe "parse, the class method" do
+      before :each do
+        @parser = mock 'pre-parser', :parse => "results"
+        PreParser.stub!(:new).and_return @parser
+      end
+      
+      it "should create a new pre_parser" do
+        PreParser.should_receive(:new).and_return @parser
+        PreParser.parse('a string')
+      end
+      
+      it "should call parse on the instance with the string given" do
+        @parser.should_receive(:parse).with('a string').and_return "results"
+        PreParser.parse('a string')
+      end
+    end
 
   end
 end
