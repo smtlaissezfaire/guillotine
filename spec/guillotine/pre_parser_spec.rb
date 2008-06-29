@@ -54,6 +54,5 @@ module Guillotine
         PreParser.parse('a string')
       end
     end
-
   end
 end
