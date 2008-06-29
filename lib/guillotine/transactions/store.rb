@@ -17,6 +17,10 @@ module Guillotine
         def clear_instances!
           @instances = nil
         end
+        
+        def remove_instance(instance)
+          instances.delete_if { |an_instance| an_instance.equal?(instance) }
+        end
       end
     end
   end

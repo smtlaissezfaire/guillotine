@@ -21,6 +21,19 @@ module Guillotine
         Store.clear_instances!
         Store.instances.should be_empty
       end
+      
+      it "should remove the instance after the transaction has ben commited" do
+        t = Transaction.new
+        t.commit
+        Store.instances.should be_empty
+      end
+      
+      it "should leave other instances around which aren't commited" do
+        t1 = Transaction.new
+        t2 = Transaction.new
+        t1.commit
+        Store.instances.should == [t2]
+      end
     end
   end
 end
