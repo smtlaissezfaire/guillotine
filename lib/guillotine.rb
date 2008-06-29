@@ -1,6 +1,5 @@
 
 require "rubygems"
-require "set"
 
 project = File.dirname(__FILE__) + "/guillotine"
 

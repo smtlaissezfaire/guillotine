@@ -1,3 +1,5 @@
+require "set"
+
 module Guillotine
   module Keywords
     PARSED_KEYWORDS = Set.new [
