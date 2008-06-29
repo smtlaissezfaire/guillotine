@@ -24,13 +24,29 @@ Guillotine.module_eval do
   
   class << self
     def execute(string)
-      Guillotine::Parser::SQLParser.new().parse(pre_process(string)).eval
+      parse_and_eval(pre_process(string))
     end
     
   private
     
+    def parse_and_eval(string)
+      parse(string).eval
+    end
+    
+    def parse(string)
+      sql_parser.parse(string)
+    end
+    
     def pre_process(string)
-      Guillotine::PreParser.parse(string)    
+      pre_parser.parse(string)
+    end
+    
+    def pre_parser
+      @pre_parser ||= Guillotine::PreParser
+    end
+    
+    def sql_parser
+      Guillotine::Parser::SQLParser.new
     end
   end
 end
