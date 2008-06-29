@@ -20,26 +20,15 @@ Guillotine.module_eval do
   autoload :Keywords,         				"#{project}/keywords"
   autoload :Expression,       				"#{project}/expression"
   autoload :RakeTasks,        				"#{project}/rake"
+  autoload :StatementExecutor,        "#{project}/statement_executor"
   autoload :Transactions,             "#{project}/transactions"
   
   class << self
     def execute(string)
-      parse_and_eval(pre_process(string))
+      Guillotine::StatementExecutor.new(pre_parser, sql_parser).execute(string)
     end
     
   private
-    
-    def parse_and_eval(string)
-      parse(string).eval
-    end
-    
-    def parse(string)
-      sql_parser.parse(string)
-    end
-    
-    def pre_process(string)
-      pre_parser.parse(string)
-    end
     
     def pre_parser
       @pre_parser ||= Guillotine::PreParser
