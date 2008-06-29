@@ -2,6 +2,7 @@ module Guillotine
   module Transactions
     class Transaction
       def initialize
+        generate_transaction_id
         register
       end
       
@@ -12,6 +13,12 @@ module Guillotine
       def rollback
         unregister
       end
+      
+      def transaction_id
+        @transaction_id ||= IdGenerator.generate
+      end
+      
+      alias_method :generate_transaction_id, :transaction_id
       
     private
       
