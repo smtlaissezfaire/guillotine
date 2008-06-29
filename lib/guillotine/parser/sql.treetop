@@ -1,0 +1,9 @@
+module Guillotine
+  module Parser
+    grammar SQL
+      rule statement
+        .*
+      end
+    end
+  end
+end
