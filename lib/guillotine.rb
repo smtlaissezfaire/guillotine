@@ -20,6 +20,7 @@ Guillotine.module_eval do
   autoload :Keywords,         				"#{project}/keywords"
   autoload :Expression,       				"#{project}/expression"
   autoload :RakeTasks,        				"#{project}/rake"
+  autoload :Transactions,             "#{project}/transactions"
 end
 
 require "#{project}/parser"
