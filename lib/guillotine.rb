@@ -46,7 +46,7 @@ Guillotine.module_eval do
     end
     
     def sql_parser
-      Guillotine::Parser::SQLParser.new
+      @sql_parser ||= Guillotine::Parser::SQLParser.new
     end
   end
 end

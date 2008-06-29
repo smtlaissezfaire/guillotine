@@ -6,7 +6,7 @@ describe Guillotine do
     @parsed_content = mock 'parsed content', :eval => nil
     @parser = mock(Guillotine::Parser::SQLParser)
     @parser.stub!(:parse).and_return @parsed_content
-    Guillotine::Parser::SQLParser.stub!(:new).and_return @parser
+    Guillotine.stub!(:sql_parser).and_return @parser
   end
   
   it "should have the execute method" do
