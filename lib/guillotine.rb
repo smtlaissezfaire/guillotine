@@ -10,6 +10,7 @@ Guillotine.module_eval do
   autoload :Assertions,      		 			"#{project}/assertions"
   autoload :DataStore,       		 			"#{project}/data_store"
   autoload :PreParser,       		 			"#{project}/pre_parser"
+  autoload :Parser,                   "#{project}/parser"
   autoload :ConditionNode,   		 			"#{project}/condition_tree"
   autoload :ProperBinaryTree,		 			"#{project}/condition_tree"
   autoload :ConjunctionConditionNode, "#{project}/condition_tree"
@@ -36,5 +37,3 @@ Guillotine.module_eval do
     end
   end
 end
-
-require "#{project}/parser"
