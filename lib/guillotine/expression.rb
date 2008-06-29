@@ -1,14 +1,15 @@
-require File.dirname(__FILE__) + "/expression/base"
-require File.dirname(__FILE__) + "/expression/expressions"
-require File.dirname(__FILE__) + "/expression/select"
-require File.dirname(__FILE__) + "/expression/from"
-require File.dirname(__FILE__) + "/expression/order_by"
-require File.dirname(__FILE__) + "/expression/limit"
-require File.dirname(__FILE__) + "/expression/backtick_string"
-require File.dirname(__FILE__) + "/expression/truncate"
-require File.dirname(__FILE__) + "/expression/delete"
-require File.dirname(__FILE__) + "/expression/select_expression"
+expression = File.dirname(__FILE__) + "/expression"
 
+require "#{expression}/base"
+require "#{expression}/expressions"
+require "#{expression}/select"
+require "#{expression}/from"
+require "#{expression}/order_by"
+require "#{expression}/limit"
+require "#{expression}/backtick_string"
+require "#{expression}/truncate"
+require "#{expression}/delete"
+require "#{expression}/select_expression"
 
 module Guillotine
   module Expression
