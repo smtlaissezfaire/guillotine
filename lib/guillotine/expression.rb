@@ -1,7 +1,5 @@
 expression = File.dirname(__FILE__) + "/expression"
 
-Guillotine.autoload             :BacktickString,       "#{expression}/backtick_string"
-
 module Guillotine
   module Expression
     class UnknownSyntaxError < StandardError; end
@@ -35,7 +33,8 @@ module Guillotine
 
     
     expression = File.dirname(__FILE__) + "/expression"
-    
+
+    Guillotine::Expression.autoload             :BacktickString,       "#{expression}/backtick_string"
     autoload :Base,                 "#{expression}/base"
     autoload :Equal,                "#{expression}/expressions"
     autoload :LessThan,             "#{expression}/expressions"

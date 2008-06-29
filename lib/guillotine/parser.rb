@@ -16,7 +16,7 @@ module Guillotine
     Limit             = Expression::Limit           unless defined?(Limit)
     OrderBy           = Expression::OrderBy         unless defined?(OrderBy)
     OrderByPair       = Expression::OrderByPair     unless defined?(OrderByPair)
-    BacktickString    = BackTickString              unless defined?(BacktickString)
+    BacktickString    = Expression::BacktickString              unless defined?(BacktickString)
   end
   
   parser = File.dirname(__FILE__) + "/parser"
