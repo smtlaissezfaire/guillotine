@@ -1,3 +1,5 @@
+require 'set'
+
 module Guillotine
   module Expression
     class From
