@@ -24,6 +24,10 @@ module Guillotine
       it "should parse a DROP TABLE statement" do
         parse("DROP TABLE events").should_not be_nil
       end
+      
+      it "should parse a transaction" do
+        parse("START TRANSACTION").should_not be_nil
+      end
     end
   end
 end
