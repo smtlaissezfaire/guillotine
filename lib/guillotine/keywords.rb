@@ -20,8 +20,10 @@ module Guillotine
       :NULL,
       :OR,
       :ORDER,
+      :RELEASE,
       :TABLE,
       :WHERE,
+      :WITH,
       :SELECT,
     ] unless defined?(IMPLEMENTED_KEYWORDS)
     
@@ -165,7 +167,6 @@ module Guillotine
       :REAL,
       :REFERENCES,
       :REGEXP,
-      :RELEASE,
       :RENAME,
       :REPEAT,
       :REPLACE,
@@ -223,7 +224,6 @@ module Guillotine
       :VARYING,
       :WHEN,
       :WHILE,
-      :WITH,
       :WRITE,
       :XOR,
       :YEAR_MONTH,
