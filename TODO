@@ -45,6 +45,8 @@ _ CREATE TABLE
   a patch for this
 - Reorganize expression class.  Conjunction & Disjunction should be
   Compound conditions.  
+- REPL = read, eval, print loop.  Can we harness IRB?  Use #inspect
+  to return rows, like mysql
 
 
 Miscelaneous:
