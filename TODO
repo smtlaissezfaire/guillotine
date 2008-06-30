@@ -2,18 +2,17 @@
 High Priority
 ===============
 
-- DELETE (3 forms, see: http://dev.mysql.com/doc/refman/5.0/en/delete.html)
-  - second form
-  - third form
+- TRANSACTIONS
 - INSERT
 - UPDATE
-- TRANSACTIONS
 - Better WHERE class
 
 
 Medium Priority
 ================
-
+- DELETE (3 forms, see: http://dev.mysql.com/doc/refman/5.0/en/delete.html)
+  - second form
+  - third form
 - We *need* 100 % coverage of all ways data can be modified under MySQL
 - Integration with rails
   - Intercept/Override Mysql Adapter:
