@@ -35,12 +35,11 @@ Autotest.add_hook :initialize do |mapper|
   # Spec Files
   spec_dot_opts       = regex "^spec/spec.opts"
   spec_helper         = regex "^spec/spec_helper.rb"
-  all_spec_files      = regex "^spec/(.*)_spec\.rb"
+  all_spec_files      = regex "^spec/(.*)_spec\.rb$"
   any_spec_file       = all_spec_files
 
   # Project files
-  project_root        = "."
-  project_path        = "#{project_root}/lib/guillotine"
+  project_path        = "lib/guillotine"
   project_files       = regex "^lib/.*"
   any_project_file    = project_files
 
@@ -72,9 +71,8 @@ Autotest.add_hook :initialize do |mapper|
     end
   end
 
-
-  map.add(any_spec_file) do |filename, match|
-    mapper.files_matching(/#{project_path}\/#{match[0]}/)
+  map.add(any_spec_file) do |filename, _|
+    filename
   end
 
   map.add(any_project_file) do |filename, _|
