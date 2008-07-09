@@ -48,7 +48,7 @@ module Guillotine
     autoload :Limit,                "#{expression}/limit"
     autoload :Truncate,             "#{expression}/truncate"
     autoload :TopLevelExpression,   "#{expression}/delete"
-    autoload :Delete,               "#{expression}/delete"
+    autoload :DeleteStatement,      "#{expression}/delete"
     autoload :SelectExpression,     "#{expression}/select_expression"
   end
 end
