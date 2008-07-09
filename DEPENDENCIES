@@ -1,0 +1,14 @@
+
+DEPENDENCIES
+============
+
+Guillotine has the following rubygem dependencies:
+
+  treetop
+  facets
+
+To develop Guillotine, the following rubygems are also required:
+
+  rspec
+  diff-lcs
+  flog (soon)
