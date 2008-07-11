@@ -1,7 +1,3 @@
-
-require "rubygems"
-require "active_record"
-
 module Guillotine
   module ActiveRecord
     module Extensions
