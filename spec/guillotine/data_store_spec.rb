@@ -91,7 +91,6 @@ module Guillotine
             DataStore.tables.should == []
           end
         end
-
       end
       
       describe "create_table" do
