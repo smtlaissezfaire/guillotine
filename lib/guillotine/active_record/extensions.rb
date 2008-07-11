@@ -13,14 +13,28 @@ module Guillotine
     class TableAdministrator
       class << self
         def add_table(ar_class)
-          datastore.create_table(ar_class.table_name.to_sym)
-          Guillotine::DataStore.initial_insert(ar_class.find(:all))
+          TableAdder.new(ar_class).add!
         end
         
-      private
-        
-        def datastore
-          Guillotine::DataStore
+        class TableAdder
+          def initialize(ar_class)
+            @ar_class = ar_class
+          end
+          
+          def add!
+            datastore.create_table(table_name)
+            Guillotine::DataStore.initial_insert(table_name, @ar_class.find(:all))
+          end
+          
+        private
+          
+          def table_name
+            @table_name ||= @ar_class.table_name.to_sym
+          end
+          
+          def datastore
+            Guillotine::DataStore
+          end
         end
       end
     end

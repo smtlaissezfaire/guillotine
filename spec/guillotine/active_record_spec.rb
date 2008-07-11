@@ -53,10 +53,11 @@ module Guillotine
         end
         
         it "should add the contents to the datastore" do
-          @datastore.should_receive(:initial_insert).with([@a_mock])
+          @datastore.should_receive(:initial_insert).with(:foo, [@a_mock])
           @ar_class.stub!(:find).and_return [@a_mock]
           
           @model.instance_eval do
+            set_table_name :foo
             guillotine_model
           end
         end
