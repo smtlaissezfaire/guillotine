@@ -6,8 +6,11 @@ project = File.dirname(__FILE__) + "/guillotine"
 require "#{project}/require"
 require "#{project}/extensions"
 
+autoload :ActiveRecord,             "#{project}/active_record"
+
 Guillotine.module_eval do
-  autoload :Assertions,      		 			"#{project}/assertions"
+  autoload :Assertions,               "#{project}/assertions"
+  autoload :ActiveRecord,             "#{project}/active_record"
   autoload :DataStore,       		 			"#{project}/data_store"
   autoload :PreParser,       		 			"#{project}/pre_parser"
   autoload :Parser,                   "#{project}/parser"
