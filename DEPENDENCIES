@@ -6,6 +6,7 @@ Guillotine has the following rubygem dependencies:
 
   treetop
   facets
+  active_record
 
 To develop Guillotine, the following rubygems are also required:
 
