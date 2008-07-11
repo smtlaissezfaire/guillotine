@@ -36,6 +36,14 @@ module Guillotine
         end
       end
       
+      def initial_insert(table_name, array)
+        insert(table_name, array)
+      end
+      
+      def insert(table_name, array)
+        data[sym(table_name)] = array
+      end
+      
       def inspect
         "Singleton #{self}"
       end

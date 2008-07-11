@@ -114,6 +114,22 @@ module Guillotine
           end
         end
       end
+      
+      describe "initial_insert" do
+        it "should take a table name and an array" do
+          lambda { 
+            DataStore.initial_insert(:a_table_name, [])
+          }.should_not raise_error
+        end
+        
+        it "should store the data in the table" do
+          DataStore.create_table(:a_table)
+          DataStore.initial_insert(:a_table, [{ :foo => :bar }])
+          DataStore.table(:a_table).should == [{ :foo => :bar }]
+        end
+        
+        xit "TODO: check for synchronization issues.  #{__FILE__}:#{__LINE__}"
+      end
     end
   end
 end
