@@ -1,12 +1,11 @@
 
 require "rubygems"
+require "active_record"
 
 project = File.dirname(__FILE__) + "/guillotine"
 
 require "#{project}/require"
 require "#{project}/extensions"
-
-autoload :ActiveRecord,             "#{project}/active_record"
 
 Guillotine.module_eval do
   autoload :Assertions,               "#{project}/assertions"
