@@ -91,3 +91,5 @@ Unclassified:
    - A parser
    - A gem
    - A rails plugin
+
+- flog reports, spec reports.  take rake tasks from fixture replement
