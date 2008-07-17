@@ -84,7 +84,7 @@ module Guillotine
       
       it "should call the second child with the results of the first call" do
         @child_one.stub!(:call).and_return [:parts_of_a_collection]
-        @child_two.should_receive(:call).with([:parts_of_a_collection]).and_return []
+        @child_two.should_receive(:call).with([:a, :collection]).and_return []
         @root.call([:a, :collection])
       end
       
