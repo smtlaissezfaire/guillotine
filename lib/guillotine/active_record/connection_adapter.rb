@@ -21,7 +21,6 @@ module Guillotine
                 super
               end
             end
-
           end
         end
       end
