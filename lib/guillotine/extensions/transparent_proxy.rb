@@ -1,4 +1,4 @@
-module Proxy
+module TransparentProxy
   def self.included(other_mod)
     other_mod.extend(ClassMethods)
   end

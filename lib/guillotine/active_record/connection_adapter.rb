@@ -7,7 +7,7 @@ module Guillotine
       
       attr_reader :connection
       
-      include Proxy
+      include TransparentProxy
       proxy :connection
     end
   end
