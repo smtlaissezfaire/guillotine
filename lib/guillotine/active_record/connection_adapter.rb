@@ -2,7 +2,7 @@ module Guillotine
   module ActiveRecord
     class ConnectionAdapter
       module Proxy
-        def proxy!(ivar)
+        def proxy(ivar)
           class_eval do
             def respond_to?(sym)
               super || __proxy_ivar__.respond_to?(sym)
@@ -33,7 +33,7 @@ module Guillotine
       attr_reader :connection
       
       extend Proxy
-      proxy! :connection
+      proxy :connection
     end
   end
 end
