@@ -21,10 +21,6 @@ module Guillotine
         Time.now.to_s
       end
       
-      def random_number
-        rand.to_s
-      end
-      
       def sha1(string)
         Digest::SHA1.hexdigest(string)
       end
