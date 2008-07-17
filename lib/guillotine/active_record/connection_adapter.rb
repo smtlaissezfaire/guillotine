@@ -6,6 +6,8 @@ module Guillotine
           super || @connection.respond_to?(sym)
         end
         
+      private
+        
         def method_missing(sym, *args, &blk)
           if @connection.respond_to?(sym)
             @connection.send(sym, *args, &blk)
