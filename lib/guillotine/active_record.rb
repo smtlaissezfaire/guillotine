@@ -2,7 +2,7 @@ module Guillotine
   module ActiveRecord
     dir = File.dirname(__FILE__) + "/active_record"
     
-    autoload :Extensions,              "#{dir}/extensions"
+    require                            "#{dir}/extensions"
     autoload :TableAdministrator,      "#{dir}/extensions"
   end
 end
