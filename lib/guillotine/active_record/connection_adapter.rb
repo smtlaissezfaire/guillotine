@@ -11,7 +11,7 @@ module Guillotine
           private
             
             define_method :__proxy_ivar__ do
-              instance_variable_get(ivar)
+              instance_variable_get("@#{ivar}")
             end
             
             def method_missing(sym, *args, &blk)
@@ -33,7 +33,7 @@ module Guillotine
       attr_reader :connection
       
       extend Proxy
-      self.proxy!("@connection")
+      proxy! :connection
     end
   end
 end
