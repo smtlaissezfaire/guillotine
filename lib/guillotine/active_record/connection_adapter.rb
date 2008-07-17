@@ -2,17 +2,21 @@ module Guillotine
   module ActiveRecord
     class ConnectionAdapter
       module Proxy
-        def proxy!
+        def proxy!(ivar)
           class_eval do
             def respond_to?(sym)
-              super || @connection.respond_to?(sym)
+              super || __proxy_ivar__.respond_to?(sym)
             end
             
           private
             
+            define_method :__proxy_ivar__ do
+              instance_variable_get(ivar)
+            end
+            
             def method_missing(sym, *args, &blk)
-              if @connection.respond_to?(sym)
-                @connection.send(sym, *args, &blk)
+              if __proxy_ivar__.respond_to?(sym)
+                __proxy_ivar__.send(sym, *args, &blk)
               else
                 super
               end
@@ -29,7 +33,7 @@ module Guillotine
       attr_reader :connection
       
       extend Proxy
-      self.proxy!
+      self.proxy!("@connection")
     end
   end
 end
