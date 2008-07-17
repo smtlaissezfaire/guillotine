@@ -32,12 +32,12 @@ module Guillotine
         end
         
         it "should create the table when mixed in" do
-          Guillotine::DataStore.should_receive(:create_table).with(:foo)
+          Guillotine::DataStore.should_receive(:create_table).with(:foo, :if_exists => true)
           @model.instance_eval { guillotine_model }
         end
         
         it "should create the table with the appropriate table name" do
-          Guillotine::DataStore.should_receive(:create_table).with(:bar)
+          Guillotine::DataStore.should_receive(:create_table).with(:bar, :if_exists => true)
           @model.instance_eval do
             set_table_name :bar
             guillotine_model

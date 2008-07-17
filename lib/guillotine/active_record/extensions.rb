@@ -18,7 +18,7 @@ module Guillotine
           end
           
           def add!
-            datastore.create_table(table_name)
+            datastore.create_table(table_name, :if_exists => true)
             Guillotine::DataStore.initial_insert(table_name, @ar_class.find(:all))
           end
           
