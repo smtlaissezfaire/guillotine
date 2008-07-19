@@ -40,4 +40,6 @@ Guillotine.module_eval do
       @pre_parser ||= Guillotine::PreParser
     end
   end
+  
+  class Guillotine::TimedCache; end
 end

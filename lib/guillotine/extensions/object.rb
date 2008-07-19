@@ -6,6 +6,11 @@ module Guillotine
       rescue TypeError
         nil
       end
+      
+      def guillotine_cache(hash={ }, &blk)
+        raise LocalJumpError, "no block given" if blk.nil?
+        Guillotine::TimedCache.new(hash, blk)
+      end
     end
   end
 end
