@@ -93,3 +93,43 @@ Unclassified:
    - A rails plugin
 
 - flog reports, spec reports.  take rake tasks from fixture replement
+
+
+Other Thoughts:
+==================
+
+- Plugable storage engine. Getting something working now is more important
+  than building something great which works in 10 years.  Should also
+  show what the priorities are (for instance, joins may be very important,
+  but currently they are low on the priority list)
+      
+      - Pure Ruby, shared memory.  Thread/state based.  Concurrency issues,
+        big time.  How to stay in sync with the database?
+      - Use erlang.  How to use shared memory in erlang?  Something needs
+        to persist the data in memory...
+      - Use a prebuilt tool in erlang.  Mensia has an in memory database.
+        Can it be lightweight and do everything we need it to do?
+      - Use time based cache (like memcached), but only in certain places:
+            cache(:ttl => 25.minutes) do
+               User.find(:all, :conditions => {:my => :conditions})
+            end
+
+        This would replace the connection adapters select query,
+        but only for that query (just as it works with cache_fu).  The first
+        time the query is run, select * from users is cached.  No new query is
+        run on the users table (assuming queries are wrapped in cache declarations)
+        for another 25 minutes.  (How should multiple cache calls against the same table
+        with different ttls work?).  The cache declaration would not need to exist inside
+        a descendent of ActiveRecord::Base - it could just as easily come in a controller
+        or presenter
+
+        The declaration could also be made global for the whole model - although then
+        it would loose much of it's flexibility.
+   
+  There's no reason all of these are options, just like mysql has different
+  storage engines.
+
+        
+
+         
+    
