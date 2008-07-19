@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 describe Object do
-  
   describe "size" do
     before :each do
       @object = Object.new
