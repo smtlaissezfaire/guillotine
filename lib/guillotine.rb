@@ -41,5 +41,52 @@ Guillotine.module_eval do
     end
   end
   
-  class Guillotine::TimedCache; end
+  class Guillotine::TimedCache
+    # TODO: use the hash for ttl.  Check options
+    def initialize(hash, block)
+      @block = block
+    end
+    
+    attr_accessor :block
+    
+    def cache
+      swap_out_method
+      @block.call
+      swap_back_method
+    end
+    
+    def mysql_adapter
+      @mysql_adapter ||= ActiveRecord::ConnectionAdapters::MysqlAdapter
+    end
+    
+    def reset_mysql_adapter!
+      @mysql_adapter = nil
+    end
+    
+    attr_writer :mysql_adapter
+    
+    
+    def row_selector
+      @row_selector ||= ::Guillotine::ActiveRecord::RowSelector.new
+    end
+    
+    attr_writer :row_selector
+    
+  private
+    
+    def swap_out_method
+      row_selector = self.row_selector
+      
+      mysql_adapter.instance_eval do
+        alias_method(:__guillotine_select_rows__, :select_rows)
+        
+        define_method :select do |sql, name|
+          row_selector.select(sql, name)
+        end
+      end
+    end
+    
+    def swap_back_method
+    end
+  end
 end

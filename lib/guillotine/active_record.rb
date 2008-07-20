@@ -4,5 +4,6 @@ module Guillotine
     
     require                            "#{dir}/extensions"
     autoload :ConnectionAdapter,       "#{dir}/connection_adapter"
+    autoload :RowSelector,             "#{dir}/row_selector"
   end
 end
