@@ -14,12 +14,11 @@ module Guillotine
       end
       
       it "should delegate it's methods to the connection (assuming it doesn't have the method)" do
-        @connection.should_receive(:adapter_name)
+        @connection.should_receive(:adapter_name).and_return nil
         @adapter.adapter_name
       end
       
-      it "should raise a MethodMissing error if the connection does not respond_to? the method" do
-        @connection.stub!(:respond_to?).and_return false
+      it "should raise a NoMethodError error if the connection does not respond_to? the method" do
         lambda { 
           @adapter.foo_bar_baz
         }.should raise_error(NoMethodError)
