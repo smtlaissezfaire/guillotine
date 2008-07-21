@@ -5,8 +5,9 @@ module Guillotine
     before :each do
       @block = lambda { }
       @cache = TimedCache.new({ }, @block)
-      @mysql_adapter = mock 'mysql adapter class', :alias_method => nil, :define_method => false
-      @row_selector = ::Guillotine::ActiveRecord::RowSelector.new
+      @mysql_adapter = mock 'mysql adapter class', :define_method => nil
+      @mysql_adapter.stub!(:class_eval)
+      @row_selector = mock(::Guillotine::ActiveRecord::RowSelector, :select => [])
     end
     
     describe "mysql adapter" do
@@ -37,6 +38,11 @@ module Guillotine
     
     describe "cache" do
       before :each do
+        @cache.row_selector = @row_selector
+        @mysql_adapter = Class.new do
+          def select
+          end
+        end
         @cache.mysql_adapter = @mysql_adapter
       end
       
@@ -50,20 +56,44 @@ module Guillotine
         @cache.cache
       end
       
-      it "should alias the method select_rows to __guillotine_select_rows__" do
-        @mysql_adapter.should_receive(:alias_method).with(:__guillotine_select_rows__, :select_rows)
-        cache { }
+      it "should alias the method select to __guillotine_select__" do
+        old_select = @mysql_adapter.instance_method(:select)
+        cache { 
+          @mysql_adapter.instance_method(:__guillotine_select__).should == old_select
+        }
       end
       
-      it "should overwrite the select_rows method with a call to the guillotine row selector" do
+      it "should overwrite the select method with a call to the guillotine row selector" do
+        pending 'todo'
         @cache.reset_mysql_adapter!
-        @cache.row_selector = @row_selector
         
         sql, name = "SELECT * FROM users", "User Load"
         @row_selector.should_receive(:select).with(sql, name).and_return []
         cache do
           User.find_by_sql("SELECT * FROM users")
         end
+      end
+      
+      it "should rescue from an error and call the __guillotine_select__ method with the sql and name"
+      
+      it "should be able to call the select method without a name"
+      
+      it "should return the select method to it's old state" do
+        old_select = @mysql_adapter.instance_method(:select)
+        cache { }
+        @mysql_adapter.instance_method(:select).should == old_select
+      end
+      
+      it "should return the method to it's old state, even when an an error occurs (it should use the ensure keyword)" do
+        old_select = @mysql_adapter.instance_method(:select)
+        begin; cache { raise }; rescue; nil; end
+        @mysql_adapter.instance_method(:select).should == old_select
+      end
+      
+      it "should remove the method __guillotine_select__ (it should not leave any dangling methods)" do
+        old_select = @mysql_adapter.instance_methods(false)
+        cache { }
+        @mysql_adapter.instance_methods(false).should == old_select
       end
     end
   end
