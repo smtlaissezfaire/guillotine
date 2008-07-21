@@ -4,6 +4,35 @@ class User < ActiveRecord::BaseUser17,401
 class StringString21,485
   def self.random(length=10)random22,498
 
+lib/guillotine/active_record/connection_adapter.rb,187
+module GuillotineGuillotine1,0
+  module ActiveRecordActiveRecord2,18
+    class ConnectionAdapterConnectionAdapter3,40
+      def initialize(active_record_connection)initialize4,68
+
+lib/guillotine/active_record/extensions.rb,474
+module GuillotineGuillotine1,0
+  module ActiveRecordActiveRecord2,18
+    module ExtensionsExtensions3,40
+      def guillotine_modelguillotine_model4,62
+    class TableAdministratorTableAdministrator9,155
+        def add_table(ar_class)add_table11,204
+        class TableAdderTableAdder15,297
+          def initialize(ar_class)initialize16,322
+          def add!add!20,415
+          def table_nametable_name27,636
+          def datastoredatastore31,742
+
+lib/guillotine/active_record/row_selector.rb,152
+module GuillotineGuillotine1,0
+  module ActiveRecordActiveRecord2,18
+    class RowSelectorRowSelector3,40
+      def select(sql, name)select5,75
+
+lib/guillotine/active_record.rb,73
+module GuillotineGuillotine1,0
+  module ActiveRecordActiveRecord2,18
+
 lib/guillotine/assertions.rb,440
 module GuillotineGuillotine1,0
   module AssertionsAssertions2,18
@@ -28,7 +57,7 @@ module GuillotineGuillotine1,0
   class DisjunctionConditionNode < ConditionNodeDisjunctionConditionNode39,875
     def call(collection)call40,924
 
-lib/guillotine/data_store.rb,672
+lib/guillotine/data_store.rb,790
 module GuillotineGuillotine1,0
   module DataStoreDataStore2,18
     class UnknownTable < StandardError; endUnknownTable3,37
@@ -39,17 +68,20 @@ module GuillotineGuillotine1,0
       def table(table_name)table19,331
       def create_table(table_name, options = { :if_exists => false })create_table23,406
       def drop_table(table_name, options = { :if_exists => false })drop_table31,651
-      def inspectinspect39,889
-      def table_exists?(table_name)table_exists?45,971
-      def sym(string_or_symbol)sym49,1065
+      def initial_insert(table_name, array)initial_insert39,889
+      def insert(table_name, array)insert43,984
+      def inspectinspect47,1075
+      def table_exists?(table_name)table_exists?53,1157
+      def sym(string_or_symbol)sym57,1251
 
-lib/guillotine/expression/backtick_string.rb,280
+lib/guillotine/expression/backtick_string.rb,326
 module GuillotineGuillotine1,0
-  class BackTickStringBackTickString2,18
-    class InvalidString < StandardError; endInvalidString3,41
-    def initialize(string)initialize7,143
-    def valuevalue12,239
-    def check_string_for_backtickscheck_string_for_backticks18,320
+  module ExpressionExpression2,18
+    class BacktickStringBacktickString3,38
+      class InvalidString < StandardError; endInvalidString4,63
+      def initialize(string)initialize8,173
+      def valuevalue13,279
+      def check_string_for_backtickscheck_string_for_backticks19,374
 
 lib/guillotine/expression/base.rb,344
 module GuillotineGuillotine1,0
@@ -90,12 +122,12 @@ module GuillotineGuillotine1,0
     class IsNotNull < IsNullIsNotNull41,928
       def to_lambdato_lambda42,957
 
-lib/guillotine/expression/from.rb,175
-module GuillotineGuillotine1,0
-  module ExpressionExpression2,18
-    class FromFrom3,38
-      def initialize(*table_names)initialize4,53
-      def ==(other)==10,195
+lib/guillotine/expression/from.rb,176
+module GuillotineGuillotine3,15
+  module ExpressionExpression4,33
+    class FromFrom5,53
+      def initialize(*table_names)initialize6,68
+      def ==(other)==12,210
 
 lib/guillotine/expression/limit.rb,171
 module GuillotineGuillotine1,0
@@ -146,37 +178,50 @@ module GuillotineGuillotine1,0
       def call(collection)call18,347
       def ==(other)==22,416
 
-lib/guillotine/expression.rb,252
-module GuillotineGuillotine13,566
-  module ExpressionExpression14,584
-    class UnknownSyntaxError < StandardError; endUnknownSyntaxError15,604
-      def find_class_for(joiner)find_class_for18,677
-      def syntax_classessyntax_classes28,915
+lib/guillotine/expression.rb,244
+module GuillotineGuillotine1,0
+  module ExpressionExpression2,18
+    class UnknownSyntaxError < StandardError; endUnknownSyntaxError3,38
+      def find_class_for(joiner)find_class_for6,111
+      def syntax_classessyntax_classes16,349
 
-lib/guillotine/extensions/object.rb,165
+lib/guillotine/extensions/includes.rb,49
+class ObjectObject1,0
+class StringString5,59
+
+lib/guillotine/extensions/object.rb,232
 module GuillotineGuillotine1,0
   module ExtensionsExtensions2,18
     module ObjectObject3,38
       def object_sizeobject_size4,56
-class ObjectObject13,174
+      def guillotine_cache(hash={ }, &blk)guillotine_cache10,162
+class ObjectObject18,339
 
-lib/guillotine/extensions/string.rb,24
-class StringString1,0
+lib/guillotine/extensions/string.rb,0
+
+lib/guillotine/extensions/transparent_proxy.rb,276
+module TransparentProxyTransparentProxy1,0
+  def self.included(other_mod)included2,24
+  module ClassMethodsClassMethods6,99
+    def proxy(ivar)proxy7,121
+        def respond_to?(sym)respond_to?9,161
+        def method_missing(sym, *args, &blk)method_missing19,393
 
 lib/guillotine/extensions.rb,0
 
-lib/guillotine/keywords.rb,65
-module GuillotineGuillotine1,0
-  module KeywordsKeywords2,18
+lib/guillotine/keywords.rb,66
+module GuillotineGuillotine3,15
+  module KeywordsKeywords4,33
 
-lib/guillotine/parser.rb,62
-module GuillotineGuillotine4,65
-  module ParserParser6,86
+lib/guillotine/parser.rb,63
+module GuillotineGuillotine6,84
+  module ParserParser8,105
 
-lib/guillotine/pre_parser.rb,99
+lib/guillotine/pre_parser.rb,138
 module GuillotineGuillotine1,0
   class PreParserPreParser2,18
-    def parse(string)parse3,36
+    def self.parse(string)parse3,36
+    def parse(string)parse7,100
 
 lib/guillotine/rake/emacs.rb,125
 module GuillotineGuillotine1,0
@@ -196,7 +241,73 @@ lib/guillotine/require.rb,85
 module GuillotineGuillotine1,0
     def require(file, kernel=Kernel)require13,399
 
-lib/guillotine.rb,0
+lib/guillotine/statement_executor.rb,311
+module GuillotineGuillotine1,0
+  class StatementExecutorStatementExecutor2,18
+    def initialize(pre_parser, parser)initialize3,44
+    def execute(string)execute10,192
+    def parse_and_eval(string)parse_and_eval16,286
+    def parse(string)parse20,355
+    def pre_process(string)pre_process24,417
+
+lib/guillotine/timed_cache.rb,406
+module GuillotineGuillotine1,0
+  class TimedCacheTimedCache2,18
+    def initialize(hash, block)initialize4,86
+    def cachecache10,182
+    def mysql_adaptermysql_adapter14,236
+    def reset_mysql_adapter!reset_mysql_adapter!18,345
+    def row_selectorrow_selector24,450
+    def swapswap32,602
+    def swap_out_methodswap_out_method41,724
+    def swap_back_methodswap_back_method55,1079
+
+lib/guillotine/transactions/id_generator.rb,283
+module GuillotineGuillotine3,23
+  module TransactionsTransactions4,41
+    class IdGeneratorIdGenerator5,63
+      def self.generategenerate6,85
+      def generategenerate10,147
+      def our_sha1our_sha116,226
+      def timetime20,293
+      def sha1(string)sha124,347
+
+lib/guillotine/transactions/store.rb,298
+module GuillotineGuillotine1,0
+  module TransactionsTransactions2,18
+    module StoreStore3,40
+        def instancesinstances5,77
+        def register(instance)register9,148
+        def clear_instances!clear_instances!17,444
+        def remove_instance(instance)remove_instance21,521
+
+lib/guillotine/transactions/transaction.rb,335
+module GuillotineGuillotine1,0
+  module TransactionsTransactions2,18
+    class TransactionTransaction3,40
+      def initializeinitialize4,62
+      def commitcommit9,149
+      def rollbackrollback13,202
+      def transaction_idtransaction_id17,257
+      def unregisterunregister25,435
+      def registerregister29,509
+
+lib/guillotine/transactions.rb,73
+module GuillotineGuillotine1,0
+  module TransactionsTransactions2,18
+
+lib/guillotine.rb,116
+    def execute(string)execute28,1096
+    def sql_parsersql_parser34,1235
+    def pre_parserpre_parser40,1338
+
+spec/guillotine/active_record/guillotine_adapter_spec.rb,74
+module GuillotineGuillotine3,55
+  module ActiveRecordActiveRecord4,73
+
+spec/guillotine/active_record_spec.rb,74
+module GuillotineGuillotine3,52
+  module ActiveRecordActiveRecord4,70
 
 spec/guillotine/btree_spec.rb,34
 module GuillotineGuillotine3,52
@@ -264,7 +375,15 @@ spec/guillotine/parser/sql_show_tables_spec.rb,61
 module GuillotineGuillotine1,0
   module ParserParser2,18
 
+spec/guillotine/parser/sql_spec.rb,62
+module GuillotineGuillotine3,55
+  module ParserParser4,73
+
 spec/guillotine/parser/sql_table_operations_spec.rb,62
+module GuillotineGuillotine3,55
+  module ParserParser4,73
+
+spec/guillotine/parser/sql_transaction_spec.rb,62
 module GuillotineGuillotine3,55
   module ParserParser4,73
 
@@ -282,14 +401,40 @@ module GuillotineGuillotine3,52
 
 spec/guillotine/require_spec.rb,0
 
-spec/guillotine/sql_parser/backtick_string_spec.rb,34
+spec/guillotine/sql_parser/backtick_string_spec.rb,70
 module GuillotineGuillotine3,55
+  module ExpressionExpression4,73
 
 spec/guillotine/sql_parser/expression_spec.rb,70
 module GuillotineGuillotine3,55
   module ExpressionExpression4,73
 
-spec/spec_helper.rb,139
+spec/guillotine/timed_cache_spec.rb,106
+module GuillotineGuillotine3,52
+          def selectselect43,1561
+      def cache(&blk)cache54,1796
+
+spec/guillotine/transactions/id_generator_spec.rb,74
+module GuillotineGuillotine3,55
+  module TransactionsTransactions4,73
+
+spec/guillotine/transactions/store_spec.rb,74
+module GuillotineGuillotine3,55
+  module TransactionsTransactions4,73
+
+spec/guillotine/transactions/transaction_spec.rb,74
+module GuillotineGuillotine3,55
+  module TransactionsTransactions4,73
+
+spec/guillotine_spec.rb,0
+
+spec/regressions/or_spec.rb,36
+module GuillotineGuillotine11,490
+
+spec/spec_helper.rb,308
 module ParserSpecHelperParserSpecHelper4,56
   def parse(string)parse5,80
   def parse_and_eval(string, *eval_args)parse_and_eval9,135
+module ActiveRecordSpecHelperActiveRecordSpecHelper14,222
+  def setup_database_connectionsetup_database_connection15,252
+class User < ActiveRecord::BaseUser35,802
