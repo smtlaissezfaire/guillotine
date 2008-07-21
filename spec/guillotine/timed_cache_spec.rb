@@ -64,7 +64,6 @@ module Guillotine
       end
       
       it "should overwrite the select method with a call to the guillotine row selector" do
-        pending 'todo'
         @cache.reset_mysql_adapter!
         
         sql, name = "SELECT * FROM users", "User Load"
