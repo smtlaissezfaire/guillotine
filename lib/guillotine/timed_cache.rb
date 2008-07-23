@@ -47,6 +47,13 @@ module Guillotine
         define_method :select do |sql, name|
           begin
             row_selector.select(sql, name)
+          # TODO: Make this exception handling better.  For instance,
+          # we might want to:
+          # 1. rescue from a SQLParseError, send it to the mysql
+          #     database, and if it *does* succeed without a parse error, log it
+          #     to a bug list. 
+          # 2. rescue from a TableNotTracked error
+          # 3. rescue from other exceptions, and log to the bug log
           rescue Exception
             __old_select_aliased_by_guillotine__(sql, name)
           end
