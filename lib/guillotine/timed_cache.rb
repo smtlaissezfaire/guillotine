@@ -44,10 +44,12 @@ module Guillotine
       mysql_adapter.class_eval do
         alias_method(:__guillotine_select__, :select)
 
-        # TODO: Call the old select when a query can't
-        # be parsed
         define_method :select do |sql, name|
-          row_selector.select(sql, name)
+          begin
+            row_selector.select(sql, name)
+          rescue Exception
+            __guillotine_select__(sql, name)
+          end
         end
       end
     end

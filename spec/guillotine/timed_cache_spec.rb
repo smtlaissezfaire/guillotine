@@ -73,7 +73,21 @@ module Guillotine
         end
       end
       
-      it "should rescue from an error and call the __guillotine_select__ method with the sql and name"
+      it "should rescue from an error and call the __guillotine_select__ method with the sql and name" do
+        @cache.reset_mysql_adapter!
+        
+        sql, name = "SELECT * FROM users", "User Load"
+        @row_selector.stub!(:select).and_raise(Exception)
+        
+        connection = User.connection
+        connection.should_receive(:__guillotine_select__).with(sql, name).and_return []
+        
+        cache do
+          User.find_by_sql("SELECT * FROM users")
+        end
+      end
+      
+      it "should log to the guillotine log when it's a cache hit"
       
       it "should be able to call the select method without a name"
       
