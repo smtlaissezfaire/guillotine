@@ -24,7 +24,7 @@ module Guillotine
           :"IS NULL"     => IsNull,
           :"IS NOT NULL" => IsNotNull,
           :AND           => Guillotine::AndCondition,
-          :OR            => Guillotine::DisjunctionConditionNode
+          :OR            => Guillotine::OrCondition
         }
       end
     end

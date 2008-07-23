@@ -79,23 +79,23 @@ module Guillotine
       
       describe "OR condition" do
         it "should parse a simple clause with two OR expressions" do
-          or_expression = DisjunctionConditionNode.new(@equal_expression, @equal_expression)
+          or_expression = OrCondition.new(@equal_expression, @equal_expression)
           parse_and_eval("WHERE foo = 7 OR foo = 7").should eql(or_expression)
         end
         
         it "should parse a simple clause with two OR expressions" do
-          or_expression = DisjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          or_expression = OrCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE foo = 7 OR bar = 8").should eql(or_expression)
         end
         
         it "should parse a simple clause with two OR expressions, with random spaces in between the 'OR' condition" do
-          or_expression = DisjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          or_expression = OrCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE             foo = 7 OR            bar    =  8").should eql(or_expression)
         end
         
         it "should parse a clause with three OR expressions" do
-          first_and_expr = DisjunctionConditionNode.new(@bar_8, @baz_9)
-          second_and_expr = DisjunctionConditionNode.new(@foo_7, first_and_expr)
+          first_and_expr = OrCondition.new(@bar_8, @baz_9)
+          second_and_expr = OrCondition.new(@foo_7, first_and_expr)
           
           node = parse_and_eval("WHERE foo = 7 OR bar = 8 OR baz=9")
           node.should eql(second_and_expr)
@@ -107,17 +107,17 @@ module Guillotine
         end
         
         it "should parse a clause with two expressions and parenthesis around them" do
-          or_expression = DisjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          or_expression = OrCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE (foo = 7 OR bar = 8)").should eql(or_expression)
         end
         
         it "should parse a clause with two expressions and parenthesis around them with a space" do
-          or_expression = DisjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          or_expression = OrCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE ( foo = 7 OR bar = 8 )").should eql(or_expression)
         end
 
         it "should parse a clause with two expressions and parenthesis around them with multiple space" do
-          or_expression = DisjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          or_expression = OrCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE (          foo    =    7   OR    bar  = 8              )").should eql(or_expression)
         end
 
@@ -126,7 +126,7 @@ module Guillotine
         end
         
         it "should parse a clause with two parenthesis around it" do
-          or_expression = DisjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          or_expression = OrCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE ((foo = 7 OR bar = 8))").should eql(or_expression)
         end
       end

@@ -51,8 +51,8 @@ module Guillotine
         @root.call([:one, :two])
       end
       
-      it "should not be equal to a DisjunctionConditionNode, even if the two have the same children" do
-        disjunction_condition_node = DisjunctionConditionNode.new(*@root.children)
+      it "should not be equal to a OrCondition, even if the two have the same children" do
+        disjunction_condition_node = OrCondition.new(*@root.children)
         @root.should_not eql(disjunction_condition_node)
       end
       
@@ -61,11 +61,11 @@ module Guillotine
       end
     end
     
-    describe DisjunctionConditionNode do
+    describe OrCondition do
       before :each do
-        @child_one = mock(DisjunctionConditionNode, :empty? => false, :call => [:one, :two])
-        @child_two = mock(DisjunctionConditionNode, :empty? => false, :call => [:three])
-        @root = DisjunctionConditionNode.new(@child_one, @child_two)
+        @child_one = mock(OrCondition, :empty? => false, :call => [:one, :two])
+        @child_two = mock(OrCondition, :empty? => false, :call => [:three])
+        @root = OrCondition.new(@child_one, @child_two)
       end
       
       it "should return the union (with Array#|) of evaluating the two children" do

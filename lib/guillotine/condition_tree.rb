@@ -33,7 +33,7 @@ module Guillotine
     end
   end
   
-  class DisjunctionConditionNode < DecisionNode
+  class OrCondition < DecisionNode
     def call(collection)
       return [] if collection.empty?
       results_of_first_call = first_child.call(collection)
