@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module Guillotine
-  module Expression
+  module Expressions
     describe BacktickString do
       it "should initialize without an error if the first and last chars are backticks" do
         lambda { 

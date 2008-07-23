@@ -1,5 +1,5 @@
 module Guillotine
-  module Expression
+  module Expressions
     class Limit
       def initialize(number)
         @limit = number

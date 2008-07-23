@@ -1,5 +1,5 @@
 module Guillotine
-  module Expression
+  module Expressions
     class Base
       def initialize(key, value)
         @key = key

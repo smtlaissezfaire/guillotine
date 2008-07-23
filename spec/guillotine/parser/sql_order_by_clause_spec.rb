@@ -10,28 +10,28 @@ module Guillotine
       end
 
       it "should order by a column name" do
-        pair = Expression::OrderByPair.new(:column)
-        result = Expression::OrderBy.new(pair)
+        pair = Expressions::OrderByPair.new(:column)
+        result = Expressions::OrderBy.new(pair)
         parse_and_eval("ORDER BY column").should == result
       end
       
       it "should order by a different name" do
-        pair = Expression::OrderByPair.new(:different_col)
-        result = Expression::OrderBy.new(pair)
+        pair = Expressions::OrderByPair.new(:different_col)
+        result = Expressions::OrderBy.new(pair)
         parse_and_eval("ORDER BY different_col").should == result
       end
       
       it "should order by two columns" do
-        pair1 = Expression::OrderByPair.new(:different_col)
-        pair2 = Expression::OrderByPair.new(:column_two)
-        result = Expression::OrderBy.new(pair1, pair2)
+        pair1 = Expressions::OrderByPair.new(:different_col)
+        pair2 = Expressions::OrderByPair.new(:column_two)
+        result = Expressions::OrderBy.new(pair1, pair2)
         parse_and_eval("ORDER BY different_col, column_two").should == result
       end
       
       it "should allow any number of spaces after the ORDER BY clause" do
-        pair1 = Expression::OrderByPair.new(:different_col)
-        pair2 = Expression::OrderByPair.new(:column_two)
-        result = Expression::OrderBy.new(pair1, pair2)
+        pair1 = Expressions::OrderByPair.new(:different_col)
+        pair2 = Expressions::OrderByPair.new(:column_two)
+        result = Expressions::OrderBy.new(pair1, pair2)
         parse_and_eval("ORDER BY             different_col, column_two").should == result
       end
       
@@ -44,8 +44,8 @@ module Guillotine
       end
       
       it "should parse and eval ORDER BY column_name ASC" do
-        pair1 = Expression::OrderByPair.new(:column_name)
-        result = Expression::OrderBy.new(pair1)
+        pair1 = Expressions::OrderByPair.new(:column_name)
+        result = Expressions::OrderBy.new(pair1)
         parse_and_eval("ORDER BY column_name ASC").should == result
       end
       
@@ -54,8 +54,8 @@ module Guillotine
       end
       
       it "should parse and eval ORDER BY column_name DESC" do
-        pair1 = Expression::OrderByPair.new(:column_name, Expression::OrderBy::DESC)
-        result = Expression::OrderBy.new(pair1)
+        pair1 = Expressions::OrderByPair.new(:column_name, Expressions::OrderBy::DESC)
+        result = Expressions::OrderBy.new(pair1)
         parse_and_eval("ORDER BY column_name DESC").should == result
       end
       
@@ -68,9 +68,9 @@ module Guillotine
       end
       
       it "should parse and eval ORDER BY col_one, col_two DESC" do
-        pair1 = Expression::OrderByPair.new(:col_one, Expression::OrderBy::ASC)
-        pair2 = Expression::OrderByPair.new(:col_two, Expression::OrderBy::DESC)
-        result = Expression::OrderBy.new(pair1, pair2)
+        pair1 = Expressions::OrderByPair.new(:col_one, Expressions::OrderBy::ASC)
+        pair2 = Expressions::OrderByPair.new(:col_two, Expressions::OrderBy::DESC)
+        result = Expressions::OrderBy.new(pair1, pair2)
 
         parse_and_eval("ORDER BY col_one, col_two DESC").should == result
       end
@@ -80,9 +80,9 @@ module Guillotine
       end
       
       it "should parse and eval ORDER BY col_one DESC, col_two" do
-        pair1 = Expression::OrderByPair.new(:col_one, Expression::OrderBy::DESC)
-        pair2 = Expression::OrderByPair.new(:col_two, Expression::OrderBy::ASC)
-        result = Expression::OrderBy.new(pair1, pair2)
+        pair1 = Expressions::OrderByPair.new(:col_one, Expressions::OrderBy::DESC)
+        pair2 = Expressions::OrderByPair.new(:col_two, Expressions::OrderBy::ASC)
+        result = Expressions::OrderBy.new(pair1, pair2)
         
         parse_and_eval("ORDER BY col_one DESC, col_two").should == result
       end

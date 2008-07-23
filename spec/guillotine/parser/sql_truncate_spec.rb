@@ -14,11 +14,11 @@ module Guillotine
       end
       
       it "should parse and eval TRUNCATE foo" do
-        parse_and_eval("TRUNCATE foo").should == Expression::Truncate.new("foo")
+        parse_and_eval("TRUNCATE foo").should == Expressions::Truncate.new("foo")
       end
       
       it "should parse and eval TRUNCATE bar" do
-        parse_and_eval("TRUNCATE bar").should == Expression::Truncate.new("bar")
+        parse_and_eval("TRUNCATE bar").should == Expressions::Truncate.new("bar")
       end
       
       it "should not parse and eval two truncate statements with the same table" do
@@ -29,19 +29,19 @@ module Guillotine
       end
       
       it "should parse and eval TRUNCATE `bar`" do
-        parse_and_eval("TRUNCATE `bar`").should == Expression::Truncate.new("bar")
+        parse_and_eval("TRUNCATE `bar`").should == Expressions::Truncate.new("bar")
       end
       
       it "should parse and eval TRUNCATE     `bar` with spaces" do
-        parse_and_eval("TRUNCATE       `bar`").should == Expression::Truncate.new("bar")
+        parse_and_eval("TRUNCATE       `bar`").should == Expressions::Truncate.new("bar")
       end
       
       it "should parse and eval TRUNCATE TABLE bar" do
-        parse_and_eval("TRUNCATE TABLE bar").should == Expression::Truncate.new("bar")
+        parse_and_eval("TRUNCATE TABLE bar").should == Expressions::Truncate.new("bar")
       end
 
       it "should parse and eval TRUNCATE TABLE       bar" do
-        parse_and_eval("TRUNCATE TABLE        bar").should == Expression::Truncate.new("bar")
+        parse_and_eval("TRUNCATE TABLE        bar").should == Expressions::Truncate.new("bar")
       end
     end
   end

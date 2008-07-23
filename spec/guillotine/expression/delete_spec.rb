@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module Guillotine
-  module Expression
+  module Expressions
     describe DeleteStatement do
       before :each do
         @where = mock('where clause')
@@ -194,7 +194,7 @@ module Guillotine
         describe "calling with order by and limit" do
           before :each do
             @collection = [{ :foo => "bar", :id => 3}, { :foo => "bar", :id => 2}]
-            order_by = Expression::OrderBy.new(OrderByPair.new(:id, :ASC))
+            order_by = Expressions::OrderBy.new(OrderByPair.new(:id, :ASC))
             @delete = DeleteStatement.new(:table_name, nil, order_by, Limit.new(1))
           end
           
@@ -211,7 +211,7 @@ module Guillotine
         describe "with a where clause" do
           before :each do
             @collection = [{ :foo => "baz", :id => 3}, { :foo => "bar", :id => 2}]
-            @where_clause = Expression::Equal.new(:foo, "baz")
+            @where_clause = Expressions::Equal.new(:foo, "baz")
             @delete = DeleteStatement.new(:table_name, @where_clause)
           end
           
@@ -228,8 +228,8 @@ module Guillotine
         describe "with a limit and a where clause" do
           before :each do
             @collection = [{ :foo => "baz", :id => 3}, { :foo => "bar", :id => 2}, { :foo => "bar", :id => 23}]
-            @where_clause = Expression::Equal.new(:foo, "bar")
-            @limit_clause = Expression::Limit.new(1)
+            @where_clause = Expressions::Equal.new(:foo, "bar")
+            @limit_clause = Expressions::Limit.new(1)
             @delete = DeleteStatement.new(:table_name, @where_clause, nil, @limit_clause)
           end
           

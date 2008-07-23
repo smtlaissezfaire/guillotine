@@ -1,5 +1,5 @@
 module Guillotine
-  module Expression
+  module Expressions
     class OrderBy
       module SortOptions
         ASC  = :ASC   unless defined? ASC

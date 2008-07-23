@@ -13,7 +13,7 @@ Guillotine.module_eval do
   autoload :Parser,                   "#{project}/parser"
   autoload :Conditions,               "#{project}/conditions"
   autoload :Keywords,         				"#{project}/keywords"
-  autoload :Expression,       				"#{project}/expression"
+  autoload :Expressions,              "#{project}/expressions"
   autoload :RakeTasks,        				"#{project}/rake"
   autoload :StatementExecutor,        "#{project}/statement_executor"
   autoload :Transactions,             "#{project}/transactions"

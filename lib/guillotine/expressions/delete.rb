@@ -1,5 +1,5 @@
 module Guillotine
-  module Expression
+  module Expressions
     class TopLevelExpression
       def call(collection)
         limit!(order!(where!(collection)))

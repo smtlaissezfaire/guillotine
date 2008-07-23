@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module Guillotine
-  module Expression
+  module Expressions
     describe Truncate do
       it "should take a table name" do
         Truncate.new("table_name")

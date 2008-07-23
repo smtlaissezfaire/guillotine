@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module Guillotine
-  module Expression
+  module Expressions
     describe OrderBy do
       before :each do
         @pair1 = mock 'order by pair 1'

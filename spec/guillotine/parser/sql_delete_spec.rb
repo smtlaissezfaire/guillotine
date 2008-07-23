@@ -14,7 +14,7 @@ module Guillotine
       end
       
       it "should parse and eval DELETE FROM table_name" do
-        parse_and_eval("DELETE FROM table_name").should == Expression::DeleteStatement.new(:table_name)
+        parse_and_eval("DELETE FROM table_name").should == Expressions::DeleteStatement.new(:table_name)
       end
       
       it "should parse DELETE FROM another_table_name" do
@@ -22,7 +22,7 @@ module Guillotine
       end
       
       it "should parse and eval DELETE FROM another_table_name" do
-        parse_and_eval("DELETE FROM another_table_name").should == Expression::DeleteStatement.new(:another_table_name)
+        parse_and_eval("DELETE FROM another_table_name").should == Expressions::DeleteStatement.new(:another_table_name)
       end
       
       it "should take any number of spaces after the delete" do
@@ -38,8 +38,8 @@ module Guillotine
       end
       
       it "should eval with an optional where clause" do
-        equal_expression = Expression::Equal.new(:foo, "bar")
-        parse_and_eval("DELETE FROM table_name WHERE foo=bar").should == Expression::DeleteStatement.new(:table_name, equal_expression)
+        equal_expression = Expressions::Equal.new(:foo, "bar")
+        parse_and_eval("DELETE FROM table_name WHERE foo=bar").should == Expressions::DeleteStatement.new(:table_name, equal_expression)
       end
       
       it "should take a where clause with any number of spaces before the WHERE" do
@@ -51,8 +51,8 @@ module Guillotine
       end
       
       it "should parse an optional order by clause" do
-        order_by_clause = Expression::OrderBy.new(Expression::OrderByPair.new(:foo))
-        parse_and_eval("DELETE FROM table_name ORDER BY foo").should == Expression::DeleteStatement.new(:table_name, nil, order_by_clause)
+        order_by_clause = Expressions::OrderBy.new(Expressions::OrderByPair.new(:foo))
+        parse_and_eval("DELETE FROM table_name ORDER BY foo").should == Expressions::DeleteStatement.new(:table_name, nil, order_by_clause)
       end
       
       it "should parse an optional order by clause with many spaces in it" do
@@ -68,8 +68,8 @@ module Guillotine
       end
       
       it "should eval with an optional limit" do
-        limit = Expression::Limit.new(1)
-        parse_and_eval("DELETE FROM table_name LIMIT 1").should == Expression::DeleteStatement.new(:table_name, nil, nil, limit)
+        limit = Expressions::Limit.new(1)
+        parse_and_eval("DELETE FROM table_name LIMIT 1").should == Expressions::DeleteStatement.new(:table_name, nil, nil, limit)
       end
       
       it "should have an optional limit with spaces" do

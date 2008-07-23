@@ -12,47 +12,47 @@ module Guillotine
       describe "condition" do
         describe "with '='" do
           it "should parse foo='bar'" do
-            parse_and_eval("foo='bar'").should eql(Expression::Equal.new(:foo, "bar"))
+            parse_and_eval("foo='bar'").should eql(Expressions::Equal.new(:foo, "bar"))
           end
           
           it "should parse baz='bar'" do
-            parse_and_eval("baz='bar'").should eql(Expression::Equal.new(:baz, "bar"))
+            parse_and_eval("baz='bar'").should eql(Expressions::Equal.new(:baz, "bar"))
           end
           
           it "should parse foo='baz'" do
-            parse_and_eval("foo='baz'").should eql(Expression::Equal.new(:foo, "baz"))
+            parse_and_eval("foo='baz'").should eql(Expressions::Equal.new(:foo, "baz"))
           end
           
           it "should parse foo=7" do
-            parse_and_eval("foo=7").should eql(Expression::Equal.new(:foo, 7))
+            parse_and_eval("foo=7").should eql(Expressions::Equal.new(:foo, 7))
           end
           
           it "should parse foo = 7" do
-            parse_and_eval("foo = 7").should eql(Expression::Equal.new(:foo, 7))
+            parse_and_eval("foo = 7").should eql(Expressions::Equal.new(:foo, 7))
           end
           
           it "should parse foo != 8"  do
-            parse_and_eval("foo != 8").should eql(Expression::NotEqual.new(:foo, 8))
+            parse_and_eval("foo != 8").should eql(Expressions::NotEqual.new(:foo, 8))
           end
           
           it "should parse foo != \"barbaz\"" do
-            parse_and_eval("foo != \"barbaz\"").should eql(Expression::NotEqual.new(:foo, "barbaz"))
+            parse_and_eval("foo != \"barbaz\"").should eql(Expressions::NotEqual.new(:foo, "barbaz"))
           end
           
           it "should parse foo > 'bar'" do
-            parse_and_eval("foo > 'bar'").should eql(Expression::GreaterThan.new(:foo, "bar"))
+            parse_and_eval("foo > 'bar'").should eql(Expressions::GreaterThan.new(:foo, "bar"))
           end
           
           it "should parse foo < 'bar'" do
-            parse_and_eval("foo < 'bar'").should eql(Expression::LessThan.new(:foo, "bar"))
+            parse_and_eval("foo < 'bar'").should eql(Expressions::LessThan.new(:foo, "bar"))
           end
           
           it "should parse foo >= 7" do
-            parse_and_eval("foo >= 7").should eql(Expression::GreaterThanOrEqualTo.new(:foo, 7))
+            parse_and_eval("foo >= 7").should eql(Expressions::GreaterThanOrEqualTo.new(:foo, 7))
           end
           
           it "should parse foo <= 7" do
-            parse_and_eval("foo <= 7").should eql(Expression::LessThanOrEqualTo.new(:foo, 7))
+            parse_and_eval("foo <= 7").should eql(Expressions::LessThanOrEqualTo.new(:foo, 7))
           end
           
           it "should not parse 'ISNOT NULL" do
@@ -60,27 +60,27 @@ module Guillotine
           end
           
           it "should parse foo IS NOT NULL" do
-            parse_and_eval("foo IS NOT NULL").should eql(Expression::IsNotNull.new(:foo))
+            parse_and_eval("foo IS NOT NULL").should eql(Expressions::IsNotNull.new(:foo))
           end
           
           it "should parse foo 'IS  NOT NULL'" do
-            parse_and_eval("foo IS  NOT NULL").should eql(Expression::IsNotNull.new(:foo))
+            parse_and_eval("foo IS  NOT NULL").should eql(Expressions::IsNotNull.new(:foo))
           end
           
           it "should parse foo 'IS NOT  NULL'" do
-            parse_and_eval("foo IS NOT  NULL").should eql(Expression::IsNotNull.new(:foo))
+            parse_and_eval("foo IS NOT  NULL").should eql(Expressions::IsNotNull.new(:foo))
           end
           
           it "should parse foo IS NULL" do
-            parse_and_eval("foo IS NULL").should eql(Expression::IsNull.new(:foo))
+            parse_and_eval("foo IS NULL").should eql(Expressions::IsNull.new(:foo))
           end
           
           it "should parse foo  IS NULL" do
-            parse_and_eval("foo  IS NULL").should eql(Expression::IsNull.new(:foo))
+            parse_and_eval("foo  IS NULL").should eql(Expressions::IsNull.new(:foo))
           end
           
           it "should parse foo IS  NULL" do
-            parse_and_eval("foo IS  NULL").should eql(Expression::IsNull.new(:foo))
+            parse_and_eval("foo IS  NULL").should eql(Expressions::IsNull.new(:foo))
           end
           
           it "should not parse fooIS NULL" do

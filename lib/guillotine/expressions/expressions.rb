@@ -1,5 +1,5 @@
 module Guillotine
-  module Expression
+  module Expressions
     def self.classes_with_comparisons
       @classes_with_comparisons ||= { 
         :Equal                => :==,

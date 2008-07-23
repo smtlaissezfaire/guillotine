@@ -46,11 +46,11 @@ module Guillotine
       end
     
       rule ascending
-        "ASC" { def eval; Guillotine::Expression::OrderBy::ASC; end }
+        "ASC" { def eval; Guillotine::Expressions::OrderBy::ASC; end }
       end
     
       rule descending
-        "DESC" { def eval; Guillotine::Expression::OrderBy::DESC; end }
+        "DESC" { def eval; Guillotine::Expressions::OrderBy::DESC; end }
       end
     end
   end

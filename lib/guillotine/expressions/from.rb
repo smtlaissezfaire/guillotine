@@ -1,7 +1,7 @@
 require 'set'
 
 module Guillotine
-  module Expression
+  module Expressions
     class From
       def initialize(*table_names)
         @table_names = Set.new(table_names.flatten)

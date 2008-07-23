@@ -1,5 +1,5 @@
 module Guillotine
-  module Expression
+  module Expressions
     class Select
       def initialize(*columns)
         @columns = columns

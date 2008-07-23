@@ -7,12 +7,12 @@ module Guillotine
       
       before :each do
         @parser = SQLWhereConditionParser.new
-        @equal_expression = Expression::Equal.new(:foo, 7)
+        @equal_expression = Expressions::Equal.new(:foo, 7)
 
         @foo_7 = @equal_expression
-        @bar_8 = Expression::Equal.new(:bar, 8)
-        @baz_9 = Expression::Equal.new(:baz, 9)
-        @bar_equals_eight_expr = Expression::Equal.new(:bar, 8)
+        @bar_8 = Expressions::Equal.new(:bar, 8)
+        @baz_9 = Expressions::Equal.new(:baz, 9)
+        @bar_equals_eight_expr = Expressions::Equal.new(:bar, 8)
       end
       
       it "should parse a simple where clause with one expression" do

@@ -1,5 +1,5 @@
 module Guillotine
-  module Expression
+  module Expressions
     class Truncate
       def initialize(arg1)
         @table_name = arg1.to_sym

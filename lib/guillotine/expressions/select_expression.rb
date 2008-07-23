@@ -1,6 +1,6 @@
 module Guillotine
-  module Expression
-    class SelectExpression < Expression::TopLevelExpression
+  module Expressions
+    class SelectExpression < Expressions::TopLevelExpression
       include Assertions
       
       def initialize(hash)

@@ -1,5 +1,5 @@
 module Guillotine
-  module Expression
+  module Expressions
     class BacktickString
       class InvalidString < StandardError; end
       

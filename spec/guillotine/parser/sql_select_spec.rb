@@ -7,7 +7,7 @@ module Guillotine
       
       before :each do
         @parser = SQLSelectParser.new
-        @select_expression = Guillotine::Expression::SelectExpression
+        @select_expression = Guillotine::Expressions::SelectExpression
       end
       
       it "should parse 'SELECT * from events'" do
@@ -30,7 +30,7 @@ module Guillotine
 
       it "should parse and evaluate 'SELECT * from events'" do
         string = "SELECT * FROM events"
-        expression = @select_expression.new(:select => Expression::Select.new("*"), :from => Expression::From.new("events"))
+        expression = @select_expression.new(:select => Expressions::Select.new("*"), :from => Expressions::From.new("events"))
         parse_and_eval(string).should eql(expression)
       end
       
@@ -52,27 +52,27 @@ module Guillotine
 
       it "should parse and evaluate 'SELECT * from events where user = 'foo''" do
         string = "SELECT * FROM events WHERE user = 'foo'"
-        select = Expression::Select.new("*")
-        from   = Expression::From.new("events")
-        where  = Expression::Equal.new(:user, "foo")
+        select = Expressions::Select.new("*")
+        from   = Expressions::From.new("events")
+        where  = Expressions::Equal.new(:user, "foo")
         expression = @select_expression.new(:select => select, :from => from, :where => where)
         parse_and_eval(string).should eql(expression)
       end
       
       it "should parse and evaluate SELECT   *    FROM     events     where user = 'foo'" do
         string = "SELECT * FROM events WHERE user = 'foo'"
-        select = Expression::Select.new("*")
-        from   = Expression::From.new("events")
-        where  = Expression::Equal.new(:user, "foo")
+        select = Expressions::Select.new("*")
+        from   = Expressions::From.new("events")
+        where  = Expressions::Equal.new(:user, "foo")
         expression = @select_expression.new(:select => select, :from => from, :where => where)
         parse_and_eval(string).should eql(expression)
       end
       
       it "should parse_and_eval SELECT * FROM events LIMIT 10" do
         string = "SELECT * FROM events LIMIT 10"
-        select = Expression::Select.new("*")
-        from   = Expression::From.new("events")
-        limit  = Expression::Limit.new(10)
+        select = Expressions::Select.new("*")
+        from   = Expressions::From.new("events")
+        limit  = Expressions::Limit.new(10)
         expression = @select_expression.new(:select => select, :from => from, :limit => limit)
 
         parse_and_eval(string).should eql(expression)
@@ -80,9 +80,9 @@ module Guillotine
       
       it "should parse_and_eval SELECT * FROM events        LIMIT 10" do
         string = "SELECT * FROM events           LIMIT 10"
-        select = Expression::Select.new("*")
-        from   = Expression::From.new("events")
-        limit  = Expression::Limit.new(10)
+        select = Expressions::Select.new("*")
+        from   = Expressions::From.new("events")
+        limit  = Expressions::Limit.new(10)
         expression = @select_expression.new(:select => select, :from => from, :limit => limit)
 
         parse_and_eval(string).should eql(expression)
@@ -96,9 +96,9 @@ module Guillotine
       end
 
       it "should parse_and_eval SELECT * FROM events ORDER BY foo" do
-        select = Expression::Select.new("*")
-        from   = Expression::From.new("events")
-        order_by  = Expression::OrderBy.new(Expression::OrderByPair.new(:foo))
+        select = Expressions::Select.new("*")
+        from   = Expressions::From.new("events")
+        order_by  = Expressions::OrderBy.new(Expressions::OrderByPair.new(:foo))
         expression = @select_expression.new(:select => select, :from => from, :order_by => order_by)
 
         parse_and_eval("SELECT * FROM events ORDER BY foo").should eql(expression)
@@ -106,9 +106,9 @@ module Guillotine
 
       it "should parse_and_eval SELECT * FROM events              ORDER BY foo" do
         string = "SELECT * FROM events ORDER BY foo"
-        select = Expression::Select.new("*")
-        from   = Expression::From.new("events")
-        order_by  = Expression::OrderBy.new(Expression::OrderByPair.new(:foo))
+        select = Expressions::Select.new("*")
+        from   = Expressions::From.new("events")
+        order_by  = Expressions::OrderBy.new(Expressions::OrderByPair.new(:foo))
         expression = @select_expression.new(:select => select, :from => from, :order_by => order_by)
 
         parse_and_eval(string).should eql(expression)
