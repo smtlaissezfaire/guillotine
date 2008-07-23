@@ -11,7 +11,7 @@ Guillotine.module_eval do
   autoload :DataStore,       		 			"#{project}/data_store"
   autoload :PreParser,       		 			"#{project}/pre_parser"
   autoload :Parser,                   "#{project}/parser"
-  autoload :DecisionNode,             "#{project}/condition_tree"
+  autoload :Condition,                "#{project}/condition_tree"
   autoload :AndCondition,             "#{project}/condition_tree"
   autoload :OrCondition,              "#{project}/condition_tree"
   autoload :Keywords,         				"#{project}/keywords"

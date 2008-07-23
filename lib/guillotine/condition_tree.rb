@@ -1,5 +1,5 @@
 module Guillotine
-  class DecisionNode
+  class Condition
     def initialize(child_one, child_two)
       @children = [child_one, child_two]
     end
@@ -23,7 +23,7 @@ module Guillotine
     end
   end
   
-  class AndCondition < DecisionNode
+  class AndCondition < Condition
     # If we can a-priori figure out whether call one or call two 
     # returns fewer records, we'll be building a real in-memory database!
     def call(collection)
@@ -33,7 +33,7 @@ module Guillotine
     end
   end
   
-  class OrCondition < DecisionNode
+  class OrCondition < Condition
     def call(collection)
       return [] if collection.empty?
       results_of_first_call = first_child.call(collection)
