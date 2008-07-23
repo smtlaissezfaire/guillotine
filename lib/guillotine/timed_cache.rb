@@ -42,13 +42,13 @@ module Guillotine
       row_selector = self.row_selector
       
       mysql_adapter.class_eval do
-        alias_method(:__guillotine_select__, :select)
+        alias_method(:__old_select_aliased_by_guillotine__, :select)
 
         define_method :select do |sql, name|
           begin
             row_selector.select(sql, name)
           rescue Exception
-            __guillotine_select__(sql, name)
+            __old_select_aliased_by_guillotine__(sql, name)
           end
         end
       end
@@ -56,8 +56,8 @@ module Guillotine
     
     def swap_back_method
       mysql_adapter.class_eval do
-        alias_method(:select, :__guillotine_select__)
-        undef :__guillotine_select__
+        alias_method(:select, :__old_select_aliased_by_guillotine__)
+        undef :__old_select_aliased_by_guillotine__
       end
     end
   end

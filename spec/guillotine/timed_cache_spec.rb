@@ -56,10 +56,10 @@ module Guillotine
         @cache.cache
       end
       
-      it "should alias the method select to __guillotine_select__" do
+      it "should alias the method select to __old_select_aliased_by_guillotine__" do
         old_select = @mysql_adapter.instance_method(:select)
         cache { 
-          @mysql_adapter.instance_method(:__guillotine_select__).should == old_select
+          @mysql_adapter.instance_method(:__old_select_aliased_by_guillotine__).should == old_select
         }
       end
       
@@ -73,14 +73,14 @@ module Guillotine
         end
       end
       
-      it "should rescue from an error and call the __guillotine_select__ method with the sql and name" do
+      it "should rescue from an error and call the __old_select_aliased_by_guillotine__ method with the sql and name" do
         @cache.reset_mysql_adapter!
         
         sql, name = "SELECT * FROM users", "User Load"
         @row_selector.stub!(:select).and_raise(Exception)
         
         connection = User.connection
-        connection.should_receive(:__guillotine_select__).with(sql, name).and_return []
+        connection.should_receive(:__old_select_aliased_by_guillotine__).with(sql, name).and_return []
         
         cache do
           User.find_by_sql("SELECT * FROM users")
@@ -103,7 +103,7 @@ module Guillotine
         @mysql_adapter.instance_method(:select).should == old_select
       end
       
-      it "should remove the method __guillotine_select__ (it should not leave any dangling methods)" do
+      it "should remove the method __old_select_aliased_by_guillotine__ (it should not leave any dangling methods)" do
         old_select = @mysql_adapter.instance_methods(false)
         cache { }
         @mysql_adapter.instance_methods(false).should == old_select
