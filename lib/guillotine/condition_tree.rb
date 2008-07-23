@@ -1,5 +1,5 @@
 module Guillotine
-  class ProperBinaryTree
+  class DecisionNode
     def initialize(child_one, child_two)
       @children = [child_one, child_two]
     end
@@ -23,7 +23,7 @@ module Guillotine
     end
   end
   
-  class ConditionNode < ProperBinaryTree
+  class ConditionNode < DecisionNode
   end
   
   class ConjunctionConditionNode < ConditionNode
