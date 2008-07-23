@@ -36,11 +36,11 @@ module Guillotine
       end
       
       it "should find the syntax class for the AND expression" do
-        Expression.find_class_for("AND").should == Guillotine::AndCondition
+        Expression.find_class_for("AND").should == Guillotine::Conditions::AndCondition
       end
       
       it "should find the syntax class for the OR than sign" do
-        Expression.find_class_for("OR").should == Guillotine::OrCondition
+        Expression.find_class_for("OR").should == Guillotine::Conditions::OrCondition
       end
       
       it "should raise an error if it is given a syntax class it doesn't know how to dispatch on" do

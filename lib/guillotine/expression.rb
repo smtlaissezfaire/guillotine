@@ -23,8 +23,8 @@ module Guillotine
           :>=            => GreaterThanOrEqualTo,
           :"IS NULL"     => IsNull,
           :"IS NOT NULL" => IsNotNull,
-          :AND           => Guillotine::AndCondition,
-          :OR            => Guillotine::OrCondition
+          :AND           => Guillotine::Conditions::AndCondition,
+          :OR            => Guillotine::Conditions::OrCondition
         }
       end
     end
