@@ -23,10 +23,7 @@ module Guillotine
     end
   end
   
-  class ConditionNode < DecisionNode
-  end
-  
-  class ConjunctionConditionNode < ConditionNode
+  class ConjunctionConditionNode < DecisionNode
     # If we can a-priori figure out whether call one or call two 
     # returns fewer records, we'll be building a real in-memory database!
     def call(collection)
@@ -36,7 +33,7 @@ module Guillotine
     end
   end
   
-  class DisjunctionConditionNode < ConditionNode
+  class DisjunctionConditionNode < DecisionNode
     def call(collection)
       return [] if collection.empty?
       results_of_first_call = first_child.call(collection)
