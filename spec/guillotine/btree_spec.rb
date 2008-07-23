@@ -24,11 +24,11 @@ module Guillotine
       }.should raise_error(ArgumentError)
     end
     
-    describe ConjunctionConditionNode do
+    describe AndCondition do
       before :each do
-        @child_one = mock(ConjunctionConditionNode, :empty? => false, :call => [:one, :two])
-        @child_two = mock(ConjunctionConditionNode, :empty? => false, :call => [:two])
-        @root = ConjunctionConditionNode.new(@child_one, @child_two)
+        @child_one = mock(AndCondition, :empty? => false, :call => [:one, :two])
+        @child_two = mock(AndCondition, :empty? => false, :call => [:two])
+        @root = AndCondition.new(@child_one, @child_two)
       end
       
       it "should return the intersection (with &) of evaluating the two children" do

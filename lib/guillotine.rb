@@ -12,7 +12,7 @@ Guillotine.module_eval do
   autoload :PreParser,       		 			"#{project}/pre_parser"
   autoload :Parser,                   "#{project}/parser"
   autoload :DecisionNode,             "#{project}/condition_tree"
-  autoload :ConjunctionConditionNode, "#{project}/condition_tree"
+  autoload :AndCondition,             "#{project}/condition_tree"
   autoload :DisjunctionConditionNode, "#{project}/condition_tree"
   autoload :Keywords,         				"#{project}/keywords"
   autoload :Expression,       				"#{project}/expression"

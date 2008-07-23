@@ -25,23 +25,23 @@ module Guillotine
       
       describe "AND conditions" do
         it "should parse a simple clause with two AND expressions" do
-          and_expression = ConjunctionConditionNode.new(@equal_expression, @equal_expression)
+          and_expression = AndCondition.new(@equal_expression, @equal_expression)
           parse_and_eval("WHERE foo = 7 AND foo = 7").should eql(and_expression)
         end
         
         it "should parse a simple clause with two AND expressions" do
-          and_expression = ConjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          and_expression = AndCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE foo = 7 AND bar = 8").should eql(and_expression)
         end
         
         it "should parse a simple clause with two AND expressions, with random spaces in between the 'AND' condition" do
-          and_expression = ConjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          and_expression = AndCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE             foo = 7 AND            bar    =  8").should eql(and_expression)
         end
         
         it "should parse a clause with three AND expressions" do
-          first_and_expr = ConjunctionConditionNode.new(@bar_8, @baz_9)
-          second_and_expr = ConjunctionConditionNode.new(@foo_7, first_and_expr)
+          first_and_expr = AndCondition.new(@bar_8, @baz_9)
+          second_and_expr = AndCondition.new(@foo_7, first_and_expr)
           
           node = parse_and_eval("WHERE foo = 7 AND bar = 8 AND baz=9")
           node.should eql(second_and_expr)
@@ -53,17 +53,17 @@ module Guillotine
         end
         
         it "should parse a clause with two expressions and parenthesis around them" do
-          and_expression = ConjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          and_expression = AndCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE (foo = 7 AND bar = 8)").should eql(and_expression)
         end
         
         it "should parse a clause with two expressions and parenthesis around them with a space" do
-          and_expression = ConjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          and_expression = AndCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE ( foo = 7 AND bar = 8 )").should eql(and_expression)
         end
 
         it "should parse a clause with two expressions and parenthesis around them with multiple space" do
-          and_expression = ConjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          and_expression = AndCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE (          foo    =    7   AND    bar  = 8              )").should eql(and_expression)
         end
 
@@ -72,7 +72,7 @@ module Guillotine
         end
         
         it "should parse a clause with two parenthesis around it" do
-          and_expression = ConjunctionConditionNode.new(@equal_expression, @bar_equals_eight_expr)
+          and_expression = AndCondition.new(@equal_expression, @bar_equals_eight_expr)
           parse_and_eval("WHERE ((foo = 7 AND bar = 8))").should eql(and_expression)
         end
       end

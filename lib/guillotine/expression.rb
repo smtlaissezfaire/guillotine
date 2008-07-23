@@ -23,7 +23,7 @@ module Guillotine
           :>=            => GreaterThanOrEqualTo,
           :"IS NULL"     => IsNull,
           :"IS NOT NULL" => IsNotNull,
-          :AND           => Guillotine::ConjunctionConditionNode,
+          :AND           => Guillotine::AndCondition,
           :OR            => Guillotine::DisjunctionConditionNode
         }
       end

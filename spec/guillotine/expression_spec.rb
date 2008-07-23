@@ -36,7 +36,7 @@ module Guillotine
       end
       
       it "should find the syntax class for the AND expression" do
-        Expression.find_class_for("AND").should == Guillotine::ConjunctionConditionNode
+        Expression.find_class_for("AND").should == Guillotine::AndCondition
       end
       
       it "should find the syntax class for the OR than sign" do

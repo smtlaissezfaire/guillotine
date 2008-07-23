@@ -23,7 +23,7 @@ module Guillotine
     end
   end
   
-  class ConjunctionConditionNode < DecisionNode
+  class AndCondition < DecisionNode
     # If we can a-priori figure out whether call one or call two 
     # returns fewer records, we'll be building a real in-memory database!
     def call(collection)
