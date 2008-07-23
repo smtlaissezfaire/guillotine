@@ -1,28 +1,8 @@
 module Guillotine
   module Conditions
-    class Base
-      def initialize(child_one, child_two)
-        @children = [child_one, child_two]
-      end
-      
-      attr_reader :children
-      
-      def eql?(other)
-        other.children == self.children && self.class == other.class
-      end
-      
-      alias_method :==, :eql?
-      
-      private
-      
-      def first_child
-        children.first
-      end
-      
-      def second_child
-        children[1]
-      end
-    end
+    dir = File.dirname(__FILE__) + "/conditions"
+    
+    autoload :Base, "#{dir}/base"
     
     class AndCondition < Base
       # If we can a-priori figure out whether call one or call two 
