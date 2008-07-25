@@ -18,7 +18,9 @@ module Guillotine
     end
     
     def parse(string)
-      parser.parse(string)
+      results = parser.parse(string)
+      raise Exceptions::SQLNotUnderstood if results.nil?
+      results
     end
     
     def pre_process(string)

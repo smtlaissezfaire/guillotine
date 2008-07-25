@@ -23,6 +23,7 @@ Guillotine.module_eval do
   autoload :StatementExecutor,        "#{project}/statement_executor"
   autoload :TimedCache,               "#{project}/timed_cache"
   autoload :Transactions,             "#{project}/transactions"
+  autoload :Exceptions,               "#{project}/exceptions"
   
   class << self
     def execute(string)
