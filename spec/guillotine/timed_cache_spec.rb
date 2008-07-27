@@ -66,8 +66,8 @@ module Guillotine
       it "should overwrite the select method with a call to the guillotine row selector" do
         @cache.reset_mysql_adapter!
         
-        sql, name = "SELECT * FROM users", "User Load"
-        @row_selector.should_receive(:select).with(sql, name).and_return []
+        sql = "SELECT * FROM users"
+        @row_selector.should_receive(:select).with(sql).and_return []
         cache do
           User.find_by_sql("SELECT * FROM users")
         end

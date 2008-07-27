@@ -46,7 +46,7 @@ module Guillotine
 
         define_method :select do |sql, name|
           begin
-            row_selector.select(sql, name)
+            row_selector.select(sql)
           # TODO: Make this exception handling better.  For instance,
           # we might want to:
           # 1. rescue from a SQLParseError, send it to the mysql
