@@ -25,6 +25,11 @@ module ActiveRecordSpecHelper
         t.column :created_at, :datetime
         t.column :updated_at, :datetime
       end
+      
+      create_table :test_data, :force => true do |t|
+        t.column :a_string, :string
+        t.column :a_number, :integer
+      end
     end
   end
 end
@@ -34,4 +39,8 @@ setup_database_connection
 
 class User < ActiveRecord::Base
   guillotine_model
+end
+
+class TestData < ActiveRecord::Base
+  set_table_name :test_data
 end
