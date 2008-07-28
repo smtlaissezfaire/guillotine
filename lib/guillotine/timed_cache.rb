@@ -62,6 +62,8 @@ module Guillotine
             __old_select_aliased_by_guillotine__(sql, name)
           end
         end
+        
+        private :select
       end
     end
     
