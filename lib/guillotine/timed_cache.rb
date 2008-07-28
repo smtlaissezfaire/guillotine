@@ -47,6 +47,7 @@ module Guillotine
       
       mysql_adapter.class_eval do
         alias_method(:__old_select_aliased_by_guillotine__, :select)
+        public :__old_select_aliased_by_guillotine__
 
         define_method :select do |sql, name|
           begin
@@ -62,8 +63,6 @@ module Guillotine
             __old_select_aliased_by_guillotine__(sql, name)
           end
         end
-        
-        private :select
       end
     end
     

@@ -8,19 +8,18 @@ describe "Creating a cache for 10 minutes" do
   end
   
   it "regression: should respond to select outside of the guillotine block" do
-    ActiveRecord::Base.connection.class.private_instance_methods.should include("select")
+    ActiveRecord::Base.connection.class.instance_methods.should include("select")
   end
   
   it "regression: should have the method select" do
     guillotine_cache do
-      ActiveRecord::Base.connection.class.private_instance_methods.should include("select")
+      ActiveRecord::Base.connection.class.instance_methods.should include("select")
     end
   end
   
   it "regression: should have the __old_select_aliased_by_guillotine method inside the block" do
-    pending 'todo'
     guillotine_cache do
-      ActiveRecord::Base.connection.class.instance_methods.should include("__old_select_aliased_by_guillotine")
+      ActiveRecord::Base.connection.class.instance_methods.should include("__old_select_aliased_by_guillotine__")
     end
   end
   
