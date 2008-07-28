@@ -109,4 +109,24 @@ module Guillotine
       end
     end
   end
+  
+  describe "class method cache" do
+    before :each do
+      @timed_cache = mock(TimedCache, :cache => nil)
+      TimedCache.stub!(:new).and_return @timed_cache
+      
+      @a_hash = { }
+      @a_lambda = lambda { }
+    end
+    
+    it "should create a new timed cache with the params" do
+      TimedCache.should_receive(:new).with(@a_hash, @a_lambda).and_return @timed_cache
+      TimedCache.cache(@a_hash, @a_lambda)
+    end
+    
+    it "should call the cache method" do
+      @timed_cache.should_receive(:cache).with(no_args)
+      TimedCache.cache(@a_hash, @a_lambda)
+    end
+  end
 end

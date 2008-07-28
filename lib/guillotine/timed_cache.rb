@@ -1,7 +1,7 @@
 module Guillotine
   class TimedCache
     def self.cache(hash, block)
-#       new(hash, block).cache
+      new(hash, block).cache
     end
     
     # TODO: use the hash for ttl.  Check options
