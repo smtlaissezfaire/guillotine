@@ -4,11 +4,14 @@ module Guillotine
       # TODO: Refactor the shit out of this
       def select(sql)
         parsed_sql = Guillotine.execute(sql)
-        table_name = parsed_sql.from.table_names.to_a.first
-        if table = Guillotine::DataStore.table(:users)
+        table_name = parsed_sql.from.table_names.to_a.first.to_sym
+        
+        
+        if table = Guillotine::DataStore.table(table_name)
           parsed_sql.call(table)
         else
-          raise Guillotine::Exceptions::TableNotTracked, "The #{table_name} table is not tracked by Guillotine"          
+          Guillotine::DataStore.create_table(table_name)
+          Guillotine::DataStore.initial_insert(table_name, ::ActiveRecord::Base.connection.__old_select_aliased_by_guillotine__("SELECT * FROM #{table_name}"))
         end
       end
     end
