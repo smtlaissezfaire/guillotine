@@ -18,7 +18,7 @@ module Guillotine
     private
       
       def insert(table_name)
-        datastore.initial_insert(table_name, original_select("SELECT * FROM #{table_name}"))
+        datastore.initial_insert(table_name, original_select("SELECT * FROM `#{table_name}`"))
       end
       
       def create_table(table_name)

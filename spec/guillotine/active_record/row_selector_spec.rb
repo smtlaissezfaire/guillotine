@@ -55,7 +55,7 @@ module Guillotine
           
           it "should find all of the records for the table 'users'" do
             @connection.stub!(:__old_select_aliased_by_guillotine__).and_return([])
-            @connection.should_receive(:__old_select_aliased_by_guillotine__).with("SELECT * FROM users").and_return []
+            @connection.should_receive(:__old_select_aliased_by_guillotine__).with("SELECT * FROM `users`").and_return []
             select("SELECT * FROM users")
           end
           
@@ -67,7 +67,7 @@ module Guillotine
           
           it "should find the records with the correct table name" do
             @connection.stub!(:__old_select_aliased_by_guillotine__).and_return([])
-            @connection.should_receive(:__old_select_aliased_by_guillotine__).with("SELECT * FROM table_data").and_return []
+            @connection.should_receive(:__old_select_aliased_by_guillotine__).with("SELECT * FROM `table_data`").and_return []
             select("SELECT * FROM table_data LIMIT 10")
           end
           
