@@ -2,29 +2,33 @@ require File.dirname(__FILE__) + "/../spec_helper"
 
 describe "Creating a cache for 10 minutes" do
   before :each do
-    @test_datum = Class.new(ActiveRecord::Base) do
+    @active_record = ::ActiveRecord::Base
+    
+    @test_datum = Class.new(@active_record) do
       set_table_name :test_data
     end
+    
+    @connection = @active_record.connection
   end
   
   it "regression: should have select as a private method before a cache block" do
-    ActiveRecord::Base.connection.class.private_instance_methods.should include("select")
+    @connection.private_methods.should include("select")
   end
   
   it "should have select as a private method after a cache block" do
     guillotine_cache { }
-    ActiveRecord::Base.connection.class.private_instance_methods.should include("select")
+    @connection.class.private_methods.should include("select")
   end
   
   it "regression: should have the method select" do
     guillotine_cache do
-      ActiveRecord::Base.connection.class.instance_methods.should include("select")
+      @connection.methods.should include("select")
     end
   end
   
   it "regression: should have the __old_select_aliased_by_guillotine method inside the block" do
     guillotine_cache do
-      ActiveRecord::Base.connection.class.instance_methods.should include("__old_select_aliased_by_guillotine__")
+      @connection.methods.should include("__old_select_aliased_by_guillotine__")
     end
   end
   
