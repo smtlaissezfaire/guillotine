@@ -20,7 +20,7 @@ describe "Creating a cache for 10 minutes" do
   it "regression: should have the __old_select_aliased_by_guillotine method inside the block" do
     pending 'todo'
     guillotine_cache do
-      ActiveRecord::Base.connection.class.methods.should include("__old_select_aliased_by_guillotine")
+      ActiveRecord::Base.connection.class.instance_methods.should include("__old_select_aliased_by_guillotine")
     end
   end
   
