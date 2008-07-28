@@ -41,13 +41,13 @@ describe Object do
       blk = lambda { }
       hash = { :ttl => 300 }
       
-      Guillotine::TimedCache.should_receive(:new).with(hash, blk).and_return @timed_cache
+      Guillotine::TimedCache.should_receive(:cache).with(hash, blk).and_return @timed_cache
       @object.guillotine_cache(hash, &blk)
     end
         
     it "should forward a request to a Guillotine::TimedCache with an empty hash when none is given" do
       blk = lambda { }
-      Guillotine::TimedCache.should_receive(:new).with({ }, blk).and_return @timed_cache
+      Guillotine::TimedCache.should_receive(:cache).with({ }, blk).and_return @timed_cache
       @object.guillotine_cache(&blk)
     end
 

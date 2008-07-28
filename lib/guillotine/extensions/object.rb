@@ -9,7 +9,7 @@ module Guillotine
       
       def guillotine_cache(hash={ }, &blk)
         raise LocalJumpError, "no block given" if blk.nil?
-        Guillotine::TimedCache.new(hash, blk)
+        Guillotine::TimedCache.cache(hash, blk)
       end
     end
   end
