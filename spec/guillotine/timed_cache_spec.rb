@@ -5,8 +5,7 @@ module Guillotine
     before :each do
       @block = lambda { }
       @cache = TimedCache.new({ }, @block)
-      @mysql_adapter = mock 'mysql adapter class', :define_method => nil
-      @mysql_adapter.stub!(:class_eval)
+      @mysql_adapter = mock 'mysql adapter class'
       @row_selector = mock(::Guillotine::ActiveRecord::RowSelector, :select => [])
     end
     
