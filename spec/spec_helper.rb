@@ -44,3 +44,9 @@ end
 class TestData < ActiveRecord::Base
   set_table_name :test_data
 end
+
+Spec::Runner.configure do |config|
+  config.before :each do
+    Guillotine::DataStore.__clear_all_tables!
+  end
+end
