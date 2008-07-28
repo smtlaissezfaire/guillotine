@@ -70,6 +70,7 @@ module Guillotine
       mysql_adapter.class_eval do
         alias_method(:select, :__old_select_aliased_by_guillotine__)
         undef :__old_select_aliased_by_guillotine__
+        private :select
       end
     end
   end

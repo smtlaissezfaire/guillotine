@@ -39,6 +39,8 @@ module Guillotine
       before :each do
         @cache.row_selector = @row_selector
         @mysql_adapter = Class.new do
+          
+        private
           def select
           end
         end
@@ -102,10 +104,15 @@ module Guillotine
         @mysql_adapter.instance_method(:select).should == old_select
       end
       
-      it "should remove the method __old_select_aliased_by_guillotine__ (it should not leave any dangling methods)" do
-        old_select = @mysql_adapter.instance_methods(false)
+      it "should remove the method __old_select_aliased_by_guillotine__" do
         cache { }
-        @mysql_adapter.instance_methods(false).should == old_select
+        @mysql_adapter.should_not respond_to(:__old_select_aliased_by_guillotine__)
+      end
+      
+      it "should not change the instance methods in the mysql adapter" do
+        lambda { 
+          cache { }
+        }.should_not change(@mysql_adapter, :instance_methods)
       end
     end
   end

@@ -7,8 +7,13 @@ describe "Creating a cache for 10 minutes" do
     end
   end
   
-  it "regression: should respond to select outside of the guillotine block" do
-    ActiveRecord::Base.connection.class.instance_methods.should include("select")
+  it "regression: should have select as a private method before a cache block" do
+    ActiveRecord::Base.connection.class.private_instance_methods.should include("select")
+  end
+  
+  it "should have select as a private method after a cache block" do
+    guillotine_cache { }
+    ActiveRecord::Base.connection.class.private_instance_methods.should include("select")
   end
   
   it "regression: should have the method select" do
