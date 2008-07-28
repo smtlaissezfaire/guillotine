@@ -3,17 +3,12 @@ require File.dirname(__FILE__) + "/../spec_helper"
 module Guillotine
   describe DataStore do
     describe "data" do
-      before :each do
-        DataStore.__clear_all_tables!
-      end
-      
       it "should return an empty array of tables"do
         DataStore.tables.should == []
       end
       
       describe "with one table" do
         before :each do
-          DataStore.__clear_all_tables!
           DataStore.create_table(:tbl_one)
         end
         
@@ -50,10 +45,6 @@ module Guillotine
       end
       
       describe "drop_table" do
-        before :each do
-          DataStore.__clear_all_tables!
-        end
-        
         it "should remove the table" do
           DataStore.create_table(:foo)
           DataStore.drop_table(:foo)
