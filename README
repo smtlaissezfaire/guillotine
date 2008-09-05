@@ -49,7 +49,7 @@ Solution
 
 ==============
 
-Use cached_model, which means that the table can stay in memory as long as 
+Use Guillotine, which means that the table can stay in memory as long as 
 you use ActiveRecord's standard methods to read and write from the table.
 
 The cache is row level, so any time an individual row is written to it not
