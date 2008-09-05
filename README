@@ -78,16 +78,4 @@ Limitations
 
 ==============
 
-There are no immediate plans to support the following:
-
-      joins
-      group_by
-      select row1, row2...row n (only select *'s are planned to be supported)
-      
-Which rules out the following type of ActiveRecord Queries:
-
-      ModelName.find(:all, :joins => "...")
-      ModelName.find(:all, :group => "...")
-      ModelName.find(:all, :include => "...")
-
-At this time, there are only plans to support Mysql 5, and possibly SQLite
+At this time, there are only plans to support Mysql 5, and possibly SQLite.
