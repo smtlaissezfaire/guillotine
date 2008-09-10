@@ -16,21 +16,19 @@ module Guillotine
       end
       
       def call(a_collection)
-        return a_collection if a_collection.empty?
         @columns.size > 1 ?
-          multi_group(a_collection) :
-          single_group(first_column, a_collection)
+          multi_group(columns, a_collection) :
+          single_group(columns.first, a_collection)
       end
       
     private
       
-      def multi_group(a_collection)
-        single_group(first_column, a_collection) &
-        GroupBy.new(*all_but_first_column).call(a_collection)
-      end
-      
-      def all_but_first_column
-        columns[1..columns.size-1]
+      def multi_group(columns, a_collection)
+        first = columns.first
+        rest = columns[1..columns.size-1]
+        
+        single_group(first, a_collection) &
+        GroupBy.new(*rest).call(a_collection)
       end
       
       def single_group(a_column, a_collection)
@@ -45,10 +43,6 @@ module Guillotine
             seen_values.select{ |obj| obj == value }.size == 1
           end
         end
-      end
-      
-      def first_column
-        columns.first
       end
     end
   end
