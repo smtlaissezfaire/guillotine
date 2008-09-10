@@ -21,6 +21,11 @@ module Guillotine
           single_group(columns.first, a_collection)
       end
       
+      def to_sql
+        columns = @columns.map { |column| "#{column.to_sql}" }.join(", ")
+        "GROUP BY #{columns}"
+      end
+      
     private
       
       def multi_group(columns, a_collection)

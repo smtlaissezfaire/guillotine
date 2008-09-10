@@ -158,6 +158,19 @@ module Guillotine
           end
         end
       end
+      
+      describe "to_sql" do
+        it "should be GROUP BY a single column" do
+          @column_one.stub!(:to_sql).and_return "foo.bar"
+          GroupBy.new(@column_one).to_sql.should == "GROUP BY foo.bar"
+        end
+        
+        it "should GROUP BY two columns" do
+          @column_one.stub!(:to_sql).and_return "foo.bar"
+          @column_two.stub!(:to_sql).and_return "baz.quxx"
+          GroupBy.new(@column_one, @column_two).to_sql.should == "GROUP BY foo.bar, baz.quxx"
+        end
+      end
     end
   end
 end
