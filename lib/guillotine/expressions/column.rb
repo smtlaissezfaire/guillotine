@@ -34,7 +34,7 @@ module Guillotine
         same_column_name?(other) && same_table_name?(other)
       end
       
-   protected
+    protected
       
       def table_name?
         @table_name ? true : false
