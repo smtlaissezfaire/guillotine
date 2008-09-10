@@ -23,11 +23,7 @@ module Guillotine
       end
       
       def ==(other)
-        if both_have_tables?(other)
-          eql?(other)
-        else
-          same_column_name?(other)
-        end
+        both_have_tables?(other) ? eql?(other) : same_column_name?(other)
       end
       
       def eql?(other)
