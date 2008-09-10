@@ -21,6 +21,34 @@ module Guillotine
           column_name.to_s
         end
       end
+      
+      def ==(other)
+        if only_one_has_table_name?(other)
+          same_column_name?(other)
+        else
+          same_column_name?(other) && same_table_name?(other)
+        end
+      end
+      
+   protected
+      
+      def table_name?
+        @table_name ? true : false
+      end
+      
+    private
+      
+      def only_one_has_table_name?(other)
+        table_name? && !other.table_name? || other.table_name? && !table_name?
+      end
+      
+      def same_table_name?(other)
+        @table_name == other.table_name
+      end
+      
+      def same_column_name?(second)
+        @column_name == second.column_name
+      end
     end
   end
 end

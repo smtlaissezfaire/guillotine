@@ -59,6 +59,43 @@ module Guillotine
           Column.new(:foo).to_sql.should == "foo"
         end
       end
+      
+      describe "==" do
+        it "should be equal if one has a table name, and one doesn't (with the same columns)" do
+          col1 = Column.new("foo.bar")
+          col2 = Column.new("bar")
+          col1.should == col2
+          col2.should == col1
+        end
+        
+        it "should not be equal with different table names" do
+          col1 = Column.new("bar.baz")
+          col2 = Column.new("foo.baz")
+          col1.should_not == col2
+          col2.should_not == col1
+        end
+        
+        it "should not be equal with different column names" do
+          col1 = Column.new("foo.bar")
+          col2 = Column.new("foo.baz")
+          col1.should_not == col2
+          col2.should_not == col1
+        end
+        
+        it "should be equal with the same table and column name" do
+          col1 = Column.new("foo.bar")
+          col2 = Column.new("foo.bar")
+          col1.should == col2
+          col2.should == col1
+        end
+      end
+      
+      describe "eql?" do
+        it "should not be equal if one has a table name, and one doesn't"
+        it "should not be equal with different table names"
+        it "should not be equal with different column names"
+        it "should be equal with the same table and column name"
+      end
     end
   end
 end
