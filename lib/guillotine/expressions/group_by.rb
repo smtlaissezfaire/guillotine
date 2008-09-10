@@ -26,7 +26,11 @@ module Guillotine
       
       def multi_group(a_collection)
         single_group(first_column, a_collection) &
-        GroupBy.new(*columns[1..columns.size-1]).call(a_collection)
+        GroupBy.new(*all_but_first_column).call(a_collection)
+      end
+      
+      def all_but_first_column
+        columns[1..columns.size-1]
       end
       
       def single_group(a_column, a_collection)
