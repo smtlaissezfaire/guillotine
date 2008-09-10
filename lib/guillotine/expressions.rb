@@ -34,6 +34,7 @@ module Guillotine
 
     autoload :BacktickString,       "#{dir}/backtick_string"
     autoload :Base,                 "#{dir}/base"
+    autoload :Column,               "#{dir}/column"
     autoload :Equal,                "#{dir}/expressions"
     autoload :LessThan,             "#{dir}/expressions"
     autoload :GreaterThan,          "#{dir}/expressions"
