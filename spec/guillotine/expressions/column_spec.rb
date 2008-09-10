@@ -88,6 +88,20 @@ module Guillotine
           col1.should == col2
           col2.should == col1
         end
+        
+        it "should be equal if both have the same column name with no table" do
+          col1 = Column.new("bar")
+          col2 = Column.new("bar")
+          col1.should == col2
+          col2.should == col1
+        end
+        
+        it "should not be equal if the two have different same column names with no table" do
+          col1 = Column.new("baz")
+          col2 = Column.new("bar")
+          col1.should_not == col2
+          col2.should_not == col1
+        end
       end
       
       describe "eql?" do
@@ -117,6 +131,20 @@ module Guillotine
           col2 = Column.new("foo.bar")
           col1.should eql(col2)
           col2.should eql(col1)
+        end
+        
+        it "should NOT be equal if both have the same column name with no table" do
+          col1 = Column.new("bar")
+          col2 = Column.new("bar")
+          col1.should_not equal(col2)
+          col2.should_not equal(col1)
+        end
+        
+        it "should not be equal if the two have different same column names with no table" do
+          col1 = Column.new("baz")
+          col2 = Column.new("bar")
+          col1.should_not equal(col2)
+          col2.should_not equal(col1)
         end
       end
     end
