@@ -30,6 +30,10 @@ module Guillotine
         end
       end
       
+      def eql?(other)
+        same_column_name?(other) && same_table_name?(other)
+      end
+      
    protected
       
       def table_name?
