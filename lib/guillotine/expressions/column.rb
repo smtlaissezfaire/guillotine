@@ -26,7 +26,7 @@ module Guillotine
         if only_one_has_table_name?(other)
           same_column_name?(other)
         else
-          same_column_name?(other) && same_table_name?(other)
+          eql?(other)
         end
       end
       
