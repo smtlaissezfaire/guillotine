@@ -1,8 +1,18 @@
 module Guillotine
   module Parser
     grammar SQLGroupByClause
+      include SQLPrimitives
+      include SQLRowSupport
+      include SQLHelpers
+
       rule group_by
-        "GROUP BY " .*
+        "GROUP BY " one_or_more_column_names {
+          def eval
+            columns = one_or_more_column_names.eval
+            columns_as_syms = columns.map { |column| column.to_sym }
+            GroupBy.new(*columns_as_syms)
+          end
+        }
       end
     end
   end

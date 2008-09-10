@@ -17,7 +17,7 @@ module Guillotine
     Limit            = Expressions::Limit            unless defined?(Limit)
     OrderBy          = Expressions::OrderBy          unless defined?(OrderBy)
     OrderByPair      = Expressions::OrderByPair      unless defined?(OrderByPair)
-#     GroupBy          = Expressions::GroupBy          unless defined?(GroupBy)
+    GroupBy          = Expressions::GroupBy          unless defined?(GroupBy)
     BacktickString   = Expressions::BacktickString   unless defined?(BacktickString)
   end
   
