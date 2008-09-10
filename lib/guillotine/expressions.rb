@@ -45,6 +45,7 @@ module Guillotine
     autoload :Select,               "#{dir}/select"
     autoload :From,                 "#{dir}/from"
     autoload :OrderBy,              "#{dir}/order_by"
+    autoload :GroupBy,              "#{dir}/group_by"
     autoload :Limit,                "#{dir}/limit"
     autoload :Truncate,             "#{dir}/truncate"
     autoload :TopLevelExpression,   "#{dir}/delete"
