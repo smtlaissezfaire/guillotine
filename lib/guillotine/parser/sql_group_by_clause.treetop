@@ -1,0 +1,9 @@
+module Guillotine
+  module Parser
+    grammar SQLGroupByClause
+      rule group_by
+        "GROUP BY " .*
+      end
+    end
+  end
+end

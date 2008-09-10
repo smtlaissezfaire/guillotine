@@ -17,6 +17,7 @@ module Guillotine
     Limit            = Expressions::Limit            unless defined?(Limit)
     OrderBy          = Expressions::OrderBy          unless defined?(OrderBy)
     OrderByPair      = Expressions::OrderByPair      unless defined?(OrderByPair)
+#     GroupBy          = Expressions::GroupBy          unless defined?(GroupBy)
     BacktickString   = Expressions::BacktickString   unless defined?(BacktickString)
   end
   
@@ -29,6 +30,7 @@ module Guillotine
   require "#{parser}/sql_where_condition"
   require "#{parser}/sql_limit"
   require "#{parser}/sql_order_by_clause"
+  require "#{parser}/sql_group_by_clause"  
   require "#{parser}/sql_from_clause"
   require "#{parser}/sql_select_clause"
   require "#{parser}/sql_select"
