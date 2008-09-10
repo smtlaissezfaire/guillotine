@@ -23,10 +23,10 @@ module Guillotine
       end
       
       def ==(other)
-        if only_one_has_table_name?(other)
-          same_column_name?(other)
-        else
+        if both_have_tables?(other)
           eql?(other)
+        else
+          same_column_name?(other)
         end
       end
       
@@ -42,8 +42,8 @@ module Guillotine
       
     private
       
-      def only_one_has_table_name?(other)
-        table_name? && !other.table_name? || other.table_name? && !table_name?
+      def both_have_tables?(other)
+        table_name? && other.table_name?
       end
       
       def same_table_name?(other)
