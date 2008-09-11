@@ -15,10 +15,6 @@ module Guillotine
         Truncate.new("bar").table_name.should == :bar
       end
       
-      it "should be able to convert the table name back out to a string" do
-        Truncate.new("bar").table_name_as_string.should == "bar"
-      end
-      
       it "should have a pretty inspect" do
         Truncate.new('baz').inspect.should == "SQL Expression: Truncate table 'baz'"
       end
