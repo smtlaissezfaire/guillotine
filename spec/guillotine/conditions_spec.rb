@@ -25,6 +25,12 @@ module Guillotine
         }.should raise_error(ArgumentError)
       end
       
+      it "should raise a NotImplementedError if to_sql is called" do
+        lambda {
+          Base.new(@node1, @node2).to_sql
+        }.should raise_error(NotImplementedError, "Subclasses of Guillotine::Conditions::Base must implement to_sql")
+      end
+      
       describe AndCondition do
         before :each do
           @child_one = mock(AndCondition, :empty? => false, :call => [:one, :two])
@@ -60,6 +66,12 @@ module Guillotine
         it "should be empty when given an empty array" do
           @root.call([]).should eql([])
         end
+        
+        it "should return the proper to_sql" do
+          @child_one.stub!(:to_sql).and_return "1 = 1"
+          @child_two.stub!(:to_sql).and_return "foo = 'bar'"
+          @root.to_sql.should == "1 = 1 AND foo = 'bar'"
+        end
       end
       
       describe OrCondition do
@@ -91,6 +103,14 @@ module Guillotine
         
         it "should be empty when given an empty array" do
           @root.call([]).should eql([])
+        end
+        
+        describe "to_sql" do
+          it "should OR the expressions, with parens around the whole thing" do
+            @child_one.stub!(:to_sql).and_return "foo"
+            @child_two.stub!(:to_sql).and_return "bar"
+            @root.to_sql.should == "(foo OR bar)"
+          end
         end
       end
     end

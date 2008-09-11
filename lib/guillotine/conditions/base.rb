@@ -1,6 +1,8 @@
 module Guillotine
   module Conditions
     class Base
+      NOT_IMPLEMENTED_ERROR_MESSAGE = "Subclasses of Guillotine::Conditions::Base must implement to_sql"
+      
       def initialize(child_one, child_two)
         @children = [child_one, child_two]
       end
@@ -13,7 +15,11 @@ module Guillotine
       
       alias_method :==, :eql?
       
-      private
+      def to_sql
+        raise NotImplementedError, NOT_IMPLEMENTED_ERROR_MESSAGE
+      end
+      
+    private
       
       def first_child
         children.first
