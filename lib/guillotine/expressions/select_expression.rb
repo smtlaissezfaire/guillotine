@@ -35,6 +35,14 @@ module Guillotine
         super
       end
       
+      def to_sql
+        string = "#{@select.to_sql} #{@from.to_sql}"
+        string += "\n#{@where.to_sql}"    if @where
+        string += "\n#{@order_by.to_sql}" if @order_by
+        string += "\n#{@limit.to_sql}"    if @limit
+        string
+      end
+      
       # TODO: In the future, eql? and == should not be the
       # same in all cases.  For now, they are aliased, but
       # in the future eql? should be the case in which two queries

@@ -126,6 +126,53 @@ module Guillotine
           end
         end
       end
+      
+      describe "to_sql" do
+        before :each do
+          @select = mock("select", :to_sql => "SELECT *")
+          @from   = mock("from",   :to_sql => "FROM a_table")
+          @where  = mock("where",  :to_sql => "WHERE something IS NOT NULL")
+          @limit  = mock("limit",  :to_sql => "LIMIT 10")
+          @order_by = mock("order by", :to_sql => "ORDER BY foo, bar")
+        end
+        
+        it "should use select, from out of necessity" do
+          obj = SelectExpression.new(:select => @select, :from => @from)
+          obj.to_sql.should == "SELECT * FROM a_table"
+        end
+        
+        it "should use a where clause when given" do
+          obj = SelectExpression.new(:select => @select, :from => @from, :where => @where)
+          obj.to_sql.should == "SELECT * FROM a_table\nWHERE something IS NOT NULL"
+        end
+        
+        it "should use a limit clause when given" do
+          obj = SelectExpression.new(:select => @select, :from => @from, :limit => @limit)
+          obj.to_sql.should == "SELECT * FROM a_table\nLIMIT 10"
+        end
+        
+        it "should use an ORDER BY clause when given" do
+          obj = SelectExpression.new(:select => @select, :from => @from, :order_by => @order_by)
+          obj.to_sql.should == "SELECT * FROM a_table\nORDER BY foo, bar"
+        end
+        
+        it "should use a GROUP BY"
+        
+        it "should use an OFFSET"
+        
+        it "should transform any joins"
+        
+        it "should use all of them, in the right order" do
+          obj = SelectExpression.new({
+            :select   => @select,
+            :from     => @from,
+            :order_by => @order_by,
+            :limit    => @limit
+          })
+          string = "SELECT * FROM a_table\nORDER BY foo, bar\nLIMIT 10"
+          obj.to_sql.should == string
+        end
+      end
     end
   end
 end
