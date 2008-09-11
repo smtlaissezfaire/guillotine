@@ -8,7 +8,7 @@ module Guillotine
       attr_reader :table_name
       
       def inspect
-        "SQL Expression: Truncate table '#{@table_name}'"
+        "SQL Expression: #{to_sql}"
       end
       
       def call(collection)
@@ -20,7 +20,7 @@ module Guillotine
       end
       
       def to_sql
-        "TRUNCATE TABLE #{@table_name}"
+        "TRUNCATE TABLE `#{@table_name}`"
       end
     end
   end

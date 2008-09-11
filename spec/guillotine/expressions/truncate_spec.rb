@@ -16,11 +16,11 @@ module Guillotine
       end
       
       it "should have a pretty inspect" do
-        Truncate.new('baz').inspect.should == "SQL Expression: Truncate table 'baz'"
+        Truncate.new('baz').inspect.should == "SQL Expression: TRUNCATE TABLE `baz`"
       end
       
       it "should use the proper table name in the inspect" do
-        Truncate.new('foo').inspect.should == "SQL Expression: Truncate table 'foo'"
+        Truncate.new('foo').inspect.should == "SQL Expression: TRUNCATE TABLE `foo`"
       end
       
       describe "called with a collection" do
@@ -36,12 +36,12 @@ module Guillotine
       end
       
       describe "to_sql" do
-        it "should be 'TRUNCATE TABLE foo'" do
-          Truncate.new(:foo).to_sql.should == "TRUNCATE TABLE foo"
+        it "should be 'TRUNCATE TABLE `foo`'" do
+          Truncate.new(:foo).to_sql.should == "TRUNCATE TABLE `foo`"
         end
         
         it "should use the table name" do
-          Truncate.new(:bar).to_sql.should == "TRUNCATE TABLE bar"          
+          Truncate.new(:bar).to_sql.should == "TRUNCATE TABLE `bar`"
         end
       end
     end
