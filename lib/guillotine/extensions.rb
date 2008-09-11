@@ -6,7 +6,8 @@
 #   raise LoadError, "You need to install the facets gem (sudo gem install facets)"
 # end
 
-require File.dirname(__FILE__) + "/extensions/object"
-require File.dirname(__FILE__) + "/extensions/string"
-require File.dirname(__FILE__) + "/extensions/symbol"
-require File.dirname(__FILE__) + "/extensions/fixnum"
+dir = File.dirname(__FILE__)
+require "#{dir}/extensions/object"
+require "#{dir}/extensions/string"
+require "#{dir}/extensions/symbol"
+require "#{dir}/extensions/fixnum"
