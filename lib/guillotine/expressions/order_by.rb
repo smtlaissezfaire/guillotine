@@ -28,6 +28,10 @@ module Guillotine
       def call(collection)
         pairs.reverse.inject(collection) { |collection, pair| pair.call(collection) }
       end
+      
+      def to_sql
+        "ORDER BY #{@pairs.map { |pair| pair.to_sql }.join(", ")}"
+      end
     end
     
     class OrderByPair
@@ -61,6 +65,10 @@ module Guillotine
       
       alias_method :descending?, :desc?
       alias_method :ascending?, :asc?
+      
+      def to_sql
+        "#{column} #{sort}"
+      end
     end
   end
 end

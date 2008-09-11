@@ -124,6 +124,29 @@ module Guillotine
           end
         end
       end
+      
+      describe "to_sql" do
+        before :each do
+          @pair_one = mock 'order by pair 1'
+          @pair_two = mock 'order by pair 2'
+        end
+        
+        it "should return ORDER BY pair1 when given one pair" do
+          @pair_one.stub!(:to_sql).and_return 'foo'
+          OrderBy.new(@pair_one).to_sql.should == "ORDER BY foo"
+        end
+        
+        it "should use the to_sql method of the pair" do
+          @pair_one.stub!(:to_sql).and_return 'bar'
+          OrderBy.new(@pair_one).to_sql.should == "ORDER BY bar"
+        end
+        
+        it "should return two pairs joined with a comma" do
+          @pair_one.stub!(:to_sql).and_return 'bar'
+          @pair_two.stub!(:to_sql).and_return "baz"
+          OrderBy.new(@pair_one, @pair_two).to_sql.should == "ORDER BY bar, baz"
+        end
+      end
     end
     
     describe OrderByPair do
@@ -208,6 +231,28 @@ module Guillotine
             collection = [{ :id => 2 }, { :id => 1 }]
             @pair.call(collection).should == [{ :id => 2 }, { :id => 1 }]
           end
+        end
+      end
+      
+      describe "to_sql" do
+        it "should return foo ASC when foo ASC is init'ed" do
+          obj = OrderByPair.new(:foo, OrderByPair::ASC)
+          obj.to_sql.should == "foo ASC"
+        end
+        
+        it "should use the proper table name" do
+          obj = OrderByPair.new(:bar, OrderByPair::ASC)
+          obj.to_sql.should == "bar ASC"
+        end
+        
+        it "should use ASC, even if not specified" do
+          obj = OrderByPair.new(:bar)
+          obj.to_sql.should == "bar ASC"
+        end
+        
+        it "should use DESC if specified" do
+          obj = OrderByPair.new(:bar, OrderByPair::DESC)
+          obj.to_sql.should == "bar DESC"
         end
       end
     end
