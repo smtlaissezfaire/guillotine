@@ -93,6 +93,7 @@ Unclassified:
    - A rails plugin
 
 - flog reports, spec reports.  take rake tasks from fixture replement
+- optional syntax highlighting with the colored gem
 
 
 Other Thoughts:
