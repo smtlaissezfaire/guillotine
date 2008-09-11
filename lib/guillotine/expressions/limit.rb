@@ -10,6 +10,10 @@ module Guillotine
       def ==(other)
         other.limit == self.limit
       end
+      
+      def to_sql
+        "LIMIT #{@limit}"
+      end
     end
   end
 end
