@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
 module Guillotine
-  module Expression
+  module Expressions
     describe SelectExpression do
       it "should have the query string" do
         SelectExpression.new(:string => "foo bar").query_string.should == "foo bar"
@@ -14,7 +14,7 @@ module Guillotine
       it "should have a pretty inspect" do
         query = "SELECT * FROM events"
         expr = SelectExpression.new(:string => query)
-        expr.inspect.should == "Guillotine::Expression::SelectExpression: SELECT * FROM events"
+        expr.inspect.should == "Guillotine::Expressions::SelectExpression: SELECT * FROM events"
       end
       
       describe "call" do
@@ -45,7 +45,7 @@ module Guillotine
           
           describe "with a limit of 1" do
             before :each do
-              @limit = Expression::Limit.new(1)
+              @limit = Expressions::Limit.new(1)
               @select = SelectExpression.new({ :select => @select_clause, :from => @from, :limit => @limit })
             end
 
@@ -58,7 +58,7 @@ module Guillotine
         describe "with a limit of 2" do
           before :each do
             @array = [1,2,3]          
-            @limit = Expression::Limit.new(2)
+            @limit = Expressions::Limit.new(2)
             @select = SelectExpression.new({ :select => @select_clause, :from => @from, :limit => @limit })
           end
           
@@ -70,7 +70,7 @@ module Guillotine
         describe "with a limit of 3" do
           before :each do
             @array = [1,2,3]          
-            @limit = Expression::Limit.new(3)
+            @limit = Expressions::Limit.new(3)
             @select = SelectExpression.new({ :select => @select_clause, :from => @from, :limit => @limit })
           end
           
@@ -82,7 +82,7 @@ module Guillotine
         describe "with a limit of 4" do
           before :each do
             @array = [1,2,3]
-            @limit = Expression::Limit.new(4)
+            @limit = Expressions::Limit.new(4)
             @select = SelectExpression.new({ :select => @select_clause, :from => @from, :limit => @limit })
           end
           
@@ -94,7 +94,7 @@ module Guillotine
         describe "with a limit of 0" do
           before :each do
             @array = [1,2,3]
-            @limit = Expression::Limit.new(0)
+            @limit = Expressions::Limit.new(0)
             @select = SelectExpression.new({ :select => @select_clause, :from => @from, :limit => @limit })
           end
           
@@ -106,8 +106,8 @@ module Guillotine
         describe "calling with order by and limit" do
           before :each do
             @collection = [{ :foo => "bar", :id => 3}, { :foo => "bar", :id => 2}]
-            order_by = Expression::OrderBy.new(Expression::OrderByPair.new(:id, :ASC))
-            @limit = Expression::Limit.new(1)
+            order_by = Expressions::OrderBy.new(Expressions::OrderByPair.new(:id, :ASC))
+            @limit = Expressions::Limit.new(1)
             @select = SelectExpression.new({ :select => @select_clause, :from => @from, :limit => @limit, :order_by => @order_by })
           end
           
