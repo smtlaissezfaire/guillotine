@@ -1,32 +1,42 @@
 module Guillotine
   module Expressions
     class Equal < Base
+      RUBY_OPERATOR = :==
+      
       def to_lambda
-        new_lambda_with_comparison(:==)
+        new_lambda_with_comparison(RUBY_OPERATOR)
       end
     end
     
     class LessThan < Base
+      RUBY_OPERATOR = :<
+      
       def to_lambda
-        new_lambda_with_comparison(:<)
+        new_lambda_with_comparison(RUBY_OPERATOR)
       end
     end
     
     class GreaterThan < Base
+      RUBY_OPERATOR = :>
+      
       def to_lambda
-        new_lambda_with_comparison(:>)
+        new_lambda_with_comparison(RUBY_OPERATOR)
       end
     end
     
     class GreaterThanOrEqualTo < Base
+      RUBY_OPERATOR = :>=
+      
       def to_lambda
-        new_lambda_with_comparison(:>=)
+        new_lambda_with_comparison(RUBY_OPERATOR)
       end
     end
     
     class LessThanOrEqualTo < Base
+      RUBY_OPERATOR = :<=
+      
       def to_lambda
-        new_lambda_with_comparison(:<=)
+        new_lambda_with_comparison(RUBY_OPERATOR)
       end
     end
     
@@ -37,6 +47,8 @@ module Guillotine
     end
     
     class IsNull < Base
+      RUBY_OPERATOR = :nil?
+      
       def initialize(key)
         super(key, nil)
       end
