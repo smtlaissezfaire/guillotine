@@ -11,6 +11,10 @@ module Guillotine
       def ==(other)
         other.columns == self.columns
       end
+      
+      def to_sql
+        "SELECT #{@columns.map { |column| column.to_sql }.join(", ")}"
+      end
     end
   end
 end
