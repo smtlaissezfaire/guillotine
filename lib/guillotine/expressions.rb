@@ -14,24 +14,35 @@ module Guillotine
     private
       
       def syntax_classes
-        @syntax_classes ||= { 
-          :"="           => Equal,
-          :"!="          => NotEqual,
-          :<             => LessThan,
-          :<=            => LessThanOrEqualTo,
-          :>             => GreaterThan,
-          :>=            => GreaterThanOrEqualTo,
-          :"IS NULL"     => IsNull,
-          :"IS NOT NULL" => IsNotNull,
-          :AND           => Guillotine::Conditions::AndCondition,
-          :OR            => Guillotine::Conditions::OrCondition
-        }
+        @syntax_classes ||= find_symbol_to_syntax_class_mapping
+      end
+      
+      def find_symbol_to_syntax_class_mapping
+        hash = { }
+        classes.map do |klass|
+          operator = klass.const_get(:SQL_OPERATOR).to_sym
+          hash[operator] = klass
+        end
+        hash
+      end
+      
+      def classes
+        [
+          Equal,
+          NotEqual,
+          LessThan,
+          LessThanOrEqualTo,
+          GreaterThan,
+          GreaterThanOrEqualTo,
+          IsNull,
+          IsNotNull,
+          Guillotine::Conditions::AndCondition,
+          Guillotine::Conditions::OrCondition
+        ]
       end
     end
-
     
     dir = File.dirname(__FILE__) + "/expressions"
-
     autoload :BacktickString,       "#{dir}/backtick_string"
     autoload :Base,                 "#{dir}/base"
     autoload :Column,               "#{dir}/column"
