@@ -21,6 +21,10 @@ module Guillotine
         collection.select { |obj| self.to_lambda.call(obj) }
       end
       
+      def to_sql
+        raise NotImplementedError, "Subclasses of Guillotine::Expression::Base must implement #to_sql"
+      end
+      
     private
       
       def new_lambda_with_comparison(comparison)
