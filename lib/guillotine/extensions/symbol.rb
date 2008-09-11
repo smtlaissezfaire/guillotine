@@ -1,5 +1,3 @@
 class Symbol
-  def to_sql
-    to_s
-  end
+  alias_method :to_sql, :to_s
 end
