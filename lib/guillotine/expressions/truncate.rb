@@ -22,6 +22,10 @@ module Guillotine
       def ==(other)
         self.table_name == other.table_name
       end
+      
+      def to_sql
+        "TRUNCATE TABLE #{@table_name}"
+      end
     end
   end
 end

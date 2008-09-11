@@ -38,6 +38,16 @@ module Guillotine
           Truncate.new("foo").call([:foo, :bar]).should == []
         end
       end
+      
+      describe "to_sql" do
+        it "should be 'TRUNCATE TABLE foo'" do
+          Truncate.new(:foo).to_sql.should == "TRUNCATE TABLE foo"
+        end
+        
+        it "should use the table name" do
+          Truncate.new(:bar).to_sql.should == "TRUNCATE TABLE bar"          
+        end
+      end
     end
   end
 end
