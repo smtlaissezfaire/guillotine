@@ -119,7 +119,7 @@ module Guillotine
          it "should truncate a single table" do
           tbl = DataStore.create_table(:foo)
           tbl << [{ :key => :value }]
-          DataStore.truncate_all_tables
+          DataStore.truncate_all_tables!
           DataStore.table(:foo).should == []
         end
         
@@ -128,7 +128,7 @@ module Guillotine
           tbl2 = DataStore.create_table(:bar)
           tbl1 << [{ :key => :value }]
           tbl2 << [{ :key => :bar }]
-          DataStore.truncate_all_tables
+          DataStore.truncate_all_tables!
           DataStore.table(:foo).should == []
           DataStore.table(:bar).should == []
         end

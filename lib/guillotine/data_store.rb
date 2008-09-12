@@ -36,7 +36,7 @@ module Guillotine
         end
       end
       
-      def truncate_all_tables
+      def truncate_all_tables!
         tables.each do |table|
           drop_table(table)
           create_table(table)

@@ -9,7 +9,7 @@ module Guillotine
       end
       
       it "should truncate all the tables in the datastore on rollback" do
-        @datastore.should_receive(:truncate_all_tables)
+        @datastore.should_receive(:truncate_all_tables!)
         @connection.rollback!
       end
       

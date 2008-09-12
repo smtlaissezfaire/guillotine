@@ -8,7 +8,7 @@ module Guillotine
       attr_reader :datastore
       
       def rollback!
-        @datastore.truncate_all_tables
+        @datastore.truncate_all_tables!
       end
     end
   end
