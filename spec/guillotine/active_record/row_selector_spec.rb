@@ -86,7 +86,6 @@ module Guillotine
             Guillotine::DataStore.should_receive(:create_table).with(:table_data)
             select("SELECT * FROM table_data WHERE foo='bar'")
           end
-          
         end
         
         describe "on second fetch" do
