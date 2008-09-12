@@ -17,6 +17,7 @@ Guillotine.module_eval do
   autoload :RakeTasks,        				"#{project}/rake"
   autoload :StatementExecutor,        "#{project}/statement_executor"
   autoload :Transactions,             "#{project}/transactions"
+  autoload :TestSupport,              "#{project}/test_support"
   
   class << self
     def execute(string)
