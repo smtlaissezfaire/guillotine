@@ -91,7 +91,6 @@ module Guillotine
             DataStore.tables.should == []
           end
         end
-
       end
       
       describe "create_table" do
@@ -113,6 +112,25 @@ module Guillotine
             DataStore.create_table(:foo, :if_exists => true)
             DataStore.tables.should == [:foo]
           end
+        end
+      end
+      
+      describe "truncate_all_tables" do
+         it "should truncate a single table" do
+          tbl = DataStore.create_table(:foo)
+          tbl << [{ :key => :value }]
+          DataStore.truncate_all_tables
+          DataStore.table(:foo).should == []
+        end
+        
+         it "should truncate a second table" do
+          tbl1 = DataStore.create_table(:foo)
+          tbl2 = DataStore.create_table(:bar)
+          tbl1 << [{ :key => :value }]
+          tbl2 << [{ :key => :bar }]
+          DataStore.truncate_all_tables
+          DataStore.table(:foo).should == []
+          DataStore.table(:bar).should == []
         end
       end
     end
