@@ -81,6 +81,32 @@ module Guillotine
           @rspec.mysql_overrider
           @rspec.mysql_overrider
         end
+        
+        describe "starting" do
+          it "should call mysql_overrider" do
+            MysqlOverrider.should_receive(:new).and_return overrider
+            @rspec.start
+          end
+          
+          it "should return true" do
+            @rspec.start.should be_true
+          end
+        end
+        
+        describe "reload" do
+          before :each do
+            @connection.stub!(:rollback!).and_return []
+          end
+          
+          it "should call the guillotine test connection's rollback! method" do
+            @connection.should_receive(:rollback!).with(no_args).and_return []
+            @rspec.reload
+          end
+          
+          it "should return true" do
+            @rspec.reload.should be_true
+          end
+        end
       end
     end
   end

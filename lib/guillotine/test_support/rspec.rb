@@ -27,6 +27,16 @@ module Guillotine
       end
       
       attr_writer :active_record_base
+      
+      def start
+        mysql_overrider
+        true
+      end
+      
+      def reload
+        connection.rollback!
+        true
+      end
     end
   end
 end
