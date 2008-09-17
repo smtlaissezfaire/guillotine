@@ -5,4 +5,6 @@ module Guillotine
     autoload :Connection,     "#{dir}/connection"
     autoload :RSpec,          "#{dir}/rspec"
   end
+  
+  RSpec = TestSupport::RSpec
 end

@@ -28,4 +28,13 @@ describe Guillotine do
     Guillotine.execute("a statement")
   end
   
+  it "should have RSpec as a top level constant, inside Guillotine" do
+    lambda { 
+      Guillotine::RSpec
+    }.should_not raise_error
+  end
+  
+  it "should have Guillotine::RSpec as an alias for Guillotine::TestSupport::RSpec" do
+    Guillotine::RSpec.should equal(Guillotine::TestSupport::RSpec)
+  end
 end
