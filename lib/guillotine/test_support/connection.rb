@@ -12,7 +12,9 @@ module Guillotine
       end
       
       def select(sql)
-        DataStore.table(parse_sql(sql).from.table_name)
+        select = parse_sql(sql)
+        table_name = select.from.table_name
+        select.call(find_table_in_datstore(table_name))
       end
       
       def insert_sql(sql)
@@ -21,6 +23,10 @@ module Guillotine
       end
       
     private
+      
+      def find_table_in_datstore(table_name)
+        DataStore.table(table_name)
+      end
       
       def parse_sql(sql)
         Guillotine.execute(sql)

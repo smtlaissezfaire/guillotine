@@ -23,7 +23,7 @@ module Guillotine
       
       describe "select" do
         before :each do
-          @select = mock 'a select'
+          @select = mock 'a select', :call => nil
           Guillotine.stub!(:execute).and_return @select
           @from = mock 'a from clause', :table_name => :foo
           @select.stub!(:from).and_return @from
@@ -40,6 +40,13 @@ module Guillotine
         
         it "should find the table from the from clause in the data store" do
           Guillotine::DataStore.should_receive(:table).with(:foo).and_return []
+          @connection.select("SELECT * FROM foo")
+        end
+        
+        it "should call the select statement with the table name of the collection" do
+          a_collection = mock 'foo table collection'
+          Guillotine::DataStore.stub!(:table).and_return a_collection
+          @select.should_receive(:call).with(a_collection)
           @connection.select("SELECT * FROM foo")
         end
       end
