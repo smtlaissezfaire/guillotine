@@ -120,8 +120,24 @@ module Guillotine
         end
         
         describe "starting" do
+          before :each do
+            @array_of_tables = ["users"]
+            @ar_base_connection.stub!(:tables).and_return @array_of_tables
+            Guillotine::DataStore.stub!(:create_table)
+          end
+          
           it "should call mysql_overrider" do
             MysqlOverrider.should_receive(:new).and_return overrider
+            @rspec.start
+          end
+          
+          it "should find the tables in the database through the mysql connection" do
+            @ar_base_connection.should_receive(:tables).and_return @array_of_tables
+            @rspec.start
+          end
+          
+          it "should add the users table to the Guillotine::DataStore" do
+            Guillotine::DataStore.should_receive(:create_table).with("users")
             @rspec.start
           end
           

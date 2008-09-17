@@ -42,12 +42,23 @@ module Guillotine
       
       def start
         mysql_overrider
+        tables.each { |table| create_table_in_datastore(table) }
         true
       end
       
       def reload
         connection.rollback!
         true
+      end
+      
+    private
+      
+      def create_table_in_datastore(table_name)
+        Guillotine::DataStore.create_table(table_name)
+      end
+      
+      def tables
+        active_record_connection.tables
       end
     end
   end
