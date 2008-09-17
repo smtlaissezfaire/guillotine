@@ -5,13 +5,16 @@ module Guillotine
     describe MysqlOverrider do
       before :each do
         @db_connection = Class.new do
+          def insert_sql(sql, name = nil, pk = nil, id_value = nil, sequence_name = nil) #:nodoc:
+            :regular_insert
+          end
         private
           def select(sql_query)
             :regular_select
           end
         end.new
 
-        @guillotine_connection = mock 'guillotine connection'
+        @guillotine_connection = mock 'guillotine connection', :insert_sql => nil
         @adapter = MysqlOverrider.new(@db_connection, @guillotine_connection)
       end
       
@@ -64,6 +67,32 @@ module Guillotine
           @guillotine_connection.stub!(:select).and_raise
           @db_connection.should_receive(:select_aliased_from_guillotine).with("SELECT * FROM users", nil)
           @adapter.select_from_guillotine("SELECT * FROM users")
+        end
+      end
+      
+      describe "insert_sql_from_guillotine" do
+        it "should have the method insert_sql_from_guillotine" do
+          MysqlOverrider.instance_methods.should include("insert_sql_from_guillotine")
+        end
+        
+        it "should call the connections old insert method" do
+          insert_string = "INSERT INTO table (col1) VALUES (1)"
+          @db_connection.should_receive(:insert_sql_aliased_from_guillotine).with(insert_string)
+          @adapter.insert_sql_from_guillotine(insert_string)
+        end
+        
+        it "should return the connections old insert method return value" do
+          a_return_value = "foobarbaz"
+          
+          insert_string = "INSERT INTO table (col1) VALUES (1)"
+          @db_connection.should_receive(:insert_sql_aliased_from_guillotine).with(insert_string).and_return a_return_value
+          @adapter.insert_sql_from_guillotine(insert_string).should == a_return_value
+        end
+        
+        it "should insert the records the records through the connection" do
+          insert_string = "INSERT INTO table (col1) VALUES (1)"
+          @guillotine_connection.should_receive(:insert_sql).with(insert_string)
+          @adapter.insert_sql_from_guillotine(insert_string)
         end
       end
     end

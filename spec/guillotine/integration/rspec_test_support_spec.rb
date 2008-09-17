@@ -9,8 +9,12 @@ describe "Integration with rspec" do
     Guillotine::RSpec.before_each
   end
   
-  it "should find swap out the db connection" do
+  it "should swap out the db connection" do
     ActiveRecord::Base.connection.private_methods.should include("select_aliased_from_guillotine")
+  end
+  
+  it "should swap out the insert command" do
+    ActiveRecord::Base.connection.methods.should include("insert_sql_aliased_from_guillotine")
   end
   
   it "should find a record with sql" do
