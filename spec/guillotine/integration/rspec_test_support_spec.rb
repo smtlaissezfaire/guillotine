@@ -14,6 +14,7 @@ describe "Integration with rspec" do
   end
   
   it "should find a record with sql" do
+    pending 'TODO: Intercept other calls to adapter, namely INSERT, UPDATE, and DELETE'
     user_class = Class.new(ActiveRecord::Base) do
       set_table_name :users
     end
