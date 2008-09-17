@@ -1,0 +1,7 @@
+guillotine_test:
+  adapter: mysql
+  encoding: utf8
+  database: guillotine_test
+  username: root
+  password:
+  host: localhost
