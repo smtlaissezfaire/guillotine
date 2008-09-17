@@ -5,12 +5,12 @@ module Guillotine
   module TestSupport
     class RSpec
       class << self
-        def before_each
-          instance.reload
-        end
-        
         def before_all
           instance.start
+        end
+        
+        def before_each
+          instance.reload
         end
         
         def instance
