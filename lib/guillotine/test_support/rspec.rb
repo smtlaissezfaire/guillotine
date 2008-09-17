@@ -5,9 +5,21 @@ module Guillotine
   module TestSupport
     class RSpec
       class << self
-        def before_each; end
+        def before_each
+          instance.reload
+        end
         
-        def before_all; end
+        def before_all
+          instance.start
+        end
+        
+        def instance
+          @instance ||= new
+        end
+        
+        def reset_instance!
+          @instance = nil
+        end
       end
       
       def connection

@@ -3,13 +3,50 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 module Guillotine
   module TestSupport
     describe RSpec do
-      describe "interface" do
+      describe "class methods" do
+        before :each do
+          RSpec.reset_instance!
+          @rspec_instance = mock 'an rspec instance'
+        end
+        
         it "should respond to before_each" do
           RSpec.should respond_to(:before_each)
         end
         
         it "should respond to before_all" do
           RSpec.should respond_to(:before_all)
+        end
+        
+        it "should have an instance" do
+          RSpec.instance.should be_a_kind_of(RSpec)
+        end
+        
+        it "should only instantiate an instance once" do
+          RSpec.should_receive(:new).once.and_return @rspec_instance
+          RSpec.instance
+          RSpec.instance
+        end
+        
+        describe "before all" do
+          before :each do
+            RSpec.stub!(:new).and_return @rspec_instance
+          end
+          
+          it "should call the instance's start method" do
+            @rspec_instance.should_receive(:start).and_return true
+            RSpec.before_all
+          end
+        end
+        
+        describe "before each" do
+          before :each do
+            RSpec.stub!(:new).and_return @rspec_instance
+          end
+          
+          it "should call the instance's reload method" do
+            @rspec_instance.should_receive(:reload).and_return true
+            RSpec.before_each
+          end
         end
       end
       
