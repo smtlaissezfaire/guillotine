@@ -10,6 +10,10 @@ module Guillotine
       def rollback!
         @datastore.truncate_all_tables!
       end
+      
+      def select(sql)
+        DataStore.table(Guillotine.execute(sql).from.table_name)
+      end
     end
   end
 end
