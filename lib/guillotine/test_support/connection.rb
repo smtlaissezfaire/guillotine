@@ -25,7 +25,7 @@ module Guillotine
     private
       
       def find_table_in_datstore(table_name)
-        DataStore.table(table_name)
+        @datastore.table(table_name)
       end
       
       def parse_sql(sql)

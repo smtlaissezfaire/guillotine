@@ -4,7 +4,7 @@ module Guillotine
   module TestSupport
     describe Connection do
       before :each do
-        @datastore = mock 'connection'
+        @datastore = mock 'datastore', :table => []
         @connection = Connection.new(@datastore)
       end
       
@@ -39,13 +39,13 @@ module Guillotine
         end
         
         it "should find the table from the from clause in the data store" do
-          Guillotine::DataStore.should_receive(:table).with(:foo).and_return []
+          @datastore.should_receive(:table).with(:foo).and_return []
           @connection.select("SELECT * FROM foo")
         end
         
         it "should call the select statement with the table name of the collection" do
           a_collection = mock 'foo table collection'
-          Guillotine::DataStore.stub!(:table).and_return a_collection
+          @datastore.stub!(:table).and_return a_collection
           @select.should_receive(:call).with(a_collection)
           @connection.select("SELECT * FROM foo")
         end
