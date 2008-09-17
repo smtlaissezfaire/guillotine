@@ -14,6 +14,11 @@ module Guillotine
       def select(sql)
         DataStore.table(Guillotine.execute(sql).from.table_name)
       end
+      
+      def insert_sql(sql)
+        insert = Guillotine.execute(sql)
+        insert.call
+      end
     end
   end
 end

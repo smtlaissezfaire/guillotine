@@ -40,6 +40,27 @@ module Guillotine
           @connection.select("SELECT * FROM foo")
         end
       end
+      
+      describe "insert_sql" do
+        before :each do
+          @insert = mock 'insert', :call => true
+          Guillotine.stub!(:execute).and_return @insert
+        end
+        
+        it "should have the method" do
+          @connection.should respond_to(:insert_sql)
+        end
+        
+        it "should call Guillotine.execute with the insert query" do
+          Guillotine.should_receive(:execute).with(@insert_query).and_return @insert
+          @connection.insert_sql(@insert_sql)
+        end
+        
+        it "should insert the row into the datastore" do
+          @insert.should_receive(:call).and_return true
+          @connection.insert_sql(@insert_sql)
+        end
+      end
     end
   end
 end
