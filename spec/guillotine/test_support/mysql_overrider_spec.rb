@@ -39,12 +39,12 @@ module Guillotine
       
       describe "select_from_db" do
         it "should call the connection's select method" do
-          @db_connection.should_receive(:select_aliased_from_guillotine).with("SELECT * FROM users")
+          @db_connection.should_receive(:select_aliased_from_guillotine).with("SELECT * FROM users", nil)
           @adapter.select_from_db("SELECT * FROM users")
         end
         
         it "should call it with the correct string" do
-          @db_connection.should_receive(:select_aliased_from_guillotine).with("SELECT * FROM people")
+          @db_connection.should_receive(:select_aliased_from_guillotine).with("SELECT * FROM people", nil)
           @adapter.select_from_db("SELECT * FROM people")
         end
       end
@@ -62,7 +62,7 @@ module Guillotine
         
         it "should call the db connection if there is an error" do
           @guillotine_connection.stub!(:select).and_raise
-          @db_connection.should_receive(:select_aliased_from_guillotine).with("SELECT * FROM users")
+          @db_connection.should_receive(:select_aliased_from_guillotine).with("SELECT * FROM users", nil)
           @adapter.select_from_guillotine("SELECT * FROM users")
         end
       end
