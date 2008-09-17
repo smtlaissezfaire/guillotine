@@ -16,6 +16,12 @@ module Guillotine
           From.new(:foo, :bar).to_sql.should == "FROM foo, bar"
         end
       end
+      
+      describe "table_name" do
+        it "should have the table name as the first table (FIXME)" do
+          From.new(:foo, :bar).table_name.should equal(:foo)
+        end
+      end
     end
   end
 end

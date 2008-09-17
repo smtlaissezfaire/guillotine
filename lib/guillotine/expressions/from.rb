@@ -18,6 +18,10 @@ module Guillotine
       def to_sql
         "FROM #{@table_names_as_array.join(", ")}"
       end
+      
+      def table_name
+        @table_names_as_array.first
+      end
     end
   end
 end
