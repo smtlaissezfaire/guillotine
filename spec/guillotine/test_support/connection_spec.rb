@@ -25,18 +25,20 @@ module Guillotine
         Connection.new.datastore.should == Guillotine::DataStore
       end
       
-      it "should have a select method" do
-        @connection.should respond_to(:select)
-      end
-      
-      it "should call Guillotine.execute with the select query given" do
-        Guillotine.should_receive(:execute).with("SELECT * FROM users").and_return @select_class
-        @connection.select("SELECT * FROM users")
-      end
-      
-      it "should find the table from the from clause in the data store" do
-        Guillotine::DataStore.should_receive(:table).with(:foo).and_return []
-        @connection.select("SELECT * FROM foo")
+      describe "select" do
+        it "should have a select method" do
+          @connection.should respond_to(:select)
+        end
+        
+        it "should call Guillotine.execute with the select query given" do
+          Guillotine.should_receive(:execute).with("SELECT * FROM users").and_return @select_class
+          @connection.select("SELECT * FROM users")
+        end
+        
+        it "should find the table from the from clause in the data store" do
+          Guillotine::DataStore.should_receive(:table).with(:foo).and_return []
+          @connection.select("SELECT * FROM foo")
+        end
       end
     end
   end
