@@ -12,12 +12,18 @@ module Guillotine
       end
       
       def select(sql)
-        DataStore.table(Guillotine.execute(sql).from.table_name)
+        DataStore.table(parse_sql(sql).from.table_name)
       end
       
       def insert_sql(sql)
-        insert = Guillotine.execute(sql)
+        insert = parse_sql(sql)
         insert.call
+      end
+      
+    private
+      
+      def parse_sql(sql)
+        Guillotine.execute(sql)
       end
     end
   end
