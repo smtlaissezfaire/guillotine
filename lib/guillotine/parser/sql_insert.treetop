@@ -1,0 +1,58 @@
+module Guillotine
+  module Parser
+    grammar SQLInsert
+      include SQLPrimitives
+      include SQLRowSupport
+      include SQLHelpers
+
+      rule base
+        "INSERT" space+ ((low_priority / delayed / high_priority) space+)? (ignore space+)?
+        ("INTO" space+)? table_name space* (list_of_columns space+)?
+        ("VALUES" / "VALUE") space* "(" space* list_of_values space* ")" 
+      end
+
+      rule low_priority
+        "LOW_PRIORITY"
+      end
+
+      rule delayed
+        "DELAYED"
+      end
+
+      rule high_priority
+        "HIGH_PRIORITY"
+      end
+
+      rule ignore
+        "IGNORE"
+      end
+
+      rule list_of_columns
+        "(" space* one_or_more_columns space* ")"
+      end
+
+      rule one_or_more_columns
+        primitive space* "," space* one_or_more_columns / primitive
+      end
+
+      rule list_of_values
+        one_or_more_values / ''
+      end
+
+      rule one_or_more_values
+        value space* "," space* one_or_more_values
+        / 
+        value
+      end
+
+      rule value
+        default_value / primitive
+      end
+
+      rule default_value
+        "DEFAULT" space* 
+        open_parens space* column_name space* close_parens
+      end
+    end
+  end
+end
