@@ -1,0 +1,135 @@
+module Guillotine
+  module Parser
+    grammar SQLChars
+      rule sql_embeded_language_char
+        left_bracket / right_bracket
+      end
+
+      rule sql_language_char
+        simple_latin_letter / digit / sql_special_char
+      end
+
+      rule simple_latin_letter
+        simple_latin_uppercase_letter / simple_latin_lowercase_letter
+      end
+
+      rule simple_latin_uppercase_letter
+        [A-Z]
+      end
+
+      rule simple_latin_lowercase_letter
+        [a-z]
+      end
+
+      rule digit
+        [0-9]
+      end
+
+      rule sql_special_char
+          space
+        / percent 
+        / ampersand 
+        / left_paren  
+        / right_paren 
+        / asterisk    
+        / plus_sign   
+        / comma       
+        / minus_sign  
+        / period      
+        / solidus
+        / colon
+        / semicolon
+        / less_than_operator
+        / equals_operator
+        / greater_than_operator
+        / question_mark
+        / underscore
+        / vertical_bar
+      end        
+
+      rule space
+        " "          
+      end
+
+      rule percent 
+        "%"
+      end
+
+      rule ampersand 
+        "&"
+      end
+
+      rule left_paren  
+        "("
+      end
+
+      rule right_paren 
+        ")"
+      end
+
+      rule asterisk    
+        "*"
+      end
+
+      rule plus_sign   
+        "+"
+      end
+
+      rule comma       
+        ","
+      end
+
+      rule minus_sign
+        "-"
+      end
+
+      rule period
+        "."
+      end
+
+      rule solidus
+        "/"
+      end
+
+      rule colon
+        ":"
+      end
+
+      rule semicolon
+        ";"
+      end
+
+      rule less_than_operator
+        "<"
+      end
+
+      rule equals_operator
+        "="
+      end
+
+      rule greater_than_operator
+        ">"
+      end
+
+      rule question_mark
+        "?"
+      end
+
+      rule underscore
+        "_"
+      end
+
+      rule vertical_bar
+        "|"
+      end
+
+      rule left_bracket
+        "["
+      end
+
+      rule right_bracket
+        "]"
+      end
+    end
+  end
+end
