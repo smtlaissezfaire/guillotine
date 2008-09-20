@@ -64,9 +64,28 @@ module Guillotine
         parse_and_eval(" ").should == []
       end
       
+      it "should turn multiple empty spaces into any empty array" do
+        parse_and_eval("         ").should == []
+      end
+      
+      it "should eval empty double quotes" do
+        pending 'todo'
+        parse_and_eval("\"\"").should == ["\"\""]
+      end
+      
+      it "should eval double quotes with text, preserving spacing" do
+        pending 'todo'
+        parse_and_eval("\"foo   bar\"").should == ["\"foo   bar\""]
+      end
+      
+      it "should eval double quotes with text in front of the quotes" do
+        pending 'todo'
+        parse_and_eval("foo  \"foo   bar\"").should == ["foo", "\"foo   bar\""]        
+      end
+      
       it "should parse single quote escaping" do
         pending 'todo'
-        parse_and_eval("'foo\\\'bar'").should == ["\'foo\\\'bar\'"]
+        parse_and_eval("'foo\\'bar'").should == ["\'foo\\\'bar\'"]
       end
       
       it "should allow double escaping of single quotes" do
