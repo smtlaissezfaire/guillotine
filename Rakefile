@@ -51,3 +51,5 @@ task :test => ["spec:rcov", "spec:verify_rcov"]
 
 desc "Build the project"
 task :build => [:treetop, :tags, :test]
+
+task :default => :spec
