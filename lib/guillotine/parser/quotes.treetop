@@ -10,7 +10,7 @@ module Guillotine
       rule one_or_more_quoted_strings
         quoted_string+ {
           def eval; 
-            elements.map { |e| e.eval }.flatten
+            elements.map { |e| e.eval }
           end
         }
       end
@@ -18,7 +18,7 @@ module Guillotine
       rule quoted_string
         "'" (!"'" .)* "'" {
           def eval
-            [text_value]
+            text_value
           end
         }
       end
