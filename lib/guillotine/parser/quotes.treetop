@@ -2,9 +2,18 @@ module Guillotine
   module Parser
     grammar Quotes
       include SQLChars
+
+      rule tokens
+        token+ { def eval; elements.map { |e| e.eval }.flatten; end } /
+        empty_string
+      end
     
       rule token
-        one_or_more_quoted_strings / unquoted_string / empty_string
+        quoted_string / word
+      end
+
+      rule word
+        string_char+ { def eval; elements.map { |e| e.text_value }.join.split(" "); end }
       end
 
       rule one_or_more_quoted_strings
