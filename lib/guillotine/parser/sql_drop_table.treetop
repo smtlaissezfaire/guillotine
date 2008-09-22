@@ -5,7 +5,7 @@ module Guillotine
       include SQLRowSupport
 
       rule drop_table
-        "DROP" (temporary)? space+ "TABLE" space+ 
+        "DROP" (temporary)? space "TABLE" space
         table_name
         (restrict / cascade)? {
           def eval
@@ -15,15 +15,15 @@ module Guillotine
       end
 
       rule temporary
-        space+ "TEMPORARY"
+        space "TEMPORARY"
       end
 
       rule restrict
-        space+ "RESTRICT"
+        space "RESTRICT"
       end
 
       rule cascade
-        space+ "CASCADE"
+        space "CASCADE"
       end
     end
   end
