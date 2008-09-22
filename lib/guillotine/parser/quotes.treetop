@@ -29,7 +29,7 @@ module Guillotine
       end
   
       rule double_quoted_string
-        double_quote (!double_quote .)* double_quote {
+        double_quote (escaped_double_quote / !double_quote .)* double_quote {
           def eval
             text_value
           end
@@ -46,6 +46,14 @@ module Guillotine
 
       rule double_quote
         "\""
+      end
+
+      rule escaped_double_quote
+        escape_char double_quote
+      end
+
+      rule escape_char
+        "\\"
       end
 
       rule single_quote

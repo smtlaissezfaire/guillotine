@@ -102,6 +102,18 @@ module Guillotine
         parse_and_eval("'foo \'bar\''").should == ["foo 'bar'"]
       end
       
+      it "should allow escaping of a double quote inside a double quote region" do
+        string = '"\""'
+        parse(string).should_not be_nil
+        parse_and_eval(string).should == ['"\""']
+      end
+      
+      it "should allow escaping of a double quote inside a double quote region, which has text" do
+        string = '"foo \" bar"'
+        parse(string).should_not be_nil
+        parse_and_eval(string).should == [string]
+      end
+      
       it "should return a quoted word with an unquoted word as two seperate words" do
         string = "'foo'bar"
         parse_and_eval(string).should == ["'foo'", "bar"]
