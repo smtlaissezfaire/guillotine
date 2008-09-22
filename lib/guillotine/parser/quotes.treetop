@@ -19,7 +19,7 @@ module Guillotine
       rule word
         string_char+ { 
           def eval
-            elements.map { |e| e.text_value }.join.split(" "); 
+            elements.map { |e| e.text_value }.join.split(" ")
           end 
         }
       end
