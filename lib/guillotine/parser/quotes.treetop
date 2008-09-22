@@ -17,17 +17,9 @@ module Guillotine
       end
 
       rule word
-        string_char+ { 
+        string_char+ {
           def eval
             elements.map { |e| e.text_value }.join.split(" ")
-          end 
-        }
-      end
-
-      rule one_or_more_quoted_strings
-        quoted_string+ {
-          def eval; 
-            elements.map { |e| e.eval }
           end
         }
       end
