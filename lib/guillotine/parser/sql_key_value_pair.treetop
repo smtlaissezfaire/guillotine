@@ -26,7 +26,7 @@ module Guillotine
       end
     
       rule is_not_null
-        "IS" space+ "NOT" space+ "NULL" {
+        "IS" space "NOT" space "NULL" {
           def eval
             { :joiner => :"IS NOT NULL" }
           end
@@ -34,7 +34,7 @@ module Guillotine
       end
     
       rule is_null
-        "IS" space+ "NULL" {
+        "IS" space "NULL" {
           def eval
             { :joiner => :"IS NULL" }
           end

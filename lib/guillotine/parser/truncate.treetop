@@ -4,7 +4,7 @@ module Guillotine
       include SQLRowSupport
     
       rule truncate
-        "TRUNCATE" space+ ("TABLE" space+)? table_name {
+        "TRUNCATE" space ("TABLE" space)? table_name {
           def eval
             Truncate.new(table_name.eval)
           end

@@ -8,11 +8,11 @@ module Guillotine
       end
 
       rule start_transaction
-        "START" space+ "TRANSACTION" with_consistent_snapshot?
+        "START" space "TRANSACTION" with_consistent_snapshot?
       end
 
       rule with_consistent_snapshot
-        space+ "WITH" space+ "CONSISTENT" space+ "SNAPSHOT"
+        space "WITH" space "CONSISTENT" space "SNAPSHOT"
       end
 
       rule begin
@@ -20,7 +20,7 @@ module Guillotine
       end
 
       rule work
-        space+ "WORK"
+        space "WORK"
       end
 
       rule commit
@@ -32,11 +32,11 @@ module Guillotine
       end
 
       rule chain
-        space+ "AND" space+ ("NO" space+)? "CHAIN"
+        space "AND" space ("NO" space)? "CHAIN"
       end
 
       rule release
-        space+ ("NO" space+)? "RELEASE"
+        space ("NO" space)? "RELEASE"
       end
 
       rule rollback

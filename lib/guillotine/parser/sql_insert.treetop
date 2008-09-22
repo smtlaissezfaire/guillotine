@@ -6,8 +6,8 @@ module Guillotine
       include SQLHelpers
 
       rule insert
-        "INSERT" space+ ((low_priority / delayed / high_priority) space+)? (ignore space+)?
-        ("INTO" space+)? table_name space* (list_of_columns space+)?
+        "INSERT" space ((low_priority / delayed / high_priority) space)? (ignore space)?
+        ("INTO" space)? table_name space* (list_of_columns space)?
         ("VALUES" / "VALUE") space* "(" space* list_of_values space* ")" 
       end
 

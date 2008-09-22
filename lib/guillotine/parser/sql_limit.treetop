@@ -4,7 +4,7 @@ module Guillotine
       include SQLPrimitives
     
       rule limit
-        "LIMIT" space+ number { def eval; Limit.new(number.eval); end }
+        "LIMIT" space number { def eval; Limit.new(number.eval); end }
       end
     end
   end

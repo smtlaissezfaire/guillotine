@@ -6,7 +6,7 @@ module Guillotine
       include SQLHelpers
     
       rule order_by
-        "ORDER" space+ "BY" space+ one_or_more_column_names_with_sort { 
+        "ORDER" space "BY" space one_or_more_column_names_with_sort { 
           def eval
             OrderBy.new(one_or_more_column_names_with_sort.eval)
           end
@@ -14,7 +14,7 @@ module Guillotine
       end
     
       rule one_or_more_column_names_with_sort
-        one_column_name_with_sort "," space+ one_or_more_column_names_with_sort {
+        one_column_name_with_sort "," space one_or_more_column_names_with_sort {
           def eval
             result1, result2 = one_column_name_with_sort.eval, one_or_more_column_names_with_sort.eval
             [result1, result2].flatten
@@ -38,7 +38,7 @@ module Guillotine
       end
     
       rule optional_sort_condition
-        space+ sort_condition { def eval; sort_condition.eval; end } / empty_string
+        space sort_condition { def eval; sort_condition.eval; end } / empty_string
       end
     
       rule sort_condition
