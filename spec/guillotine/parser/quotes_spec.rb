@@ -107,12 +107,6 @@ module Guillotine
         string = "'foo'bar"
         parse_and_eval(string).should ["'foo'", "bar"]
       end
-      
-      it "should return two sets of single quotes with no spaces in an array of two elements quoted" do
-        pending 'todo'
-        string = "'foo''bar'"
-        parse_and_eval(string).should == ["'foo'", "'bar'"]
-      end
     end
   end
 end
