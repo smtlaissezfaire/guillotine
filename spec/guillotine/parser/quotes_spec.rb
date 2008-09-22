@@ -103,9 +103,8 @@ module Guillotine
       end
       
       it "should return a quoted word with an unquoted word as two seperate words" do
-        pending 'todo'
         string = "'foo'bar"
-        parse_and_eval(string).should ["'foo'", "bar"]
+        parse_and_eval(string).should == ["'foo'", "bar"]
       end
     end
   end
