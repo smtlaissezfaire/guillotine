@@ -52,7 +52,6 @@ module Guillotine
       end
       
       it "should split two single quoted words with a space between them" do
-        pending 'todo'
         parse("'foo' 'bar'").should_not be_nil
         parse_and_eval("'foo' 'bar'").should == ["'foo'", "'bar'"]
       end
