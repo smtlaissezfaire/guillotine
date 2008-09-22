@@ -3,12 +3,20 @@ module Guillotine
     grammar Quotes
       include SQLChars
     
-      rule rest_of_string
-        unquoted_string / quoted_string / empty_string
+      rule token
+        one_or_more_quoted_strings / unquoted_string / empty_string
+      end
+
+      rule one_or_more_quoted_strings
+        quoted_string+ {
+          def eval; 
+            elements.map { |e| e.eval }.flatten
+          end
+        }
       end
 
       rule quoted_string
-        "'" (rest_of_string) "'" {
+        "'" (!"'" .)* "'" {
           def eval
             [text_value]
           end

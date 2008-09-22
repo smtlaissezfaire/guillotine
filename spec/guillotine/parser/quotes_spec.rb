@@ -46,6 +46,18 @@ module Guillotine
         parse_and_eval(string).should == [string]
       end
       
+      it "should split two single quoted words" do
+        parse("'foo''bar'").should_not be_nil
+        parse_and_eval("'foo''bar'").should == ["'foo'", "'bar'"]
+      end
+      
+      it "should split two single quoted words with a space between them" do
+        pending 'todo'
+        parse("'foo' 'bar'").should_not be_nil
+        parse_and_eval("'foo' 'bar'").should == ["'foo'", "'bar'"]
+      end
+      
+      
       it "should allow uppercase words" do
         parse_and_eval("FOO").should == ["FOO"]
       end
