@@ -57,7 +57,6 @@ module Guillotine
         parse_and_eval("'foo' 'bar'").should == ["'foo'", "'bar'"]
       end
       
-      
       it "should allow uppercase words" do
         parse_and_eval("FOO").should == ["FOO"]
       end
@@ -92,14 +91,9 @@ module Guillotine
         parse_and_eval("foo  \"foo   bar\"").should == ["foo", "\"foo   bar\""]        
       end
       
-      it "should parse single quote escaping" do
-        pending 'todo'
-        parse_and_eval("'foo\\'bar'").should == ["\'foo\\\'bar\'"]
-      end
-      
-      it "should allow double escaping of single quotes" do
-        pending 'todo'
-        parse_and_eval("'foo \'bar\''").should == ["foo 'bar'"]
+      it "should parse single quote escaping with a backslash" do
+        string = "'foo\\\'bar'"
+        parse_and_eval(string).should == [string]
       end
       
       it "should allow escaping of a double quote inside a double quote region" do

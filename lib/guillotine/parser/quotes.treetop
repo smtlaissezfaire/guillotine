@@ -37,7 +37,7 @@ module Guillotine
       end
 
       rule single_quoted_string
-        single_quote (!single_quote .)* single_quote {
+        single_quote (escaped_single_quote / !single_quote .)* single_quote {
           def eval
             text_value
           end
@@ -50,6 +50,10 @@ module Guillotine
 
       rule escaped_double_quote
         escape_char double_quote
+      end
+
+      rule escaped_single_quote
+        escape_char single_quote
       end
 
       rule escape_char
