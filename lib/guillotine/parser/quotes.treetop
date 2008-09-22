@@ -25,11 +25,31 @@ module Guillotine
       end
 
       rule quoted_string
-        "'" (!"'" .)* "'" {
+        single_quoted_string / double_quoted_string
+      end
+  
+      rule double_quoted_string
+        double_quote (!double_quote .)* double_quote {
           def eval
             text_value
           end
         }
+      end
+
+      rule single_quoted_string
+        single_quote (!single_quote .)* single_quote {
+          def eval
+            text_value
+          end
+        }
+      end
+
+      rule double_quote
+        "\""
+      end
+
+      rule single_quote
+        "'"
       end
 
       rule unquoted_string

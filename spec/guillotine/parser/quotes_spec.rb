@@ -81,17 +81,14 @@ module Guillotine
       end
       
       it "should eval empty double quotes" do
-        pending 'todo'
         parse_and_eval("\"\"").should == ["\"\""]
       end
       
       it "should eval double quotes with text, preserving spacing" do
-        pending 'todo'
         parse_and_eval("\"foo   bar\"").should == ["\"foo   bar\""]
       end
       
       it "should eval double quotes with text in front of the quotes" do
-        pending 'todo'
         parse_and_eval("foo  \"foo   bar\"").should == ["foo", "\"foo   bar\""]        
       end
       
@@ -116,7 +113,6 @@ module Guillotine
         string = "'foo''bar'"
         parse_and_eval(string).should == ["'foo'", "'bar'"]
       end
-      
     end
   end
 end
