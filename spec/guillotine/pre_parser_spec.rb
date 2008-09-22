@@ -55,17 +55,17 @@ module Guillotine
       end
     end
     
-#     it "should replace two spaces with one" do
-#       parse("foo  bar").should == "foo bar"
-#     end
+    it "should replace two spaces with one" do
+      parse("foo  bar").should == "foo bar"
+    end
     
-#     it "should replace three spaces with one" do
-#       parse("foo   bar").should == "foo bar"
-#     end
+    it "should replace three spaces with one" do
+      parse("foo   bar").should == "foo bar"
+    end
     
-#     it "should not change the spaces inside a single quote" do
-#       parse("'foo  bar'").should == "'foo  bar'"
-#     end
+    it "should not change the spaces inside a single quote" do
+      parse("'foo  bar'").should == "'foo  bar'"
+    end
     
 #       describe "quoted string" do
 #         it "should use single quotes" do

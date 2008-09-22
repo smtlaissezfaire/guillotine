@@ -6,7 +6,7 @@ module Guillotine
     
     def parse(string)
       string = remove_extra_chars(string)
-#       Guillotine::Parser::QuotesParser.new.parse(string).eval
+      Guillotine::Parser::QuotesParser.new.parse(string).eval.join(" ")
     end
     
   private
