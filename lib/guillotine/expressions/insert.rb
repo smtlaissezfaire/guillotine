@@ -21,7 +21,34 @@ module Guillotine
         s += " VALUES (#{values_as_sql})"
       end
       
-    private
+      def ==(other)
+        return false if !other.kind_of?(Insert)
+        equal_tables?(other) && equal_values?(other)
+      end
+      
+    protected
+      
+      def columns_mapped_to_values
+        hash = { }
+        columns.each_with_index do |column, index|
+          hash[column] = values[index]
+        end
+        hash
+      end
+      
+   private
+      
+      def equal_values?(other)
+        if columns
+          columns_mapped_to_values == other.columns_mapped_to_values
+        else
+          other.values == self.values
+        end
+      end
+      
+      def equal_tables?(other)
+        other.table_name == self.table_name
+      end
       
       def values_as_sql
         transform_to_sql(values) { |v| value_to_sql(v) }
