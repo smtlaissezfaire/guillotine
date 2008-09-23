@@ -63,5 +63,6 @@ module Guillotine
     autoload :TopLevelExpression,   "#{dir}/delete"
     autoload :DeleteStatement,      "#{dir}/delete"
     autoload :SelectExpression,     "#{dir}/select_expression"
+    autoload :Insert,               "#{dir}/insert"
   end
 end
