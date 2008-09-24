@@ -19,6 +19,8 @@ module Guillotine
     OrderByPair      = Expressions::OrderByPair      unless defined?(OrderByPair)
     GroupBy          = Expressions::GroupBy          unless defined?(GroupBy)
     BacktickString   = Expressions::BacktickString   unless defined?(BacktickString)
+
+    Insert           = Expressions::Insert           unless defined?(Insert)
   end
   
   parser = File.dirname(__FILE__) + "/parser"

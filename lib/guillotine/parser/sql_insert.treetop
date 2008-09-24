@@ -8,7 +8,12 @@ module Guillotine
       rule insert
         "INSERT" space ((low_priority / delayed / high_priority) space)? (ignore space)?
         ("INTO" space)? table_name space* (list_of_columns space)?
-        ("VALUES" / "VALUE") space* "(" space* list_of_values space* ")" 
+        ("VALUES" / "VALUE") space* "(" space* list_of_values space* ")" {
+          def eval
+            Insert.new(:into => table_name.eval.to_sym, 
+                       :values => [list_of_values.eval].flatten)
+          end
+        }
       end
 
       rule low_priority
@@ -36,22 +41,30 @@ module Guillotine
       end
 
       rule list_of_values
-        one_or_more_values / ''
+        one_or_more_values
+        /
+        '' { def eval; []; end }
       end
 
       rule one_or_more_values
-        value space* "," space* one_or_more_values
+        insert_value space* "," space* one_or_more_values { 
+          def eval
+            [insert_value.eval, one_or_more_values.eval]
+          end
+        }
         / 
-        value
+        insert_value  
       end
 
-      rule value
+      rule insert_value
         default_value / primitive
       end
 
       rule default_value
         "DEFAULT" space* 
-        open_parens space* column_name space* close_parens
+        open_parens space* column_name space* close_parens { 
+          def eval; "DEFAULT"; end
+        }
       end
     end
   end

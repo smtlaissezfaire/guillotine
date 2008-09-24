@@ -14,12 +14,42 @@ module Guillotine
           parse("INSERT INTO users VALUES (1)").should_not be_nil
         end
         
+        it "should parse and eval 'INSERT INTO users VALUES (1)" do
+          insert = Insert.new(:into => :users, :values => [1])
+          parse_and_eval("INSERT INTO users VALUES (1)").should == insert
+        end
+        
+        it "should parse and eval 'INSERT INTO foo VALUES (1)" do
+          insert = Insert.new(:into => :foo, :values => [1])
+          parse_and_eval("INSERT INTO foo VALUES (1)").should == insert
+        end
+        
+        it "should parse and eval 'INSERT INTO foo VALUES ()" do
+          insert = Insert.new(:into => :foo, :values => [])
+          parse_and_eval("INSERT INTO foo VALUES ()").should == insert
+        end
+        
+        it "should parse and eval 'INSERT INTO foo VALUES (1, 1)" do
+          insert = Insert.new(:into => :foo, :values => [1, 2])
+          parse_and_eval("INSERT INTO foo VALUES (1, 2)").should == insert
+        end
+        
+        it "should parse and eval two values, with a different set of values" do
+          insert = Insert.new(:into => :foo, :values => [3,2])
+          parse_and_eval("INSERT INTO foo VALUES (3,2)").should == insert
+        end
+        
         it "should not parse 'foo bar'" do
           parse("foo bar").should be_nil
         end
         
         it "should parse 'INSERT INTO users VALUES (2)" do
           parse("INSERT INTO users VALUES (2)").should_not be_nil
+        end
+        
+        it "should parse and eval 'INSERT INTO users VALUES (2)" do
+          insert = Insert.new(:into => :users, :values => [2])
+          parse_and_eval("INSERT INTO users VALUES (2)").should == insert
         end
         
         it "should parse one value, which is a number" do
@@ -36,6 +66,12 @@ module Guillotine
         
         it "should parse two primitives, with no spaces between the two primitves with the comma" do
           parse("INSERT INTO users VALUES (TRUE,TRUE)").should_not be_nil
+        end
+        
+        it "should parse and eval two true statements" do
+          pending 'todo'
+          insert = Insert.new(:into => :users, :values => [true, true])
+          parse("INSERT INTO users VALUES (TRUE,TRUE)").should == insert
         end
         
         it "should parse two primitvies, with lots of spaces between the two primitives" do
