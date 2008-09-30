@@ -231,6 +231,12 @@ module Guillotine
         
         it "should parse 'ON DUPLICATE KEY UPDATE' key=value"
         
+        str = "INSERT INTO `users` ( `updated_at` , `username` , `created_at` ) VALUES( '2008-09-29 23:28:57' )"
+        
+        it "should be able to parse #{str}" do
+          parse(str).should_not be_nil
+        end
+        
         # And others.  See the spec or http://dev.mysql.com/doc/refman/5.0/en/insert.html
       end
     end

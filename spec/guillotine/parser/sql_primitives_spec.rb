@@ -174,6 +174,10 @@ module Guillotine
         it "should parse and eval the time" do
           parse_and_eval('2008-09-29 23:28:57').should == Time.mktime("2008", "9", "29", "23", "28", "57")
         end
+        
+        it "should parse a datetime which is quoted" do
+          parse("'2008-09-29 23:28:57'").should_not be_nil
+        end
       end
     end
   end

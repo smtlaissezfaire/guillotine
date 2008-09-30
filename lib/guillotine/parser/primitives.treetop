@@ -135,7 +135,7 @@ module Guillotine
       end
 
       rule datetime
-        date space time {
+        quote? date space time quote? {
           def eval
             Time.parse(text_value)
           end
@@ -144,6 +144,10 @@ module Guillotine
 
       rule time
         two_digits ":" two_digits ":" two_digits
+      end
+
+      rule quote
+        single_quote / double_quote
       end
     end
   end
