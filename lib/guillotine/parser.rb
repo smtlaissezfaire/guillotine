@@ -1,5 +1,6 @@
 
 require "date"
+require "time"
 require "treetop"
 
 # Need to module eval here to get the require from

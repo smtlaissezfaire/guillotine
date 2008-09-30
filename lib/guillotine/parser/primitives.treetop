@@ -2,7 +2,7 @@ module Guillotine
   module Parser
     grammar SQLPrimitives
       rule primitive
-        date / boolean / quoted_string / backtick_string / number / string
+        datetime / date / boolean / quoted_string / backtick_string / number / string
       end
     
       rule space
@@ -132,6 +132,18 @@ module Guillotine
   
       rule dash
         "-" { def eval; nil; end }
+      end
+
+      rule datetime
+        date space time {
+          def eval
+            Time.parse(text_value)
+          end
+        }
+      end
+
+      rule time
+        two_digits ":" two_digits ":" two_digits
       end
     end
   end

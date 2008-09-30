@@ -165,6 +165,16 @@ module Guillotine
           parse_and_eval("2007-11-21").should == Date.new(2007, 11, 21)
         end
       end
+      
+      describe "datetime" do
+        it "should parse the date '2008-09-29 23:28:57'" do
+          parse('2008-09-29 23:28:57').should_not be_nil
+        end
+        
+        it "should parse and eval the time" do
+          parse_and_eval('2008-09-29 23:28:57').should == Time.mktime("2008", "9", "29", "23", "28", "57")
+        end
+      end
     end
   end
 end
