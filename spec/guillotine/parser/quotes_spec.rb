@@ -111,6 +111,16 @@ module Guillotine
         string = "'foo'bar"
         parse_and_eval(string).should == ["'foo'", "bar"]
       end
+      
+      it "should parse with two backticks" do
+        parse("``").should_not be_nil
+      end
+      
+      string = "INSERT INTO `users` (`updated_at`, `username`, `created_at`) VALUES('2008-09-29 22:31:32', 'smtlaissezfaire', '2008-09-29 22:31:32')"
+      
+      it "should parse the string #{string}" do
+        parse(string).should_not be_nil
+      end
     end
   end
 end
