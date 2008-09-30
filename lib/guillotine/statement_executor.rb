@@ -1,4 +1,6 @@
 module Guillotine
+  class SQLParseError < StandardError; end
+  
   class StatementExecutor
     def initialize(pre_parser, parser)
       @pre_parser = pre_parser
@@ -18,7 +20,11 @@ module Guillotine
     end
     
     def parse(string)
-      parser.parse(string)
+      if result = parser.parse(string)
+        result
+      else
+        raise Guillotine::SQLParseError, "Could not parse query: #{string}"
+      end
     end
     
     def pre_process(string)
