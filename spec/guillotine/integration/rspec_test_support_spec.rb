@@ -18,12 +18,13 @@ describe "Integration with rspec" do
   end
   
   it "should find a record with sql" do
-    pending 'TODO: Intercept other calls to adapter, namely INSERT, UPDATE, and DELETE'
-    user_class = Class.new(ActiveRecord::Base) do
-      set_table_name :users
+    pending 'TODO: Intercept other calls to adapter, namely INSERT, UPDATE, and DELETE' do
+      user_class = Class.new(ActiveRecord::Base) do
+        set_table_name :users
+      end
+      
+      first_user = user_class.create!(:username => "smtlaissezfaire")
+      user_class.find(:all).should == [first_user]
     end
-    
-    first_user = user_class.create!(:username => "smtlaissezfaire")
-    user_class.find(:all).should == [first_user]
   end
 end

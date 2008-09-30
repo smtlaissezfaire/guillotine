@@ -30,8 +30,9 @@ module Guillotine
       end
       
       it "should parse SELECT column_name1" do
-        pending 'todo'
-        parse_and_eval("SELECT column_name1").should == Expressions::Select.new("column_name1")
+        pending 'todo' do
+          parse_and_eval("SELECT column_name1").should == Expressions::Select.new("column_name1")
+        end
       end
       
       it "should parse SELECT my_column_name" do

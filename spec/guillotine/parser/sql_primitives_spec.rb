@@ -124,8 +124,9 @@ module Guillotine
         end
         
         it "should parse '1' as true" do
-          pending 'todo'
-          parse_and_eval("1").should be_true
+          pending 'todo' do
+            parse_and_eval("1").should be_true
+          end
         end
         
         it "should parse 'true' as true"

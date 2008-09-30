@@ -238,9 +238,10 @@ module Guillotine
           end
           
           it "should modify the array, removing the elements" do
-            pending 'todo'
-            @delete.call(@collection)
-            @collection.should == [{ :foo => "bar", :id => 2 }]
+            pending 'todo' do
+              @delete.call(@collection)
+              @collection.should == [{ :foo => "bar", :id => 2 }]
+            end
           end
         end
       end

@@ -52,8 +52,7 @@ module Guillotine
         end
         
         it "should parse a clause with one expression and parenthesis" do
-          pending 'should it?'
-          parse_and_eval("WHERE (foo = 7)").should eql(@equal_expression)     
+          parse_and_eval("WHERE (foo = 7)").should eql(@equal_expression)
         end
         
         it "should parse a clause with two expressions and parenthesis around them" do
@@ -110,8 +109,7 @@ module Guillotine
         end
         
         it "should parse a clause with one expression and parenthesis" do
-          pending 'should it?'
-          parse_and_eval("WHERE (foo = 7)").should eql(@equal_expression)     
+          parse_and_eval("WHERE (foo = 7)").should eql(@equal_expression)
         end
         
         it "should parse a clause with two expressions and parenthesis around them" do

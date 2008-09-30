@@ -69,9 +69,10 @@ module Guillotine
         end
         
         it "should parse and eval two true statements" do
-          pending 'todo'
-          insert = Insert.new(:into => :users, :values => [true, true])
-          parse("INSERT INTO users VALUES (TRUE,TRUE)").should == insert
+          pending 'todo' do
+            insert = Insert.new(:into => :users, :values => [true, true])
+            parse("INSERT INTO users VALUES (TRUE,TRUE)").should == insert
+          end
         end
         
         it "should parse two primitvies, with lots of spaces between the two primitives" do
