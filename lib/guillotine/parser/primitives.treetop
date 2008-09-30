@@ -2,7 +2,7 @@ module Guillotine
   module Parser
     grammar SQLPrimitives
       rule primitive
-        boolean / quoted_string / backtick_string / number / string
+        date / boolean / quoted_string / backtick_string / number / string
       end
     
       rule space
@@ -58,11 +58,15 @@ module Guillotine
       end
     
       rule double_quote
-        '"'
+        "\""
+      end
+
+      rule backtick
+        "`"
       end
     
       rule backtick_string
-        "`" string "`" {
+        backtick string backtick {
           def eval(backtick_string_class=BacktickString)
             backtick_string_class.new(text_value)
           end
@@ -86,7 +90,7 @@ module Guillotine
       end
     
       rule integer
-        [0-9]+ {
+        digit+ {
           def eval
             text_value.to_i
           end
@@ -99,6 +103,35 @@ module Guillotine
             text_value.to_f
           end
         }
+      end
+
+      rule digit
+        [0-9]
+      end
+
+      rule date
+        one:four_digits dash two:two_digits dash three:two_digits {
+          def eval
+            elements = [one.eval, two.eval, three.eval]
+            Date.new(*elements)
+          end
+        }
+      end
+
+      rule four_digits
+        two_digits two_digits {
+          def eval; text_value.to_i; end
+        }
+      end
+
+      rule two_digits
+        digit digit {
+          def eval; text_value.to_i; end
+        }
+      end
+  
+      rule dash
+        "-" { def eval; nil; end }
       end
     end
   end

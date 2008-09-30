@@ -147,6 +147,24 @@ module Guillotine
           parse_and_eval("10.123456789").should == 10.123456789
         end
       end
+      
+      describe "date" do
+        it "should parse '2008-09-29'" do
+          parse('2008-09-29').should_not be_nil
+        end
+        
+        it "should eval to the date" do
+          parse_and_eval('2008-09-29').should == Date.new(2008, 9, 29)
+        end
+        
+        it "should parse '2007-11-21" do
+          parse("2007-11-21").should_not be_nil
+        end
+        
+        it "should parse and eval to the correct date" do
+          parse_and_eval("2007-11-21").should == Date.new(2007, 11, 21)
+        end
+      end
     end
   end
 end
