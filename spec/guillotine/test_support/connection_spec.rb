@@ -53,8 +53,11 @@ module Guillotine
       
       describe "insert_sql" do
         before :each do
-          @insert = mock 'insert', :call => true
+          @insert = mock 'insert', :call => true, :into => :foo
           Guillotine.stub!(:execute).and_return @insert
+          @collection = mock 'a collection'
+          
+          @datastore.stub!(:table).and_return @collection
         end
         
         it "should have the method" do
@@ -69,6 +72,19 @@ module Guillotine
         it "should insert the row into the datastore" do
           @insert.should_receive(:call).and_return true
           @connection.insert_sql(@insert_sql)
+        end
+        
+        it "should find the table from the from clause in the data store" do
+          @insert.stub!(:into).and_return :foo
+          @datastore.should_receive(:table).with(:foo).and_return @collection
+          @connection.insert_sql("INSERT INTO foo VALUES (1)")
+        end
+        
+        it "should call it with the collection received by looking it up in the datastore" do
+          @datastore.stub!(:table).and_return @collection
+          @insert.should_receive(:call).with(@collection)
+          
+          @connection.insert_sql("INSET INTO foo VALUES (1)")
         end
       end
     end

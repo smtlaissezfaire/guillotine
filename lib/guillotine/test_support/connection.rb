@@ -19,7 +19,8 @@ module Guillotine
       
       def insert_sql(sql)
         insert = parse_sql(sql)
-        insert.call
+        collection = find_table_in_datstore(insert.into)
+        insert.call(collection)
       end
       
     private
