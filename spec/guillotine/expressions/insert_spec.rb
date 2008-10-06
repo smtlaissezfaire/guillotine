@@ -138,6 +138,24 @@ module Guillotine
         # TODO
         describe "when columns are specified on only one of the objects being compared"
       end
+      
+      describe "call" do
+        before(:each) do
+          @table = []
+        end
+        
+        it "should insert with one key and values" do
+          insert = Insert.new(:into => "foo", :columns => [:foo], :values => ["foo"])
+          insert.call(@table)
+          @table.should == [{:foo => "foo"}]
+        end
+        
+        it "should insert with two keys and values" do
+          insert = Insert.new(:into => "foo", :columns => [:foo, :bar], :values => ["foo", "bar"])
+          insert.call(@table)
+          @table.should == [{:foo => "foo", :bar => "bar"}]
+        end
+      end
     end
   end
 end

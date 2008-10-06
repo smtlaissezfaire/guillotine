@@ -26,6 +26,11 @@ module Guillotine
         equal_tables?(other) && equal_values?(other)
       end
       
+      def call(table)
+        require 'rubygems'; require 'ruby-debug'; debugger if $debug
+        table << columns_mapped_to_values
+      end
+      
     protected
       
       def columns_mapped_to_values
