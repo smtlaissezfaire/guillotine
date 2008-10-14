@@ -30,6 +30,10 @@ module Guillotine
         table << columns_mapped_to_values
       end
       
+      def eql?(other)
+        self.==(other) && columns == other.columns
+      end
+      
     protected
       
       def columns_mapped_to_values

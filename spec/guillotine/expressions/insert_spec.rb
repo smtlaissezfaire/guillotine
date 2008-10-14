@@ -158,6 +158,54 @@ module Guillotine
         end
       end
       
+      describe "eql?" do
+        before(:each) do
+          @lhs = Insert.new(:into => :foo, :values => [1])
+          @rhs = Insert.new(:into => :foo, :values => [1])
+        end
+        
+        describe "when it's not ==" do
+          it "should be false" do
+            @lhs.stub!(:==).and_return false
+            @lhs.should_not eql(@rhs)
+          end
+        end
+        
+        describe "when it's ==" do
+          before(:each) do
+            @lhs.stub!(:==).and_return true
+          end
+          
+          it "should be true if both have the same column information" do
+            @lhs.columns = [:one]
+            @rhs.columns = [:one]
+            
+            @lhs.should eql(@rhs)
+          end
+          
+          it "should be true if neither have column information" do
+            @lhs.columns = nil
+            @rhs.columns = nil
+            
+            @lhs.should eql(@rhs)
+          end
+          
+          it "should be false if the first one has column infomration, but the second doesn't" do
+            @lhs.columns = [:foo]
+            @rhs.columns = nil
+            
+            @lhs.should_not eql(@rhs)
+          end
+          
+          it "should be false if the second has column infomration, but the first doesn't" do
+            @lhs.columns = nil
+            @rhs.columns = [:foo]
+            
+            @lhs.should_not eql(@rhs)
+          end
+        end
+      end
+      
       describe "call" do
         before(:each) do
           @table = []
