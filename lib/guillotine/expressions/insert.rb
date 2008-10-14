@@ -43,7 +43,7 @@ module Guillotine
    private
       
       def equal_values?(other)
-        if columns
+        if columns && other.columns
           columns_mapped_to_values == other.columns_mapped_to_values
         else
           other.values == self.values

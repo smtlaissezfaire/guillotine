@@ -237,6 +237,24 @@ module Guillotine
           parse(str).should_not be_nil
         end
         
+        it "should be able to parse and evaluate #{str}" do
+          pending 'fixme' do
+            time = Time.parse('2008-09-29 23:28:57')
+            evaluated_string = parse_and_eval(str)
+            
+            evaluated_string.should eql(Insert.new(:into => :users, :values => [time], :columns => [:updated_at, :username, :created_at]))
+          end
+        end
+        
+        it "should equal the same expression" do
+          time = Time.parse('2008-09-29 23:28:57')
+          insert = Insert.new(:into => :users, :values => [time], :columns => [:updated_at, :username, :created_at])
+          
+          evaluated_string = parse_and_eval(str)
+          insert.should == evaluated_string
+        end
+        
+        
         # And others.  See the spec or http://dev.mysql.com/doc/refman/5.0/en/insert.html
       end
     end

@@ -136,7 +136,26 @@ module Guillotine
         end
         
         # TODO
-        describe "when columns are specified on only one of the objects being compared"
+        describe "when columns are specified on only one of the objects being compared" do
+          describe "when its the object on the RIGHT hand side being compared" do
+            
+            it "should be == with one value and the same table name" do
+              left = Insert.new(:into => :foo, :columns => [:one], :values => [1])
+              right = Insert.new(:into => :foo, :values => [1])
+              
+              left.should == right
+            end
+          end
+          
+          describe "when it's the object on the LEFT hand side being compared" do
+            it "should be == with one value and the same table name" do
+              left = Insert.new(:into => :foo, :columns => [:one], :values => [1])
+              right = Insert.new(:into => :foo, :values => [1])
+              
+              right.should == left
+            end
+          end
+        end
       end
       
       describe "call" do
