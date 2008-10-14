@@ -27,7 +27,6 @@ module Guillotine
       end
       
       def call(table)
-        require 'rubygems'; require 'ruby-debug'; debugger if $debug
         table << columns_mapped_to_values
       end
       
