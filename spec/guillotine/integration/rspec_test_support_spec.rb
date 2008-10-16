@@ -25,4 +25,13 @@ describe "Integration with rspec" do
     first_user = @user_class.create!(:username => "smtlaissezfaire")
     @user_class.find(:all, :conditions => ["username = ?", "smtlaissezfaire"]).should == [first_user]
   end
+  
+  it "should find no records if none are present" do
+    @user_class.find(:all).should == []
+  end
+  
+  it "should not find a record if it does not match the conditions" do
+    user = @user_class.create!(:username => "smtlaissezfaire")
+    @user_class.find(:all, :conditions => ["username != ?", "smtlaissezfaire"]).should == []
+  end
 end
