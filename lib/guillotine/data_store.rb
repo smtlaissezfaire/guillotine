@@ -20,8 +20,8 @@ module Guillotine
       end
       
       def <<(record)
-        if @schema_options[:auto_increment]
-          super(record.merge(@schema_options[:primary_key] => size + 1))
+        if auto_increment?
+          super(record.merge(primary_key => next_autoincrement_id))
         else
           super
         end
@@ -30,7 +30,19 @@ module Guillotine
       attr_reader :table_name
       attr_reader :schema_options
       
+      def auto_increment?
+        @schema_options[:auto_increment]
+      end
+      
+      def primary_key
+        @schema_options[:primary_key]
+      end
+      
     private
+      
+      def next_autoincrement_id
+        size + 1
+      end
       
       def check_schema_options
         if @schema_options[:auto_increment] && !@schema_options[:primary_key]
