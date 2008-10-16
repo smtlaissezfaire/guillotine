@@ -40,6 +40,85 @@ module Guillotine
         tbl.to_a.should == []
         tbl.should be_empty
       end
+      
+      describe "with auto-increment => true" do
+        describe "with the primary key 'id'" do
+          before(:each) do
+            @table = Table.new(:foo, :auto_increment => true, :primary_key => :id)
+          end
+          
+          it "should add an id field to the elemnt being inserted" do
+            record = { :foo => :bar }
+            @table << record
+            @table.to_a.first.keys.should include(:id)
+          end
+          
+          it "should add the id with value of '1' to the first element inserted" do
+            record = { :foo => :bar }
+            @table << record
+            @table.to_a.should == [{ :foo => :bar, :id => 1 }]
+          end
+          
+          it "should add the id with the value of '2' to the second element inserted" do
+            record = { :foo => :bar }
+            @table << { }
+            @table << record
+            @table.to_a.should include({ :foo => :bar, :id => 2 })
+          end
+        end
+        
+        describe "with the primary key :foo_bar_id" do
+          before(:each) do
+            @table = Table.new(:foo, :auto_increment => true, :primary_key => :foo_bar_id)
+          end
+          
+          it "should add the id with value of '1' to the first element inserted" do
+            record = { :foo => :bar }
+            @table << record
+            @table.to_a.should == [{ :foo => :bar, :foo_bar_id => 1 }]
+          end
+        end
+        
+        describe "when there is no primary key, but there is an auto-increment" do
+          it 'should raise when initializing' do
+            lambda { 
+              Table.new(:foo, :auto_increment => true)
+            }.should raise_error(Guillotine::DataStore::Table::PrimaryKeyError, "A Primary Key must be specified with auto-increment => true")
+          end
+        end
+      end
+      
+      describe "a non-auto-incrementing table", :shared => true do
+        it "should add a record without adding an :id field" do
+          record = { :foo => :bar }
+          @table << record
+          @table.to_a.should == [record]
+        end
+        
+        it "should allow a record with id field to be added" do
+          record = { :id => 7 }
+          @table << record
+          @table.to_a.should == [record]
+        end
+      end
+      
+      describe "when auto_increment => false" do
+        before(:each) do
+          @table = Table.new(:foo, :auto_increment => false)
+        end
+        
+        it_should_behave_like "a non-auto-incrementing table"
+        
+        # Fill this in
+      end
+      
+      describe "when no auto_increment option is given" do
+        before(:each) do
+          @table = Table.new(:foo)
+        end
+
+        it_should_behave_like "a non-auto-incrementing table"
+      end
     end
   end
 end
