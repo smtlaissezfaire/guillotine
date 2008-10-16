@@ -15,6 +15,12 @@ module Guillotine
     end
     
     class << self
+      
+      DEFAULT_TABLE_OPTIONS = { 
+        :primary_key => :id,
+        :auto_increment => true
+      }
+      
       def __clear_all_tables!
         @data = nil
       end
@@ -35,7 +41,8 @@ module Guillotine
         if !options[:if_exists] && table_exists?(table_name)
           raise TableAlreadyExists
         else
-          data[sym(table_name)] = []
+          table_name = sym(table_name)
+          data[table_name] = Table.new(table_name, DEFAULT_TABLE_OPTIONS)
         end
       end
       

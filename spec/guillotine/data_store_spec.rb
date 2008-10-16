@@ -112,6 +112,26 @@ module Guillotine
             DataStore.create_table(:foo, :if_exists => true)
             DataStore.tables.should == [:foo]
           end
+          
+          it "should instantiate a new Table" do
+            DataStore::Table.should_receive(:new).with(:foo, hash_including({ }))
+            DataStore.create_table(:foo)
+          end
+          
+          it "should instantiate a table with the correct name" do
+            DataStore::Table.should_receive(:new).with(:bar, hash_including({ }))
+            DataStore.create_table(:bar)
+          end
+          
+          it "should instantiate with :primary_key => :id" do
+            DataStore::Table.should_receive(:new).with(:bar, hash_including({ :primary_key => :id }))
+            DataStore.create_table(:bar)
+          end
+          
+          it "should instantiate with :auto_increment => true" do
+            DataStore::Table.should_receive(:new).with(:bar, hash_including({ :auto_increment => true }))
+            DataStore.create_table(:bar)
+          end
         end
       end
       
