@@ -2,32 +2,21 @@
 High Priority
 ===============
 
-- TRANSACTIONS
-- INSERT
 - UPDATE
-- Better WHERE class
-
+- TRANSACTIONS 
+  - at least for specs, parse them, and throw them away
 
 Medium Priority
 ================
 - DELETE (3 forms, see: http://dev.mysql.com/doc/refman/5.0/en/delete.html)
   - second form
   - third form
-- We *need* 100 % coverage of all ways data can be modified under MySQL
-- Integration with rails
-  - Intercept/Override Mysql Adapter:
-    - SELECT => #select
-    - model declarations (to add to ActiveRecord::Base)
-- Security: simple key value pairs of username, password,
-  with all access to data.  Can we encrypt this over SSL
-  (or another secure protocol) to get to the DRB process?
-- DRb, so that multiple mongrels can all talk to the same cache
-- Threading for the drb/data access
-- Write all database access to a log
 - Beef up primary key support.  We'll need to talk to the database
   at initialization to find the primary key, and whether or not
   it's an auto-incrememnt field.  For now, assume the primary key
   is named "id", and the auto-incrememnt is set to true
+- We *need* 100 % coverage of all ways data can be modified under MySQL
+- Write all database access to a log
 
 
 Low Priority:
@@ -40,7 +29,7 @@ _ CREATE TABLE
     - LIMIT with offset
     - mysql procedures (for GROUP BY)
     - mysql modifiers  (i.e. DISTINCT)
-- Joins
+    - subqueries.  Can we rewrite them as joins dynamically?
 - errors in sql parsing 
   - SQLNotUnderstood (a parsing error)
   - NotImplementedErrors (for selects which aren't implemented)
@@ -50,7 +39,12 @@ _ CREATE TABLE
   Compound conditions.  
 - REPL = read, eval, print loop.  Can we harness IRB?  Use #inspect
   to return rows, like mysql
-
+- Security: simple key value pairs of username, password,
+  with all access to data.  Can we encrypt this over SSL
+  (or another secure protocol) to get to the DRB process?
+- DRb, so that multiple mongrels can all talk to the same cache
+- Threading for the drb/data access
+- Transactins: Serious transaction processing
 
 Miscelaneous:
 ===============
@@ -58,6 +52,7 @@ Miscelaneous:
 - rake tasks:
     - building gem
     - github gem integration
+    - share with smt_gem plugin
 - profiling reports on large tables
 - when 0.1 release is done, publish gem to github & rubyforge
     
