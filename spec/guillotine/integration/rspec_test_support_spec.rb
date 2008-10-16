@@ -23,6 +23,6 @@ describe "Integration with rspec" do
     end
     
     first_user = user_class.create!(:username => "smtlaissezfaire")
-    user_class.find(:all).should == [first_user]
+    user_class.find(:all, :conditions => ["username = ?", "smtlaissezfaire"]).should == [first_user]
   end
 end
