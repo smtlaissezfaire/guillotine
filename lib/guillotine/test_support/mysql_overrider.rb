@@ -17,7 +17,7 @@ module Guillotine
       end
       
       def select_from_guillotine(sql, message=nil)
-        guillotine_connection.select(sql)
+        guillotine_connection.select(sql).map { |hash| hash.stringify_keys }
       rescue Exception
         select_from_db(sql, message)
       end

@@ -54,12 +54,12 @@ module Guillotine
       
       describe "select_from_guillotine" do
         it "should call the connection's select method" do
-          @guillotine_connection.should_receive(:select).with("SELECT * FROM users")
+          @guillotine_connection.should_receive(:select).with("SELECT * FROM users").and_return [{ :foo => "bar" }]
           @adapter.select_from_guillotine("SELECT * FROM users")
         end
         
         it "should call it with the correct string" do
-          @guillotine_connection.should_receive(:select).with("SELECT * FROM people")
+          @guillotine_connection.should_receive(:select).with("SELECT * FROM people").and_return [{ :foo => "bar" }]
           @adapter.select_from_guillotine("SELECT * FROM people")
         end
         
@@ -67,6 +67,11 @@ module Guillotine
           @guillotine_connection.stub!(:select).and_raise
           @db_connection.should_receive(:select_aliased_from_guillotine).with("SELECT * FROM users", nil)
           @adapter.select_from_guillotine("SELECT * FROM users")
+        end
+        
+        it "should stringify the hash returned from the select method" do
+          @guillotine_connection.stub!(:select).with("SELECT * FROM people").and_return([{ :foo => "bar" }])
+          @adapter.select_from_guillotine("SELECT * FROM people").should == [{ "foo" => "bar" }]
         end
       end
       
