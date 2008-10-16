@@ -15,143 +15,242 @@ module GuillotineGuillotine1,0
       def self.assert(expression)assert23,430
       def assert(expression)assert27,512
 
-lib/guillotine/condition_tree.rb,546
+lib/guillotine/conditions/and_condition.rb,186
 module GuillotineGuillotine1,0
-  class ProperBinaryTreeProperBinaryTree2,18
-    def initialize(child_one, child_two)initialize3,43
-    def eql?(other)eql?9,169
-    def first_childfirst_child17,317
-    def second_childsecond_child21,371
-  class ConditionNode < ProperBinaryTreeConditionNode26,427
-  class ConjunctionConditionNode < ConditionNodeConjunctionConditionNode29,477
-    def call(collection)call32,666
-  class DisjunctionConditionNode < ConditionNodeDisjunctionConditionNode39,875
-    def call(collection)call40,924
+  module ConditionsConditions2,18
+    class AndCondition < BaseAndCondition3,38
+      def call(collection)call8,246
+      def to_sqlto_sql14,463
 
-lib/guillotine/data_store.rb,672
+lib/guillotine/conditions/base.rb,303
+module GuillotineGuillotine1,0
+  module ConditionsConditions2,18
+    class BaseBase3,38
+      def initialize(child_one, child_two)initialize6,165
+      def eql?(other)eql?12,303
+      def to_sqlto_sql18,448
+      def first_childfirst_child24,566
+      def second_childsecond_child28,628
+
+lib/guillotine/conditions/or_condition.rb,184
+module GuillotineGuillotine1,0
+  module ConditionsConditions2,18
+    class OrCondition < BaseOrCondition3,38
+      def call(collection)call6,100
+      def to_sqlto_sql12,306
+
+lib/guillotine/conditions.rb,69
+module GuillotineGuillotine1,0
+  module ConditionsConditions2,18
+
+lib/guillotine/data_store.rb,1200
 module GuillotineGuillotine1,0
   module DataStoreDataStore2,18
     class UnknownTable < StandardError; endUnknownTable3,37
-    class TableAlreadyExists < StandardError; end    TableAlreadyExists4,81
-      def __clear_all_tables!__clear_all_tables!7,158
-      def datadata11,225
-      def tablestables15,279
-      def table(table_name)table19,331
-      def create_table(table_name, options = { :if_exists => false })create_table23,406
-      def drop_table(table_name, options = { :if_exists => false })drop_table31,651
-      def inspectinspect39,889
-      def table_exists?(table_name)table_exists?45,971
-      def sym(string_or_symbol)sym49,1065
+    class TableAlreadyExists < StandardError; endTableAlreadyExists4,81
+    class Table < ArrayTable6,136
+      class PrimaryKeyError < StandardErrorPrimaryKeyError7,160
+        def messagemessage10,299
+      def initialize(table_name, schema_options={ }, rows=[])initialize15,372
+      def <<(record)<<22,581
+      def auto_increment?auto_increment?33,826
+      def primary_keyprimary_key37,910
+      def next_autoincrement_idnext_autoincrement_id43,1006
+      def check_schema_optionscheck_schema_options47,1072
+      def __clear_all_tables!__clear_all_tables!61,1382
+      def datadata65,1449
+      def tablestables69,1503
+      def table(table_name)table73,1555
+      def create_table(table_name, options = { :if_exists => false })create_table77,1630
+      def drop_table(table_name, options = { :if_exists => false })drop_table86,1951
+      def truncate_all_tables!truncate_all_tables!94,2189
+      def inspectinspect101,2338
+      def table_exists?(table_name)table_exists?107,2420
+      def sym(string_or_symbol)sym111,2514
 
-lib/guillotine/expression/backtick_string.rb,280
+lib/guillotine/expressions/backtick_string.rb,328
 module GuillotineGuillotine1,0
-  class BackTickStringBackTickString2,18
-    class InvalidString < StandardError; endInvalidString3,41
-    def initialize(string)initialize7,143
-    def valuevalue12,239
-    def check_string_for_backtickscheck_string_for_backticks18,320
+  module ExpressionsExpressions2,18
+    class BacktickStringBacktickString3,39
+      class InvalidString < StandardError; endInvalidString4,64
+      def initialize(string)initialize8,174
+      def valuevalue13,280
+      def check_string_for_backtickscheck_string_for_backticks19,375
 
-lib/guillotine/expression/base.rb,344
+lib/guillotine/expressions/base.rb,377
 module GuillotineGuillotine1,0
-  module ExpressionExpression2,18
-    class BaseBase3,38
-      def initialize(key, value)initialize4,53
-      def eql?(other)eql?12,200
-      def call(collection)call20,380
-      def new_lambda_with_comparison(comparison)new_lambda_with_comparison26,504
-      def key_as_symbolkey_as_symbol30,643
+  module ExpressionsExpressions2,18
+    class BaseBase3,39
+      def initialize(key, value)initialize4,54
+      def eql?(other)eql?12,201
+      def call(collection)call20,381
+      def to_sqlto_sql24,486
+      def new_lambda_with_comparison(comparison)new_lambda_with_comparison30,642
+      def key_as_symbolkey_as_symbol34,781
 
-lib/guillotine/expression/delete.rb,720
+lib/guillotine/expressions/column.rb,461
 module GuillotineGuillotine1,0
-  module ExpressionExpression2,18
-    class TopLevelExpressionTopLevelExpression3,38
-      def call(collection)call4,67
-      def empty_limit?empty_limit?14,256
-      def where!(collection)where!18,330
-      def order!(collection)order!22,440
-      def limit!(collection)limit!28,643
-      def filter_by(boolean_condition, collection)filter_by32,765
-    class DeleteStatement < TopLevelExpressionDeleteStatement37,886
-      def initialize(table_name, where_clause=nil, order_by=nil, limit=nil)initialize38,933
-      def ==(other)==47,1185
-      def call(collection)call54,1368
-      def truncate(collection)truncate63,1597
-      def truncatortruncator67,1680
+  module ExpressionsExpressions2,18
+    class ColumnColumn3,39
+      def initialize(column)initialize4,56
+      def to_sqlto_sql17,417
+      def ==(other)==25,566
+      def eql?(other)eql?29,677
+      def table_name?table_name?35,797
+      def both_have_tables?(other)both_have_tables?41,890
+      def same_table_name?(other)same_table_name?45,983
+      def same_column_name?(second)same_column_name?49,1074
 
-lib/guillotine/expression/expressions.rb,419
+lib/guillotine/expressions/delete.rb,722
 module GuillotineGuillotine1,0
-  module ExpressionExpression2,18
-    def self.classes_with_comparisonsclasses_with_comparisons3,38
-    class NotEqual < EqualNotEqual25,641
-      def to_lambdato_lambda26,668
-    class IsNull < BaseIsNull31,754
-      def initialize(key)initialize32,778
-      def to_lambdato_lambda36,845
-    class IsNotNull < IsNullIsNotNull41,928
-      def to_lambdato_lambda42,957
+  module ExpressionsExpressions2,18
+    class TopLevelExpressionTopLevelExpression3,39
+      def call(collection)call4,68
+      def empty_limit?empty_limit?14,257
+      def where!(collection)where!18,331
+      def order!(collection)order!22,441
+      def limit!(collection)limit!28,644
+      def filter_by(boolean_condition, collection)filter_by32,766
+    class DeleteStatement < TopLevelExpressionDeleteStatement37,887
+      def initialize(table_name, where_clause=nil, order_by=nil, limit=nil)initialize38,934
+      def ==(other)==47,1186
+      def call(collection)call54,1369
+      def truncate(collection)truncate63,1598
+      def truncatortruncator67,1681
 
-lib/guillotine/expression/from.rb,175
+lib/guillotine/expressions/expressions.rb,1051
 module GuillotineGuillotine1,0
-  module ExpressionExpression2,18
-    class FromFrom3,38
-      def initialize(*table_names)initialize4,53
-      def ==(other)==10,195
+  module ExpressionsExpressions2,18
+    class Equal < BaseEqual3,39
+      def to_lambdato_lambda7,120
+      def to_sqlto_sql11,207
+    class LessThan < BaseLessThan16,289
+      def to_lambdato_lambda20,388
+      def to_sqlto_sql24,475
+    class GreaterThan < BaseGreaterThan29,557
+      def to_lambdato_lambda33,659
+      def to_sqlto_sql37,746
+    class GreaterThanOrEqualTo < BaseGreaterThanOrEqualTo42,828
+      def to_lambdato_lambda46,940
+      def to_sqlto_sql50,1027
+    class LessThanOrEqualTo < BaseLessThanOrEqualTo55,1109
+      def to_lambdato_lambda59,1220
+      def to_sqlto_sql63,1307
+    class NotEqual < EqualNotEqual68,1389
+      def to_lambdato_lambda71,1449
+      def to_sqlto_sql75,1529
+    class IsNull < BaseIsNull80,1611
+      def initialize(key)initialize84,1702
+      def to_lambdato_lambda88,1769
+      def to_sqlto_sql92,1846
+    class IsNotNull < IsNullIsNotNull97,1919
+      def to_lambdato_lambda100,1990
+      def to_sqlto_sql104,2070
 
-lib/guillotine/expression/limit.rb,171
+lib/guillotine/expressions/from.rb,248
+module GuillotineGuillotine3,15
+  module ExpressionsExpressions4,33
+    class FromFrom5,54
+      def initialize(*table_names)initialize6,69
+      def ==(other)==13,255
+      def to_sqlto_sql18,400
+      def table_nametable_name22,485
+
+lib/guillotine/expressions/group_by.rb,413
 module GuillotineGuillotine1,0
-  module ExpressionExpression2,18
-    class LimitLimit3,38
-      def initialize(number)initialize4,54
-      def ==(other)==10,156
+  module ExpressionsExpressions2,18
+    class GroupByGroupBy3,39
+      def initialize(*columns)initialize4,57
+      def columncolumn10,166
+      def ==(other)==14,254
+      def call(a_collection)call18,325
+      def to_sqlto_sql24,498
+      def multi_group(columns, a_collection)multi_group31,655
+      def single_group(a_column, a_collection)single_group39,888
 
-lib/guillotine/expression/order_by.rb,516
+lib/guillotine/expressions/insert.rb,765
 module GuillotineGuillotine1,0
-  module ExpressionExpression2,18
-    class OrderByOrderBy3,38
-      module SortOptionsSortOptions4,56
-      def initialize(*columns)initialize12,283
-      def pairpair18,396
-      def ==(other)==22,474
-      def call(collection)call28,645
-    class OrderByPairOrderByPair33,781
-      def initialize(column, sort = ASC)initialize36,845
-      def ==(other)==44,1013
-      def call(collection)call49,1170
-      def asc?asc?54,1311
-      def desc?desc?58,1364
+  module ExpressionsExpressions2,18
+    class InsertInsert3,39
+      class UnknownInsertExpression < StandardError; endUnknownInsertExpression4,56
+      def initialize(options={ })initialize6,120
+      def to_sqlto_sql16,339
+      def ==(other)==24,536
+      def call(table)call29,674
+      def eql?(other)eql?33,755
+      def columns_mapped_to_valuescolumns_mapped_to_values39,866
+      def equal_values?(other)equal_values?49,1070
+      def equal_tables?(other)equal_tables?57,1286
+      def values_as_sqlvalues_as_sql61,1378
+      def transform_to_sql(collection, &blk)transform_to_sql65,1476
+      def value_to_sql(value)value_to_sql70,1632
+      def set_each_option(options)set_each_option78,1779
 
-lib/guillotine/expression/select.rb,175
+lib/guillotine/expressions/limit.rb,204
 module GuillotineGuillotine1,0
-  module ExpressionExpression2,18
-    class SelectSelect3,38
-      def initialize(*columns)initialize4,55
-      def ==(other)==11,210
+  module ExpressionsExpressions2,18
+    class LimitLimit3,39
+      def initialize(number)initialize4,55
+      def ==(other)==10,157
+      def to_sqlto_sql14,228
 
-lib/guillotine/expression/select_expression.rb,297
+lib/guillotine/expressions/order_by.rb,581
 module GuillotineGuillotine1,0
-  module ExpressionExpression2,18
-    class SelectExpression < Expression::TopLevelExpressionSelectExpression3,38
-      def initialize(hash)initialize6,130
-      def inspectinspect19,451
-      def ==(other)==23,521
-      def call(collection)call33,857
+  module ExpressionsExpressions2,18
+    class OrderByOrderBy3,39
+      module SortOptionsSortOptions4,57
+      def initialize(*columns)initialize12,284
+      def pairpair18,397
+      def ==(other)==22,475
+      def call(collection)call28,646
+      def to_sqlto_sql32,776
+    class OrderByPairOrderByPair37,883
+      def initialize(column, sort = ASC)initialize40,947
+      def ==(other)==48,1115
+      def call(collection)call53,1272
+      def asc?asc?58,1413
+      def desc?desc?62,1466
+      def to_sqlto_sql69,1598
 
-lib/guillotine/expression/truncate.rb,306
+lib/guillotine/expressions/select.rb,208
 module GuillotineGuillotine1,0
-  module ExpressionExpression2,18
-    class TruncateTruncate3,38
-      def initialize(arg1)initialize4,57
-      def table_name_as_stringtable_name_as_string10,172
-      def inspectinspect14,245
-      def call(collection)call18,347
-      def ==(other)==22,416
+  module ExpressionsExpressions2,18
+    class SelectSelect3,39
+      def initialize(*columns)initialize4,56
+      def ==(other)==11,211
+      def to_sqlto_sql15,286
 
-lib/guillotine/expression.rb,252
-module GuillotineGuillotine13,566
-  module ExpressionExpression14,584
-    class UnknownSyntaxError < StandardError; endUnknownSyntaxError15,604
-      def find_class_for(joiner)find_class_for18,677
-      def syntax_classessyntax_classes28,915
+lib/guillotine/expressions/select_expression.rb,331
+module GuillotineGuillotine1,0
+  module ExpressionsExpressions2,18
+    class SelectExpression < Expressions::TopLevelExpressionSelectExpression3,39
+      def initialize(hash)initialize6,132
+      def inspectinspect19,453
+      def ==(other)==23,523
+      def call(collection)call33,859
+      def to_sqlto_sql38,972
+
+lib/guillotine/expressions/truncate.rb,280
+module GuillotineGuillotine1,0
+  module ExpressionsExpressions2,18
+    class TruncateTruncate3,39
+      def initialize(arg1)initialize4,58
+      def inspectinspect10,173
+      def call(collection)call14,244
+      def ==(other)==18,313
+      def to_sqlto_sql22,394
+
+lib/guillotine/expressions.rb,368
+module GuillotineGuillotine1,0
+  module ExpressionsExpressions2,18
+    class UnknownSyntaxError < StandardError; endUnknownSyntaxError3,39
+      def find_class_for(joiner)find_class_for6,112
+      def syntax_classessyntax_classes16,350
+      def find_symbol_to_syntax_class_mappingfind_symbol_to_syntax_class_mapping20,456
+      def classesclasses29,686
+
+lib/guillotine/extensions/fixnum.rb,24
+class FixnumFixnum1,0
 
 lib/guillotine/extensions/object.rb,165
 module GuillotineGuillotine1,0
@@ -160,23 +259,29 @@ module GuillotineGuillotine1,0
       def object_sizeobject_size4,56
 class ObjectObject13,174
 
-lib/guillotine/extensions/string.rb,24
+lib/guillotine/extensions/string.rb,49
 class StringString1,0
+  def to_sqlto_sql4,36
+
+lib/guillotine/extensions/symbol.rb,24
+class SymbolSymbol1,0
 
 lib/guillotine/extensions.rb,0
 
-lib/guillotine/keywords.rb,65
-module GuillotineGuillotine1,0
-  module KeywordsKeywords2,18
+lib/guillotine/keywords.rb,66
+module GuillotineGuillotine3,15
+  module KeywordsKeywords4,33
 
-lib/guillotine/parser.rb,62
-module GuillotineGuillotine4,65
-  module ParserParser6,86
+lib/guillotine/parser.rb,65
+module GuillotineGuillotine8,114
+  module ParserParser10,135
 
-lib/guillotine/pre_parser.rb,99
+lib/guillotine/pre_parser.rb,199
 module GuillotineGuillotine1,0
   class PreParserPreParser2,18
-    def parse(string)parse3,36
+    def self.parse(string)parse3,36
+    def parse(string)parse7,100
+    def remove_extra_chars(string)remove_extra_chars14,264
 
 lib/guillotine/rake/emacs.rb,125
 module GuillotineGuillotine1,0
@@ -196,49 +301,217 @@ lib/guillotine/require.rb,85
 module GuillotineGuillotine1,0
     def require(file, kernel=Kernel)require13,399
 
-lib/guillotine.rb,0
+lib/guillotine/statement_executor.rb,373
+module GuillotineGuillotine1,0
+  class SQLParseError < StandardError; endSQLParseError2,18
+  class StatementExecutorStatementExecutor4,64
+    def initialize(pre_parser, parser)initialize5,90
+    def execute(string)execute12,238
+    def parse_and_eval(string)parse_and_eval18,332
+    def parse(string)parse22,401
+    def pre_process(string)pre_process30,587
 
-spec/guillotine/btree_spec.rb,34
+lib/guillotine/test_support/connection.rb,414
+module GuillotineGuillotine1,0
+  module TestSupportTestSupport2,18
+    class ConnectionConnection3,39
+      def initialize(datastore = Guillotine::DataStore)initialize4,60
+      def rollback!rollback!10,200
+      def select(sql)select14,277
+      def insert_sql(sql)insert_sql20,448
+      def find_table_in_datstore(table_name)find_table_in_datstore28,631
+      def parse_sql(sql)parse_sql32,730
+
+lib/guillotine/test_support/mysql_overrider.rb,468
+module GuillotineGuillotine1,0
+  module TestSupportTestSupport2,18
+    class MysqlOverriderMysqlOverrider3,39
+      def initialize(db_connection, guillotine_connection)initialize4,64
+      def select_from_db(sql, message=nil)select_from_db13,341
+      def select_from_guillotine(sql, message=nil)select_from_guillotine19,507
+      def insert_sql_from_guillotine(*args)insert_sql_from_guillotine25,712
+      def redefine_methods!redefine_methods!33,945
+
+lib/guillotine/test_support/rspec.rb,654
+module GuillotineGuillotine4,44
+  module TestSupportTestSupport5,62
+    class RSpecRSpec6,83
+        def before_allbefore_all8,119
+        def before_eachbefore_each12,188
+        def instanceinstance16,259
+        def reset_instance!reset_instance!20,329
+      def connectionconnection25,412
+      def active_record_baseactive_record_base29,489
+      def active_record_connectionactive_record_connection33,586
+      def mysql_overridermysql_overrider37,676
+      def startstart43,850
+      def reloadreload49,985
+      def create_table_in_datastore(table_name)create_table_in_datastore56,1080
+      def tablestables60,1200
+
+lib/guillotine/test_support.rb,71
+module GuillotineGuillotine1,0
+  module TestSupportTestSupport2,18
+
+lib/guillotine/transactions/id_generator.rb,283
+module GuillotineGuillotine3,23
+  module TransactionsTransactions4,41
+    class IdGeneratorIdGenerator5,63
+      def self.generategenerate6,85
+      def generategenerate10,147
+      def our_sha1our_sha116,226
+      def timetime20,293
+      def sha1(string)sha124,347
+
+lib/guillotine/transactions/store.rb,298
+module GuillotineGuillotine1,0
+  module TransactionsTransactions2,18
+    module StoreStore3,40
+        def instancesinstances5,77
+        def register(instance)register9,148
+        def clear_instances!clear_instances!17,444
+        def remove_instance(instance)remove_instance21,521
+
+lib/guillotine/transactions/transaction.rb,335
+module GuillotineGuillotine1,0
+  module TransactionsTransactions2,18
+    class TransactionTransaction3,40
+      def initializeinitialize4,62
+      def commitcommit9,149
+      def rollbackrollback13,202
+      def transaction_idtransaction_id17,257
+      def unregisterunregister25,435
+      def registerregister29,509
+
+lib/guillotine/transactions.rb,73
+module GuillotineGuillotine1,0
+  module TransactionsTransactions2,18
+
+lib/guillotine/version.rb,63
+module GuillotineGuillotine1,0
+  module VersionVersion2,18
+
+lib/guillotine.rb,115
+    def execute(string)execute25,893
+    def sql_parsersql_parser31,1032
+    def pre_parserpre_parser37,1135
+
+spec/guillotine/conditions_spec.rb,70
 module GuillotineGuillotine3,52
+  module ConditionsConditions4,70
+
+spec/guillotine/data_store/table_spec.rb,68
+module GuillotineGuillotine3,55
+  module DataStoreDataStore4,73
 
 spec/guillotine/data_store_spec.rb,34
 module GuillotineGuillotine3,52
 
-spec/guillotine/expression/delete_spec.rb,70
+spec/guillotine/expressions/base_spec.rb,72
 module GuillotineGuillotine3,55
-  module ExpressionExpression4,73
+  module ExpressionsExpressions4,73
 
-spec/guillotine/expression/order_by_spec.rb,70
+spec/guillotine/expressions/column_spec.rb,72
 module GuillotineGuillotine3,55
-  module ExpressionExpression4,73
+  module ExpressionsExpressions4,73
 
-spec/guillotine/expression/select_expression.rb,70
+spec/guillotine/expressions/delete_spec.rb,72
 module GuillotineGuillotine3,55
-  module ExpressionExpression4,73
+  module ExpressionsExpressions4,73
 
-spec/guillotine/expression/truncate_spec.rb,70
+spec/guillotine/expressions/from_expression_spec.rb,72
 module GuillotineGuillotine3,55
-  module ExpressionExpression4,73
+  module ExpressionsExpressions4,73
 
-spec/guillotine/expression_spec.rb,34
+spec/guillotine/expressions/group_by_spec.rb,72
+module GuillotineGuillotine3,55
+  module ExpressionsExpressions4,73
+
+spec/guillotine/expressions/insert_spec.rb,72
+module GuillotineGuillotine3,55
+  module ExpressionsExpressions4,73
+
+spec/guillotine/expressions/joiner_spec.rb,72
+module GuillotineGuillotine3,55
+  module ExpressionsExpressions4,73
+
+spec/guillotine/expressions/limit_spec.rb,72
+module GuillotineGuillotine3,55
+  module ExpressionsExpressions4,73
+
+spec/guillotine/expressions/order_by_spec.rb,72
+module GuillotineGuillotine3,55
+  module ExpressionsExpressions4,73
+
+spec/guillotine/expressions/select_expression_spec.rb,72
+module GuillotineGuillotine3,55
+  module ExpressionsExpressions4,73
+
+spec/guillotine/expressions/select_spec.rb,72
+module GuillotineGuillotine3,55
+  module ExpressionsExpressions4,73
+
+spec/guillotine/expressions/truncate_spec.rb,72
+module GuillotineGuillotine3,55
+  module ExpressionsExpressions4,73
+
+spec/guillotine/expressions_spec.rb,34
 module GuillotineGuillotine3,52
+
+spec/guillotine/extensions/integer_spec.rb,0
 
 spec/guillotine/extensions/object_spec.rb,0
 
+spec/guillotine/extensions/string_spec.rb,0
+
+spec/guillotine/extensions/symbol_spec.rb,0
+
+spec/guillotine/integration/rspec_test_support_spec.rb,0
+
+spec/guillotine/integration/spec_helper.rb,344
+module SpecHelpersSpecHelpers6,99
+  class DatabaseHelperDatabaseHelper7,118
+    def setup_database_connectionsetup_database_connection8,141
+    def establish_connectionestablish_connection13,235
+    def define_schemadefine_schema17,341
+    def read_config_fileread_config_file28,555
+    def config_file_pathconfig_file_path32,657
+
 spec/guillotine/keywords_spec.rb,34
 module GuillotineGuillotine3,52
+
+spec/guillotine/parser/quotes_spec.rb,62
+module GuillotineGuillotine3,55
+  module ParserParser4,73
 
 spec/guillotine/parser/sql_delete_spec.rb,62
 module GuillotineGuillotine3,55
   module ParserParser4,73
 
-spec/guillotine/parser/sql_from_clause_spec.rb,62
+spec/guillotine/parser/sql_from_clause_spec.rb,96
+module GuillotineGuillotine3,55
+  module ParserParser4,73
+      def from(*args)from12,239
+
+spec/guillotine/parser/sql_group_by_clause_spec.rb,62
 module GuillotineGuillotine3,55
   module ParserParser4,73
 
-spec/guillotine/parser/sql_key_value_pair_spec.rb,62
+spec/guillotine/parser/sql_insert_clause_spec.rb,62
 module GuillotineGuillotine3,55
   module ParserParser4,73
+
+spec/guillotine/parser/sql_key_value_pair_spec.rb,499
+module GuillotineGuillotine3,55
+  module ParserParser4,73
+          def equal(*args)equal14,309
+          def not_equal(*args)not_equal18,403
+          def greater_than(*args)greater_than22,504
+          def greater_than_or_equal_to(*args)greater_than_or_equal_to26,611
+          def less_than(*args)less_than30,751
+          def less_than_or_equal_to(*args)less_than_or_equal_to34,852
+          def is_null(*args)is_null38,986
+          def is_not_null(*args)is_not_null42,1073
 
 spec/guillotine/parser/sql_limit_parser_spec.rb,62
 module GuillotineGuillotine3,55
@@ -264,7 +537,15 @@ spec/guillotine/parser/sql_show_tables_spec.rb,61
 module GuillotineGuillotine1,0
   module ParserParser2,18
 
+spec/guillotine/parser/sql_spec.rb,62
+module GuillotineGuillotine3,55
+  module ParserParser4,73
+
 spec/guillotine/parser/sql_table_operations_spec.rb,62
+module GuillotineGuillotine3,55
+  module ParserParser4,73
+
+spec/guillotine/parser/sql_transaction_spec.rb,62
 module GuillotineGuillotine3,55
   module ParserParser4,73
 
@@ -282,14 +563,53 @@ module GuillotineGuillotine3,52
 
 spec/guillotine/require_spec.rb,0
 
-spec/guillotine/sql_parser/backtick_string_spec.rb,34
+spec/guillotine/sql_parser/backtick_string_spec.rb,72
 module GuillotineGuillotine3,55
+  module ExpressionsExpressions4,73
 
-spec/guillotine/sql_parser/expression_spec.rb,70
+spec/guillotine/sql_parser/expression_spec.rb,72
 module GuillotineGuillotine3,55
-  module ExpressionExpression4,73
+  module ExpressionsExpressions4,73
 
-spec/spec_helper.rb,139
-module ParserSpecHelperParserSpecHelper4,56
-  def parse(string)parse5,80
-  def parse_and_eval(string, *eval_args)parse_and_eval9,135
+spec/guillotine/statement_executor_spec.rb,34
+module GuillotineGuillotine3,52
+
+spec/guillotine/test_support/connection_spec.rb,72
+module GuillotineGuillotine3,55
+  module TestSupportTestSupport4,73
+
+spec/guillotine/test_support/mysql_overrider_spec.rb,233
+module GuillotineGuillotine3,55
+  module TestSupportTestSupport4,73
+          def insert_sql(sql, name = nil, pk = nil, id_value = nil, sequence_name = nil) #:nodoc:insert_sql8,185
+          def select(sql_query)select12,341
+
+spec/guillotine/test_support/rspec_spec.rb,113
+module GuillotineGuillotine3,55
+  module TestSupportTestSupport4,73
+        def overrideroverrider103,3315
+
+spec/guillotine/transactions/id_generator_spec.rb,74
+module GuillotineGuillotine3,55
+  module TransactionsTransactions4,73
+
+spec/guillotine/transactions/store_spec.rb,74
+module GuillotineGuillotine3,55
+  module TransactionsTransactions4,73
+
+spec/guillotine/transactions/transaction_spec.rb,74
+module GuillotineGuillotine3,55
+  module TransactionsTransactions4,73
+
+spec/guillotine/version_spec.rb,34
+module GuillotineGuillotine3,52
+
+spec/guillotine_spec.rb,0
+
+spec/regressions/or_spec.rb,36
+module GuillotineGuillotine11,490
+
+spec/spec_helper.rb,141
+module ParserSpecHelperParserSpecHelper6,90
+  def parse(string)parse7,114
+  def parse_and_eval(string, *eval_args)parse_and_eval14,251
