@@ -24,6 +24,10 @@ Medium Priority
 - DRb, so that multiple mongrels can all talk to the same cache
 - Threading for the drb/data access
 - Write all database access to a log
+- Beef up primary key support.  We'll need to talk to the database
+  at initialization to find the primary key, and whether or not
+  it's an auto-incrememnt field.  For now, assume the primary key
+  is named "id", and the auto-incrememnt is set to true
 
 
 Low Priority:
