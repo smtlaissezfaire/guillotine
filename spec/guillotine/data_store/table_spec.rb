@@ -108,8 +108,6 @@ module Guillotine
         end
         
         it_should_behave_like "a non-auto-incrementing table"
-        
-        # Fill this in
       end
       
       describe "when no auto_increment option is given" do
