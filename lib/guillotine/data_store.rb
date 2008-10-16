@@ -1,7 +1,18 @@
 module Guillotine
   module DataStore
     class UnknownTable < StandardError; end
-    class TableAlreadyExists < StandardError; end    
+    class TableAlreadyExists < StandardError; end
+    
+    class Table < Array
+      def initialize(table_name, schema_options={ }, rows=[])
+        @table_name = table_name.to_sym
+        @schema_options = schema_options
+        super(rows)
+      end
+      
+      attr_reader :table_name
+      attr_reader :schema_options
+    end
     
     class << self
       def __clear_all_tables!
