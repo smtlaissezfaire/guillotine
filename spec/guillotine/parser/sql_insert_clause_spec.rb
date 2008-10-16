@@ -238,12 +238,10 @@ module Guillotine
         end
         
         it "should be able to parse and evaluate #{str}" do
-          pending 'fixme' do
-            time = Time.parse('2008-09-29 23:28:57')
-            evaluated_string = parse_and_eval(str)
-            
-            evaluated_string.should eql(Insert.new(:into => :users, :values => [time], :columns => [:updated_at, :username, :created_at]))
-          end
+          time = Time.parse('2008-09-29 23:28:57')
+          evaluated_string = parse_and_eval(str)
+          
+          evaluated_string.should eql(Insert.new(:into => :users, :values => [time], :columns => [:updated_at, :username, :created_at]))
         end
         
         it "should equal the same expression" do
@@ -251,7 +249,14 @@ module Guillotine
           insert = Insert.new(:into => :users, :values => [time], :columns => [:updated_at, :username, :created_at])
           
           evaluated_string = parse_and_eval(str)
-          insert.should == evaluated_string
+          insert.should eql(evaluated_string)
+        end
+        
+        it "should use the correct columns in the insert clause" do
+          insert = Insert.new(:into => :tblname, :values => [1], :columns => [:foo])
+          
+          evaluated_string = parse_and_eval("INSERT INTO tblname ( foo ) VALUES (1)")
+          evaluated_string.should eql(insert)
         end
         
         
