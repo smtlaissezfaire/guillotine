@@ -7,6 +7,10 @@ describe "Integration with rspec" do
   
   before :each do
     Guillotine::RSpec.before_each
+    
+    @user_class = Class.new(ActiveRecord::Base) do
+      set_table_name :users
+    end
   end
   
   it "should swap out the db connection" do
@@ -18,11 +22,7 @@ describe "Integration with rspec" do
   end
   
   it "should find a record with sql" do
-    user_class = Class.new(ActiveRecord::Base) do
-      set_table_name :users
-    end
-    
-    first_user = user_class.create!(:username => "smtlaissezfaire")
-    user_class.find(:all, :conditions => ["username = ?", "smtlaissezfaire"]).should == [first_user]
+    first_user = @user_class.create!(:username => "smtlaissezfaire")
+    @user_class.find(:all, :conditions => ["username = ?", "smtlaissezfaire"]).should == [first_user]
   end
 end
