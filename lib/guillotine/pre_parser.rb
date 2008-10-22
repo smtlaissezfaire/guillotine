@@ -5,11 +5,18 @@ module Guillotine
     end
     
     def parse(string)
-      string = remove_extra_chars(string)
-      Guillotine::Parser::QuotesParser.new.parse(string).eval.join(" ")
+      if string = quote_parse(remove_extra_chars(string))
+        string.eval.join(" ")
+      else
+        return nil
+      end
     end
     
   private
+    
+    def quote_parse(string)
+      Guillotine::Parser::QuotesParser.new.parse(string)
+    end
     
     def remove_extra_chars(string)
       string.strip.gsub("\r", "").squeeze("\n").gsub("\n", " ")

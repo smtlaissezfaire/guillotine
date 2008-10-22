@@ -4,11 +4,12 @@ require "spec"
 require File.dirname(__FILE__) + "/../lib/guillotine"
 
 module ParserSpecHelper
+  def pre_parse(string)
+    Guillotine::PreParser.parse(string)
+  end
+  
   def parse(string)
-    begin
-      string = Guillotine::PreParser.parse(string)
-    rescue; nil; end
-    @parser.parse(string)
+    @parser.parse(pre_parse(string))
   end
   
   def parse_and_eval(string, *eval_args)

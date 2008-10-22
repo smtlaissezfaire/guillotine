@@ -82,15 +82,15 @@ module Guillotine
         end
         
         it "should not parse if it starts with a single quote, but ends in a double quote" do
-          parse("\"foo'").should be_nil
+          pre_parse("\"foo'").should be_nil
         end
         
         it "should not parse if it starts with a double quote and ends in a single quote" do
-          parse("'foo\"").should be_nil
+          pre_parse("'foo\"").should be_nil
         end
         
         it "should not parse a string which has three double quotes" do
-          parse('"foo"bar"').should be_nil
+          pre_parse('"foo"bar"').should be_nil
         end
         
         it "should match the empty string with single quotes" do
@@ -150,7 +150,7 @@ module Guillotine
       
       describe "date" do
         it "should parse '2008-09-29'" do
-          parse('2008-09-29').should_not be_nil
+          pre_parse('2008-09-29').should_not be_nil
         end
         
         it "should eval to the date" do
@@ -158,7 +158,7 @@ module Guillotine
         end
         
         it "should parse '2007-11-21" do
-          parse("2007-11-21").should_not be_nil
+          pre_parse("2007-11-21").should_not be_nil
         end
         
         it "should parse and eval to the correct date" do
@@ -168,7 +168,7 @@ module Guillotine
       
       describe "datetime" do
         it "should parse the date '2008-09-29 23:28:57'" do
-          parse('2008-09-29 23:28:57').should_not be_nil
+          pre_parse('2008-09-29 23:28:57').should_not be_nil
         end
         
         it "should parse and eval the time" do
@@ -176,7 +176,7 @@ module Guillotine
         end
         
         it "should parse a datetime which is quoted" do
-          parse("'2008-09-29 23:28:57'").should_not be_nil
+          pre_parse("'2008-09-29 23:28:57'").should_not be_nil
         end
       end
     end
