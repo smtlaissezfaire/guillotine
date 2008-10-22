@@ -23,12 +23,6 @@ module Guillotine
         parse_and_eval("WHERE            foo    =  7").should eql(@equal_expression)
       end
       
-      it "should parse a clause with a != expression" do
-        pending "FIXME" do
-          parse("WHERE foo != 7").should_not be_nil
-        end
-      end
-      
       describe "AND conditions" do
         before :each do
           @and_condition = Guillotine::Conditions::AndCondition
