@@ -45,6 +45,7 @@ module Guillotine
         / question_mark
         / underscore
         / vertical_bar
+        / not_char
       end        
 
       rule space
@@ -129,6 +130,10 @@ module Guillotine
 
       rule right_bracket
         "]"
+      end
+
+      rule not_char
+        "!"
       end
     end
   end

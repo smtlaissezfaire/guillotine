@@ -67,14 +67,28 @@ module Guillotine
       parse("'foo  bar'").should == "'foo  bar'"
     end
     
-    string = "INSERT INTO `users` (`updated_at`, `username`, `created_at`) VALUES('2008-09-29 22:31:32', 'smtlaissezfaire', '2008-09-29 22:31:32')"
-    
-    it "should parse the string #{string}" do
-      parse(string).should_not be_nil
+    describe "regression 1: A Rails generated INSERT" do
+      before(:each) do
+        @string = "INSERT INTO `users` (`updated_at`, `username`, `created_at`) VALUES('2008-09-29 22:31:32', 'smtlaissezfaire', '2008-09-29 22:31:32')"
+      end
+      
+      it "should parse the string" do
+        @pre_parser.parse(@string).should_not be_nil
+      end
+      
+      it "should parse and eval the string" do
+        @pre_parser.parse(@string).should == "INSERT INTO `users` ( `updated_at` , `username` , `created_at` ) VALUES( '2008-09-29 22:31:32' , 'smtlaissezfaire' , '2008-09-29 22:31:32' )"
+      end
     end
     
-    it "should parse and eval the string #{string}" do
-      parse(string).should == "INSERT INTO `users` ( `updated_at` , `username` , `created_at` ) VALUES( '2008-09-29 22:31:32' , 'smtlaissezfaire' , '2008-09-29 22:31:32' )"
+    describe "regression 2: A SELECT with !=" do
+      before(:each) do
+        @string = "foo != 'bar'"
+      end
+    
+      it "should parse the string" do
+        parse(@string).should == "foo != 'bar'"
+      end
     end
   end
 end
