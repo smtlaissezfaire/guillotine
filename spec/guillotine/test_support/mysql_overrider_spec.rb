@@ -32,12 +32,12 @@ module Guillotine
       
       it "should redefine select to proxy the adapter" do
         @adapter.stub!(:select_from_guillotine).and_return :guillotine_result
-        @db_connection.send(:select, "a string").should == :guillotine_result
+        @db_connection.select("a string").should equal(:guillotine_result)
       end
       
       it "should return the real result from guillotine" do
         @adapter.stub!(:select_from_guillotine).and_return :a_different_guillotine_result
-        @db_connection.send(:select, "a string").should == :a_different_guillotine_result
+        @db_connection.select("a string").should equal(:a_different_guillotine_result)
       end
       
       describe "select_from_db" do
@@ -61,12 +61,6 @@ module Guillotine
         it "should call it with the correct string" do
           @guillotine_connection.should_receive(:select).with("SELECT * FROM people").and_return [{ :foo => "bar" }]
           @adapter.select_from_guillotine("SELECT * FROM people")
-        end
-        
-        it "should call the db connection if there is an error" do
-          @guillotine_connection.stub!(:select).and_raise
-          @db_connection.should_receive(:select_aliased_from_guillotine).with("SELECT * FROM users", nil)
-          @adapter.select_from_guillotine("SELECT * FROM users")
         end
         
         it "should stringify the hash returned from the select method" do

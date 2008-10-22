@@ -18,8 +18,6 @@ module Guillotine
       
       def select_from_guillotine(sql, message=nil)
         guillotine_connection.select(sql).map { |hash| hash.stringify_keys }
-      rescue Exception
-        select_from_db(sql, message)
       end
       
       def insert_sql_from_guillotine(*args)
@@ -31,7 +29,7 @@ module Guillotine
     private
       
       def redefine_methods!
-        mysql_adapter_self = self
+        overrider = self
         
         metaclass = class << @db_connection; self; end
         
@@ -41,7 +39,7 @@ module Guillotine
             
             alias_method new_method_name, method_name
             define_method method_name do |*args|
-              mysql_adapter_self.__send__("#{method_name}_from_guillotine", *args)
+              overrider.__send__("#{method_name}_from_guillotine", *args)
             end
           end
         end
