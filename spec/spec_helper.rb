@@ -9,7 +9,11 @@ module ParserSpecHelper
   end
   
   def parse(string)
-    @parser.parse(pre_parse(string))
+    if pre_parsed_string = pre_parse(string)
+      @parser.parse(pre_parsed_string)
+    else
+      raise "* Could not pre-parse string! '#{string}'"
+    end
   end
   
   def parse_and_eval(string, *eval_args)
