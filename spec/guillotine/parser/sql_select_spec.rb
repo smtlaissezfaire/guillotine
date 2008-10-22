@@ -120,6 +120,24 @@ module Guillotine
         parse_and_eval(first_statement).should_not == parse_and_eval(second_statement)
         parse_and_eval(second_statement).should_not == parse_and_eval(first_statement)
       end
+      
+      expr = "SELECT * FROM `users`    WHERE (username != 'smtlaissezfaire') "
+      
+      it "should parse the expression #{expr}" do
+        pending 'FIXME' do
+          parse(expr).should be_true
+        end
+      end
+      
+      it "should parse and eval the expression #{expr}" do
+        pending 'FIXME' do
+          select = Expressions::Select.new("*")
+          from   = Expressions::From.new("users")
+          where  = Expressions::NotEqual.new(:username, "smtlaissezfaire")
+          
+          parse_and_eval(expr).should == @select_expression.new(:select => select, :from => from, :where => where)
+        end
+      end
     end
   end
 end
