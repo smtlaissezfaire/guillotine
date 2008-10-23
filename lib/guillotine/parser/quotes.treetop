@@ -15,9 +15,9 @@ module Guillotine
       end
 
       rule word
-        string_char+ {
+        string_chars {
           def eval
-            elements.map { |e| e.text_value }.join.split(" ")
+            text_value.split(" ")
           end
         }
       end
@@ -78,8 +78,8 @@ module Guillotine
         "" { def eval; []; end }
       end
 
-      rule string_char
-        [A-Za-z0-9\ \%\&\(\)\*\+\,\-\.\/\:\;\<\=\>\?\_\|\!\[\]]
+      rule string_chars
+        [A-Za-z0-9\ \%\&\(\)\*\+\,\-\.\/\:\;\<\=\>\?\_\|\!\[\]]+
       end
     end
   end
