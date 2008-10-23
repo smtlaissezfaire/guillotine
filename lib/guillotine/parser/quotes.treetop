@@ -1,8 +1,6 @@
 module Guillotine
   module Parser
     grammar Quotes
-      include SQLChars
-
       rule tokens
         token+ { 
           def eval
@@ -89,7 +87,7 @@ module Guillotine
       end
 
       rule string_char
-        sql_language_char / sql_embeded_language_char
+        [A-Za-z0-9\ \%\&\(\)\*\+\,\-\.\/\:\;\<\=\>\?\_\|\!\[\]]
       end
     end
   end
