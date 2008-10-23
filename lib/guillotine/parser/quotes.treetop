@@ -74,14 +74,6 @@ module Guillotine
         "'"
       end
 
-      rule unquoted_string
-        string_char+ {
-          def eval
-            text_value.split(" ")
-          end
-        }
-      end
-
       rule empty_string
         "" { def eval; []; end }
       end
