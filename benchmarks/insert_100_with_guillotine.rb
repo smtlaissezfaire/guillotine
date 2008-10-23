@@ -42,7 +42,7 @@ def run_benchmark(name)
   
   Benchmark.bm do |x|
     x.report do
-      100.times do
+      1000.times do
         User.create!(:username => "smtlaissezfaire")
       end
     end
