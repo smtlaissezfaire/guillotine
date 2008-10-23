@@ -8,7 +8,7 @@ module Guillotine
       if string = quote_parse(remove_extra_chars(string))
         string.eval.join(" ")
       else
-        return nil
+        nil
       end
     end
     
