@@ -29,6 +29,7 @@ module Guillotine
   
   require "#{parser}/primitives"
   require "#{parser}/sql_chars"
+  require "#{parser}/c_extensions/c_quotes_parser"
   require "#{parser}/quotes_parser"
   require "#{parser}/sql_helpers"
   require "#{parser}/sql_row_support"
