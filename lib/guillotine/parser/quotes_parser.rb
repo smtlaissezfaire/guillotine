@@ -41,13 +41,19 @@ module Guillotine
       end
       
       def update_quote_status
-        if @in_quotes && current_char == @start_quote
-          @in_quotes = false
-          @start_quote = nil
-        elsif !@in_quotes && (current_char == SINGLE_QUOTE || current_char == DOUBLE_QUOTE || current_char == BACKTICK)
+        if @in_quotes
+          if current_char == @start_quote
+            @in_quotes = false
+            @start_quote = nil
+          end
+        elsif current_char_a_quote?
           @in_quotes = true
           @start_quote = current_char
         end
+      end
+      
+      def current_char_a_quote?
+        current_char == SINGLE_QUOTE || current_char == DOUBLE_QUOTE || current_char == BACKTICK
       end
       
       def advance_char
