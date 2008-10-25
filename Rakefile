@@ -2,6 +2,31 @@
 require File.dirname(__FILE__) + "/lib/guillotine"
 TASKS = Guillotine::RakeTasks
 
+namespace :c_extensions do
+  desc "Build C extension"
+  task :make do
+    dir = "#{File.dirname(__FILE__)}/lib/guillotine/parser/c_extensions"
+    sh "ruby #{dir}/extconf.rb --with-c-quotes-parser-dir='#{dir}'"
+    sh "make #{dir}"
+  end
+  
+  desc "Clean C extension auto-generated files"
+  task :clean do
+    files = [
+      "lib/guillotine/parser/c_extensions/CQuotesParser.o",
+      "lib/guillotine/parser/c_extensions/Makefile",
+      "lib/guillotine/parser/c_extensions/c_quotes_parser.bundle"
+    ]
+    
+    root_path = File.dirname(__FILE__)
+    
+    files.each do |file|
+      file = "#{root_path}/#{file}"
+      FileUtils.rm("#{root_path}/#{file}") if File.exists?(file)
+    end
+  end
+end
+
 namespace :tags do
   ruby_files = TASKS::Emacs::Tags::RUBY_FILES
   

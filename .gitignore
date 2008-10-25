@@ -13,3 +13,4 @@ doc
 lib/guillotine/parser/c_extensions/CQuotesParser.o
 lib/guillotine/parser/c_extensions/Makefile
 lib/guillotine/parser/c_extensions/c_quotes_parser.bundle
+Makefile
