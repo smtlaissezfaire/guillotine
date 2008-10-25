@@ -81,18 +81,6 @@ module Guillotine
           parse_and_eval("\"foo\"").should == "foo"
         end
         
-        it "should not parse if it starts with a single quote, but ends in a double quote" do
-          pre_parse("\"foo'").should be_nil
-        end
-        
-        it "should not parse if it starts with a double quote and ends in a single quote" do
-          pre_parse("'foo\"").should be_nil
-        end
-        
-        it "should not parse a string which has three double quotes" do
-          pre_parse('"foo"bar"').should be_nil
-        end
-        
         it "should match the empty string with single quotes" do
           parse_and_eval("''").should == ""
         end

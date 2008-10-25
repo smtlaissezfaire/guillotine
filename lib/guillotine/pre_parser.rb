@@ -6,7 +6,7 @@ module Guillotine
     
     def parse(string)
       if string = quote_parse(remove_extra_chars(string))
-        string.eval.join(" ")
+        string.eval
       else
         nil
       end

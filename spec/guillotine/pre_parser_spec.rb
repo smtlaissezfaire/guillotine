@@ -77,7 +77,7 @@ module Guillotine
       end
       
       it "should parse and eval the string" do
-        @pre_parser.parse(@string).should == "INSERT INTO `users` ( `updated_at` , `username` , `created_at` ) VALUES( '2008-09-29 22:31:32' , 'smtlaissezfaire' , '2008-09-29 22:31:32' )"
+        @pre_parser.parse(@string).should == "INSERT INTO `users` (`updated_at`, `username`, `created_at`) VALUES('2008-09-29 22:31:32', 'smtlaissezfaire', '2008-09-29 22:31:32')"
       end
     end
     

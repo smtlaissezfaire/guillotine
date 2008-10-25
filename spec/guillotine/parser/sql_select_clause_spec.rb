@@ -44,9 +44,7 @@ module Guillotine
       end
       
       it "should parse SELECT `table_name`.column_name" do
-        pending 'TODO: FIXME' do
-          parse_and_eval("SELECT `table_name`.column_name").should == Expressions::Select.new("table_name.column_name")
-        end
+        parse_and_eval("SELECT `table_name`.column_name").should == Expressions::Select.new("table_name.column_name")
       end
       
       it "should parse SELECT column_one, column_two" do
@@ -58,9 +56,7 @@ module Guillotine
       end
       
       it "should parse SELECT table_name.column_one, table_name.column_two" do
-        pending 'todo' do
-          parse_and_eval("SELECT table_name.column_one, `table_name`.column_two").should == Expressions::Select.new("table_name.column_one", "table_name.column_two")
-        end
+        parse_and_eval("SELECT table_name.column_one, `table_name`.column_two").should == Expressions::Select.new("table_name.column_one", "table_name.column_two")
       end
       
       it "should parse three columns" do
