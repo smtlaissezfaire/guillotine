@@ -15,10 +15,8 @@ module Guillotine
       def parse(string)
         @original_content = string.strip
         @length = @original_content.length
-        
-        while chars_left?
-          process_char 
-        end
+
+        process_char while chars_left?
         
         self
       end
