@@ -63,7 +63,7 @@ end
 
 
 desc "Run all specs"
-task :spec => ["spec:examples"]
+task :spec => ["c_extensions:make", "spec:examples"]
 
 desc "Build the emacs tags file"
 task :tags => ["tags:emacs"]
