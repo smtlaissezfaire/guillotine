@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "ruby.h"
 
 #define SINGLE_QUOTE '\''
@@ -8,14 +9,13 @@
 #define BACKTICK     '`'
 #define SPACE        ' '
 
-VALUE CQuotesParser = Qnil;
+VALUE QuotesParser = Qnil;
 
-static char   original_string[1000];
-static char   buffer[1000] = "";
+static char * original_string;
+static char * buffer;
 static int    at        = 0;
 static bool   in_quotes = false;
 static char   starting_quote;
-
 
 static char * parse();
 static bool chars_left();
@@ -28,8 +28,8 @@ static void update_quote_status();
 static int advance_char();
 static bool a_quote(char);
 
-void Init_c_quotes_parser();
-VALUE c_quotes_parser(VALUE, VALUE);
+void Init_quotes_parser();
+VALUE quotes_parser(VALUE, VALUE);
 
 /* int main(int argc, char **argv) { */
 /*   char * first_arg = argv[1]; */
@@ -40,7 +40,12 @@ VALUE c_quotes_parser(VALUE, VALUE);
 /* } */
 
 static char * parse(char * string) {
-  strcpy(original_string, string);
+  at = 0;
+  free(original_string);
+  free(buffer);
+  original_string = malloc(sizeof(char) * strlen(string));
+  original_string = strcpy(original_string, string);
+  buffer = calloc(sizeof(char), strlen(string));
 
   while (chars_left()) {
     eat_whitespace();
@@ -49,6 +54,7 @@ static char * parse(char * string) {
       add_current_char();
     }
   }
+
   return buffer;
 }
 
@@ -107,11 +113,11 @@ static bool a_quote(char c) {
 
 // Ruby-C bindings
 
-void Init_c_quotes_parser() {
-	CQuotesParser = rb_define_module("CQuoteParser");
-	rb_define_method(CQuotesParser, "parse", c_quotes_parser, 1);
+void Init_quotes_parser() {
+	QuotesParser = rb_define_module("QuotesParser");
+	rb_define_method(QuotesParser, "parse", quotes_parser, 1);
 }
 
-VALUE c_quotes_parser(VALUE self, VALUE ruby_string) {
+VALUE quotes_parser(VALUE self, VALUE ruby_string) {
 	return rb_str_new2(parse(RSTRING(ruby_string)->ptr));
 }

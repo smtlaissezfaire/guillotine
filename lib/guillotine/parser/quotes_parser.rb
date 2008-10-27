@@ -1,7 +1,7 @@
 module Guillotine
   module Parser
     class QuotesParser
-      include ::CQuoteParser
+      include ::QuotesParser
     end
   end
 end

@@ -5,6 +5,7 @@ project = File.dirname(__FILE__) + "/guillotine"
 
 require "#{project}/require"
 require "#{project}/extensions"
+require File.dirname(__FILE__) + "/../ext/quotes_parser/quotes_parser.so"
 
 Guillotine.module_eval do
   autoload :Assertions,        "#{project}/assertions"
