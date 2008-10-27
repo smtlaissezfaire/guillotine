@@ -9,8 +9,11 @@ doc
 # OS X files
 .DS_Store
 
-# C compilation files from C extension
-lib/guillotine/parser/c_extensions/CQuotesParser.o
-lib/guillotine/parser/c_extensions/Makefile
-lib/guillotine/parser/c_extensions/c_quotes_parser.bundle
+# C compilation files
 Makefile
+*.o
+*.bundle
+*.so
+*.dll
+pkg
+doc
