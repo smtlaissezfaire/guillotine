@@ -1,11 +1,16 @@
+= Guillotine 
 
-Guillotine 
+* FIX (url)
 
-=================
+== DESCRIPTION:
 
 Provide transparent, row level cache to ActiveRecord.
 
+== FEATURES/PROBLEMS:
 
+* FIX (list of features or problems)
+
+== SYNOPSIS:
 
 Philosophical problems to current caching 
 
@@ -79,3 +84,18 @@ Limitations
 ==============
 
 At this time, there are only plans to support Mysql 5, and possibly SQLite.
+
+== REQUIREMENTS:
+
+* FIX (list of requirements)
+
+== INSTALL:
+
+* FIX (sudo gem install, anything else)
+
+== LICENSE:
+
+(None, yet)
+
+
+
