@@ -1,86 +1,9 @@
-Autotest.add_hook :initialize do |mapper|
-
-  ##########################
-  #                        #
-  #  Conveniences for      #
-  #  Autotest              #
-  #                        #
-  ##########################
-
-  map = mapper
-
-  def map.clear
-    clear_mappings
+Autotest.add_hook :initialize do |at|
+  at.add_mapping(/ext\/.*\/(.*)\.[ch]/) do |_, m|
+    ["test/test_#{m[1]}_extn.rb"]
   end
+end
 
-  def map.add(*args, &blk)
-    add_mapping(*args, &blk)
-  end
-
-  def regex(string)
-    Regexp.new(string)
-  end
-
-
-  ##########################
-  #                        #
-  #  Convenience           #
-  #  Variables             #
-  #                        #
-  ##########################
-
-  # Autotest itself
-  autotest_file       = regex "^.autotest"
-
-  # Spec Files
-  spec_dot_opts       = regex "^spec/spec.opts"
-  spec_helper         = regex "^spec/spec_helper.rb"
-  all_spec_files      = regex "^spec/(.*)_spec\.rb$"
-  any_spec_file       = all_spec_files
-
-  # Project files
-  project_path        = "lib/guillotine"
-  project_files       = regex "^lib/.*"
-  any_project_file    = project_files
-
-  ignored_files       = %w(.git
-                           TODO
-                           README
-                           .emproj
-                           benchmarks
-                           doc
-                           Rakefile
-                           TAGS)
-
-  ##########################
-  #                        #
-  #  Mappings              #
-  #                        #
-  ##########################
-
-  map.clear
-
-  # Rerun all the specs for changes in the following files:
-  #  - .autotest
-  #  - spec/spec_helper.rb
-  #  - spec/spec.opts
-
-  [autotest_file, spec_helper, spec_dot_opts].each do |file|
-    map.add(file) do
-      mapper.files_matching(all_spec_files)
-    end
-  end
-
-  map.add(any_spec_file) do |filename, _|
-    filename
-  end
-
-  map.add(any_project_file) do |filename, _|
-    mapper.files_matching(all_spec_files)
-  end
-
-  # Ignore files we don't care about
-  ignored_files.each do |file|
-    map.add_exception(file)
-  end
+Autotest.add_hook :run_command do |at|
+  system "rake compile"
 end
