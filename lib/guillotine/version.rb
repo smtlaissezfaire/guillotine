@@ -1,9 +1,10 @@
 module Guillotine
-  module Version
+  module VERSION #:nodoc:
     MAJOR = 0
     MINOR = 0
     TINY  = 1
-    
-    VERSION = "#{MAJOR}.#{MINOR}.#{TINY}"
+
+    STRING = [MAJOR, MINOR, TINY].join('.')
+    self
   end
 end

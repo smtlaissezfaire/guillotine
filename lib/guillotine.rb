@@ -19,7 +19,7 @@ Guillotine.module_eval do
   autoload :StatementExecutor, "#{project}/statement_executor"
   autoload :Transactions,      "#{project}/transactions"
   autoload :TestSupport,       "#{project}/test_support"
-  autoload :Version,           "#{project}/version"
+  autoload :VERSION,           "#{project}/version"
   
   class << self
     def execute(string)
