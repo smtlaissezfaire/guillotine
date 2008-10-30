@@ -53,14 +53,6 @@ module Guillotine
         parse_and_eval("'foo    bar' foo    bar").should == "'foo    bar' foo bar"
       end
       
-      it "should turn an empty space into an empty array" do
-        parse_and_eval(" ").should == ""
-      end
-      
-      it "should turn multiple empty spaces into any empty string" do
-        parse_and_eval("         ").should == ""
-      end
-      
       it "should eval empty double quotes" do
         parse_and_eval("\"\"").should == "\"\""
       end
