@@ -31,21 +31,10 @@ static bool a_quote(char);
 void Init_quotes_parser();
 VALUE quotes_parser(VALUE, VALUE);
 
-/* int main(int argc, char **argv) { */
-/*   char * first_arg = argv[1]; */
-/*   printf("first arg: %s\n", first_arg); */
-/*   printf("results of buffer: %s\n", parse(first_arg)); */
-/*   printf("results of buffer: %s\n", buffer); */
-/*   return 0; */
-/* } */
-
 static char * parse(char * string) {
   at = 0;
-  free(original_string);
-  free(buffer);
-  original_string = malloc(sizeof(char) * strlen(string));
-  original_string = strcpy(original_string, string);
-  buffer = calloc(sizeof(char), strlen(string));
+  original_string = string;
+  buffer = calloc(sizeof(char), strlen(original_string));
 
   while (chars_left()) {
     eat_whitespace();
@@ -119,5 +108,13 @@ void Init_quotes_parser() {
 }
 
 VALUE quotes_parser(VALUE self, VALUE ruby_string) {
-	return rb_str_new2(parse(RSTRING(ruby_string)->ptr));
+  char * string = RSTRING(ruby_string)->ptr;
+
+  if (string)  {
+    return rb_str_new2(parse(string));
+  } else {
+    return Qnil;
+  }
 }
+
+

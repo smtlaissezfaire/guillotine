@@ -10,7 +10,7 @@ module Guillotine
       end
       
       def parse_and_eval(string)
-        @parser.parse(string).eval
+        @parser.parse(string)
       end
       
       it "should return an empty array for an empty string" do
