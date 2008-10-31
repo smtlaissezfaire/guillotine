@@ -1,8 +1,24 @@
 #include <stdbool.h>
 #include <string.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include "ruby.h"
+
+static char *       original_string = NULL;
+static char *       buffer          = NULL;
+static unsigned int at              = 0;
+static bool         in_quotes       = false;
+static char         starting_quote;
+
+static char * parse();
+static bool   chars_left();
+static char   current_char();
+static char   next_char();
+static void   eat_whitespace();
+static void   add_current_char();
+static void   add_to_buffer(char);
+static void   update_quote_status();
+static int    advance_char();
+static bool   a_quote(char);
 
 #define SINGLE_QUOTE '\''
 #define DOUBLE_QUOTE '\"'
@@ -10,31 +26,13 @@
 #define SPACE        ' '
 
 VALUE QuotesParser = Qnil;
-
-static char * original_string;
-static char * buffer;
-static int    at        = 0;
-static bool   in_quotes = false;
-static char   starting_quote;
-
-static char * parse();
-static bool chars_left();
-static char current_char();
-static char next_char();
-static void eat_whitespace();
-static void add_current_char();
-static void add_to_buffer(char);
-static void update_quote_status();
-static int advance_char();
-static bool a_quote(char);
-
-void Init_quotes_parser();
+void  Init_quotes_parser();
 VALUE quotes_parser(VALUE, VALUE);
 
 static char * parse(char * string) {
   at = 0;
   original_string = string;
-  buffer = calloc(sizeof(char), strlen(original_string));
+  buffer = calloc(sizeof(char), strlen(original_string) + 1);
 
   while (chars_left()) {
     eat_whitespace();
@@ -77,9 +75,7 @@ static int advance_char() {
 }
 
 static void add_to_buffer(char c) {
-  char array[2] = "";
-  array[0] = c;
-  strcat(buffer, array);
+  buffer[strlen(buffer)] = c;
 }
 
 static void update_quote_status() {
@@ -116,5 +112,3 @@ VALUE quotes_parser(VALUE self, VALUE ruby_string) {
     return Qnil;
   }
 }
-
-
