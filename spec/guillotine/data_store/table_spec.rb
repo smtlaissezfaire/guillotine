@@ -65,6 +65,27 @@ module Guillotine
             @table << record
             @table.to_a.should include({ :foo => :bar, :id => 2 })
           end
+          
+          describe "when assigning an id" do
+            describe "when it conflicts with an existing record" do
+              it "should raise an error"
+            end
+            
+            describe "when it doesn't conflict with an existing record" do
+              it "should use the correct id" do
+                record = { :foo => :bar, :id => 7 }
+                @table << record
+                @table.to_a.should == [{ :foo => :bar, :id => 7 }]
+              end
+              
+              it "should use the correct primary key name" do
+                @table.stub!(:primary_key).and_return(:p_key)
+                record = { :foo => :bar, :p_key => 7 }
+                @table << record
+                @table.to_a.should == [{ :foo => :bar, :p_key => 7 }]
+              end
+            end
+          end
         end
         
         describe "with the primary key :foo_bar_id" do

@@ -20,7 +20,7 @@ module Guillotine
       end
       
       def <<(record)
-        if auto_increment?
+        if auto_increment? && primary_key_not_present?(record)
           super(record.merge(primary_key => next_autoincrement_id))
         else
           super
@@ -39,6 +39,10 @@ module Guillotine
       end
       
     private
+      
+      def primary_key_not_present?(record)
+        !record.has_key?(primary_key)
+      end
       
       def next_autoincrement_id
         size + 1
