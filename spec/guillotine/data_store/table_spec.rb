@@ -30,9 +30,12 @@ module Guillotine
       end
       
       it "should take an optional list of rows as it's third parameter, and treat those rows as an array normally does" do
-        tbl = Table.new(:foo, { }, [:row1, :row2])
-        tbl << :row3
-        tbl.to_a.should == [:row1, :row2, :row3]
+        @row1 = { :id => 1 }
+        @row2 = { :id => 2 }
+        
+        tbl = Table.new(:foo, { }, [@row1])
+        tbl << @row2
+        tbl.to_a.should == [{ :id => 1 }, { :id => 2}]
       end
       
       it "should have an empty array of rows when none are given" do
@@ -68,7 +71,13 @@ module Guillotine
           
           describe "when assigning an id" do
             describe "when it conflicts with an existing record" do
-              it "should raise an error"
+              it "should raise an error" do
+                record = { :foo => :bar, :id => 1 }
+                @table << { }
+                lambda {
+                  @table << record
+                }.should raise_error(Table::PrimaryKeyError, "A primary key with id 1 has already been taken")
+              end
             end
             
             describe "when it doesn't conflict with an existing record" do

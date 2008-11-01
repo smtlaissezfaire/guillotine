@@ -4,13 +4,7 @@ module Guillotine
     class TableAlreadyExists < StandardError; end
     
     class Table < Array
-      class PrimaryKeyError < StandardError
-        ERROR_MESSAGE = "A Primary Key must be specified with auto-increment => true"
-        
-        def message
-          ERROR_MESSAGE
-        end
-      end
+      class PrimaryKeyError < StandardError; end
       
       def initialize(table_name, schema_options={ }, rows=[])
         @table_name = table_name.to_sym
@@ -21,10 +15,14 @@ module Guillotine
       
       def <<(record)
         if auto_increment? && primary_key_not_present?(record)
-          super(record.merge(primary_key => next_autoincrement_id))
+          new_record = record.merge(primary_key => next_autoincrement_id)
         else
-          super
+          new_record = record
         end
+        
+        check_primary_key_validity(record)
+        
+        super(new_record)
       end
       
       attr_reader :table_name
@@ -40,6 +38,12 @@ module Guillotine
       
     private
       
+      def check_primary_key_validity(a_row)
+        if detect { |row| row[:id] == a_row[:id] }
+          raise(PrimaryKeyError, "A primary key with id 1 has already been taken")
+        end
+      end
+      
       def primary_key_not_present?(record)
         !record.has_key?(primary_key)
       end
@@ -50,7 +54,7 @@ module Guillotine
       
       def check_schema_options
         if @schema_options[:auto_increment] && !@schema_options[:primary_key]
-          raise PrimaryKeyError
+          raise PrimaryKeyError, "A Primary Key must be specified with auto-increment => true"
         end
       end
     end
