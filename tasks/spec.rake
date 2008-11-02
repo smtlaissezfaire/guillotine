@@ -11,7 +11,7 @@ namespace :spec do
     t.rcov = true
     t.spec_files = FileList['spec/**/*.rb']
     t.rcov_dir   = "doc/coverage"
-    t.rcov_opts  = ["--exclude", "rcov,rspec,facets,polyglot,gems.*treetop,spec,parser\/.+\.rb"]
+    t.rcov_opts  = ["--exclude", "gems,Gems,spec\/.+\.rb"]
   end
   
   RCov::VerifyTask.new(:verify_rcov => :spec) do |t|
