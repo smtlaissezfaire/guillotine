@@ -78,6 +78,10 @@ module Guillotine
       it "should parse the string #{string}" do
         parse(string).should_not be_nil
       end
+      
+      it "should not polute the global namespace by defining the module 'QuotesParser' (from the C extension)" do
+        defined?(QuotesParser).should be_nil
+      end
     end
   end
 end
