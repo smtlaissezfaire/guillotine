@@ -2,6 +2,8 @@ require File.dirname(__FILE__) + "/../lib/guillotine"
 TASKS = Guillotine::RakeTasks
 
 namespace :spec do
+  RCOV_OPTS = ["--exclude", "gems,Gems,spec\/.+\.rb"]
+  
   Spec::Rake::SpecTask.new(:examples) do |t|
     t.spec_files = FileList['spec/**/*.rb']
     t.spec_opts = ["--diff", "--color", "--reverse", "--format", "profile"]
@@ -11,7 +13,7 @@ namespace :spec do
     t.rcov = true
     t.spec_files = FileList['spec/**/*.rb']
     t.rcov_dir   = "doc/coverage"
-    t.rcov_opts  = ["--exclude", "gems,Gems,spec\/.+\.rb"]
+    t.rcov_opts  = RCOV_OPTS
   end
   
   RCov::VerifyTask.new(:verify_rcov => :spec) do |t|
