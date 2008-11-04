@@ -110,7 +110,7 @@ module Guillotine
       end
       
       def truncate_all_tables!
-        table_names.each { |tbl_name| table(tbl_name).truncate }
+        tables.each { |tbl| tbl.truncate }
       end
       
       def inspect
