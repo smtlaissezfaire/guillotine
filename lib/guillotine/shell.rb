@@ -13,9 +13,17 @@ HERE
         Kernel.puts(INTRODUCTORY_TEXT)
         
         loop do
-          Kernel.printf(">> ")
-          Command.execute(Kernel.gets)
+          begin
+            Kernel.printf(">> ")
+            Command.execute(Kernel.gets)
+          rescue => e
+            output_error(e)
+          end
         end
+      end
+      
+      def self.output_error(e)
+        Kernel.puts e.message
       end
     end
     

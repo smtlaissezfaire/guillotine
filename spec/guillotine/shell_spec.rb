@@ -87,6 +87,10 @@ module Guillotine
       end
       
       describe "do" do
+        before(:each) do
+          Main.stub!(:output_error).and_return "error output"
+        end
+        
         it "should have some introductory text" do
           Main::INTRODUCTORY_TEXT.should =~ /Welcome to Guillotine SQL/m
         end
@@ -114,6 +118,38 @@ module Guillotine
         it "should send the contents of STDIN to Command.execute" do
           Command.should_receive(:execute).with("input")
           Main.do
+        end
+        
+        it "should rescue any Runtime Error" do
+          Command.stub!(:execute).and_raise(RuntimeError)
+          lambda { 
+            Main.do
+          }.should_not raise_error
+        end
+        
+        it "should output the error" do
+          error = RuntimeError.new("an error occurred")
+          Command.stub!(:execute).and_raise(error)
+          
+          Main.should_receive(:output_error).with(error)
+          Main.do
+        end
+      end
+      
+      describe "outputting an error" do
+        before(:each) do
+          @error = mock 'an error', :message => "the message"
+          Kernel.stub!(:puts).and_return "some output"
+        end
+        
+        it "should call the error's message" do
+          @error.should_receive(:message).with(no_args).and_return "some message"
+          Main.output_error(@error)
+        end
+        
+        it "should output the message on the error" do
+          Kernel.should_receive(:puts).with("the message").and_return "some message"
+          Main.output_error(@error)
         end
       end
     end
