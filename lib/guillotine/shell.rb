@@ -1,5 +1,9 @@
 module Guillotine
   module Shell
+    def self.start
+      Main.do
+    end
+    
     module Main
       INTRODUCTORY_TEXT = <<-HERE
 Welcome to Guillotine SQL
