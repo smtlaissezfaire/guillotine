@@ -16,6 +16,7 @@ Guillotine.module_eval do
   autoload :Expressions,            "#{project}/expressions"
   autoload :RSpec,                  "#{project}/test_support"
   autoload :RakeTasks,              "#{project}/rake"
+  autoload :Shell,                  "#{project}/shell"
   autoload :StatementExecutor,      "#{project}/statement_executor"
   autoload :MultiStatementExecutor, "#{project}/multi_statement_executor"
   autoload :Transactions,           "#{project}/transactions"
