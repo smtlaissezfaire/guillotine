@@ -17,3 +17,7 @@ Makefile
 *.dll
 pkg
 doc
+
+
+# c-tags / emacs tags file:
+TAGS
