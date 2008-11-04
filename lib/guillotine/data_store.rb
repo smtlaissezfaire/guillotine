@@ -80,7 +80,7 @@ module Guillotine
         @data ||= { }
       end
       
-      def tables
+      def table_names
         data.keys
       end
       
@@ -106,7 +106,7 @@ module Guillotine
       end
       
       def truncate_all_tables!
-        tables.each { |tbl_name| table(tbl_name).truncate }
+        table_names.each { |tbl_name| table(tbl_name).truncate }
       end
       
       def inspect

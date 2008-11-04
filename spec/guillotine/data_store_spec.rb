@@ -8,7 +8,7 @@ module Guillotine
       end
       
       it "should return an empty array of tables"do
-        DataStore.tables.should == []
+        DataStore.table_names.should == []
       end
       
       describe "with one table" do
@@ -18,7 +18,7 @@ module Guillotine
         end
         
         it "should have the table :tbl_one" do
-          DataStore.tables.should == [:tbl_one]
+          DataStore.table_names.should == [:tbl_one]
         end
         
         it "should have no data for tbl_one" do
@@ -39,7 +39,7 @@ module Guillotine
         it "should reset the tables to empty" do
           DataStore.create_table(:foo)
           DataStore.__clear_all_tables!
-          DataStore.tables.should be_empty
+          DataStore.table_names.should be_empty
         end
       end
       
@@ -57,20 +57,20 @@ module Guillotine
         it "should remove the table" do
           DataStore.create_table(:foo)
           DataStore.drop_table(:foo)
-          DataStore.tables.should be_empty
+          DataStore.table_names.should be_empty
         end
         
         it "should not remove other tables" do
           DataStore.create_table(:bar)
           DataStore.create_table(:foo)
           DataStore.drop_table(:foo)
-          DataStore.tables.should == [:bar]
+          DataStore.table_names.should == [:bar]
         end
         
         it "should be able to use strings instead of symbols" do
           DataStore.create_table(:foo)
           DataStore.drop_table("foo")
-          DataStore.tables.should == []
+          DataStore.table_names.should == []
         end
         
         it "should raise an error if the table doesn't exist" do
@@ -83,12 +83,12 @@ module Guillotine
           it "should drop the table if it exists" do
             DataStore.create_table(:foo)
             DataStore.drop_table(:foo, :if_exists => true)
-            DataStore.tables.should == []
+            DataStore.table_names.should == []
           end
           
           it "should do nothing if the table does not exist" do
             DataStore.drop_table(:foo, :if_exists => true)
-            DataStore.tables.should == []
+            DataStore.table_names.should == []
           end
         end
       end
@@ -105,12 +105,12 @@ module Guillotine
           it "should not do anything if the table is already there" do
             DataStore.create_table(:foo)
             DataStore.create_table(:foo, :if_exists => true)
-            DataStore.tables.should == [:foo]
+            DataStore.table_names.should == [:foo]
           end
           
           it "should create the table if the table does not exist" do
             DataStore.create_table(:foo, :if_exists => true)
-            DataStore.tables.should == [:foo]
+            DataStore.table_names.should == [:foo]
           end
           
           it "should instantiate a new Table" do
