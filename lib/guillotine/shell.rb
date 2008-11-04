@@ -9,21 +9,37 @@ module Guillotine
 Welcome to Guillotine SQL
 HERE
       
-      def self.do
-        Kernel.puts(INTRODUCTORY_TEXT)
-        
-        loop do
-          begin
-            Kernel.printf(">> ")
-            Command.execute(Kernel.gets)
-          rescue => e
-            output_error(e)
+      class << self
+        def do
+          puts(INTRODUCTORY_TEXT)
+          
+          loop do
+            begin
+              printf(">> ")
+              Command.execute(gets)
+            rescue => e
+              output_error(e)
+            end
           end
         end
-      end
-      
-      def self.output_error(e)
-        Kernel.puts e.message
+        
+        def output_error(e)
+          puts e.message
+        end
+        
+      private
+        
+        def puts(*args)
+          Kernel.puts(*args)
+        end
+        
+        def printf(*args)
+          Kernel.printf(*args)
+        end
+        
+        def gets(*args)
+          Kernel.gets(*args)
+        end
       end
     end
     
