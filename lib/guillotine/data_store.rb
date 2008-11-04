@@ -40,6 +40,7 @@ module Guillotine
       
       def truncate
         clear
+        @last_autoincrement_id = 0
       end
       
     private
@@ -67,7 +68,7 @@ module Guillotine
     
     class << self
       
-      DEFAULT_TABLE_OPTIONS = { 
+      DEFAULT_TABLE_OPTIONS = {
         :primary_key => :id,
         :auto_increment => true
       }

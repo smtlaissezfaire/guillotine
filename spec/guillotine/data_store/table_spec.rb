@@ -158,6 +158,24 @@ module Guillotine
 
         it_should_behave_like "a non-auto-incrementing table"
       end
+      
+      describe "truncate" do
+        before(:each) do
+          @table = Table.new(:foo, :auto_increment => true, :primary_key => :id)
+          @table << { :foo => :bar }
+        end
+        
+        it "should clear the data" do
+          @table.truncate
+          @table.should be_empty
+        end
+        
+        it "should reset the auto_increment id" do
+          @table.truncate
+          @table << { :foo => :bar }
+          @table.should == [{ :foo => :bar, :id => 1}]
+        end
+      end
     end
   end
 end
