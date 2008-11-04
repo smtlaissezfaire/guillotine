@@ -152,6 +152,15 @@ module Guillotine
           DataStore.table(:foo).should == []
           DataStore.table(:bar).should == []
         end
+        
+        it "should call the table's truncate method" do
+          tbl = DataStore.create_table(:foo)
+          
+          tbl.stub!(:truncate).and_return nil
+          
+          tbl.should_receive(:truncate).with(no_args)
+          DataStore.truncate_all_tables!
+        end
       end
     end
   end

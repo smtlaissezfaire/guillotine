@@ -38,6 +38,10 @@ module Guillotine
         @schema_options[:primary_key]
       end
       
+      def truncate
+        clear
+      end
+      
     private
       
       def check_primary_key_validity(a_row)
@@ -102,10 +106,7 @@ module Guillotine
       end
       
       def truncate_all_tables!
-        tables.each do |table|
-          drop_table(table)
-          create_table(table)
-        end
+        tables.each { |tbl_name| table(tbl_name).truncate }
       end
       
       def inspect
