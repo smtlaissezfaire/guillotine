@@ -77,6 +77,15 @@ module Guillotine
           Main.output_error(@error)
         end
       end
+      
+      describe "emacs editing mode" do
+        it "should be on" do
+          pending 'Waiting on ruby 1.9' do
+            # Emacs editing mode is disabled on OS X.5?
+            Readline.emacs_editing_mode?.should be_true
+          end
+        end
+      end
     end
   end
 end
