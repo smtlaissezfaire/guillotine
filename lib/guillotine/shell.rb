@@ -5,9 +5,7 @@ module Guillotine
     end
     
     module Main
-      INTRODUCTORY_TEXT = <<-HERE
-Welcome to Guillotine SQL
-HERE
+      INTRODUCTORY_TEXT = File.read(File.dirname(__FILE__) + "/shell_introduction.txt")
       
       class << self
         def do
