@@ -14,7 +14,7 @@ HERE
         
         loop do
           Kernel.printf(">> ")
-          Command.execute(STDIN.read)
+          Command.execute(Kernel.gets)
         end
       end
     end

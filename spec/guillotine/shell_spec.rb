@@ -82,7 +82,7 @@ module Guillotine
         Main.stub!(:loop).and_yield
         Kernel.stub!(:puts)
         Kernel.stub!(:printf)
-        STDIN.stub!(:read).and_return "STDIN"
+        Kernel.stub!(:gets).and_return "input"
         Command.stub!(:execute).and_return "some output"
       end
       
@@ -106,13 +106,13 @@ module Guillotine
           Main.do
         end
         
-        it "should read from STDIN" do
-          STDIN.should_receive(:read).and_return "STDIN"
+        it "should read from cmd-line" do
+          Kernel.should_receive(:gets).and_return "input"
           Main.do
         end
         
         it "should send the contents of STDIN to Command.execute" do
-          Command.should_receive(:execute).with("STDIN")
+          Command.should_receive(:execute).with("input")
           Main.do
         end
       end
