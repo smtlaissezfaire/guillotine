@@ -84,6 +84,10 @@ module Guillotine
         data.keys
       end
       
+      def tables
+        table_names.map { |name| table(name) }
+      end
+      
       def table(table_name)
         data[sym(table_name)]
       end

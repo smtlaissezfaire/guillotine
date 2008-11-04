@@ -135,6 +135,27 @@ module Guillotine
         end
       end
       
+      describe "tables" do
+        it "should be empty with no tables" do
+          DataStore.tables.should == []
+        end
+        
+        it "should have one element with one table" do
+          DataStore.create_table(:foo)
+          DataStore.tables.size.should equal(1)
+        end
+        
+        it "should have the first one as a kind_of?(Table)" do
+          DataStore.create_table(:foo)
+          DataStore.tables.first.should be_a_kind_of(DataStore::Table)
+        end
+        
+        it "should use the correct table name" do
+          DataStore.create_table(:bar)
+          DataStore.tables.first.table_name.should equal(:bar)
+        end
+      end
+      
       describe "truncate_all_tables" do
          it "should truncate a single table" do
           tbl = DataStore.create_table(:foo)
