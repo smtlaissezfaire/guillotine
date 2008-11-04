@@ -1,7 +1,7 @@
 module Guillotine
   module Shell
     module Main
-      INTRODUCTORY_TEXT = File.read(File.dirname(__FILE__) + "/../shell_introduction.txt")
+      INTRODUCTORY_TEXT = File.read(File.dirname(__FILE__) + "/introduction.txt")
       
       class << self
         def do
