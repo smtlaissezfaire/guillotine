@@ -6,6 +6,7 @@ module Guillotine
     
     dir = "#{File.dirname(__FILE__)}/shell"
     autoload :Command, "#{dir}/command"
+    autoload :OutputFormatter, "#{dir}/output_formatter"
     
     module Main
       INTRODUCTORY_TEXT = File.read(File.dirname(__FILE__) + "/shell_introduction.txt")
@@ -41,16 +42,6 @@ module Guillotine
         def gets(*args)
           Kernel.gets(*args).chomp
         end
-      end
-    end
-    
-    class OutputFormatter
-      def self.format(obj)
-        new.format(obj)
-      end
-      
-      def format(obj)
-        obj.to_s
       end
     end
   end
