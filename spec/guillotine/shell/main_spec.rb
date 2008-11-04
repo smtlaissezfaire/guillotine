@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 
 module Guillotine
   module Shell
-    describe "Main" do
+    describe Main do
       before(:each) do
         Main.stub!(:loop).and_yield
         Kernel.stub!(:puts)
