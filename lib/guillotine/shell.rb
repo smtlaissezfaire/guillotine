@@ -4,6 +4,9 @@ module Guillotine
       Main.do
     end
     
+    dir = "#{File.dirname(__FILE__)}/shell"
+    autoload :Command, "#{dir}/command"
+    
     module Main
       INTRODUCTORY_TEXT = File.read(File.dirname(__FILE__) + "/shell_introduction.txt")
       
@@ -37,26 +40,6 @@ module Guillotine
         
         def gets(*args)
           Kernel.gets(*args).chomp
-        end
-      end
-    end
-    
-    class Command
-      EXIT_SEQUENCE = "exit"
-      
-      def self.execute(command)
-        new(command).execute
-      end
-      
-      def initialize(command)
-        @command = command
-      end
-      
-      def execute
-        if @command == EXIT_SEQUENCE
-          Kernel.exit
-        else
-          OutputFormatter.format(Guillotine.execute(@command))
         end
       end
     end
