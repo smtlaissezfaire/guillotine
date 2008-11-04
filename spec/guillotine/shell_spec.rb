@@ -115,6 +115,12 @@ module Guillotine
           Main.do
         end
         
+        it "should chomp any \n's off the end of the input" do
+          Kernel.stub!(:gets).and_return "exit\n"
+          Command.should_receive(:execute).with("exit")
+          Main.do
+        end
+        
         it "should send the contents of STDIN to Command.execute" do
           Command.should_receive(:execute).with("input")
           Main.do

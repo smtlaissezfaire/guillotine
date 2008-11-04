@@ -38,7 +38,7 @@ HERE
         end
         
         def gets(*args)
-          Kernel.gets(*args)
+          Kernel.gets(*args).chomp
         end
       end
     end
