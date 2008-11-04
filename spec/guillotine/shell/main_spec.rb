@@ -6,8 +6,7 @@ module Guillotine
       before(:each) do
         Main.stub!(:loop).and_yield
         Kernel.stub!(:puts)
-        Kernel.stub!(:printf)
-        Kernel.stub!(:gets).and_return "input"
+        Readline.stub!(:readline).and_return "input"
         Command.stub!(:execute).and_return "some output"
       end
       
@@ -30,23 +29,18 @@ module Guillotine
           Main.do
         end
         
-        it "should print out '>> '" do
-          Kernel.should_receive(:printf).with(">> ")
-          Main.do
-        end
-        
-        it "should read from cmd-line" do
-          Kernel.should_receive(:gets).and_return "input"
+        it "should print out '>> ' with readline, and save the history" do
+          Readline.should_receive(:readline).with(">> ", true).and_return "input"
           Main.do
         end
         
         it "should chomp any \n's off the end of the input" do
-          Kernel.stub!(:gets).and_return "exit\n"
+          Readline.stub!(:readline).and_return "exit\n"
           Command.should_receive(:execute).with("exit")
           Main.do
         end
         
-        it "should send the contents of STDIN to Command.execute" do
+        it "should send the input to Command.execute" do
           Command.should_receive(:execute).with("input")
           Main.do
         end

@@ -1,3 +1,5 @@
+require "readline"
+
 module Guillotine
   module Shell
     module Main
@@ -9,8 +11,7 @@ module Guillotine
           
           loop do
             begin
-              printf(">> ")
-              Command.execute(gets)
+              Command.execute(readline(">> "))
             rescue => e
               output_error(e)
             end
@@ -23,16 +24,16 @@ module Guillotine
         
       private
         
+        def readline(line)
+          Readline.readline(line, true).chomp
+        end
+        
         def puts(*args)
           Kernel.puts(*args)
         end
         
         def printf(*args)
           Kernel.printf(*args)
-        end
-        
-        def gets(*args)
-          Kernel.gets(*args).chomp
         end
       end
     end
