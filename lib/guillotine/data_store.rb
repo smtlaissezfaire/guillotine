@@ -9,6 +9,7 @@ module Guillotine
       def initialize(table_name, schema_options={ }, rows=[])
         @table_name = table_name.to_sym
         @schema_options = schema_options
+        @last_autoincrement_id = 0
         check_schema_options
         super(rows)
       end
@@ -23,6 +24,7 @@ module Guillotine
         check_primary_key_validity(record)
         
         super(new_record)
+        @last_autoincrement_id += 1
       end
       
       attr_reader :table_name
@@ -49,7 +51,7 @@ module Guillotine
       end
       
       def next_autoincrement_id
-        size + 1
+        @last_autoincrement_id + 1
       end
       
       def check_schema_options

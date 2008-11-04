@@ -69,6 +69,17 @@ module Guillotine
             @table.to_a.should include({ :foo => :bar, :id => 2 })
           end
           
+          it "should use the value of '2', even if the first record was created and deleted" do
+            first_record =  { :record => :first }
+            second_record = { :record => :second }
+            
+            @table << first_record
+            @table.clear
+            @table << second_record
+            
+            @table.to_a.should == [{ :record => :second, :id => 2 }]
+          end
+          
           describe "when assigning an id" do
             describe "when it conflicts with an existing record" do
               it "should raise an error" do
