@@ -5,11 +5,8 @@ module Guillotine
     end
     
     def parse(string)
-      if string = quote_parse(remove_extra_chars(string))
-        string
-      else
-        nil
-      end
+      string = quote_parse(remove_extra_chars(string))
+      string ? string : nil
     end
     
   private
