@@ -4,11 +4,10 @@ module Guillotine
     
     class << self
       def find_class_for(joiner)
-        if syntax_class = syntax_classes[joiner.to_sym]
-          syntax_class
-        else
-          raise UnknownSyntaxError, "Unknown joiner '#{joiner}'"
-        end
+        syntax_class = syntax_classes[joiner.to_sym]        
+        syntax_class ? 
+          syntax_class : 
+          raise(UnknownSyntaxError, "Unknown joiner '#{joiner}'")
       end
       
     private
