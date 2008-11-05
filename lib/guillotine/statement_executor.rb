@@ -20,10 +20,11 @@ module Guillotine
     end
     
     def parse(string)
-      if result = parser.parse(string)
+      result = parser.parse(string)
+      if result
         result
       else
-        raise Guillotine::SQLParseError, "Could not parse query: #{string}"
+        raise(Guillotine::SQLParseError, "Could not parse query: #{string}")
       end
     end
     
