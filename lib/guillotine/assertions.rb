@@ -4,9 +4,9 @@ module Guillotine
     
     def assert_each_expression(&blk)
       yield
-      return true
+      true
     rescue Assertion::AssertionFailedError
-      return false
+      false
     end
     
     def assert(expression)

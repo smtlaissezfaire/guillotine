@@ -18,10 +18,13 @@ module Guillotine
       end
       
       def call(collection)
-        return truncate(collection) if !where && !limit
-        return collection if empty_limit?
-        
-        collection.delete_if { |obj| super.include?(obj) }
+        if !where && !limit
+          truncate(collection)
+        elsif empty_limit?
+          collection
+        else
+          collection.delete_if { |obj| super.include?(obj) }
+        end
       end
       
     private

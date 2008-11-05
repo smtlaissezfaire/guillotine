@@ -4,9 +4,12 @@ module Guillotine
       SQL_OPERATOR = "OR"
       
       def call(collection)
-        return [] if collection.empty?
-        results_of_first_call = first_child.call(collection)
-        results_of_first_call | second_child.call(collection)
+        if collection.empty?
+          []
+        else
+          results_of_first_call = first_child.call(collection)
+          results_of_first_call | second_child.call(collection)
+        end
       end
       
       def to_sql

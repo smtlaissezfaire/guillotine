@@ -22,8 +22,11 @@ module Guillotine
       end
       
       def ==(other)
-        return false if !other.kind_of?(Insert)
-        equal_tables?(other) && equal_values?(other)
+        if !other.kind_of?(Insert)
+          false
+        else
+          equal_tables?(other) && equal_values?(other)
+        end
       end
       
       def call(table)

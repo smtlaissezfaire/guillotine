@@ -46,8 +46,11 @@ module Guillotine
       attr_reader :sort
       
       def ==(other)
-        return false if !other.kind_of?(self.class)
-        self.column.equal?(other.column) && self.sort == other.sort
+        if !other.kind_of?(self.class)
+          false
+        else
+          self.column.equal?(other.column) && self.sort == other.sort
+        end
       end
       
       def call(collection)

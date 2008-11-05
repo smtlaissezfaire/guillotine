@@ -31,8 +31,7 @@ module Guillotine
       end
       
       def call(collection)
-        return [] if empty_limit? || collection.empty?
-        super
+        (empty_limit? || collection.empty?) ? [] : super
       end
       
       def to_sql
