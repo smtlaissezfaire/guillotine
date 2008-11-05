@@ -3,14 +3,15 @@ module Guillotine
     private
     
     def assert_each_expression(&blk)
-      yield
-      true
-    rescue Assertion::AssertionFailedError
-      false
+      callcc do |cc|
+        @continuation = cc
+        yield
+        true
+      end
     end
     
     def assert(expression)
-      Assertion.assert(expression)
+      Assertion.new(@continuation).assert(expression)
     end
     
     def assert_equal(expr1, expr2)
@@ -18,14 +19,18 @@ module Guillotine
     end
     
     class Assertion
-      class AssertionFailedError < StandardError; end
-      
-      def self.assert(expression)
-        new.assert(expression)
+      def initialize(continuation = nil)
+        @continuation = continuation
       end
       
       def assert(expression)
-        expression ? true : (raise AssertionFailedError)
+        expression ? true : assert_false
+      end
+      
+    private
+      
+      def assert_false
+        @continuation ? @continuation.call(false) : false
       end
     end
   end
