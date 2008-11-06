@@ -3,6 +3,8 @@ require 'set'
 module Guillotine
   module Expressions
     class From
+      Datastore = Guillotine::DataStore
+      
       def initialize(*table_names)
         @table_names_as_array = table_names
         @table_names = Set.new(table_names.flatten)
@@ -21,6 +23,10 @@ module Guillotine
       
       def table_name
         @table_names_as_array.first
+      end
+      
+      def table
+        Datastore.table(table_name)
       end
     end
   end

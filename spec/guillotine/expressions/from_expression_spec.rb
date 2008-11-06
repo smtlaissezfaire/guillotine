@@ -22,6 +22,22 @@ module Guillotine
           From.new(:foo, :bar).table_name.should equal(:foo)
         end
       end
+      
+      describe "table" do
+        def datastore
+          Guillotine::DataStore
+        end
+        
+        it "should find the table in the datastore" do
+          table = datastore.create_table(:foo, :if_exists => true)
+          From.new(:foo).table.should == table
+        end
+        
+        it "should use the correct name" do
+          datastore.should_receive(:table).with(:bar).and_return nil
+          From.new(:bar).table
+        end
+      end
     end
   end
 end
