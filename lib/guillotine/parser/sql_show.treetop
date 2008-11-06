@@ -1,0 +1,13 @@
+module Guillotine
+  module Parser
+    grammar Show
+      rule show
+        "SHOW TABLES" {
+          def eval
+            Guillotine::DataStore.table_names
+          end
+        }
+      end
+    end
+  end
+end
