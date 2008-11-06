@@ -32,6 +32,10 @@ module Guillotine
       it "should parse an INSERT statement" do
         parse("INSERT INTO foo VALUES (1, 2)").should_not be_nil
       end
+      
+      it "should parse 'SHOW TABLES" do
+        parse("SHOW TABLES").should_not be_nil
+      end
     end
   end
 end

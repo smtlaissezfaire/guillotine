@@ -7,9 +7,10 @@ module Guillotine
       include DropTable #TODO: Fix my name
       include SQLTransaction
       include SQLInsert
+      include Show
 
       rule statement
-        select_expression / delete / truncate / drop_table / transaction_statement / insert
+        select_expression / delete / truncate / drop_table / transaction_statement / insert / show
       end
     end
   end
