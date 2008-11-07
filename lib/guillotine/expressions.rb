@@ -5,9 +5,8 @@ module Guillotine
     class << self
       def find_class_for(joiner)
         syntax_class = syntax_classes[joiner.to_sym]        
-        syntax_class ? 
-          syntax_class : 
-          raise(UnknownSyntaxError, "Unknown joiner '#{joiner}'")
+        raise(UnknownSyntaxError, "Unknown joiner '#{joiner}'") unless syntax_class
+        syntax_class
       end
       
     private
