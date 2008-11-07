@@ -74,20 +74,6 @@ module Guillotine
           MysqlOverrider.instance_methods.should include("insert_sql_from_guillotine")
         end
         
-        it "should call the connections old insert method" do
-          insert_string = "INSERT INTO table (col1) VALUES (1)"
-          @db_connection.should_receive(:insert_sql_aliased_from_guillotine).with(insert_string)
-          @adapter.insert_sql_from_guillotine(insert_string)
-        end
-        
-        it "should return the connections old insert method return value" do
-          a_return_value = "foobarbaz"
-          
-          insert_string = "INSERT INTO table (col1) VALUES (1)"
-          @db_connection.should_receive(:insert_sql_aliased_from_guillotine).with(insert_string).and_return a_return_value
-          @adapter.insert_sql_from_guillotine(insert_string).should == a_return_value
-        end
-        
         it "should insert the records the records through the connection" do
           insert_string = "INSERT INTO table (col1) VALUES (1)"
           @guillotine_connection.should_receive(:insert_sql).with(insert_string)

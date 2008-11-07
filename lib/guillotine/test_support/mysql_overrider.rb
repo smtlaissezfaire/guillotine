@@ -21,9 +21,7 @@ module Guillotine
       end
       
       def insert_sql_from_guillotine(*args)
-        return_value = db_connection.insert_sql_aliased_from_guillotine(*args)
         guillotine_connection.insert_sql(args.first)
-        return_value
       end
       
     private
