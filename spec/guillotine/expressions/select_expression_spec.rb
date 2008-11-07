@@ -17,7 +17,7 @@ module Guillotine
         expr.inspect.should == "Guillotine::Expressions::SelectExpression: SELECT * FROM events"
       end
       
-      describe "call" do
+      describe "call_with_collection" do
         before :each do
           @select_clause = mock("select clause")
           @from = mock("from clause")
@@ -34,7 +34,7 @@ module Guillotine
           end
         
           it "should return all the results" do
-            @select.call(@array).should == @array
+            @select.call_with_collection(@array).should == @array
           end
         end
         
@@ -50,7 +50,7 @@ module Guillotine
             end
 
             it "should return only the first element" do
-              @select.call(@array).should == [1]
+              @select.call_with_collection(@array).should == [1]
             end
           end
         end
@@ -63,7 +63,7 @@ module Guillotine
           end
           
           it "should return the first two elements" do
-            @select.call(@array).should == [1, 2]
+            @select.call_with_collection(@array).should == [1, 2]
           end
         end
         
@@ -75,7 +75,7 @@ module Guillotine
           end
           
           it "should return all the elements" do
-            @select.call(@array).should == [1, 2, 3]
+            @select.call_with_collection(@array).should == [1, 2, 3]
           end
         end
         
@@ -87,7 +87,7 @@ module Guillotine
           end
           
           it "should return all the elements" do
-            @select.call(@array).should == [1, 2, 3]
+            @select.call_with_collection(@array).should == [1, 2, 3]
           end
         end
         
@@ -99,11 +99,11 @@ module Guillotine
           end
           
           it "should return none of the elements" do
-            @select.call(@array).should == []
+            @select.call_with_collection(@array).should == []
           end
         end
         
-        describe "calling with order by and limit" do
+        describe "call_with_collectioning with order by and limit" do
           before :each do
             @collection = [{ :foo => "bar", :id => 3}, { :foo => "bar", :id => 2}]
             order_by = Expressions::OrderBy.new(Expressions::OrderByPair.new(:id, :ASC))
@@ -112,7 +112,7 @@ module Guillotine
           end
           
           it "should return the results with the first matching element" do
-            @select.call(@collection).should == [{ :foo => "bar", :id => 3}]
+            @select.call_with_collection(@collection).should == [{ :foo => "bar", :id => 3}]
           end
         end
         
@@ -122,7 +122,28 @@ module Guillotine
           end
           
           it "should return empty" do
-            @select.call([]).should be_empty
+            @select.call_with_collection([]).should be_empty
+          end
+        end
+        
+        describe "when passed no args" do
+          before(:each) do
+            @from = mock('from clause', :table => [])
+            @select = SelectExpression.new(:from => @from)
+          end
+          
+          it "should re-invoke the call method with the from clause's table" do
+            @select.stub!(:call_with_collection)
+            @select.should_receive(:call_with_collection).with([]).and_return []
+            @select.call
+          end
+          
+          it "should use the proper collection" do
+            @collection = mock 'a collection of table rows'
+            @from.stub!(:table).and_return @collection
+            
+            @select.should_receive(:call_with_collection).with(@collection)
+            @select.call
           end
         end
       end

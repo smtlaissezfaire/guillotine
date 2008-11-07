@@ -30,9 +30,15 @@ module Guillotine
         end
       end
       
-      def call(collection)
-        (empty_limit? || collection.empty?) ? [] : super
+      def call(collection = nil)
+        if collection
+          (empty_limit? || collection.empty?) ? [] : super
+        else
+          call_with_collection(from.table)
+        end
       end
+      
+      alias_method :call_with_collection, :call
       
       def to_sql
         string = "#{@select.to_sql} #{@from.to_sql}"
