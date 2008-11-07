@@ -35,6 +35,7 @@ Low Priority:
 - DRb, so that multiple mongrels can all talk to the same cache
 - Threading for the drb/data access
 - Transactions: Serious transaction processing
+- dup data sent
 
 Miscelaneous:
 ===============
@@ -99,3 +100,4 @@ Other Thoughts:
    
   There's no reason all of these are options, just like mysql has different
   storage engines.
+- unfreeze objects via C extension
