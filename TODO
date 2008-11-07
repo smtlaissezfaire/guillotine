@@ -1,10 +1,9 @@
 
 High Priority
 ===============
-
+- SHOW TABLES
+- CREATE TABLE
 - UPDATE
-- TRANSACTIONS 
-  - at least for specs, parse them, and throw them away
 
 Medium Priority
 ================
@@ -15,47 +14,39 @@ Medium Priority
   at initialization to find the primary key, and whether or not
   it's an auto-incrememnt field.  For now, assume the primary key
   is named "id", and the auto-incrememnt is set to true
-- We *need* 100 % coverage of all ways data can be modified under MySQL
-- Write all database access to a log
+- Write all database access to a log (optional)
 
-
-Low Priority:
+Medium Priority:
 ===============
 
-_ CREATE TABLE
 - SELECT:
     - Joins
     - GROUP BY
-    - LIMIT with offset
-    - mysql procedures (for GROUP BY)
+    - OFFSET
+    - mysql procedures (for GROUP BY )
     - mysql modifiers  (i.e. DISTINCT)
     - subqueries.  Can we rewrite them as joins dynamically?
-- errors in sql parsing 
-  - SQLNotUnderstood (a parsing error)
-  - NotImplementedErrors (for selects which aren't implemented)
 - Treetop doesn't support case insensitive matching.  Need to provide
   a patch for this
-- Reorganize expression class.  Conjunction & Disjunction should be
-  Compound conditions.  
-- REPL = read, eval, print loop.  Can we harness IRB?  Use #inspect
-  to return rows, like mysql
+- REPL = shell = client.
+
+
+Low Priority:
+=============
+
 - Security: simple key value pairs of username, password,
   with all access to data.  Can we encrypt this over SSL
   (or another secure protocol) to get to the DRB process?
 - DRb, so that multiple mongrels can all talk to the same cache
 - Threading for the drb/data access
-- Transactins: Serious transaction processing
+- Transactions: Serious transaction processing
 
 Miscelaneous:
 ===============
 
 - rake tasks:
-    - building gem
-    - github gem integration
-    - share with smt_gem plugin
-- profiling reports on large tables
-- when 0.1 release is done, publish gem to github & rubyforge
-    
+    - github, rubyforge gem publishing
+- benchmarking reports on large tables
 
 Unclassified:
 ===============
@@ -77,22 +68,7 @@ Unclassified:
         SELECT * FROM users WHERE first_name = "Scott"
         SELECT * FROM users WHERE last_name = "Taylor"
         SELECT * FROM users WHERE first_name = "Scott" AND last_name = "Taylor"
-- It sure would be nice to be able to limit how big in RAM these
-  objects will get, i.e.:
-  
-  class MyClass < ActiveRecord::Base
-    cache_model :limit_memory => 100.megabytes
-  end
-  
-  We now have Object#object_size
 
-- Split this project into two (or three) parts:
-   - A parser
-   - A gem
-   - A rails plugin
-
-- flog reports, spec reports.  take rake tasks from fixture replement
-- optional syntax highlighting with the colored gem
 
 
 Other Thoughts:
@@ -128,8 +104,3 @@ Other Thoughts:
    
   There's no reason all of these are options, just like mysql has different
   storage engines.
-
-        
-
-         
-    
