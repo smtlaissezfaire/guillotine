@@ -15,9 +15,12 @@ Medium Priority
   it's an auto-incrememnt field.  For now, assume the primary key
   is named "id", and the auto-incrememnt is set to true
 - Write all database access to a log (optional)
+- Treetop doesn't support case insensitive matching.  Need to provide
+  a patch for this
+- REPL = shell = client.
 
-Medium Priority:
-===============
+Low Priority:
+=============
 
 - SELECT:
     - Joins
@@ -26,14 +29,6 @@ Medium Priority:
     - mysql procedures (for GROUP BY )
     - mysql modifiers  (i.e. DISTINCT)
     - subqueries.  Can we rewrite them as joins dynamically?
-- Treetop doesn't support case insensitive matching.  Need to provide
-  a patch for this
-- REPL = shell = client.
-
-
-Low Priority:
-=============
-
 - Security: simple key value pairs of username, password,
   with all access to data.  Can we encrypt this over SSL
   (or another secure protocol) to get to the DRB process?
