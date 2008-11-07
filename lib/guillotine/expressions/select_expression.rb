@@ -4,11 +4,11 @@ module Guillotine
       include Assertions
       
       def initialize(hash)
-        @select = hash[:select]
-        @from = hash[:from]
-        @where = hash[:where]
-        @limit = hash[:limit]
-        @order_by = hash[:order_by]
+        @select       = hash[:select]
+        @from         = hash[:from]
+        @where        = hash[:where]
+        @limit        = hash[:limit]
+        @order_by     = hash[:order_by]
         @query_string = hash[:string]
       end
 
