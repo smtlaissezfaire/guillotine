@@ -26,11 +26,15 @@ describe "Integration with rspec" do
     @user_class.find(:all, :conditions => ["username = ?", "smtlaissezfaire"]).should == [user]
   end
   
+  it "should have the next-autoincrement_id at 0 at the start of the test case" do
+    (Guillotine::DataStore.table(:users).__send__ :next_autoincrement_id).should == 1
+  end
+  
   it "should write the record with the same id with which it's found" do
-    user = @user_class.create!(:username => "foo")
-    potential_user = @user_class.find(:first, :conditions => ["username = ?", "foo"])
+    created_user = @user_class.create!(:username => "foo")
+    found_user = @user_class.find(:first, :conditions => ["username = ?", "foo"])
     
-    user.id.should equal(potential_user.id)
+    created_user.id.should equal(found_user.id)
   end
   
   it "should find no records if none are present" do
