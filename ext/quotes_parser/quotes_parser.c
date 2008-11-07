@@ -74,7 +74,7 @@ static bool a_quote(char c) {
 // Ruby-C bindings
 
 void Init_quotes_parser() {
-	QuotesParser = rb_define_module("QuotesParser");
+	QuotesParser = rb_define_class_under(rb_path2class("Guillotine::Parser"), "QuotesParser", rb_cObject);
 	rb_define_method(QuotesParser, "parse", quotes_parser, 1);
 }
 

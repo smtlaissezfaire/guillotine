@@ -80,7 +80,7 @@ module Guillotine
       end
       
       it "should not polute the global namespace by defining the module 'QuotesParser' (from the C extension)" do
-        defined?(QuotesParser).should be_nil
+        defined?(::QuotesParser).should be_nil
       end
     end
   end

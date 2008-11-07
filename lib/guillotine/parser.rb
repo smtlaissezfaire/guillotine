@@ -29,7 +29,6 @@ module Guillotine
   
   require "#{parser}/primitives"
   require "#{parser}/sql_chars"
-  require "#{parser}/quotes_parser"
   require "#{parser}/sql_helpers"
   require "#{parser}/sql_row_support"
   require "#{parser}/sql_key_value_pair"
@@ -47,4 +46,6 @@ module Guillotine
   require "#{parser}/sql_transaction"
   require "#{parser}/sql_insert"  
   require "#{parser}/sql"
+  
+  require File.dirname(__FILE__) + "/../../ext/quotes_parser/quotes_parser.so"
 end
