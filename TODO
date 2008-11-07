@@ -35,7 +35,6 @@ Low Priority:
 - DRb, so that multiple mongrels can all talk to the same cache
 - Threading for the drb/data access
 - Transactions: Serious transaction processing
-- dup data sent
 
 Miscelaneous:
 ===============

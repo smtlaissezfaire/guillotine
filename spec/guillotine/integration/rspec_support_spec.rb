@@ -45,4 +45,11 @@ describe "Integration with rspec" do
     user = @user_class.create!(:username => "smt")
     @user_class.find(:all, :conditions => ["username != ?", "smt"]).should == []
   end
+  
+  it "should not modify the object if it hasn't been committed" do
+    user = @user_class.create!(:username => "smt")
+    user.username = "foo"
+    
+    @user_class.find(:first).username.should == "smt"
+  end
 end
