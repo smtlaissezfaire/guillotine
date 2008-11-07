@@ -45,7 +45,6 @@ module Guillotine
   require "#{parser}/sql_drop_table"
   require "#{parser}/sql_show_tables"
   require "#{parser}/sql_transaction"
-  require "#{parser}/sql_insert"
-  require "#{parser}/sql_show"
+  require "#{parser}/sql_insert"  
   require "#{parser}/sql"
 end
