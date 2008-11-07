@@ -8,6 +8,25 @@ module Guillotine
         @obj = mock 'an-object'
       end
       
+      describe "puts" do
+        before(:each) do
+          Kernel.stub!(:puts).and_return "foo"
+        end
+        
+        it "should format the object" do
+          @formatter.should_receive(:format).with(@obj).and_return "output_string"
+          @formatter.puts(@obj)
+        end
+        
+        it "should call puts with the format results" do
+          @formatter.stub!(:format).with(@obj).and_return "output_string"
+          
+          Kernel.should_receive(:puts).with("output_string")
+          
+          @formatter.puts(@obj)
+        end
+      end
+      
       describe "class format convenience method" do
         before(:each) do
           @formatter = mock 'formatter', :format => "some output"

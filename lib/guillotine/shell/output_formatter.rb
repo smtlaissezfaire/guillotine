@@ -15,6 +15,10 @@ module Guillotine
         out
       end
       
+      def puts(obj)
+        Kernel.puts format(obj)
+      end
+      
     private
       
       def spaces(records, column_name, column_value)
