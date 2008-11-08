@@ -1,7 +1,6 @@
 
 High Priority
 ===============
-- SHOW TABLES
 - CREATE TABLE
 - UPDATE
 
@@ -35,6 +34,8 @@ Low Priority:
 - DRb, so that multiple mongrels can all talk to the same cache
 - Threading for the drb/data access
 - Transactions: Serious transaction processing
+- Other SHOW TABLES conditions
+
 
 Miscelaneous:
 ===============
