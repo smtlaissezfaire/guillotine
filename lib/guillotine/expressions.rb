@@ -62,5 +62,6 @@ module Guillotine
     autoload :DeleteStatement,      "#{dir}/delete"
     autoload :SelectExpression,     "#{dir}/select_expression"
     autoload :Insert,               "#{dir}/insert"
+    autoload :CreateTable,          "#{dir}/create_table"
   end
 end
