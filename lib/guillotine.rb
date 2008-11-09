@@ -23,7 +23,7 @@ Guillotine.module_eval do
   
   class << self
     def execute(string)
-      Guillotine::StatementExecutor.new(pre_parser, self.sql_parser).execute(string)
+      Guillotine::StatementExecutor.new(pre_parser, self.sql_parser).parse(string)
     end
     
   protected

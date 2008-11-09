@@ -9,17 +9,17 @@ module Guillotine
     
     attr_reader :parser, :pre_parser
     
-    def execute(string)
+    def parse(string)
       parse_and_eval(pre_process(string))
     end
     
   private
     
     def parse_and_eval(string)
-      parse(string).eval
+      parse_sql(string).eval
     end
     
-    def parse(string)
+    def parse_sql(string)
       result = parser.parse(string)
       if result
         result
