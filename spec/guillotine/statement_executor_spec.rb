@@ -26,5 +26,27 @@ module Guillotine
         }.should raise_error(Guillotine::SQLParseError, "Could not parse query: some sql")
       end
     end
+    
+    describe "execute" do
+      before(:each) do
+        @result = mock 'Intermediate Representation', :call => "some result"
+        @executor.stub!(:parse).and_return @result
+      end
+      
+      it "should call parse with an argument" do
+        @executor.should_receive(:parse).with("FOO").and_return @result
+        @executor.execute("FOO")
+      end
+      
+      it "should call the call method on the IR" do
+        @result.should_receive(:call).with(no_args).and_return "some text"
+        @executor.execute("FOO")
+      end
+      
+      it "should call parse with the string passed to it" do
+        @executor.should_receive(:parse).with("BAR").and_return @result
+        @executor.execute("BAR")
+      end
+    end
   end
 end

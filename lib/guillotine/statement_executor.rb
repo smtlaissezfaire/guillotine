@@ -13,6 +13,10 @@ module Guillotine
       parse_and_eval(pre_process(string))
     end
     
+    def execute(string)
+      parse(string).call
+    end
+    
   private
     
     def parse_and_eval(string)
