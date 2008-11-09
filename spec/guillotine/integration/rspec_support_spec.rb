@@ -6,6 +6,7 @@ describe "Integration with rspec" do
   end
   
   before :each do
+    Guillotine::DataStore.create_table(:users)
     Guillotine::RSpec.before_each
     
     @user_class = Class.new(ActiveRecord::Base) do

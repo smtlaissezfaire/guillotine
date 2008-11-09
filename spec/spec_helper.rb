@@ -32,4 +32,10 @@ module TestUnitRemover
   end
 end
 
+Spec::Runner.configure do |conf|
+  conf.before(:each) do
+    Guillotine::DataStore.__clear_all_tables!
+  end
+end
+
 TestUnitRemover.remove!
