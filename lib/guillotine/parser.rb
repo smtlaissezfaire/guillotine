@@ -44,10 +44,11 @@ module Guillotine
   require "#{parser}/sql_drop_table"
   require "#{parser}/sql_show_tables"
   require "#{parser}/sql_transaction"
-  require "#{parser}/sql_insert"  
-  require "#{parser}/sql"
-  require "#{parser}/sql_create_table"
+  require "#{parser}/sql_insert"
   require "#{parser}/sql_datatypes"
+  require "#{parser}/sql_create_table"
+  require "#{parser}/sql"
+
   
   require File.dirname(__FILE__) + "/../../ext/quotes_parser/quotes_parser.so"
 end
