@@ -5,7 +5,16 @@ module Guillotine
       include SQLDataTypes
 
       rule create_table
-        "CREATE TABLE" space table_name space "(" space? column_name space datatype space? ")"
+        "CREATE TABLE" space table_name space "(" columns_and_datatypes ")"
+      end
+
+      rule columns_and_datatypes
+        column_with_datatype comma columns_and_datatypes /
+        column_with_datatype
+      end
+
+      rule column_with_datatype
+        space? column_name space datatype space?
       end
     end
   end

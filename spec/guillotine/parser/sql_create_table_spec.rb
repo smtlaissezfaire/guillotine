@@ -44,6 +44,14 @@ module Guillotine
       it "should allow an int" do
         parse("CREATE TABLE foo ( foo INT (11))").should_not be_nil
       end
+      
+      it "should allow two sets of columns" do
+        parse("CREATE TABLE foo (foo BIT, foo BIT)").should_not be_nil
+      end
+      
+      it "should allow spaces betwee the first definition and the comma" do
+        parse("CREATE TABLE foo (foo BIT   , foo BIT)").should_not be_nil
+      end
     end
   end
 end
