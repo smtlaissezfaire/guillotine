@@ -5,16 +5,38 @@ module Guillotine
       include SQLDataTypes
 
       rule create_table
-        "CREATE TABLE" space table_name space "(" columns_and_datatypes ")"
+        "CREATE TABLE" space table_name space "(" columns_and_datatypes ")" {
+          def eval
+            options = {
+              :columns    => columns_and_datatypes.eval,
+              :table_name => table_name.eval
+            }
+            
+            Expressions::CreateTable.new(options)
+          end
+        }
       end
 
       rule columns_and_datatypes
-        column_with_datatype comma columns_and_datatypes /
-        column_with_datatype
+        column_with_datatype comma columns_and_datatypes {
+          def eval
+            all = ([column_with_datatype.eval] + columns_and_datatypes.eval)
+            all.flatten!
+            all
+          end
+        }
+        /
+        column_with_datatype {
+          def eval
+            [super]
+          end
+        }
       end
 
       rule column_with_datatype
-        space? column_name space datatype space?
+        space? column_name space datatype space? {
+          def eval; Expressions::Column.new(column_name.eval); end
+        }
       end
     end
   end
