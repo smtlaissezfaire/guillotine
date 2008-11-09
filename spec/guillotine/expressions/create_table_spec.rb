@@ -111,6 +111,58 @@ module Guillotine
           tbl.to_sql.should == "CREATE TABLE `bar` (\n  SQL_FOR_COL_1,\n  SQL_FOR_COL_2\n)"
         end
       end
+      
+      describe "==" do
+        before(:each) do
+          @columns1 = mock "first set of columns", :== => true, :empty? => false
+          @columns2 = mock "second set of columns2", :== => true, :empty? => false
+        end
+        
+        it "should be true if it has the columns and the name are ==" do
+          creator1 = CreateTable.new(:columns => @columns1, :table_name => "foo")
+          creator2 = CreateTable.new(:columns => @columns2, :table_name => "foo")
+          
+          creator1.should == creator2
+        end
+        
+        it "should be false if the columns are not ==" do
+          creator1 = CreateTable.new(:columns => @columns1, :table_name => "foo")
+          creator2 = CreateTable.new(:columns => @columns2, :table_name => "foo")
+          
+          @columns1.stub!(:==).and_return false
+          
+          creator1.should_not == creator2
+        end
+        
+        it "should be false if the table_name is different" do
+          creator1 = CreateTable.new(:columns => @columns1, :table_name => "foo")
+          creator2 = CreateTable.new(:columns => @columns2, :table_name => "bar")
+          
+          creator1.should_not == creator2
+        end
+        
+        it "should be false if it doesn't respond_to? :columns" do
+          @comparable = Class.new do
+            def table_name
+              :foo
+            end
+          end.new
+          
+          creator = CreateTable.new(:columns => @columns1, :table_name => "foo")
+          creator.should_not == @comparable
+        end
+        
+        it "should be false if it doesn't respond_to? :table_name" do
+          @comparable = Class.new do
+            def columns
+              :who_cares
+            end
+          end.new
+          
+          creator = CreateTable.new(:columns => @columns1, :table_name => "foo")
+          creator.should_not == @comparable
+        end
+      end
     end
   end
 end

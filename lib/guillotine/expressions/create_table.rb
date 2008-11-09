@@ -26,7 +26,21 @@ module Guillotine
         "CREATE TABLE `#{table_name}` (\n#{columns_to_sql}\n)"
       end
       
+      def ==(other)
+        if comparable?(other)
+          columns == other.columns && 
+            table_name == other.table_name
+        else
+          false
+        end
+      end
+      
     private
+      
+      def comparable?(other)
+        other.respond_to?(:columns) &&
+          other.respond_to?(:table_name)
+      end
       
       def columns_to_sql
         columns.map { |col| "#{COLUMN_INDENTATION}#{col.to_sql}" }.join(COLUMN_SEPARATOR)
