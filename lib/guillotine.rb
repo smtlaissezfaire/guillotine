@@ -22,7 +22,7 @@ Guillotine.module_eval do
   autoload :VERSION,           "#{project}/version"
   
   class << self
-    def execute(string)
+    def parse(string)
       Guillotine::StatementExecutor.new(pre_parser, self.sql_parser).parse(string)
     end
     

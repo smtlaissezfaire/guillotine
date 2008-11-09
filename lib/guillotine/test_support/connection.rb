@@ -30,7 +30,7 @@ module Guillotine
       end
       
       def parse_sql(sql)
-        Guillotine.execute(sql)
+        Guillotine.parse(sql)
       end
     end
   end

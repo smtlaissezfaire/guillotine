@@ -24,7 +24,7 @@ module Guillotine
       describe "select" do
         before :each do
           @select = mock 'a select', :call => nil
-          Guillotine.stub!(:execute).and_return @select
+          Guillotine.stub!(:parse).and_return @select
           @from = mock 'a from clause', :table_name => :foo
           @select.stub!(:from).and_return @from
         end
@@ -33,8 +33,8 @@ module Guillotine
           @connection.should respond_to(:select)
         end
         
-        it "should call Guillotine.execute with the select query given" do
-          Guillotine.should_receive(:execute).with("SELECT * FROM users").and_return @select
+        it "should call Guillotine.parse with the select query given" do
+          Guillotine.should_receive(:parse).with("SELECT * FROM users").and_return @select
           @connection.select("SELECT * FROM users")
         end
         
@@ -54,7 +54,7 @@ module Guillotine
       describe "insert_sql" do
         before :each do
           @insert = mock 'insert', :call => true, :into => :foo
-          Guillotine.stub!(:execute).and_return @insert
+          Guillotine.stub!(:parse).and_return @insert
           @collection = mock 'a collection'
           
           @datastore.stub!(:table).and_return @collection
@@ -65,7 +65,7 @@ module Guillotine
         end
         
         it "should call Guillotine.execute with the insert query" do
-          Guillotine.should_receive(:execute).with(@insert_query).and_return @insert
+          Guillotine.should_receive(:parse).with(@insert_query).and_return @insert
           @connection.insert_sql(@insert_sql)
         end
         
