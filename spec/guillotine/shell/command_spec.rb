@@ -16,6 +16,24 @@ module Guillotine
           command.execute
         end
         
+        describe "debug" do
+          before(:each) do
+            @command = Command.new("debug")
+            @command.stub!(:require)
+            @command.stub!(:debugger)
+          end
+          
+          it "should require ruby-debug" do
+            @command.should_receive(:require).with("ruby-debug").and_return nil
+            @command.execute
+          end
+          
+          it "should invoke the debugger" do
+            @command.should_receive(:debugger).with(no_args).and_return nil
+            @command.execute
+          end
+        end
+        
         it "should call Guillotine.execute with the string otherwise" do
           command = Command.new("foo")
           Guillotine.should_receive(:execute).with("foo").and_return "something"
