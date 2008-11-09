@@ -36,6 +36,10 @@ module Guillotine
       it "should parse a SHOW TABLES expression" do
         parse("SHOW TABLES").should_not be_nil
       end
+      
+      it "should parse a CREATE TABLE statement" do
+        parse("CREATE TABLE `foo` (id INT(11))").should_not be_nil
+      end
     end
   end
 end

@@ -8,6 +8,7 @@ module Guillotine
       include SQLTransaction
       include SQLInsert
       include SQLShowTables
+      include SQLCreateTable
 
       rule sql_statement
         select_expression     /
@@ -16,7 +17,8 @@ module Guillotine
         drop_table            /
         transaction_statement /
         insert                /
-        show_tables
+        show_tables           /
+        create_table
       end
     end
   end
