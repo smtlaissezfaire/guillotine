@@ -1,0 +1,127 @@
+module Guillotine
+  module Parser
+    grammar SQLDataTypes
+      include SQLPrimitives
+
+      rule datatype
+        bit_field /
+        numeric_type
+      end
+
+      rule numeric_type
+        int_type / decimal_type
+      end
+
+      rule decimal_type
+        decimal_field field_size_with_space? unsigned? zerofill?
+      end
+
+      rule decimal_field
+        real_keyword    /
+        double_keyword  /
+        float_keyword   /
+        decimal_keyword /
+        numeric_keyword
+      end
+
+      rule real_keyword
+        "REAL"
+      end
+
+      rule double_keyword
+        "DOUBLE"
+      end
+
+      rule float_keyword
+        "FLOAT"
+      end
+
+      rule decimal_keyword
+        "DECIMAL"
+      end
+
+      rule numeric_keyword
+        "NUMERIC"
+      end
+
+      rule int_type
+        int_field int_options
+      end
+
+      rule int_field
+        tiny_int_keyword     /
+        small_int_keyword    /
+        integer_keyword      /
+        int_keyword          /
+        big_int_keyword
+      end
+
+      rule big_int_keyword
+        "BIGINT"
+      end
+
+      rule int_options
+        field_size_with_space? unsigned? zerofill?
+      end
+
+      rule bit_field
+        "BIT" field_size?
+      end
+
+      rule small_int_keyword
+        "SMALLINT"
+      end
+
+      rule tiny_int_keyword
+        "TINYINT"
+      end
+
+      rule int_keyword
+        "INT"
+      end
+
+      rule integer_keyword
+        "INTEGER"
+      end
+
+      rule unsigned
+        space unsigned_keyword
+      end
+
+      rule unsigned_keyword
+        "UNSIGNED"
+      end
+
+      rule zerofill
+        space zerofill_keyword
+      end
+
+      rule zerofill_keyword
+        "ZEROFILL"
+      end
+
+      rule field_size_with_space
+        space? field_size
+      end
+
+      rule field_size
+        open_parens space? integer space? close_parens /
+        open_parens space? integer space? comma space? integer space? close_parens
+      end
+
+      rule comma
+        ","
+      end
+
+      rule open_parens
+        "("
+      end
+
+      rule close_parens
+        ")"
+      end
+    end
+  end
+end
+
+  

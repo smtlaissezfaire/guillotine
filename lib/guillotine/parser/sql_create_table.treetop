@@ -1,0 +1,11 @@
+module Guillotine
+  module Parser
+    grammar SQLCreateTable
+      include SQLRowSupport
+
+      rule create_table
+        "CREATE TABLE" space table_name space "(foo bit)"
+      end
+    end
+  end
+end
