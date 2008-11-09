@@ -33,4 +33,20 @@ describe Guillotine do
   it "should have Guillotine::RSpec as an alias for Guillotine::TestSupport::RSpec" do
     Guillotine::RSpec.should equal(Guillotine::TestSupport::RSpec)
   end
+  
+  it "should call the statement executor's execute method" do
+    executor = mock 'executor'
+    Guillotine.stub!(:statement_executor).and_return executor
+    
+    executor.should_receive(:execute).with("SQL STATEMENT")
+    Guillotine.execute("SQL STATEMENT")
+  end
+  
+  it "should use the correct sql statement" do
+    executor = mock 'executor'
+    Guillotine.stub!(:statement_executor).and_return executor
+    
+    executor.should_receive(:execute).with("SELECT * FROM foo")
+    Guillotine.execute("SELECT * FROM foo")
+  end
 end

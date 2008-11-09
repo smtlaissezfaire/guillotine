@@ -22,11 +22,19 @@ Guillotine.module_eval do
   autoload :VERSION,           "#{project}/version"
   
   class << self
+    def execute(string)
+      statement_executor.execute(string)
+    end
+    
     def parse(string)
-      Guillotine::StatementExecutor.new(pre_parser, self.sql_parser).parse(string)
+      statement_executor.parse(string)
     end
     
   protected
+    
+    def statement_executor
+      Guillotine::StatementExecutor.new(pre_parser, self.sql_parser)
+    end
     
     def sql_parser
       @sql_parser ||= Guillotine::Parser::SQLParser.new
