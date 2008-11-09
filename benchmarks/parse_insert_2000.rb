@@ -7,7 +7,7 @@ SQL_STATEMENT = "INSERT INTO `foo` (`col_one`, `col_two`) VALUES (1, 'smtlaissez
 Benchmark.bmbm do |x|
   x.report "pre-parsing and regular parsing" do
     2000.times do
-      Guillotine.execute(SQL_STATEMENT)
+      Guillotine.parse(SQL_STATEMENT)
     end
   end
   

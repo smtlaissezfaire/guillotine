@@ -64,7 +64,7 @@ module Guillotine
           @connection.should respond_to(:insert_sql)
         end
         
-        it "should call Guillotine.execute with the insert query" do
+        it "should call Guillotine.parse with the insert query" do
           Guillotine.should_receive(:parse).with(@insert_query).and_return @insert
           @connection.insert_sql(@insert_sql)
         end
