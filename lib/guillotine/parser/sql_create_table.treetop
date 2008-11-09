@@ -2,9 +2,10 @@ module Guillotine
   module Parser
     grammar SQLCreateTable
       include SQLRowSupport
+      include SQLDataTypes
 
       rule create_table
-        "CREATE TABLE" space table_name space "(foo bit)"
+        "CREATE TABLE" space table_name space "(" space? column_name space datatype space? ")"
       end
     end
   end
