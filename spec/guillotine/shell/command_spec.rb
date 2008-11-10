@@ -34,25 +34,107 @@ module Guillotine
           end
         end
         
-        it "should call Guillotine.execute with the string otherwise" do
-          command = Command.new("foo")
-          Guillotine.should_receive(:execute).with("foo").and_return "something"
-          command.execute
-        end
-        
-        it "should call Guillotine.execute with the *same* command" do
-          command = Command.new("bar")
-          Guillotine.should_receive(:execute).with("bar").and_return "something"
-          command.execute
-        end
-        
-        it "should wrap the execution results in an OutputFormatter" do
-          command = Command.new("bar")
-          results = mock('a mock')
-          Guillotine.stub!(:execute).and_return(results)
+        describe "debug with a command" do
+          before(:each) do
+            @command = Command.new("debug SELECT * FROM foo")
+            @command.stub!(:require)
+            @command.stub!(:debugger)
+          end
           
-          OutputFormatter.should_receive(:format).with(results)
-          command.execute
+          it "should require ruby-debug" do
+            @command.should_receive(:require).with("ruby-debug").and_return nil
+            @command.execute
+          end
+          
+          it "should invoke the debugger" do
+            @command.should_receive(:debugger).with(no_args).and_return nil
+            @command.execute
+          end
+        end
+        
+        describe "a command that does not start with debug" do
+          def stub_debugger(command)
+            command.stub!(:require)
+            command.stub!(:debugger)
+          end
+          
+          it "should call Guillotine.execute with the string otherwise" do
+            command = Command.new("debug foo")
+            stub_debugger(command)
+            
+            Guillotine.should_receive(:execute).with("foo").and_return "something"
+            command.execute
+          end
+          
+          it "should call Guillotine.execute with the *same* command" do
+            command = Command.new("debug bar")
+            stub_debugger(command)            
+            
+            Guillotine.should_receive(:execute).with("bar").and_return "something"
+            command.execute
+          end
+          
+          it "should wrap the execution results in an OutputFormatter" do
+            command = Command.new("debug bar")
+            stub_debugger(command)
+            
+            results = mock('a mock')
+            Guillotine.stub!(:execute).and_return(results)
+            
+            OutputFormatter.should_receive(:format).with(results)
+            command.execute
+          end
+        end
+        
+        describe "debug statement in incorrect format" do
+          before(:each) do
+            Guillotine.stub!(:execute).and_return "foo"
+            OutputFormatter.stub!(:format).and_return "some text"
+          end
+          
+          def stub_debugger(command)
+            command.stub!(:require)
+            command.stub!(:debugger)
+          end
+          
+          it "should not start the debugger if it has debug in the middle of the sequence" do
+            command = Command.new("foo debug foo")
+            stub_debugger(command)
+            
+            command.should_not_receive(:debugger)
+            command.execute
+          end
+          
+          it "should not start the debugger if does not start with a coherent 'debug'" do
+            command = Command.new("debugfoo")
+            stub_debugger(command)
+            
+            command.should_not_receive(:debugger)
+            command.execute
+          end
+        end
+        
+        describe "if not receiving a debug sequence or exit sequence" do
+          it "should call Guillotine.execute with the string otherwise" do
+            command = Command.new("foo")
+            Guillotine.should_receive(:execute).with("foo").and_return "something"
+            command.execute
+          end
+          
+          it "should call Guillotine.execute with the *same* command" do
+            command = Command.new("bar")
+            Guillotine.should_receive(:execute).with("bar").and_return "something"
+            command.execute
+          end
+          
+          it "should wrap the execution results in an OutputFormatter" do
+            command = Command.new("bar")
+            results = mock('a mock')
+            Guillotine.stub!(:execute).and_return(results)
+            
+            OutputFormatter.should_receive(:format).with(results)
+            command.execute
+          end
         end
       end
       
