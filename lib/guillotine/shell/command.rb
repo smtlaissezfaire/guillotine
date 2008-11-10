@@ -14,18 +14,31 @@ module Guillotine
       
       def execute
         if @command == EXIT_SEQUENCE
-          Kernel.exit
+          exit
         elsif @command =~ /^#{DEBUG_SEQUENCE}\s.*$/
-          require "ruby-debug"
-          debugger
-          OutputFormatter.format(Guillotine.execute(@command.gsub("debug ", "")))
+          debug_command
         elsif @command =~ /^#{DEBUG_SEQUENCE}$/
-          require "ruby-debug"
-          debugger
-          OutputFormatter.format(Guillotine.execute(@command.gsub("debug ", "")))
+          debug_command
         else
-          OutputFormatter.format(Guillotine.execute(@command))
+          format_and_output
         end
+      end
+      
+    private
+      
+      def exit
+        Kernel.exit
+      end
+      
+      def debug_command
+        require "ruby-debug"
+        debugger
+        @command.gsub!("debug ", "")
+        format_and_output
+      end
+      
+      def format_and_output
+        OutputFormatter.format(Guillotine.execute(@command))
       end
     end
   end
