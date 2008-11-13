@@ -17,13 +17,7 @@ module Guillotine
         Kernel.puts("#{format(obj)}\n")
       end
       
-      def to_s(obj = nil)
-        if obj.nil?
-          super
-        else
-          puts(obj)
-        end
-      end
+      alias_method :to_s, :puts
       
     private
       

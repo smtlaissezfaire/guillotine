@@ -31,10 +31,6 @@ module Guillotine
         def puts(*args)
           Kernel.puts(*args)
         end
-        
-        def printf(*args)
-          Kernel.printf(*args)
-        end
       end
     end
   end
