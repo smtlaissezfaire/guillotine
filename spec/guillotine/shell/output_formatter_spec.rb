@@ -95,6 +95,10 @@ module Guillotine
           Kernel.should_receive(:puts).with("Empty set\n").and_return nil
           @formatter.format([])
         end
+        
+        it "should format the result [{:table_name => 'foo'}] properly"  do
+          @formatter.format([{ :table_name => "foo" }])
+        end
       end
     end
   end

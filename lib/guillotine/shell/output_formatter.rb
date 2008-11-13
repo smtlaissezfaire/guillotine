@@ -31,8 +31,16 @@ module Guillotine
       end
       
       def spaces(records, column_name, column_value)
-        length = max_value_length(records, column_name)
-        " " * (length - column_value.to_s.length)
+        length_of_values = max_value_length(records, column_name)
+        length_of_column = column_value.to_s.length
+        number_of_spaces = 
+          if length_of_column > length_of_values
+            length_of_column - length_of_values
+          else
+            length_of_values - length_of_column
+          end
+        
+        " " * number_of_spaces
       end
       
       def max_value_length(records, column_name)
