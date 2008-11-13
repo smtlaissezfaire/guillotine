@@ -1,6 +1,7 @@
 
 High Priority
 ===============
+- REPL.  Necessary for evaluating queries
 - UPDATE
 
 Medium Priority
@@ -9,7 +10,13 @@ Medium Priority
   - second form
   - third form
 - Write all database access to a log (optional)
-- REPL = shell = client.
+- Beef up primary key support.  We'll need to talk to the database
+  at initialization to find the primary key, and whether or not
+  it's an auto-incrememnt field.  For now, assume the primary key
+  is named "id", and the auto-incrememnt is set to true
+- Write all database access to a log (optional)
+- Treetop doesn't support case insensitive matching.  Need to provide
+  a patch for this
 
 Low Priority:
 =============
@@ -33,6 +40,8 @@ Low Priority:
   it's an auto-incrememnt field.  For now, assume the primary key
   is named "id", and the auto-incrememnt is set to true
 - other CREATE TABLE clauses
+- Query timing
+- CREATE TABLE - other clauses, other types
 
 Miscelaneous:
 ===============
