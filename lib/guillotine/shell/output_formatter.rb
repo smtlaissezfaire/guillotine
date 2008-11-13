@@ -2,7 +2,7 @@ module Guillotine
   module Shell
     class OutputFormatter
       def self.format(obj)
-        new.format(obj)
+        new.to_s(obj)
       end
       
       def format(table)

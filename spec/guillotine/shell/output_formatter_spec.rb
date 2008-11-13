@@ -29,7 +29,7 @@ module Guillotine
       
       describe "class format convenience method" do
         before(:each) do
-          @formatter = mock 'formatter', :format => "some output"
+          @formatter = mock 'formatter', :to_s => "some output"
           Shell::OutputFormatter.stub!(:new).and_return @formatter
           
           @an_object = mock 'an object'
@@ -40,8 +40,8 @@ module Guillotine
           Shell::OutputFormatter.format(@an_object)
         end
         
-        it "should call format with the object" do
-          @formatter.should_receive(:format).with(@an_object).and_return "some output"
+        it "should call to_s with the object" do
+          @formatter.should_receive(:to_s).with(@an_object).and_return "some output"
           Shell::OutputFormatter.format(@an_object)
         end
       end
