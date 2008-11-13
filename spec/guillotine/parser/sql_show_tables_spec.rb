@@ -7,10 +7,17 @@ module Guillotine
       
       before :each do
         @parser = SQLShowTablesParser.new
+        @displayer = mock 'displayer'
+        Expressions::TableDisplayer.stub!(:new).and_return @displayer
       end
       
       it "should parse 'SHOW TABLES'" do
         parse("SHOW TABLES").should_not be_nil
+      end
+      
+      it "should instantiate a table displayer with the datastore" do
+        Expressions::TableDisplayer.should_receive(:new).with(Guillotine::DataStore)
+        parse_and_eval("SHOW TABLES")
       end
       
       it "parse with the FULL keyword" do

@@ -7,7 +7,11 @@ module Guillotine
 
       rule show_tables
         "SHOW" space (full)? "TABLES" from_table?
-        (like_pattern / (space where_condition))?
+        (like_pattern / (space where_condition))? {
+          def eval
+            Expressions::TableDisplayer.new(Guillotine::DataStore)
+          end
+        }
       end
 
       rule full

@@ -63,5 +63,6 @@ module Guillotine
     autoload :SelectExpression,     "#{dir}/select_expression"
     autoload :Insert,               "#{dir}/insert"
     autoload :CreateTable,          "#{dir}/create_table"
+    autoload :TableDisplayer,       "#{dir}/table_displayer"
   end
 end
