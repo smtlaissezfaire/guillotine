@@ -21,14 +21,27 @@ module Guillotine
       describe "call" do
         before(:each) do
           @datastore.stub!(:table_names).and_return ["a", "b"]
+          @displayer = TableDisplayer.new(@datastore)
         end
         
         it "should call the table_names method on the datastore" do
-          displayer = TableDisplayer.new(@datastore)
-          
           @datastore.should_receive(:table_names).and_return ["a", "b"]
-          
-          displayer.call
+          @displayer.call
+        end
+        
+        it "should return an array of :table_name => value with the table name" do
+          @datastore.stub!(:table_names).and_return ["foo"]
+          @displayer.call.should == [{ :table_name => "foo" }]
+        end
+        
+        it "should return the correct table name" do
+          @datastore.stub!(:table_names).and_return ["bar"]
+          @displayer.call.should == [{ :table_name => "bar" }]
+        end
+        
+        it "should return both table names, when there are two" do
+          @datastore.stub!(:table_names).and_return ["foo", "bar"]
+          @displayer.call.should == [{ :table_name => "foo" }, { :table_name => "bar"}]
         end
       end
       

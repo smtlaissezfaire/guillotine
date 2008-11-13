@@ -12,7 +12,9 @@ module Guillotine
       end
       
       def call
-        @datastore.table_names
+        @datastore.table_names.map do |tbl_name|
+          { :table_name => tbl_name }
+        end
       end
       
       def ==(other)
