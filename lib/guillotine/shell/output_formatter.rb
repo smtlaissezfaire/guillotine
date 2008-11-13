@@ -7,15 +7,22 @@ module Guillotine
       
       def format(table)
         if table.empty?
-          puts("Empty set")
+          "Empty set"
         else
           table_with_data_output(table)
         end
       end
       
       def puts(obj)
-        output_obj = obj.kind_of?(String) ? obj : format(obj)
-        Kernel.puts("#{output_obj}\n")
+        Kernel.puts("#{format(obj)}\n")
+      end
+      
+      def to_s(obj = nil)
+        if obj.nil?
+          super
+        else
+          puts(obj)
+        end
       end
       
     private

@@ -92,12 +92,29 @@ module Guillotine
         end
         
         it "should return the string 'Empty set\n' when it tries to format an empty array" do
-          Kernel.should_receive(:puts).with("Empty set\n").and_return nil
-          @formatter.format([])
+          @formatter.format([]).should == "Empty set"
         end
         
         it "should format the result [{:table_name => 'foo'}] properly"  do
           @formatter.format([{ :table_name => "foo" }])
+        end
+      end
+      
+      describe "to_s" do
+        before(:each) do
+          @formatter.stub!(:format).and_return "some text"
+          @an_object = mock 'an object'
+          Kernel.stub!(:puts).and_return "some text\n"
+        end
+        
+        it "should call format on the object" do
+          @formatter.should_receive(:format).with(@an_object).and_return "some text"
+          @formatter.to_s(@an_object)
+        end
+        
+        it "should puts the obj" do
+          Kernel.should_receive(:puts).with("some text\n").and_return "some text\n"
+          @formatter.to_s(@an_object)
         end
       end
     end
