@@ -6,6 +6,21 @@ module Guillotine
       end
       
       def format(table)
+        if table.empty?
+          puts("Empty set")
+        else
+          table_with_data_output(table)
+        end
+      end
+      
+      def puts(obj)
+        output_obj = obj.kind_of?(String) ? obj : format(obj)
+        Kernel.puts("#{output_obj}\n")
+      end
+      
+    private
+      
+      def table_with_data_output(table)
         out = ""
         out << header(table)
         records = table
@@ -14,12 +29,6 @@ module Guillotine
         end
         out
       end
-      
-      def puts(obj)
-        Kernel.puts format(obj)
-      end
-      
-    private
       
       def spaces(records, column_name, column_value)
         length = max_value_length(records, column_name)

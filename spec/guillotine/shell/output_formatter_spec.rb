@@ -21,7 +21,7 @@ module Guillotine
         it "should call puts with the format results" do
           @formatter.stub!(:format).with(@obj).and_return "output_string"
           
-          Kernel.should_receive(:puts).with("output_string")
+          Kernel.should_receive(:puts).with("output_string\n")
           
           @formatter.puts(@obj)
         end
@@ -89,6 +89,11 @@ module Guillotine
         
         it "should map two values side by side" do
           @formatter.format([{ :foo => "123", :bar => "123" }, { :foo => "123456", :bar => "123" }]).should include("| 123    | 123 |")
+        end
+        
+        it "should return the string 'Empty set\n' when it tries to format an empty array" do
+          Kernel.should_receive(:puts).with("Empty set\n").and_return nil
+          @formatter.format([])
         end
       end
     end
