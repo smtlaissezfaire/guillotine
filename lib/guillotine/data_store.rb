@@ -125,7 +125,7 @@ module Guillotine
       end
       
       def sym(string_or_symbol)
-        string_or_symbol.to_sym
+        string_or_symbol.to_s.downcase.to_sym
       end
     end
   end

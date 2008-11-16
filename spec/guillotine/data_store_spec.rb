@@ -133,6 +133,11 @@ module Guillotine
             DataStore.create_table(:bar)
           end
         end
+        
+        it "should downcase the tablename" do
+          DataStore.create_table("FOO")
+          DataStore.table_names.should == [:foo]
+        end
       end
       
       describe "tables" do
