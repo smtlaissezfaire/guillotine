@@ -1,7 +1,6 @@
 
 High Priority
 ===============
-- CREATE TABLE
 - UPDATE
 
 Medium Priority
@@ -9,13 +8,7 @@ Medium Priority
 - DELETE (3 forms, see: http://dev.mysql.com/doc/refman/5.0/en/delete.html)
   - second form
   - third form
-- Beef up primary key support.  We'll need to talk to the database
-  at initialization to find the primary key, and whether or not
-  it's an auto-incrememnt field.  For now, assume the primary key
-  is named "id", and the auto-incrememnt is set to true
 - Write all database access to a log (optional)
-- Treetop doesn't support case insensitive matching.  Need to provide
-  a patch for this
 - REPL = shell = client.
 
 Low Priority:
@@ -24,18 +17,22 @@ Low Priority:
 - SELECT:
     - Joins
     - GROUP BY
-    - OFFSET
+    - OFFSET clause
+    - LIMIT with offset clause
     - mysql procedures (for GROUP BY )
     - mysql modifiers  (i.e. DISTINCT)
     - subqueries.  Can we rewrite them as joins dynamically?
-- Security: simple key value pairs of username, password,
-  with all access to data.  Can we encrypt this over SSL
-  (or another secure protocol) to get to the DRB process?
-- DRb, so that multiple mongrels can all talk to the same cache
-- Threading for the drb/data access
 - Transactions: Serious transaction processing
 - Other SHOW TABLES conditions
-
+- Remove overriding of require.  Replace it with something which will
+  autoload treetop file if in ruby, else require it with Treetop.load
+- Move all parser transformations into seperate files (which will decouple
+  the parser from the IR)
+- Beef up primary key support.  We'll need to talk to the database
+  at initialization to find the primary key, and whether or not
+  it's an auto-incrememnt field.  For now, assume the primary key
+  is named "id", and the auto-incrememnt is set to true
+- other CREATE TABLE clauses
 
 Miscelaneous:
 ===============
@@ -53,8 +50,6 @@ Unclassified:
 - Database formats.  Is one big array per table really a good format?
   - Should Set be used instead of Array?
 - Other database adapters?  SQLite?  Decouple design
-- Option to disconnect from database entirely in tests.
-  - if NotImplementedError, then we *should* use the real database!
 - Could we make this lazy, as opposed to eager?
   - seems that we could, if we could figure out that certain queries
     are subsets of other queries.  For instance:
@@ -64,8 +59,11 @@ Unclassified:
         SELECT * FROM users WHERE first_name = "Scott"
         SELECT * FROM users WHERE last_name = "Taylor"
         SELECT * FROM users WHERE first_name = "Scott" AND last_name = "Taylor"
-
-
+- DRb, so that multiple mongrels can all talk to the same cache
+- Threading for the drb/data access
+- Security: simple key value pairs of username, password,
+  with all access to data.  Can we encrypt this over SSL
+  (or another secure protocol) to get to the DRB process?
 
 Other Thoughts:
 ==================
@@ -100,4 +98,3 @@ Other Thoughts:
    
   There's no reason all of these are options, just like mysql has different
   storage engines.
-- unfreeze objects via C extension
