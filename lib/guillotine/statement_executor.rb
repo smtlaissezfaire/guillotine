@@ -2,7 +2,7 @@ module Guillotine
   class SQLParseError < StandardError; end
   
   class StatementExecutor
-    def initialize(pre_parser, parser)
+    def initialize(pre_parser = Guillotine::PreParser, parser = Guillotine::Parser::SQLParser.new)
       @pre_parser = pre_parser
       @parser = parser
     end

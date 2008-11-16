@@ -1,29 +1,6 @@
 require File.dirname(__FILE__) + "/spec_helper"
 
 describe Guillotine do
-  before :each do
-    Guillotine::PreParser.stub!(:parse).and_return "pre-processed statement"
-    @parsed_content = mock 'parsed content', :eval => nil
-    @parser = mock(Guillotine::Parser::SQLParser)
-    @parser.stub!(:parse).and_return @parsed_content
-    Guillotine.stub!(:sql_parser).and_return @parser
-  end
-  
-  it "should run the pre-processor on the string" do
-    Guillotine::PreParser.should_receive(:parse).with("a statement").and_return 'pre-processed statement'
-    Guillotine.parse("a statement")
-  end
-  
-  it "should send the pre-processed statement on to the main parser" do
-    @parser.should_receive(:parse).with("pre-processed statement").and_return @parsed_content
-    Guillotine.parse("a statement")
-  end
-  
-  it "should evaluate the pre-processed statement" do
-    @parsed_content.should_receive(:eval).with(no_args)
-    Guillotine.parse("a statement")
-  end
-  
   it "should have RSpec as a top level constant, inside Guillotine" do
     lambda { 
       Guillotine::RSpec
@@ -34,19 +11,37 @@ describe Guillotine do
     Guillotine::RSpec.should equal(Guillotine::TestSupport::RSpec)
   end
   
-  it "should call the statement executor's execute method" do
-    executor = mock 'executor'
-    Guillotine.stub!(:statement_executor).and_return executor
+  describe "execute" do
+    before(:each) do
+      @executor = mock 'executor', :execute => "foo"
+      Guillotine::MultiStatementExecutor.stub!(:new).and_return @executor
+    end
     
-    executor.should_receive(:execute).with("SQL STATEMENT")
-    Guillotine.execute("SQL STATEMENT")
+    it "should instantiate a new executor" do
+      Guillotine::MultiStatementExecutor.should_receive(:new).with("a string").and_return @executor
+      Guillotine.execute("a string")
+    end
+    
+    it "should call execute on the string" do
+      @executor.should_receive(:execute).and_return "some results"
+      Guillotine.execute("foo")
+    end
   end
   
-  it "should use the correct sql statement" do
-    executor = mock 'executor'
-    Guillotine.stub!(:statement_executor).and_return executor
+  describe "parse" do
+    before(:each) do
+      @executor = mock 'executor', :parse => "foo"
+      Guillotine::MultiStatementExecutor.stub!(:new).and_return @executor
+    end
     
-    executor.should_receive(:execute).with("SELECT * FROM foo")
-    Guillotine.execute("SELECT * FROM foo")
+    it "should instantiate a new executor" do
+      Guillotine::MultiStatementExecutor.should_receive(:new).with("a string").and_return @executor
+      Guillotine.parse("a string")
+    end
+    
+    it "should call parse on the string" do
+      @executor.should_receive(:parse).and_return "some results"
+      Guillotine.parse("foo")
+    end
   end
 end
