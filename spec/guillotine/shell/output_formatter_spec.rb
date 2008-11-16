@@ -21,7 +21,7 @@ module Guillotine
         it "should call puts with the format results" do
           @formatter.stub!(:format).with(@obj).and_return "output_string"
           
-          Kernel.should_receive(:puts).with("output_string\n")
+          Kernel.should_receive(:puts).with("output_string\n\n")
           
           @formatter.puts(@obj)
         end
@@ -60,7 +60,7 @@ module Guillotine
         end
         
         it "should have a vertical bar between both columns" do
-          @formatter.format([{ :foo => 123, :bar => :baz }]).should include("| foo | bar |")          
+          @formatter.format([{ :foo => 123, :bar => :baz }]).should include("| foo | bar |")
         end
         
         it "should have the first value in the table" do
@@ -91,7 +91,7 @@ module Guillotine
           @formatter.format([{ :foo => "123", :bar => "123" }, { :foo => "123456", :bar => "123" }]).should include("| 123    | 123 |")
         end
         
-        it "should return the string 'Empty set\n' when it tries to format an empty array" do
+        it "should return the string 'Empty set' when it tries to format an empty array" do
           @formatter.format([]).should == "Empty set"
         end
         
@@ -113,7 +113,7 @@ module Guillotine
         end
         
         it "should puts the obj" do
-          Kernel.should_receive(:puts).with("some text\n").and_return "some text\n"
+          Kernel.should_receive(:puts).with("some text\n\n").and_return "some text\n\n"
           @formatter.to_s(@an_object)
         end
       end

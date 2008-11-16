@@ -14,7 +14,7 @@ module Guillotine
       end
       
       def puts(obj)
-        Kernel.puts("#{format(obj)}\n")
+        Kernel.puts("#{format(obj)}\n\n")
       end
       
       alias_method :to_s, :puts
