@@ -3,10 +3,7 @@ require "date"
 require "time"
 require "treetop"
 
-# Need to module eval here to get the require from
-# Guillotine
 module Guillotine
-  
   module Parser
     Expressions      = Guillotine::Expressions       unless defined?(Expressions)
     
@@ -25,8 +22,9 @@ module Guillotine
     Insert           = Expressions::Insert           unless defined?(Insert)
   end
   
-  parser = File.dirname(__FILE__) + "/parser"
+  require File.dirname(__FILE__) + "/../../ext/quotes_parser/quotes_parser.so"
   
+  parser = File.dirname(__FILE__) + "/parser"
   require "#{parser}/primitives"
   require "#{parser}/sql_chars"
   require "#{parser}/sql_helpers"
@@ -48,7 +46,4 @@ module Guillotine
   require "#{parser}/sql_datatypes"
   require "#{parser}/sql_create_table"
   require "#{parser}/sql"
-
-  
-  require File.dirname(__FILE__) + "/../../ext/quotes_parser/quotes_parser.so"
 end
