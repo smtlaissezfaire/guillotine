@@ -6,36 +6,36 @@ module Guillotine
       @pre_parser = PreParser.new
     end
     
-    def parse(string)
-      @pre_parser.parse(string)
+    def parse(*args)
+      @pre_parser.parse(*args)
     end
     
     it "should remove any spaces at the start of the string" do
-      parse("   foo").should == "foo"
+      parse("   foo").should == "FOO"
     end
     
     it "should remove any spaces at the end of the string" do
-      parse("foo     ").should == "foo"
+      parse("foo     ").should == "FOO"
     end
     
     it "should remove any carriage returns" do
-      parse("foo\r\rbar\r\rbaz").should == "foobarbaz"
+      parse("foo\r\rbar\r\r").should == "FOOBAR"
     end
     
     it "should replace \n's with spaces" do
-      parse("foo\nbar\nbaz").should == "foo bar baz"
+      parse("foo\nbar\nbaz").should == "FOO BAR BAZ"
     end
     
     it "should not have \n's at the start of a line" do
-      parse("\n\nfoo\nbar\nbaz").should == "foo bar baz"      
+      parse("\n\nfoo\nbar\nbaz").should == "FOO BAR BAZ"
     end
     
     it "should not have \n's at the end of a line" do
-      parse("\n\nfoo\nbar\nbaz").should == "foo bar baz"      
+      parse("\n\nfoo\nbar\nbaz").should == "FOO BAR BAZ"
     end
     
     it "should collapse multiple \n's into one space" do
-      parse("foo\n\n\nbar").should == "foo bar"
+      parse("foo\n\n\nbar").should == "FOO BAR"
     end
     
     describe "parse, the class method" do
@@ -56,15 +56,27 @@ module Guillotine
     end
     
     it "should replace two spaces with one" do
-      parse("foo  bar").should == "foo bar"
+      parse("foo  bar").should == "FOO BAR"
     end
     
     it "should replace three spaces with one" do
-      parse("foo   bar").should == "foo bar"
+      parse("foo   bar").should == "FOO BAR"
     end
     
     it "should not change the spaces inside a single quote" do
       parse("'foo  bar'").should == "'foo  bar'"
+    end
+    
+    it "should upcase anything outside of a quote"do
+      parse("foo bar").should == "FOO BAR"
+    end
+    
+    it "should not upcase anything inside a quote" do
+      parse("foo 'bar' baz").should == "FOO 'bar' BAZ"
+    end
+    
+    it "should not upcase if given false as it's second parameter" do
+      parse("foo", false).should == "foo"
     end
     
     describe "regression 1: A Rails generated INSERT" do
@@ -87,7 +99,7 @@ module Guillotine
       end
     
       it "should parse the string" do
-        parse(@string).should == "foo != 'bar'"
+        parse(@string).should == "FOO != 'bar'"
       end
     end
   end

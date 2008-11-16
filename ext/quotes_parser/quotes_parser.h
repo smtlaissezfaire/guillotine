@@ -3,6 +3,7 @@ static char *       original_string = NULL;
 static char *       buffer          = NULL;
 static unsigned int at              = 0;
 static bool         in_quotes       = false;
+static bool         upcasing        = true;
 static char         starting_quote;
 
 static char * parse();
@@ -23,5 +24,5 @@ static bool   a_quote(char);
 
 VALUE QuotesParser = Qnil;
 void  Init_quotes_parser();
-VALUE quotes_parser(VALUE, VALUE);
+VALUE quotes_parser(int, VALUE *, VALUE);
 

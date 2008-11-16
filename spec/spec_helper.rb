@@ -3,12 +3,12 @@ require "spec"
 require File.dirname(__FILE__) + "/../lib/guillotine"
 
 module ParserSpecHelper
-  def pre_parse(string)
-    Guillotine::PreParser.parse(string)
+  def pre_parse(string, upcasing = false)
+    Guillotine::PreParser.parse(string, upcasing)
   end
   
-  def parse(string)
-    if pre_parsed_string = pre_parse(string)
+  def parse(string, upcasing = false)
+    if pre_parsed_string = pre_parse(string, upcasing)
       @parser.parse(pre_parsed_string)
     else
       raise "* Could not pre-parse string! '#{string}'"

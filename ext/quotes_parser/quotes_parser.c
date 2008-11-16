@@ -50,6 +50,9 @@ static int advance_char() {
 }
 
 static void add_to_buffer(char c) {
+  if (upcasing && !in_quotes && islower(c)) {
+    c = toupper(c);
+  }
   buffer[strlen(buffer)] = c;
 }
 
@@ -75,11 +78,21 @@ static bool a_quote(char c) {
 
 void Init_quotes_parser() {
 	QuotesParser = rb_define_class_under(rb_path2class("Guillotine::Parser"), "QuotesParser", rb_cObject);
-	rb_define_method(QuotesParser, "parse", quotes_parser, 1);
+	rb_define_method(QuotesParser, "parse", quotes_parser, -1);
 }
 
-VALUE quotes_parser(VALUE self, VALUE ruby_string) {
-  char * string = RSTRING(ruby_string)->ptr;
+VALUE quotes_parser(int argc, VALUE *argv, VALUE self) {
+  VALUE ruby_string;
+  VALUE upcase;
+  char *string;
+
+  rb_scan_args(argc, argv, "11", &ruby_string, &upcase);
+  string = RSTRING(ruby_string)->ptr;
+  if (upcase == Qnil || upcase == Qfalse) {
+    upcasing = false;
+  } else {
+    upcasing = true;
+  }
 
   if (string)  {
     return rb_str_new2(parse(string));
