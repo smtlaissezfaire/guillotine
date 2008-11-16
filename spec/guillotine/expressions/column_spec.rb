@@ -147,6 +147,18 @@ module Guillotine
           col2.should_not equal(col1)
         end
       end
+      
+      describe "lowercasing column names" do
+        it "should lowercase the column name" do
+          col = Column.new("FOO")
+          col.column_name.should == :foo
+        end
+        
+        it "should lowcase the column name if given with a table name" do
+          col = Column.new("FOO.BAR")
+          col.column_name.should == :bar
+        end
+      end
     end
   end
 end

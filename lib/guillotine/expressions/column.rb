@@ -5,10 +5,13 @@ module Guillotine
         column_as_string = column.to_s
         
         if column_as_string.include?(".")
-          @table_name, @column_name = column_as_string.split(".").map { |col| col.to_sym }
+          @table_name, @column_name = column_as_string.split(".")
+          @table_name = to_lowercase_sym(@table_name)
         else
-          @column_name = column.to_sym
+          @column_name = column_as_string.to_s
         end
+        
+        @column_name = to_lowercase_sym(@column_name)
       end
       
       attr_accessor :table_name
@@ -37,6 +40,10 @@ module Guillotine
       end
       
     private
+      
+      def to_lowercase_sym(string)
+        string.downcase.to_sym
+      end
       
       def both_have_tables?(other)
         table_name? && other.table_name?
