@@ -2,16 +2,17 @@ module Guillotine
   module Parser
     grammar SQLKeyValuePair
       include SQLPrimitives
+      include SQLRowSupport
     
       rule key_value_pair
-        string optional_spaces joiner_or_null  {
+        one_column_name optional_spaces joiner_or_null  {
           def eval
             results = joiner_or_null.eval
             klass = Expressions.find_class_for(results[:joiner])
             if value = results[:value]
-              klass.new(string.eval.to_sym, results[:value])
+              klass.new(one_column_name.eval.to_sym, results[:value])
             else
-              klass.new(string.eval.to_sym)
+              klass.new(one_column_name.eval.to_sym)
             end
           end
         }

@@ -2,7 +2,7 @@ module Guillotine
   module Parser
     grammar SQLRowSupport
       include SQLPrimitives
-    
+
       rule one_or_more_table_names
         table_name "," space one_or_more_table_names {
           def eval
@@ -23,7 +23,6 @@ module Guillotine
         / 
         one_column_name_with_sort
       end
-    
     
       rule one_or_more_column_names
         one_column_name space? "," space? one_or_more_column_names {
@@ -47,7 +46,7 @@ module Guillotine
       end
     
       rule column_name
-        backtick_string / string / all_columns
+        backtick_string / column_string / all_columns
       end
     
       # TODO: Clean this up
@@ -59,6 +58,14 @@ module Guillotine
         }
         /
         string
+      end
+
+      rule column_string
+        string {
+          def eval
+            text_value.downcase
+          end
+        }
       end
     
       rule dot

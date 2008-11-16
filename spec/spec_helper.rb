@@ -18,6 +18,10 @@ module ParserSpecHelper
   def parse_and_eval(string, *eval_args)
     parse(string).eval(*eval_args)
   end
+  
+  def parse_and_eval_with_upcasing(string, *eval_args)
+    parse(string, true).eval(*eval_args)
+  end
 end
 
 module TestUnitRemover

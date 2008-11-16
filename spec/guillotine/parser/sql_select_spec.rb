@@ -120,6 +120,12 @@ module Guillotine
         parse_and_eval(first_statement).should_not == parse_and_eval(second_statement)
         parse_and_eval(second_statement).should_not == parse_and_eval(first_statement)
       end
+      
+      it "should downcase a column name" do
+        first_statement = "SELECT * FROM events WHERE foo = bar"
+        select = parse_and_eval_with_upcasing(first_statement)
+        select.where.key.should equal(:foo)
+      end
     end
   end
 end
