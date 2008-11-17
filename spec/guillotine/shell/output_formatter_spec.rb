@@ -72,6 +72,9 @@ module Guillotine
         end
         
         it "should output two columns worth of data" do
+          pending <<-HERE
+            TODO - This fails occasionally, since hashes aren't ordered. See the TODO file.
+          HERE
           two_column_output = read_file("two_columns")
           data = [
             { 
