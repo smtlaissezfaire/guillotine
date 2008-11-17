@@ -25,15 +25,14 @@ module Guillotine
       end
       
       module ColumnLengthCalculator
-        CHAR_COUNT_OFFSET = 2
-        
         class << self
           def size_of_column(column, values)
             column_length = column_length(column)
             value_length = max_value_length(values)
             
-            length = column_length > value_length ? column_length : value_length
-            length + CHAR_COUNT_OFFSET
+            column_length > value_length ?
+              column_length :
+              value_length
           end
           
         private
