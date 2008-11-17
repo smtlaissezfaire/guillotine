@@ -16,6 +16,7 @@ static void   add_to_buffer(char);
 static void   update_quote_status();
 static int    advance_char();
 static bool   a_quote(char);
+static bool   rb_to_bool(VALUE);
 
 #define SINGLE_QUOTE '\''
 #define DOUBLE_QUOTE '\"'

@@ -74,8 +74,11 @@ static bool a_quote(char c) {
   return(c == SINGLE_QUOTE || c == DOUBLE_QUOTE || c == BACKTICK);
 }
 
-// Ruby-C bindings
+static bool rb_to_bool(VALUE value) {
+  return (value == Qnil || value == Qfalse) ? false : true;
+}
 
+// Ruby-C bindings
 void Init_quotes_parser() {
 	QuotesParser = rb_define_class_under(rb_path2class("Guillotine::Parser"), "QuotesParser", rb_cObject);
 	rb_define_method(QuotesParser, "parse", quotes_parser, -1);
@@ -87,14 +90,9 @@ VALUE quotes_parser(int argc, VALUE *argv, VALUE self) {
   char *string;
 
   rb_scan_args(argc, argv, "11", &ruby_string, &upcase);
-  string = RSTRING(ruby_string)->ptr;
-  if (upcase == Qnil || upcase == Qfalse) {
-    upcasing = false;
-  } else {
-    upcasing = true;
-  }
 
-  if (string)  {
+  if (string = RSTRING(ruby_string)->ptr)  {
+    upcasing = rb_to_bool(upcase);
     return rb_str_new2(parse(string));
   } else {
     return Qnil;
