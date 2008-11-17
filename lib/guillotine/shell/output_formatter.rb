@@ -3,13 +3,13 @@ module Guillotine
     class OutputFormatter
       dir = File.dirname(__FILE__) + "/output_formatter"
       
-      autoload :ColumnOutputer, "#{dir}/column_outputer"
-      autoload :ColumnDelimiterHeader, "#{dir}/column_delimiter_header"
-      autoload :ColumnExtractor, "#{dir}/column_extractor"
+      autoload :ColumnOutputer,         "#{dir}/column_outputer"
+      autoload :ColumnDelimiterHeader,  "#{dir}/column_delimiter_header"
+      autoload :ColumnExtractor,        "#{dir}/column_extractor"
       autoload :ColumnLengthCalculator, "#{dir}/column_length_calculator"
-      autoload :TableOutputer, "#{dir}/table_outputer"
-      autoload :OutputBuffer, "#{dir}/output_buffer"
-      autoload :RowAdder, "#{dir}/row_adder"
+      autoload :TableOutputer,          "#{dir}/table_outputer"
+      autoload :OutputBuffer,           "#{dir}/output_buffer"
+      autoload :RowAdder,               "#{dir}/row_adder"
       
       def self.format(obj)
         new.to_s(obj)
