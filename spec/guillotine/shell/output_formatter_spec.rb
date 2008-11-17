@@ -64,6 +64,12 @@ module Guillotine
           data = [{ :column_name => 1}, { :column_name => 12312 }]
           @formatter.format(data).should == one_column_text
         end
+        
+        it "should output one column with the proper name" do
+          one_column_with_proper_name = read_file("one_column_with_proper_name")
+          data = [{ :foo => 23 }, { :foo => 1 }]
+          @formatter.format(data).should == one_column_with_proper_name
+        end
       end
       
       describe "to_s" do

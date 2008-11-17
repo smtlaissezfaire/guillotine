@@ -34,8 +34,8 @@ module Guillotine
         "Empty set"
       end
       
-      def extractor_for(column)
-        @extractor = ColumnExtractor.new.extract(:column_name, @table)
+      def extractor_for(column_name)
+        @extractor = ColumnExtractor.new.extract(column_name, @table)
       end
       
       def size_of_column
@@ -53,10 +53,13 @@ module Guillotine
       end
       
       def table_output
-        extractor = extractor_for(:column_name)
+        column_names = @table.first.keys
+        column_name = column_names.first
+        
+        extractor = extractor_for(column_name)
         column_size = size_of_column
         header = separator
-        column_name = ColumnOutputer.output("column_name", column_size, true)
+        column_name = ColumnOutputer.output(column_name.to_s, column_size, true)
 <<-HERE
 #{separator}
 #{column_name}
