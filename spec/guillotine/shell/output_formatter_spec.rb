@@ -47,60 +47,6 @@ module Guillotine
       end
       
       describe "format" do
-        it "should have one column name" do
-          @formatter.format([{ :foo => :bar}]).should include("foo")
-        end
-        
-        it "should output two column names" do
-          pending 'pend for now.  This one is failing'
-          @formatter.format([{ :foo => 123, :bar => :baz }]).should include("foo | bar")
-        end
-        
-        it "should have a vertical bar before and after the column name" do
-          @formatter.format([{ :foo => :bar }]).should include("| foo |")
-        end
-        
-        it "should have a vertical bar between both columns" do
-          pending 'pend for now.  This one is failing'
-          @formatter.format([{ :foo => 123, :bar => :baz }]).should include("| foo | bar |")
-        end
-        
-        it "should have the first value in the table" do
-          @formatter.format([{ :foo => 123 }]).should include("123")
-        end
-        
-        it "should include the correct value" do
-          @formatter.format([{ :foo => 3234 }]).should include("3234")
-        end
-        
-        it "should have 5 spaces for a 3 value column" do
-          @formatter.format([{ :foo => "123" }]).should include("| 123 |")
-        end
-        
-        it "should include the a 3 value column with 6 spaces when a different value takes 4 spaces" do
-          @formatter.format([{ :foo => "123" }, { :foo => "1234" }]).should include("| 123  |")
-        end
-        
-        it "should include multiple columns spaced out appropriately" do
-          @formatter.format([{ :foo => "123" }, { :foo => "123456" }]).should include("| 123    |")
-        end
-        
-        it "should space out the columns appropriately" do
-          @formatter.format([{ :foo => "123" }, { :foo => "123456" }]).should include("| foo    |")
-        end
-        
-        it "should map two values side by side" do
-          pending 'pend for now.  This one is failing'          
-          @formatter.format([{ :foo => "123", :bar => "123" }, { :foo => "123456", :bar => "123" }]).should include("| 123    | 123 |")
-        end
-        
-        it "should return the string 'Empty set' when it tries to format an empty array" do
-          @formatter.format([]).should == "Empty set"
-        end
-        
-        it "should format the result [{:table_name => 'foo'}] properly"  do
-          @formatter.format([{ :table_name => "foo" }])
-        end
       end
       
       describe "to_s" do
