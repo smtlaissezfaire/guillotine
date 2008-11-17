@@ -7,6 +7,7 @@ describe "Datastore / Create table Integration" do
   end
   
   it "should be able to show the table" do
+    pending 'todo'
     Kernel.stub!(:puts).and_return nil
     lambda { 
       Guillotine::Shell::Command.execute("CREATE TABLE foo (id BIT)")

@@ -47,6 +47,23 @@ module Guillotine
       end
       
       describe "format" do
+        before(:each) do
+          @formatter = OutputFormatter.new
+        end
+        
+        it "should output the string 'Empty set' when given an empty array" do
+          @formatter.format([]).should == "Empty set"
+        end
+        
+        def read_file(file_name)
+          File.read(File.dirname(__FILE__) + "/#{file_name}.txt")
+        end
+        
+        it "should output one column properly" do
+          one_column_text = read_file("one_column")
+          data = [{ :column_name => 1}, { :column_name => 12312 }]
+          @formatter.format(data).should == one_column_text
+        end
       end
       
       describe "to_s" do
