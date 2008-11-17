@@ -13,10 +13,12 @@ module Guillotine
       end
       
       def format(table)
+        @table = table
+        
         if table.empty?
           empty_table_output
         else
-          table_output(table)
+          table_output
         end
       end
       
@@ -32,22 +34,35 @@ module Guillotine
         "Empty set"
       end
       
-      def table_output(table)
-        extractor = ColumnExtractor.new.extract(:column_name, table)
-        column_size = ColumnLengthCalculator.size_of_column(extractor[:column], extractor[:values])
-        header = ColumnDelimiterHeader.output(column_size, true)
-        column_name = ColumnOutputer.output("column_name", column_size, true)
-        
-        column_values  = extractor[:values].map do |value|
-          ColumnOutputer.output(value, column_size, true)
+      def extractor_for(column)
+        @extractor = ColumnExtractor.new.extract(:column_name, @table)
+      end
+      
+      def size_of_column
+        ColumnLengthCalculator.size_of_column(@extractor[:column], @extractor[:values])
+      end
+      
+      def separator
+        ColumnDelimiterHeader.output(size_of_column, true)
+      end
+      
+      def column_values
+        @extractor[:values].map do |value|
+          ColumnOutputer.output(value, size_of_column, true)
         end.join("\n")
-        
+      end
+      
+      def table_output
+        extractor = extractor_for(:column_name)
+        column_size = size_of_column
+        header = separator
+        column_name = ColumnOutputer.output("column_name", column_size, true)
 <<-HERE
-#{header}
+#{separator}
 #{column_name}
-#{header}
+#{separator}
 #{column_values}
-#{header}
+#{separator}
 HERE
       end
     end
