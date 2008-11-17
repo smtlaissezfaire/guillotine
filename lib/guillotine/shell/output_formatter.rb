@@ -27,21 +27,21 @@ module Guillotine
       module ColumnLengthCalculator
         CHAR_COUNT_OFFSET = 2
         
-        def size_of_column(column_name, column)
-          def size_of_column_header(column_name, column)
-            column.first.keys.detect { |key| key.equal?(column_name) }.to_s.length
+        def size_of_column(column, values)
+          def column_length(column)
+            column.to_s.length
           end
           
-          def size_of_longest_column_value(column_name, column)
-            lengths = column.map { |row| row[column_name].to_s.length }
-            lengths.last
+          def max_value_length(values)
+            value_lengths = values.map { |value| value.length }
+            value_lengths.sort.last
           end
-
-          header_size = size_of_column_header(column_name, column)
-          longest_value = size_of_longest_column_value(column_name, column)
           
-          size = longest_value > header_size ? longest_value : header_size
-          size + CHAR_COUNT_OFFSET
+          column_length = column_length(column)
+          value_length = max_value_length(values)
+          
+          length = column_length > value_length ? column_length : value_length
+          length + CHAR_COUNT_OFFSET
         end
       end
       
