@@ -87,7 +87,7 @@ VALUE quotes_parser(int argc, VALUE *argv, VALUE self) {
 
   rb_scan_args(argc, argv, "11", &ruby_string, &upcase);
 
-  if (string = RSTRING(ruby_string)->ptr)  {
+  if ((string = RSTRING(ruby_string)->ptr))  {
     upcasing = rb_to_bool(upcase);
     return rb_str_new2(parse(string));
   } else {
