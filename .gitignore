@@ -10,7 +10,6 @@ doc
 .DS_Store
 
 # C compilation files
-Makefile
 *.o
 *.bundle
 *.so
