@@ -8,6 +8,8 @@ module Guillotine
       autoload :ColumnExtractor, "#{dir}/column_extractor"
       autoload :ColumnLengthCalculator, "#{dir}/column_length_calculator"
       autoload :TableOutputer, "#{dir}/table_outputer"
+      autoload :OutputBuffer, "#{dir}/output_buffer"
+      autoload :RowAdder, "#{dir}/row_adder"
       
       def self.format(obj)
         new.to_s(obj)
