@@ -1,6 +1,36 @@
 module Guillotine
   module Shell
     class OutputFormatter
+      class ColumnOutputer
+        def self.output(string, max_size)
+          new(string, max_size).output
+        end
+        
+        class InvalidMaxSizeError < StandardError; end
+        
+        def initialize(string, max_size)
+          @string = string
+          @max_size = max_size
+        end
+        
+        def output
+          "| #{@string}#{spaces} |"
+        end
+        
+        def spaces
+          " " * number_of_spaces
+        end
+        
+        def number_of_spaces
+          space_count = @max_size - 4 - @string.length
+          if space_count < 0
+            raise(InvalidMaxSizeError,
+                  "The string '#{@string}' cannot fit into a column #{@max_size} chars wide")
+          end
+          space_count
+        end
+      end
+      
       class ColumnExtractor
         class UnfoundKeyError < StandardError; end
         
