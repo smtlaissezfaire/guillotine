@@ -4,9 +4,7 @@ module Guillotine
   module Shell
     describe OutputFormatter::ColumnLengthCalculator do
       before(:each) do
-        @calculator = Class.new do
-          include OutputFormatter::ColumnLengthCalculator
-        end.new
+        @calculator = OutputFormatter::ColumnLengthCalculator
       end
       
       it "should find the size of '3' with a column name one char long (the size + offset)" do

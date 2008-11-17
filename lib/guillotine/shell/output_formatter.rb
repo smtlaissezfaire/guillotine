@@ -27,7 +27,17 @@ module Guillotine
       module ColumnLengthCalculator
         CHAR_COUNT_OFFSET = 2
         
-        def size_of_column(column, values)
+        class << self
+          def size_of_column(column, values)
+            column_length = column_length(column)
+            value_length = max_value_length(values)
+            
+            length = column_length > value_length ? column_length : value_length
+            length + CHAR_COUNT_OFFSET
+          end
+          
+        private
+          
           def column_length(column)
             column.to_s.length
           end
@@ -36,12 +46,6 @@ module Guillotine
             value_lengths = values.map { |value| value.length }
             value_lengths.sort.last
           end
-          
-          column_length = column_length(column)
-          value_length = max_value_length(values)
-          
-          length = column_length > value_length ? column_length : value_length
-          length + CHAR_COUNT_OFFSET
         end
       end
       
