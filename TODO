@@ -1,26 +1,29 @@
 
 High Priority
 ===============
-- REPL.  Necessary for evaluating queries
-- UPDATE
-- Fix any pending specs.
 - fix the datastore to store column information with create table.
   make sure column names are ordered.  Need ordering info for consistent
   output in shell
+- Fix any pending specs.
+- Get rcov back up to 100%
+- Fix INSERT to insert to datastore with known table name
+- UPDATE
+- allow proper quoting of table names
+- SELECT column_name FROM table_name
+- SELECT table_name.column_name
+- SELECT * FROM table_name.column_name
 
 Medium Priority
 ================
 - DELETE (3 forms, see: http://dev.mysql.com/doc/refman/5.0/en/delete.html)
   - second form
   - third form
-- Write all database access to a log (optional)
 - Beef up primary key support.  We'll need to talk to the database
   at initialization to find the primary key, and whether or not
   it's an auto-incrememnt field.  For now, assume the primary key
   is named "id", and the auto-incrememnt is set to true
 - Write all database access to a log (optional)
-- Treetop doesn't support case insensitive matching.  Need to provide
-  a patch for this
+- LIMIT regression
 
 Low Priority:
 =============
