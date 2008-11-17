@@ -1,6 +1,27 @@
 module Guillotine
   module Shell
     class OutputFormatter
+      module ColumnLengthCalculator
+        CHAR_COUNT_OFFSET = 2
+        
+        def size_of_column(column_name, column)
+          def size_of_column_header(column_name, column)
+            column.first.keys.detect { |key| key.equal?(column_name) }.to_s.length
+          end
+          
+          def size_of_longest_column_value(column_name, column)
+            lengths = column.map { |row| row[column_name].to_s.length }
+            lengths.last
+          end
+
+          header_size = size_of_column_header(column_name, column)
+          longest_value = size_of_longest_column_value(column_name, column)
+          
+          size = longest_value > header_size ? longest_value : header_size
+          size + CHAR_COUNT_OFFSET
+        end
+      end
+      
       def self.format(obj)
         new.to_s(obj)
       end
