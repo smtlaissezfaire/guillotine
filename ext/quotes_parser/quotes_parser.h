@@ -29,4 +29,4 @@ static int    advance_char();
 static bool   a_quote(char);
 static bool   rb_to_bool(VALUE);
        void   Init_quotes_parser();
-       VALUE  quotes_parser(int, VALUE *, VALUE);
+       VALUE  quotes_parser(int, VALUE *);

@@ -80,7 +80,7 @@ void Init_quotes_parser() {
 	rb_define_method(QuotesParser, "parse", quotes_parser, -1);
 }
 
-VALUE quotes_parser(int argc, VALUE *argv, VALUE self) {
+VALUE quotes_parser(int argc, VALUE *argv) {
   VALUE ruby_string;
   VALUE upcase;
   char *string;
