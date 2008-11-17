@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <ruby.h>
 
 #define SINGLE_QUOTE '\''
