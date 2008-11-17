@@ -1,7 +1,3 @@
-#include <stdbool.h>
-#include <string.h>
-#include <stdlib.h>
-#include "ruby.h"
 #include "quotes_parser.h"
 
 static char * parse(char * string) {
