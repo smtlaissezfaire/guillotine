@@ -19,11 +19,17 @@ module Guillotine
         end
         
         def output
-          "#{BAR_SEPARATOR}#{SPACE}#{@string}#{spaces}#{SPACE}#{end_column_bar}"
+          "#{separator}#{padding}#{@string}#{spaces}#{padding}#{end_separator}"
         end
         
+      private
+        
         def spaces
-          SPACE * number_of_spaces
+          padding * number_of_spaces
+        end
+        
+        def padding
+          SPACE
         end
         
         def number_of_spaces
@@ -35,8 +41,36 @@ module Guillotine
           space_count
         end
         
-        def end_column_bar
-          @end_column ? BAR_SEPARATOR : EMPTY_STRING
+        def end_separator
+          @end_column ? separator : EMPTY_STRING
+        end
+        
+        def separator
+          BAR_SEPARATOR
+        end
+      end
+      
+      class ColumnDelimiterHeader < ColumnOutputer
+        PLUS_SEPARATOR = "+"
+        DASH = "-"
+        CONTENT = DASH
+        
+        def self.output(column_size, end_column = false)
+          new(column_size, end_column).output
+        end
+        
+        def initialize(column_size, end_column = false)
+          super(CONTENT * column_size, column_size, end_column)
+        end
+        
+      private
+        
+        def padding
+          DASH
+        end
+        
+        def separator
+          PLUS_SEPARATOR
         end
       end
       
