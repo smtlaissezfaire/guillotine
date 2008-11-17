@@ -7,9 +7,7 @@ module Guillotine
             column_length = column_length(column)
             value_length = max_value_length(values)
             
-            column_length > value_length ?
-              column_length :
-              value_length
+            column_length > value_length ? column_length : value_length
           end
           
         private
