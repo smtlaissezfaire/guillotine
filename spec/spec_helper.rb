@@ -24,22 +24,8 @@ module ParserSpecHelper
   end
 end
 
-module TestUnitRemover
-  def self.remove!
-    require "active_record"
-
-    if defined?(Test)
-      Object.instance_eval do
-        remove_const(:Test)
-      end
-    end
-  end
-end
-
 Spec::Runner.configure do |conf|
   conf.before(:each) do
     Guillotine::DataStore.__clear_all_tables!
   end
 end
-
-TestUnitRemover.remove!
