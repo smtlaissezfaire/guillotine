@@ -41,7 +41,7 @@ LIBRUBYARG_SHARED = -l$(RUBY_SO_NAME)
 LIBRUBYARG_STATIC = -l$(RUBY_SO_NAME)
 
 RUBY_EXTCONF_H = 
-CFLAGS   =  -fno-common -arch ppc -arch i386 -Os -pipe -fno-common 
+CFLAGS   =  -fno-common -arch ppc -arch i386 -Os -pipe -fno-common -W -Wall
 INCFLAGS = -I. -I$(topdir) -I$(hdrdir) -I$(srcdir)
 CPPFLAGS =  
 CXXFLAGS = $(CFLAGS) 
