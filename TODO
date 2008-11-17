@@ -4,6 +4,9 @@ High Priority
 - REPL.  Necessary for evaluating queries
 - UPDATE
 - Fix any pending specs.
+- fix the datastore to store column information with create table.
+  make sure column names are ordered.  Need ordering info for consistent
+  output in shell
 
 Medium Priority
 ================
