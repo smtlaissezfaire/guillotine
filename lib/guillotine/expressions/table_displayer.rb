@@ -18,8 +18,7 @@ module Guillotine
       end
       
       def ==(other)
-        other.respond_to?(:datastore) ?
-          @datastore.equal?(other.datastore) : false
+        other.respond_to?(:datastore) ? @datastore.equal?(other.datastore) : false
       end
       
       alias_method :eql?, :==
