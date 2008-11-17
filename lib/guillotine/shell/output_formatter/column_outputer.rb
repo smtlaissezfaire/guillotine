@@ -52,4 +52,3 @@ module Guillotine
     end
   end
 end
-

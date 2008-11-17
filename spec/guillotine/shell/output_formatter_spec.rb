@@ -70,6 +70,21 @@ module Guillotine
           data = [{ :foo => 23 }, { :foo => 1 }]
           @formatter.format(data).should == one_column_with_proper_name
         end
+        
+        it "should output two columns worth of data" do
+          two_column_output = read_file("two_columns")
+          data = [
+            { 
+              :username => "smtlaissezfaire",
+              :first_name => "Scott"
+            }, 
+            { 
+              :username => "bricolage",
+              :first_name => "Matt",
+            }
+          ]
+          @formatter.format(data).should == two_column_output
+        end
       end
       
       describe "to_s" do
