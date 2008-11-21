@@ -49,6 +49,7 @@ Low Priority:
 - other CREATE TABLE clauses
 - Query timing
 - CREATE TABLE - other clauses, other types
+- utf-8.  Other char encodings?
 
 Miscelaneous:
 ===============
