@@ -5,7 +5,7 @@ end
 
 task :compile => "extconf:compile"
 
-task :test => :compile
+task :spec => :compile
 
 BIN = "*.{bundle,jar,so,obj,pdb,lib,def,exp}"
 $hoe.clean_globs |= ["ext/**/#{BIN}", "lib/**/#{BIN}", 'ext/**/Makefile']
