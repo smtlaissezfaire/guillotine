@@ -43,7 +43,11 @@ REQUIRED_GEMS = [
   "rcov",
   "active_record",
   "mysql",
-  "treetop"
+  "treetop",
+  {
+    :name => "diff-lcs",
+    :require => "diff/lcs"
+  }
 ]
 
 require 'rubygems'
