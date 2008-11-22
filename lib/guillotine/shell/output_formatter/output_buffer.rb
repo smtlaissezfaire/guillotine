@@ -29,11 +29,13 @@ module Guillotine
           end
           
           def add_values(values)
-            @values = if @values.empty?
-              values
-            else
-              @values.zip(values).map { |row| row.join("") }
-            end
+# Waiting for ordered hashes.  See README
+#             @values = if @values.empty?
+#               values
+#             else
+#               @values.zip(values).map { |row| row.join("") }
+#             end
+            @values = values
           end
         end
       end
