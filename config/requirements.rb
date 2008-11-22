@@ -62,7 +62,7 @@ REQUIRED_GEMS.each do |req_gem|
   begin
     require(require_name)
   rescue LoadError
-    puts "This Rakefile requires the '#{gem_name}}' RubyGem."
+    puts "This Rakefile requires the '#{gem_name}' RubyGem."
     puts "Installation: gem install #{gem_name} -y"
     exit
   end
