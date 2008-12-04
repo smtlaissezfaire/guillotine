@@ -42,7 +42,6 @@ REQUIRED_GEMS = [
   },
   "rcov",
   "active_record",
-  "mysql",
   "treetop",
   {
     :name => "diff-lcs",

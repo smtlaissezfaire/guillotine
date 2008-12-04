@@ -87,7 +87,7 @@ At this time, there are only plans to support Mysql 5, and possibly SQLite.
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+See DEPENDENCIES
 
 == INSTALL:
 
