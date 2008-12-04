@@ -7,8 +7,17 @@ Guillotine has the following rubygem dependencies:
   treetop
   facets
 
-To develop Guillotine, the following rubygems are also required:
+To work with Guillotine, the following rubygems are also required:
 
+  rake
+  hoe
+  newgem
   rspec
+  rcov
   diff-lcs
   flog (soon)
+  activerecord
+
+Here it is, all in one command:
+
+  sudo gem install rake hoe newgem rspec rcov diff-lcs flog treetop facets activerecord
