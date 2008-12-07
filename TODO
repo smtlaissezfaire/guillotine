@@ -1,7 +1,6 @@
 
 High Priority
 ===============
-- get it running on ruby 1.8.5, 1.8.7, and 1.9
 - fix the datastore to store column information with create table.
   make sure column names are ordered.  Need ordering info for consistent
   output in shell
@@ -51,6 +50,7 @@ Low Priority:
 - Query timing
 - CREATE TABLE - other clauses, other types
 - utf-8.  Other char encodings?
+- get it running on ruby 1.9
 
 Miscelaneous:
 ===============
