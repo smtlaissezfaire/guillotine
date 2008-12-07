@@ -54,7 +54,7 @@ module Guillotine
     private
       
       def create_table_in_datastore(table_name)
-        Guillotine::DataStore.create_table(table_name)
+        Guillotine::DataStore.create_table(table_name, [])
       end
       
       def tables

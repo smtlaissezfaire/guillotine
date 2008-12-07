@@ -42,23 +42,24 @@ module Guillotine
       describe "call" do
         before(:each) do
           @datastore = mock 'datastore'
+          @columns = mock 'columns', :empty? => false
         end
         
         it "should call create_table on the datastore" do
-          create = CreateTable.new(:table_name => :foo, :columns => [:foo])
-          @datastore.should_receive(:create_table).with(:foo)
+          create = CreateTable.new(:table_name => :foo, :columns => @columns)
+          @datastore.should_receive(:create_table).with(:foo, @columns)
           create.call(@datastore)
         end
         
         it "should call create_table in the datastore with the correct table name" do
-          create = CreateTable.new(:table_name => :bar, :columns => [:foo])
-          @datastore.should_receive(:create_table).with(:bar)
+          create = CreateTable.new(:table_name => :bar, :columns => @columns)
+          @datastore.should_receive(:create_table).with(:bar, @columns)
           create.call(@datastore)
         end
         
         it "should use the default Guillotine::DataStore if none is given" do
-          create = CreateTable.new(:table_name => :foo, :columns => [:foo])
-          Guillotine::DataStore.should_receive(:create_table).with(:foo)
+          create = CreateTable.new(:table_name => :foo, :columns => @columns)
+          Guillotine::DataStore.should_receive(:create_table).with(:foo, @columns)
           create.call
         end
       end

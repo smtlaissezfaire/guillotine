@@ -19,7 +19,7 @@ module Guillotine
       attr_reader :table_name
       
       def call(datastore = Guillotine::DataStore)
-        datastore.create_table(table_name)
+        datastore.create_table(table_name, @columns)
       end
       
       def to_sql
