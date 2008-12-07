@@ -5,10 +5,26 @@ require "active_record"
 
 module SpecHelpers
   class DatabaseHelper
-    def setup_database_connection
+    def self.setup_connection
+      @obj ||= new
+      @obj.setup_connection unless @obj.already_connected?
+    end
+
+    def initialize
+      @setup_connection = false
+    end
+
+    def setup_connection
       establish_connection
       define_schema
+      @setup_connection = true
     end
+
+    def setup_connection?
+      @setup_connection
+    end
+
+    alias_method :already_connected?, :setup_connection?
     
     def establish_connection
       ActiveRecord::Base.establish_connection(read_config_file)
@@ -35,5 +51,5 @@ module SpecHelpers
   end
 end
 
-SpecHelpers::DatabaseHelper.new.setup_database_connection
+SpecHelpers::DatabaseHelper.setup_connection
 
