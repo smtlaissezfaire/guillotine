@@ -2,16 +2,7 @@ module Guillotine
   module Expressions
     class Column
       def initialize(column)
-        column_as_string = column.to_s
-        
-        if column_as_string.include?(".")
-          @table_name, @column_name = column_as_string.split(".")
-          @table_name = to_lowercase_sym(@table_name)
-        else
-          @column_name = column_as_string.to_s
-        end
-        
-        @column_name = to_lowercase_sym(@column_name)
+        set_column_and_table_name(column)
         @primary_key = false
       end
       
@@ -47,6 +38,19 @@ module Guillotine
       end
       
     private
+
+      def set_column_and_table_name(column)
+        column = column.to_s
+        
+        if column.include?(".")
+          @table_name, @column_name = column.split(".")
+          @table_name = to_lowercase_sym(@table_name)
+        else
+          @column_name = column.to_s
+        end
+        
+        @column_name = to_lowercase_sym(@column_name)
+      end
       
       def to_lowercase_sym(string)
         string.downcase.to_sym
