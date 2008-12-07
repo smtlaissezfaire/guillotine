@@ -12,6 +12,7 @@ module Guillotine
         end
         
         @column_name = to_lowercase_sym(@column_name)
+        @primary_key = false
       end
       
       attr_accessor :table_name
@@ -31,6 +32,12 @@ module Guillotine
       
       def eql?(other)
         same_column_name?(other) && same_table_name?(other)
+      end
+
+      attr_writer :primary_key
+
+      def primary_key?
+        @primary_key
       end
       
     protected

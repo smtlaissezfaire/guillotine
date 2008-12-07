@@ -159,6 +159,25 @@ module Guillotine
           col.column_name.should == :bar
         end
       end
+
+      describe "primary_key" do
+        before(:each) do
+          @col = Column.new("foo")
+        end
+
+        it "should not be a primary key by default" do
+          @col.should_not be_a_primary_key
+        end
+
+        it "should return *false* when it's not a primary key" do
+          @col.primary_key?.should be_false
+        end
+
+        it "should be setable to true" do
+          @col.primary_key = true
+          @col.primary_key?.should be_true
+        end
+      end
     end
   end
 end
