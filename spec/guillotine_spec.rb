@@ -10,15 +10,19 @@ describe Guillotine do
   it "should have Guillotine::RSpec as an alias for Guillotine::TestSupport::RSpec" do
     Guillotine::RSpec.should equal(Guillotine::TestSupport::RSpec)
   end
+
+  def executor_class
+    Guillotine::StatementExecutors::MultiExecutor
+  end
   
   describe "execute" do
     before(:each) do
       @executor = mock 'executor', :execute => "foo"
-      Guillotine::MultiStatementExecutor.stub!(:new).and_return @executor
+      executor_class.stub!(:new).and_return @executor
     end
     
     it "should instantiate a new executor" do
-      Guillotine::MultiStatementExecutor.should_receive(:new).with("a string").and_return @executor
+      executor_class.should_receive(:new).with("a string").and_return @executor
       Guillotine.execute("a string")
     end
     
@@ -31,11 +35,11 @@ describe Guillotine do
   describe "parse" do
     before(:each) do
       @executor = mock 'executor', :parse => "foo"
-      Guillotine::MultiStatementExecutor.stub!(:new).and_return @executor
+      executor_class.stub!(:new).and_return @executor
     end
     
     it "should instantiate a new executor" do
-      Guillotine::MultiStatementExecutor.should_receive(:new).with("a string").and_return @executor
+      executor_class.should_receive(:new).with("a string").and_return @executor
       Guillotine.parse("a string")
     end
     

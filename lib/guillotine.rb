@@ -18,18 +18,18 @@ Guillotine.module_eval do
   autoload :RakeTasks,              "#{project}/rake"
   autoload :Shell,                  "#{project}/shell"
   autoload :StatementExecutor,      "#{project}/statement_executor"
-  autoload :MultiStatementExecutor, "#{project}/multi_statement_executor"
+  autoload :StatementExecutors,     "#{project}/statement_executors"
   autoload :Transactions,           "#{project}/transactions"
   autoload :TestSupport,            "#{project}/test_support"
   autoload :VERSION,                "#{project}/version"
   
   class << self
     def execute(string)
-      Guillotine::MultiStatementExecutor.new(string).execute
+      Guillotine::StatementExecutors::MultiExecutor.new(string).execute
     end
     
     def parse(string)
-      Guillotine::MultiStatementExecutor.new(string).parse
+      Guillotine::StatementExecutors::MultiExecutor.new(string).parse
     end
   end
 end
