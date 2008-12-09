@@ -42,10 +42,6 @@ Low Priority:
   autoload treetop file if in ruby, else require it with Treetop.load
 - Move all parser transformations into seperate files (which will decouple
   the parser from the IR)
-- Beef up primary key support.  We'll need to talk to the database
-  at initialization to find the primary key, and whether or not
-  it's an auto-incrememnt field.  For now, assume the primary key
-  is named "id", and the auto-incrememnt is set to true
 - other CREATE TABLE clauses
 - Query timing
 - CREATE TABLE - other clauses, other types
