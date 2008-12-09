@@ -27,7 +27,7 @@ module Guillotine
         
         it "should have Guillotine::StatementExecutor as the default executor" do
           obj = MultiExecutor.new("foo")
-          obj.executor.should be_a_kind_of(Guillotine::StatementExecutor)
+          obj.executor.should be_a_kind_of(Guillotine::StatementExecutors::SingleExecutor)
         end
         
         it "should be able to set the executor" do

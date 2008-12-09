@@ -5,6 +5,8 @@ require "treetop"
 
 module Guillotine
   module Parser
+    class SQLParseError < StandardError; end
+
     Expressions      = Guillotine::Expressions       unless defined?(Expressions)
     
     SelectExpression = Expressions::SelectExpression unless defined?(SelectExpression)

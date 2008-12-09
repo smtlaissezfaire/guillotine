@@ -25,7 +25,7 @@ module Guillotine
       attr_reader :delimiter
       
       def executor
-        @executor ||= Guillotine::StatementExecutor.new
+        @executor ||= StatementExecutors::SingleExecutor.new
       end
       
       def parse
