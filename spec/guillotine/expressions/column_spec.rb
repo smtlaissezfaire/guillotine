@@ -178,6 +178,21 @@ module Guillotine
           @col.primary_key?.should be_true
         end
       end
+
+      describe "auto_increment" do
+        before(:each) do
+          @col = Column.new("foo")
+        end
+
+        it "should be false by default" do
+          @col.auto_increment?.should be_false
+        end
+
+        it "should be true if set to true" do
+          @col.auto_increment = true
+          @col.auto_increment?.should be_true
+        end
+      end
     end
   end
 end

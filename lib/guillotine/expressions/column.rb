@@ -30,6 +30,12 @@ module Guillotine
       def primary_key?
         @primary_key
       end
+
+      def auto_increment?
+        @auto_increment ||= false
+      end
+
+      attr_writer :auto_increment
       
     protected
       
