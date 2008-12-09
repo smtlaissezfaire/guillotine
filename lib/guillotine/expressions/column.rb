@@ -24,8 +24,6 @@ module Guillotine
         same_column_name?(other) && same_table_name?(other)
       end
 
-      attr_writer :primary_key
-
       def primary_key?
         @primary_key ||= false
       end
@@ -34,8 +32,9 @@ module Guillotine
         @auto_increment ||= false
       end
 
+      attr_writer :primary_key
       attr_writer :auto_increment
-      
+
     protected
       
       def table_name?
