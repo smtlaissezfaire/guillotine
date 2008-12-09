@@ -45,6 +45,14 @@ module Guillotine
       def inspect
         "Singleton #{self}"
       end
+
+      def load(data_dump)
+        @data = Marshal.load(data_dump)
+      end
+
+      def dump
+        Marshal.dump(data)
+      end
       
     private
       

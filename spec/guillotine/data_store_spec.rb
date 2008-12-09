@@ -179,6 +179,52 @@ module Guillotine
           DataStore.truncate_all_tables!
         end
       end
+
+      describe "dump and laoding" do
+        # TODO: Fixme when Database is no longer a module.
+        def new_database
+          Class.new do
+            include Guillotine::DataStore::Database
+          end.new
+        end
+
+        before(:each) do
+          @data = {:foo => [{:bar => 17}, {:bar => 18}]}
+          @database = new_database
+          @marshal_data = Marshal.dump(@data)
+        end
+
+        describe "load" do
+          it "should load the marshal dump" do
+            @database.load(@marshal_data)
+            @database.data.should == @data
+          end
+        end
+
+        describe "dump" do
+          it "should load the marshal dump" do
+            @database.stub!(:data).and_return @data
+            @database.dump.should == @marshal_data
+          end
+        end
+      end
+
+
+#       describe "dump_to_yaml" do
+#         before(:each) do
+# #           >> {:foo => [{:bar => 17}, {:bar => 18}]}.to_yaml
+# #           => "--- \n:foo: \n- :bar: 17\n- :bar: 18\n"
+#           @data = {:foo => [{:bar => 17}, {:bar => 18}]}
+#           @database = Class.new do
+#             include Guillotine::Database::Database
+#           end.new
+
+#         end
+
+#         it "should dump the data to yaml" do
+          
+#         end
+#       end
     end
   end
 end
