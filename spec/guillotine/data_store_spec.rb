@@ -15,7 +15,7 @@ module Guillotine
       describe "with one table" do
         before :each do
           DataStore.__clear_all_tables!
-          DataStore.create_table(:tbl_one, [@column])
+          DataStore.create_table(:tbl_one, :columns => [@column])
         end
         
         it "should have the table :tbl_one" do
@@ -31,14 +31,14 @@ module Guillotine
         end
         
         it "should be able to access the table by a symbol, even if created with a string" do
-          DataStore.create_table("my_table", [@column])
+          DataStore.create_table("my_table", :columns => [@column])
           DataStore.table(:my_table).should_not be_nil
         end
       end
       
       describe "clearing all tables" do
         it "should reset the tables to empty" do
-          DataStore.create_table(:foo, [@column])
+          DataStore.create_table(:foo, :columns => [@column])
           DataStore.__clear_all_tables!
           DataStore.table_names.should be_empty
         end
@@ -56,20 +56,20 @@ module Guillotine
         end
         
         it "should remove the table" do
-          DataStore.create_table(:foo, [@column])
+          DataStore.create_table(:foo, :columns => [@column])
           DataStore.drop_table(:foo)
           DataStore.table_names.should be_empty
         end
         
         it "should not remove other tables" do
-          DataStore.create_table(:bar, [@column])
-          DataStore.create_table(:foo, [@column])
+          DataStore.create_table(:bar, :columns => [@column])
+          DataStore.create_table(:foo, :columns => [@column])
           DataStore.drop_table(:foo)
           DataStore.table_names.should == [:bar]
         end
         
         it "should be able to use strings instead of symbols" do
-          DataStore.create_table(:foo, [@column])
+          DataStore.create_table(:foo, :columns => [@column])
           DataStore.drop_table("foo")
           DataStore.table_names.should == []
         end
@@ -82,7 +82,7 @@ module Guillotine
         
         describe "with :if_exists => true" do
           it "should drop the table if it exists" do
-            DataStore.create_table(:foo, [@column])
+            DataStore.create_table(:foo, :columns => [@column])
             DataStore.drop_table(:foo, :if_exists => true)
             DataStore.table_names.should == []
           end
@@ -96,47 +96,47 @@ module Guillotine
       
       describe "create_table" do
         it "should raise an error if the table is already there" do
-          DataStore.create_table(:foo, [@column])
+          DataStore.create_table(:foo, :columns => [@column])
           lambda { 
-            DataStore.create_table(:foo, [@column])
+            DataStore.create_table(:foo, :columns => [@column])
           }.should raise_error(DataStore::TableAlreadyExists)
         end
         
         describe "with :force => true" do
           it "should not do anything if the table is already there" do
-            DataStore.create_table(:foo, [@column])
-            DataStore.create_table(:foo, [@column], :force => true)
+            DataStore.create_table(:foo, :columns => [@column])
+            DataStore.create_table(:foo, :columns => [@column], :force => true)
             DataStore.table_names.should == [:foo]
           end
           
           it "should create the table if the table does not exist" do
-            DataStore.create_table(:foo, [@column], :force => true)
+            DataStore.create_table(:foo, :columns => [@column], :force => true)
             DataStore.table_names.should == [:foo]
           end
           
           it "should instantiate a new Table" do
             DataStore::Table.should_receive(:new).with(:foo, hash_including({ }))
-            DataStore.create_table(:foo, [@column], :force => true)
+            DataStore.create_table(:foo, :columns => [@column], :force => true)
           end
           
           it "should instantiate a table with the correct name" do
             DataStore::Table.should_receive(:new).with(:bar, hash_including({ }))
-            DataStore.create_table(:bar, [@column], :force => true)
+            DataStore.create_table(:bar, :columns => [@column], :force => true)
           end
           
           it "should instantiate with :primary_key => :id" do
             DataStore::Table.should_receive(:new).with(:bar, hash_including({ :primary_key => :id }))
-            DataStore.create_table(:bar, [@column], :force => true)
+            DataStore.create_table(:bar, :columns => [@column], :force => true)
           end
           
           it "should instantiate with :auto_increment => true" do
             DataStore::Table.should_receive(:new).with(:bar, hash_including({ :auto_increment => true }))
-            DataStore.create_table(:bar, [@column], :force => true)
+            DataStore.create_table(:bar, :columns => [@column], :force => true)
           end
         end
         
         it "should downcase the tablename" do
-          DataStore.create_table("FOO", [@column])
+          DataStore.create_table("FOO", :columns => [@column])
           DataStore.table_names.should == [:foo]
         end
       end
@@ -147,32 +147,32 @@ module Guillotine
         end
         
         it "should have one element with one table" do
-          DataStore.create_table(:foo, [@column])
+          DataStore.create_table(:foo, :columns => [@column])
           DataStore.tables.size.should equal(1)
         end
         
         it "should have the first one as a kind_of?(Table)" do
-          DataStore.create_table(:foo, [@column])
+          DataStore.create_table(:foo, :columns => [@column])
           DataStore.tables.first.should be_a_kind_of(DataStore::Table)
         end
         
         it "should use the correct table name" do
-          DataStore.create_table(:bar, [@column])
+          DataStore.create_table(:bar, :columns => [@column])
           DataStore.tables.first.table_name.should equal(:bar)
         end
       end
       
       describe "truncate_all_tables" do
          it "should truncate a single table" do
-          tbl = DataStore.create_table(:foo, [@column])
+          tbl = DataStore.create_table(:foo, :columns => [@column])
           tbl << { :key => :value }
           DataStore.truncate_all_tables!
           DataStore.table(:foo).should == []
         end
         
          it "should truncate a second table" do
-          tbl1 = DataStore.create_table(:foo, [@column])
-          tbl2 = DataStore.create_table(:bar, [@column])
+          tbl1 = DataStore.create_table(:foo, :columns => [@column])
+          tbl2 = DataStore.create_table(:bar, :columns => [@column])
           tbl1 << { :key => :value }
           tbl2 << { :key => :bar }
           DataStore.truncate_all_tables!
@@ -181,7 +181,7 @@ module Guillotine
         end
         
         it "should call the table's truncate method" do
-          tbl = DataStore.create_table(:foo, [@column])
+          tbl = DataStore.create_table(:foo, :columns => [@column])
           
           tbl.stub!(:truncate).and_return nil
           

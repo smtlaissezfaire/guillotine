@@ -7,7 +7,7 @@ describe "Integration with rspec" do
   
   before :each do
     column = Guillotine::Expressions::Column.new("users.username")
-    Guillotine::DataStore.create_table(:users, [column])
+    Guillotine::DataStore.create_table(:users)
     Guillotine::RSpec.before_each
     
     @user_class = Class.new(ActiveRecord::Base) do

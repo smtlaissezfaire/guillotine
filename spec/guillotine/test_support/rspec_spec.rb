@@ -137,7 +137,7 @@ module Guillotine
           end
           
           it "should add the users table to the Guillotine::DataStore" do
-            Guillotine::DataStore.should_receive(:create_table).with("users", [])
+            Guillotine::DataStore.should_receive(:create_table).with("users")
             @rspec.start
           end
           

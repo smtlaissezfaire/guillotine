@@ -26,7 +26,7 @@ module Guillotine
         data[sym(table_name)]
       end
       
-      def create_table(table_name, columns, options = { :force => false })
+      def create_table(table_name, options = { :force => false })
         if !options[:force] && table_exists?(table_name)
           raise TableAlreadyExists
         else
