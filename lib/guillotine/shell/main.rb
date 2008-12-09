@@ -4,6 +4,7 @@ module Guillotine
   module Shell
     module Main
       INTRODUCTORY_TEXT = File.read(File.dirname(__FILE__) + "/introduction.txt")
+      READLINE_PROMPT = ">> "
       
       class << self
         def do
@@ -11,7 +12,7 @@ module Guillotine
           
           loop do
             begin
-              Command.execute(readline(">> "))
+              Command.execute(readline(READLINE_PROMPT))
             rescue => e
               output_error(e)
             end
