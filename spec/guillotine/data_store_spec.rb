@@ -102,36 +102,36 @@ module Guillotine
           }.should raise_error(DataStore::TableAlreadyExists)
         end
         
-        describe "with :if_exists => true" do
+        describe "with :force => true" do
           it "should not do anything if the table is already there" do
             DataStore.create_table(:foo, [@column])
-            DataStore.create_table(:foo, [@column], :if_exists => true)
+            DataStore.create_table(:foo, [@column], :force => true)
             DataStore.table_names.should == [:foo]
           end
           
           it "should create the table if the table does not exist" do
-            DataStore.create_table(:foo, [@column], :if_exists => true)
+            DataStore.create_table(:foo, [@column], :force => true)
             DataStore.table_names.should == [:foo]
           end
           
           it "should instantiate a new Table" do
             DataStore::Table.should_receive(:new).with(:foo, hash_including({ }))
-            DataStore.create_table(:foo, [@column])
+            DataStore.create_table(:foo, [@column], :force => true)
           end
           
           it "should instantiate a table with the correct name" do
             DataStore::Table.should_receive(:new).with(:bar, hash_including({ }))
-            DataStore.create_table(:bar, [@column])
+            DataStore.create_table(:bar, [@column], :force => true)
           end
           
           it "should instantiate with :primary_key => :id" do
             DataStore::Table.should_receive(:new).with(:bar, hash_including({ :primary_key => :id }))
-            DataStore.create_table(:bar, [@column])
+            DataStore.create_table(:bar, [@column], :force => true)
           end
           
           it "should instantiate with :auto_increment => true" do
             DataStore::Table.should_receive(:new).with(:bar, hash_including({ :auto_increment => true }))
-            DataStore.create_table(:bar, [@column])
+            DataStore.create_table(:bar, [@column], :force => true)
           end
         end
         
