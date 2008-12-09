@@ -5,7 +5,7 @@ module Guillotine
     describe "data" do
       before :each do
         DataStore.__clear_all_tables!
-        @column = mock 'column'
+        @column = mock 'column', :primary_key? => false
       end
       
       it "should return an empty array of tables"do
@@ -121,16 +121,6 @@ module Guillotine
           
           it "should instantiate a table with the correct name" do
             DataStore::Table.should_receive(:new).with(:bar, hash_including({ }))
-            DataStore.create_table(:bar, :columns => [@column], :force => true)
-          end
-          
-          it "should instantiate with :primary_key => :id" do
-            DataStore::Table.should_receive(:new).with(:bar, hash_including({ :primary_key => :id }))
-            DataStore.create_table(:bar, :columns => [@column], :force => true)
-          end
-          
-          it "should instantiate with :auto_increment => true" do
-            DataStore::Table.should_receive(:new).with(:bar, hash_including({ :auto_increment => true }))
             DataStore.create_table(:bar, :columns => [@column], :force => true)
           end
         end

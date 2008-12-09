@@ -1,11 +1,6 @@
 module Guillotine
   module DataStore
     module Database
-      DEFAULT_TABLE_OPTIONS = {
-        :primary_key => :id,
-        :auto_increment => true
-      }
-      
       def __clear_all_tables!
         @data = nil
       end
@@ -31,7 +26,7 @@ module Guillotine
           raise TableAlreadyExists
         else
           table_name = sym(table_name)
-          data[table_name] = Table.new(table_name, DEFAULT_TABLE_OPTIONS)
+          data[table_name] = Table.new(table_name, options)
         end
       end
       
