@@ -2,6 +2,9 @@ module Guillotine
   module DataStore
     class Table < Array
       class PrimaryKeyError < StandardError; end
+
+      AUTO_INCREMENT_DEFAULT = true
+      DEFAULT_PRIMARY_KEY_ID = :id
       
       def initialize(table_name, schema_options={ }, rows=[])
         @table_name = table_name.to_sym
@@ -28,19 +31,51 @@ module Guillotine
       attr_reader :schema_options
       
       def auto_increment?
-        @schema_options[:auto_increment]
+        if primary_key_column?
+          primary_key_column.auto_increment?
+        elsif columns?
+          false
+        else
+          AUTO_INCREMENT_DEFAULT
+        end
       end
+
+      alias_method :auto_incrementing?, :auto_increment?
       
       def primary_key
-        @schema_options[:primary_key]
+        if primary_key_column?
+          primary_key_column.column_name
+        elsif columns?
+          nil
+        else
+          DEFAULT_PRIMARY_KEY_ID
+        end
       end
-      
+
       def truncate
         clear
         @last_autoincrement_id = 0
       end
       
     private
+
+      def primary_key_column
+        if columns?
+          columns.detect { |col| col.primary_key? }
+        end
+      end
+
+      def primary_key_column?
+        primary_key_column ? true : false
+      end
+      
+      def columns?
+        columns ? true : false
+      end
+
+      def columns
+        @schema_options[:columns]
+      end
       
       def check_primary_key_validity(a_row)
         if detect { |row| row[:id] == a_row[:id] }

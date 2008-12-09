@@ -20,7 +20,7 @@ module Guillotine
       end
       
       it "should take a schema options, and return them back" do
-        schema_options = { :auto_increment => true, :primary_key => :id }
+        schema_options = { :columns => [mock('column')] }
         tbl = Table.new(:users, schema_options)
         tbl.schema_options.should == schema_options
       end
@@ -43,120 +43,77 @@ module Guillotine
         tbl.to_a.should == []
         tbl.should be_empty
       end
-      
-      describe "with auto-increment => true" do
-        describe "with the primary key 'id'" do
-          before(:each) do
-            @table = Table.new(:foo, :auto_increment => true, :primary_key => :id)
-          end
-          
-          it "should add an id field to the elemnt being inserted" do
-            record = { :foo => :bar }
-            @table << record
-            @table.to_a.first.keys.should include(:id)
-          end
-          
-          it "should add the id with value of '1' to the first element inserted" do
-            record = { :foo => :bar }
-            @table << record
-            @table.to_a.should == [{ :foo => :bar, :id => 1 }]
-          end
-          
-          it "should add the id with the value of '2' to the second element inserted" do
-            record = { :foo => :bar }
-            @table << { }
-            @table << record
-            @table.to_a.should include({ :foo => :bar, :id => 2 })
-          end
-          
-          it "should use the value of '2', even if the first record was created and deleted" do
-            first_record =  { :record => :first }
-            second_record = { :record => :second }
-            
-            @table << first_record
-            @table.clear
-            @table << second_record
-            
-            @table.to_a.should == [{ :record => :second, :id => 2 }]
-          end
-          
-          describe "when assigning an id" do
-            describe "when it conflicts with an existing record" do
-              it "should raise an error" do
-                record = { :foo => :bar, :id => 1 }
-                @table << { }
-                lambda {
-                  @table << record
-                }.should raise_error(Table::PrimaryKeyError, "A primary key with id 1 has already been taken")
-              end
-            end
-            
-            describe "when it doesn't conflict with an existing record" do
-              it "should use the correct id" do
-                record = { :foo => :bar, :id => 7 }
-                @table << record
-                @table.to_a.should == [{ :foo => :bar, :id => 7 }]
-              end
-              
-              it "should use the correct primary key name" do
-                @table.stub!(:primary_key).and_return(:p_key)
-                record = { :foo => :bar, :p_key => 7 }
-                @table << record
-                @table.to_a.should == [{ :foo => :bar, :p_key => 7 }]
-              end
-            end
-          end
-        end
-        
-        describe "with the primary key :foo_bar_id" do
-          before(:each) do
-            @table = Table.new(:foo, :auto_increment => true, :primary_key => :foo_bar_id)
-          end
-          
-          it "should add the id with value of '1' to the first element inserted" do
-            record = { :foo => :bar }
-            @table << record
-            @table.to_a.should == [{ :foo => :bar, :foo_bar_id => 1 }]
-          end
-        end
-        
-        describe "when there is no primary key, but there is an auto-increment" do
-          it 'should raise when initializing' do
-            lambda { 
-              Table.new(:foo, :auto_increment => true)
-            }.should raise_error(Guillotine::DataStore::Table::PrimaryKeyError, "A Primary Key must be specified with auto-increment => true")
-          end
-        end
-      end
-      
-      describe "a non-auto-incrementing table", :shared => true do
-        it "should add a record without adding an :id field" do
-          record = { :foo => :bar }
-          @table << record
-          @table.to_a.should == [record]
-        end
-        
-        it "should allow a record with id field to be added" do
-          record = { :id => 7 }
-          @table << record
-          @table.to_a.should == [record]
-        end
-      end
-      
-      describe "when auto_increment => false" do
-        before(:each) do
-          @table = Table.new(:foo, :auto_increment => false)
-        end
-        
-        it_should_behave_like "a non-auto-incrementing table"
-      end
-      
-      describe "when no auto_increment option is given" do
+
+      describe "when given no column information" do
         before(:each) do
           @table = Table.new(:foo)
         end
 
-        it_should_behave_like "a non-auto-incrementing table"
+        it "should assume auto-increment true" do
+          @table.should be_auto_incrementing
+        end
+
+        it "should use the primary key of 'id'" do
+          @table.primary_key.should == :id
+        end
+      end
+
+      describe "when given columns, but no primary key" do
+        before(:each) do
+          column = mock('a column', :primary_key? => false)
+          @table = Table.new(:foo, :columns => [column])
+        end
+        
+        it "should have auto_increment as false" do
+          @table.should_not be_auto_incrementing
+        end
+
+        it "should have the primary key as nil" do
+          @table.primary_key.should be_nil
+        end
+      end
+
+      describe "when given a column with a primary key" do
+        before(:each) do
+          @col = mock 'a column', :column_name => :foo, :primary_key? => true
+          @table = Table.new(:foo, :columns => [@col])
+        end
+
+        it "should have the primary key id" do
+          @table.primary_key.should equal(:foo)
+        end
+
+        it "should return the correct primary key id" do
+          @col.stub!(:column_name).and_return :bar
+          @table.primary_key.should equal(:bar)
+        end
+
+        it "should return the second column, if the second column has the primary key" do
+          col_one = mock 'a column', :column_name => :foo, :primary_key? => false
+          col_two = mock 'a column', :column_name => :bar, :primary_key? => true
+          
+          table = Table.new(:foo, :columns => [col_one, col_two])
+          table.primary_key.should equal(:bar)
+        end
+
+        it "should raise an error if there is more than one primary key"
+      end
+
+      describe "auto-increment" do
+        before(:each) do
+          @column = mock 'column', :primary_key? => true
+          @table = Table.new(:foo, :columns => [@column])
+        end
+
+        it "should be false if the primary key doesn't support auto-increment" do
+          @column.stub!(:auto_increment?).and_return false
+          @table.auto_increment?.should be_false
+        end
+
+        it "should be true if the primary key *does* support auto_increment?" do
+          @column.stub!(:auto_increment?).and_return true
+          @table.auto_increment?.should be_true
+        end
       end
       
       describe "truncate" do
