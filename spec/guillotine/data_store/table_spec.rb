@@ -133,6 +133,44 @@ module Guillotine
           @table.should == [{ :foo => :bar, :id => 1}]
         end
       end
+
+      describe "columns" do
+        it "should be an empty array when passed no column information" do
+          Table.new(:foo).columns.should == []
+        end
+
+        it "should be the list of columns" do
+          @columns = mock 'columns'
+          Table.new(:foo, :columns => @columns).columns.should equal(@columns)
+        end
+      end
+
+      describe "column_names" do
+        before(:each) do
+          @column = mock 'a column', :column_name => :foo
+          @columns = [@column]
+          @table = Table.new(:foo, :columns => @columns)
+        end
+
+        it "should have one name correct (when given one name)" do
+          @table.column_names.should == [:foo]
+        end
+
+        it "should use the correct name" do
+          @column.stub!(:column_name).and_return :bar
+          @table.column_names.should == [:bar]
+        end
+
+        it "should have two (when there are two)" do
+          column_one = mock 'col 1', :column_name => :foo
+          column_two = mock 'col 1', :column_name => :bar
+          
+          columns = [column_one, column_two]
+          table = Table.new(:foo, :columns => columns)
+
+          table.column_names.should == [:foo, :bar]
+        end
+      end
     end
   end
 end

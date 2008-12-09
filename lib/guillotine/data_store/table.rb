@@ -33,7 +33,7 @@ module Guillotine
       def auto_increment?
         if primary_key_column?
           primary_key_column.auto_increment?
-        elsif columns?
+        elsif given_columns?
           false
         else
           AUTO_INCREMENT_DEFAULT
@@ -45,7 +45,7 @@ module Guillotine
       def primary_key
         if primary_key_column?
           primary_key_column.column_name
-        elsif columns?
+        elsif given_columns?
           nil
         else
           DEFAULT_PRIMARY_KEY_ID
@@ -55,6 +55,22 @@ module Guillotine
       def truncate
         clear
         @last_autoincrement_id = 0
+      end
+
+      def columns
+        given_columns || []
+      end
+
+      def given_columns
+        @schema_options[:columns]
+      end
+
+      def given_columns?
+        given_columns ? true : false
+      end
+
+      def column_names
+        columns.map { |col| col.column_name }
       end
       
     private
@@ -73,10 +89,6 @@ module Guillotine
         columns ? true : false
       end
 
-      def columns
-        @schema_options[:columns]
-      end
-      
       def check_primary_key_validity(a_row)
         if detect { |row| row[:id] == a_row[:id] }
           raise(PrimaryKeyError, "A primary key with id 1 has already been taken")
