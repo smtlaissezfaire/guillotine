@@ -3,7 +3,6 @@ module Guillotine
     class Column
       def initialize(column)
         set_column_and_table_name(column)
-        @primary_key = false
       end
       
       attr_accessor :table_name
@@ -28,7 +27,7 @@ module Guillotine
       attr_writer :primary_key
 
       def primary_key?
-        @primary_key
+        @primary_key ||= false
       end
 
       def auto_increment?
