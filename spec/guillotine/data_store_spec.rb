@@ -208,23 +208,6 @@ module Guillotine
           end
         end
       end
-
-
-#       describe "dump_to_yaml" do
-#         before(:each) do
-# #           >> {:foo => [{:bar => 17}, {:bar => 18}]}.to_yaml
-# #           => "--- \n:foo: \n- :bar: 17\n- :bar: 18\n"
-#           @data = {:foo => [{:bar => 17}, {:bar => 18}]}
-#           @database = Class.new do
-#             include Guillotine::Database::Database
-#           end.new
-
-#         end
-
-#         it "should dump the data to yaml" do
-          
-#         end
-#       end
     end
   end
 end
