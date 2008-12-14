@@ -4,5 +4,6 @@ module Guillotine
 
     autoload :SingleExecutor, "#{dir}/single_executor"
     autoload :MultiExecutor,  "#{dir}/multi_executor"
+    autoload :StatementCache, "#{dir}/statement_cache"
   end
 end
