@@ -10,9 +10,11 @@ module Guillotine
       
       attr_reader :parser, :pre_parser
       
-      def parse(string)
+      def parse_without_caching(string)
         parse_and_eval(pre_process(string))
       end
+
+      alias_method :parse, :parse_without_caching
       
       def execute(string)
         parse(string).call
