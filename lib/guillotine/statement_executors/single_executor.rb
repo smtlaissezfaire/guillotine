@@ -14,7 +14,13 @@ module Guillotine
         parse_and_eval(pre_process(string))
       end
 
-      alias_method :parse, :parse_without_caching
+      def parse_with_caching(string)
+        StatementCache.add_or_find string do
+          parse_without_caching(string)
+        end
+      end
+
+      alias_method :parse, :parse_with_caching
       
       def execute(string)
         parse(string).call
