@@ -1,0 +1,5 @@
+-- create_table(:users, {:force=>true})
+   -> 0.0640s
+      user     system      total        real
+using AR & mysql,     10000 times  1.170000   0.170000   1.340000 (  2.184340)
+using AR & guillotine, 10000 times 12.550000   0.060000  12.610000 ( 12.668526)
