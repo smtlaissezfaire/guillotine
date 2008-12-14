@@ -1,0 +1,6 @@
+-- create_table(:users, {:force=>true})
+   -> 0.0242s
+* With sql statement SELECT * FROM users LIMIT 10, and no data in the users table
+      user     system      total        real
+using AR & mysql,     10000 times  1.100000   0.170000   1.270000 (  2.079282)
+using AR & guillotine, 10000 times 10.600000   0.070000  10.670000 ( 10.763242)
