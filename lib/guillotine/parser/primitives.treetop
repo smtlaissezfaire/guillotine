@@ -40,7 +40,7 @@ module Guillotine
       rule single_quoted_string
         single_quote (string_chars / double_quote)* single_quote {
           def eval
-            instance_eval text_value
+            text_value[1..text_value.length-2]
           end
         }
       end
@@ -52,7 +52,7 @@ module Guillotine
       rule double_quoted_string
         double_quote (string_chars / single_quote)* double_quote {
           def eval
-            instance_eval text_value
+            text_value[1..text_value.length-2]
           end
         }
       end
