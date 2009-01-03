@@ -1,0 +1,33 @@
+grammar TreetopSQL
+  rule command
+    select / insert
+  end
+
+  rule select
+    select_clause space from_clause
+  end
+
+  rule insert
+    "INSERT INTO foo VALUES (1,2)"
+  end
+
+  rule table_name
+    "foo"
+  end
+
+  rule from_clause
+    "FROM" space table_name
+  end
+
+  rule table_names
+    "*"
+  end
+
+  rule select_clause
+    "SELECT" space table_names
+  end
+
+  rule space
+    [\r\n\t ]
+  end
+end
