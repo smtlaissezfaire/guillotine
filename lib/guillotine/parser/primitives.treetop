@@ -2,6 +2,24 @@ module Guillotine
   module Parser
     grammar SQLPrimitives
       rule primitive
+        open_parens primitive close_parens {
+           def eval
+            simple_primitive.eval
+          end
+        }
+        /
+        simple_primitive
+      end
+
+      rule open_parens
+        '('
+      end
+
+      rule close_parens
+        ')'
+      end
+
+      rule simple_primitive
         datetime / date / boolean / quoted_string / backtick_string / number / string
       end
     

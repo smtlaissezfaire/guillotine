@@ -126,6 +126,14 @@ module Guillotine
         select = parse_and_eval_with_upcasing(first_statement)
         select.where.key.should equal(:foo)
       end
+
+      it "should parse a paren around a value" do
+        parse("SELECT * FROM foo WHERE id = (7)").should_not be_nil
+      end
+
+      it "should parse two parens around a value" do
+        parse("SELECT * FROM foo WHERE id = ((7))").should_not be_nil
+      end
     end
   end
 end
