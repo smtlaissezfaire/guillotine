@@ -115,7 +115,9 @@ module Guillotine
           parse_and_eval("1").should be_true
         end
         
-        it "should parse 'true' as true"
+        it "should parse 'true' as true" do
+          parse_and_eval("true").should be_true
+        end
         
         it "should parse 'False' as false"
       end
