@@ -119,7 +119,7 @@ module Guillotine
           parse_and_eval("true").should be_true
         end
         
-        it "should parse 'False' as false"
+        it "should parse 'false' as false"
       end
       
       describe "floating point numbers" do
