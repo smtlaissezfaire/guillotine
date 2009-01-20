@@ -6,3 +6,5 @@ end
 
 desc "Recompile the treetop files"
 task :treetop => ["treetop:compile"]
+
+task :tt => :treetop
