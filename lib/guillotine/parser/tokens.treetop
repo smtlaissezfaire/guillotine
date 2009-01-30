@@ -45,6 +45,10 @@ module Guillotine
         "`"
       end
       
+      rule comma
+        ","
+      end
+      
       rule string_chars
         [a-zA-Z_]
       end
@@ -95,10 +99,6 @@ module Guillotine
       
       rule zerofill_keyword
         "ZEROFILL"
-      end
-      
-      rule comma
-        ","
       end
       
       rule unsigned_keyword
