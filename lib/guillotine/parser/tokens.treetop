@@ -33,79 +33,79 @@ module Guillotine
         }
       end
       
-      rule single_quote
+      rule SINGLE_QUOTE
         "'"
       end
       
-      rule double_quote
+      rule DOUBLE_QUOTE
         "\""
       end
 
-      rule backtick
+      rule BACKTICK
         "`"
       end
       
-      rule comma
+      rule COMMA
         ","
       end
       
-      rule string_chars
+      rule STRING_CHARS
         [a-zA-Z_]
       end
       
-      rule digit
+      rule DIGIT
         [0-9]
       end
       
-      rule dash
+      rule DASH
         "-" { def eval; nil; end }
       end
 
-      rule real_keyword
+      rule REAL_KEYWORD
         "REAL"
       end
 
-      rule double_keyword
+      rule DOUBLE_KEYWORD
         "DOUBLE"
       end
 
-      rule float_keyword
+      rule FLOAT_KEYWORD
         "FLOAT"
       end
 
-      rule decimal_keyword
+      rule DECIMAL_KEYWORD
         "DECIMAL"
       end
 
-      rule numeric_keyword
+      rule NUMERIC_KEYWORD
         "NUMERIC"
       end
       
-      rule small_int_keyword
+      rule SMALL_INT_KEYWORD
         "SMALLINT"
       end
 
-      rule tiny_int_keyword
+      rule TINY_INT_KEYWORD
         "TINYINT"
       end
 
-      rule int_keyword
+      rule INT_KEYWORD
         "INT"
       end
 
-      rule integer_keyword
+      rule INTEGER_KEYWORD
         "INTEGER"
       end
       
-      rule zerofill_keyword
+      rule ZEROFILL_KEYWORD
         "ZEROFILL"
       end
       
-      rule unsigned_keyword
+      rule UNSIGNED_KEYWORD
         "UNSIGNED"
       end
       
-      rule big_int_keyword
+      rule BIG_INT_KEYWORD
         "BIGINT"
       end
     end

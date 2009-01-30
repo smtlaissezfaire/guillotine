@@ -18,7 +18,7 @@ module Guillotine
       end
 
       rule columns_and_datatypes
-        column_with_datatype comma columns_and_datatypes {
+        column_with_datatype COMMA columns_and_datatypes {
           def eval
             all = ([column_with_datatype.eval] + columns_and_datatypes.eval)
             all.flatten!

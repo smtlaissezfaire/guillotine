@@ -30,7 +30,7 @@ module Guillotine
       end
     
       rule single_quoted_string
-        single_quote (string_chars / double_quote)* single_quote {
+        SINGLE_QUOTE (STRING_CHARS / DOUBLE_QUOTE)* SINGLE_QUOTE {
           def eval
             text_value[1..text_value.length-2]
           end
@@ -38,7 +38,7 @@ module Guillotine
       end
     
       rule double_quoted_string
-        double_quote (string_chars / single_quote)* double_quote {
+        DOUBLE_QUOTE (STRING_CHARS / SINGLE_QUOTE)* DOUBLE_QUOTE {
           def eval
             text_value[1..text_value.length-2]
           end
@@ -46,7 +46,7 @@ module Guillotine
       end
     
       rule backtick_string
-        backtick string backtick {
+        BACKTICK string BACKTICK {
           def eval(backtick_string_class=BacktickString)
             backtick_string_class.new(text_value)
           end
@@ -54,7 +54,7 @@ module Guillotine
       end
     
       rule string
-        string_chars+ {
+        STRING_CHARS+ {
           def eval
             text_value
           end
@@ -66,7 +66,7 @@ module Guillotine
       end
     
       rule integer
-        digit+ {
+        DIGIT+ {
           def eval
             text_value.to_i
           end
@@ -82,7 +82,7 @@ module Guillotine
       end
 
       rule date
-        one:four_digits dash two:two_digits dash three:two_digits {
+        one:four_digits DASH two:two_digits DASH three:two_digits {
           def eval
             elements = [one.eval, two.eval, three.eval]
             Date.new(*elements)
@@ -97,7 +97,7 @@ module Guillotine
       end
 
       rule two_digits
-        digit digit {
+        DIGIT DIGIT {
           def eval; text_value.to_i; end
         }
       end
@@ -115,7 +115,7 @@ module Guillotine
       end
 
       rule quote
-        single_quote / double_quote
+        SINGLE_QUOTE / DOUBLE_QUOTE
       end
     end
   end

@@ -17,11 +17,11 @@ module Guillotine
       end
 
       rule decimal_field
-        real_keyword    /
-        double_keyword  /
-        float_keyword   /
-        decimal_keyword /
-        numeric_keyword
+        REAL_KEYWORD    /
+        DOUBLE_KEYWORD  /
+        FLOAT_KEYWORD   /
+        DECIMAL_KEYWORD /
+        NUMERIC_KEYWORD
       end
 
       rule int_type
@@ -29,11 +29,11 @@ module Guillotine
       end
 
       rule int_field
-        tiny_int_keyword     /
-        small_int_keyword    /
-        integer_keyword      /
-        int_keyword          /
-        big_int_keyword
+        TINY_INT_KEYWORD     /
+        SMALL_INT_KEYWORD    /
+        INTEGER_KEYWORD      /
+        INT_KEYWORD          /
+        BIG_INT_KEYWORD
       end
 
       rule int_options
@@ -45,11 +45,11 @@ module Guillotine
       end
 
       rule unsigned
-        SPACE unsigned_keyword
+        SPACE UNSIGNED_KEYWORD
       end
 
       rule zerofill
-        SPACE zerofill_keyword
+        SPACE ZEROFILL_KEYWORD
       end
 
       rule field_size_with_space
@@ -58,7 +58,7 @@ module Guillotine
 
       rule field_size
         OPEN_PARENS SPACE? integer SPACE? CLOSE_PARENS /
-        OPEN_PARENS SPACE? integer SPACE? comma SPACE? integer SPACE? CLOSE_PARENS
+        OPEN_PARENS SPACE? integer SPACE? COMMA SPACE? integer SPACE? CLOSE_PARENS
       end
     end
   end
