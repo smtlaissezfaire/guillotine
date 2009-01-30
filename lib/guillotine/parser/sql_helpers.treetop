@@ -23,7 +23,7 @@ module Guillotine
         '' { def eval; nil; end }
       end
       
-      rule open_parens
+      rule OPEN_PARENS
         '('
       end
 

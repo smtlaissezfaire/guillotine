@@ -12,7 +12,7 @@ module Guillotine
       end
     
       rule where_clause
-        open_parens optional_spaces where_clause optional_spaces close_parens {
+        OPEN_PARENS optional_spaces where_clause optional_spaces close_parens {
           def eval
             where_clause.eval
           end

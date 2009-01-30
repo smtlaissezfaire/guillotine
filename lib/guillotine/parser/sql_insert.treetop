@@ -81,7 +81,7 @@ module Guillotine
 
       rule default_value
         "DEFAULT" SPACE* 
-        open_parens SPACE* column_name SPACE* close_parens { 
+        OPEN_PARENS SPACE* column_name SPACE* close_parens { 
           def eval; "DEFAULT"; end
         }
       end
