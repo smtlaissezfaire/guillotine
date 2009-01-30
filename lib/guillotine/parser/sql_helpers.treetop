@@ -27,7 +27,7 @@ module Guillotine
         '('
       end
 
-      rule close_parens
+      rule CLOSE_PARENS
         ')'
       end
     end

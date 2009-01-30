@@ -4,7 +4,7 @@ module Guillotine
       include SQLHelpers
     
       rule primitive
-        OPEN_PARENS primitive close_parens {
+        OPEN_PARENS primitive CLOSE_PARENS {
            def eval
             simple_primitive.eval
           end

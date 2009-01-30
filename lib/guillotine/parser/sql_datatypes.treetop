@@ -105,8 +105,8 @@ module Guillotine
       end
 
       rule field_size
-        OPEN_PARENS SPACE? integer SPACE? close_parens /
-        OPEN_PARENS SPACE? integer SPACE? comma SPACE? integer SPACE? close_parens
+        OPEN_PARENS SPACE? integer SPACE? CLOSE_PARENS /
+        OPEN_PARENS SPACE? integer SPACE? comma SPACE? integer SPACE? CLOSE_PARENS
       end
 
       rule comma
