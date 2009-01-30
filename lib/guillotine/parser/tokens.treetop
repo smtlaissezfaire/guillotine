@@ -12,6 +12,10 @@ module Guillotine
       rule CLOSE_PARENS
         ')'
       end
+      
+      rule EMPTY_STRING
+        '' { def eval; nil; end }
+      end
     end
   end
 end

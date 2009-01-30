@@ -18,10 +18,6 @@ module Guillotine
       rule order_by_condition_or_empty
         SPACE order_by { def eval; order_by.eval; end } / EMPTY_STRING
       end
-    
-      rule EMPTY_STRING
-        '' { def eval; nil; end }
-      end
     end
   end
 end
