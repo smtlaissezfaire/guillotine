@@ -23,12 +23,12 @@ module Guillotine
         datetime / date / boolean / quoted_string / backtick_string / number / string
       end
     
-      rule space
+      rule SPACE
         " "
       end
     
       rule optional_spaces
-        space*
+        SPACE*
       end
     
       rule boolean
@@ -153,7 +153,7 @@ module Guillotine
       end
 
       rule datetime
-        quote? date space time quote? {
+        quote? date SPACE time quote? {
           def eval
             Time.parse(text_value)
           end

@@ -6,8 +6,8 @@ module Guillotine
       include SQLWhereCondition
 
       rule show_tables
-        "SHOW" space (full)? "TABLES" from_table?
-        (like_pattern / (space where_condition))? {
+        "SHOW" SPACE (full)? "TABLES" from_table?
+        (like_pattern / (SPACE where_condition))? {
           def eval
             Expressions::TableDisplayer.new(Guillotine::DataStore)
           end
@@ -15,15 +15,15 @@ module Guillotine
       end
 
       rule full
-        "FULL" space
+        "FULL" SPACE
       end
 
       rule from_table
-        space "FROM" space table_name
+        SPACE "FROM" SPACE table_name
       end
 
       rule like_pattern
-        space "LIKE" space single_quoted_string
+        SPACE "LIKE" SPACE single_quoted_string
       end
     end
   end

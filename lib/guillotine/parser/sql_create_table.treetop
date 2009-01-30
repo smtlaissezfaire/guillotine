@@ -5,7 +5,7 @@ module Guillotine
       include SQLDataTypes
 
       rule create_table
-        "CREATE TABLE" space table_name space "(" columns_and_datatypes ")" {
+        "CREATE TABLE" SPACE table_name SPACE "(" columns_and_datatypes ")" {
           def eval
             options = {
               :columns    => columns_and_datatypes.eval,
@@ -34,7 +34,7 @@ module Guillotine
       end
 
       rule column_with_datatype
-        space? column_name space datatype space? {
+        SPACE? column_name SPACE datatype SPACE? {
           def eval; Expressions::Column.new(column_name.eval); end
         }
       end

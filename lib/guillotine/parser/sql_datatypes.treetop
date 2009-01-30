@@ -85,7 +85,7 @@ module Guillotine
       end
 
       rule unsigned
-        space unsigned_keyword
+        SPACE unsigned_keyword
       end
 
       rule unsigned_keyword
@@ -93,7 +93,7 @@ module Guillotine
       end
 
       rule zerofill
-        space zerofill_keyword
+        SPACE zerofill_keyword
       end
 
       rule zerofill_keyword
@@ -101,12 +101,12 @@ module Guillotine
       end
 
       rule field_size_with_space
-        space? field_size
+        SPACE? field_size
       end
 
       rule field_size
-        open_parens space? integer space? close_parens /
-        open_parens space? integer space? comma space? integer space? close_parens
+        open_parens SPACE? integer SPACE? close_parens /
+        open_parens SPACE? integer SPACE? comma SPACE? integer SPACE? close_parens
       end
 
       rule comma

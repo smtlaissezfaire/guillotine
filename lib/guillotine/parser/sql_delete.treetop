@@ -29,9 +29,9 @@ module Guillotine
       end
     
       rule common_delete_clause
-        "DELETE" space
+        "DELETE" SPACE
         optional_delete_directives
-        "FROM" space
+        "FROM" SPACE
       end
     
       rule optional_delete_directives
@@ -53,15 +53,15 @@ module Guillotine
       end
     
       rule ignore
-        "IGNORE" space
+        "IGNORE" SPACE
       end
     
       rule quick
-        "QUICK" space
+        "QUICK" SPACE
       end
     
       rule low_priority
-        "LOW_PRIORITY" space
+        "LOW_PRIORITY" SPACE
       end
     end
   end

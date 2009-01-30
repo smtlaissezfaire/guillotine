@@ -5,7 +5,7 @@ module Guillotine
       include SQLRowSupport
     
       rule from
-        "FROM" space one_or_more_table_names {
+        "FROM" SPACE one_or_more_table_names {
           def eval
             From.new(one_or_more_table_names.eval)
           end
