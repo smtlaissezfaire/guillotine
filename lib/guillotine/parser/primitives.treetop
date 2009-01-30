@@ -25,22 +25,6 @@ module Guillotine
         true / false
       end
     
-      rule true
-        "TRUE" {
-          def eval
-            true
-          end
-        }
-      end
-    
-      rule false
-        "FALSE" {
-          def eval
-            false
-          end
-        }
-      end
-    
       rule quoted_string
         single_quoted_string / double_quoted_string
       end
@@ -53,24 +37,12 @@ module Guillotine
         }
       end
     
-      rule single_quote
-        "'"
-      end
-    
       rule double_quoted_string
         double_quote (string_chars / single_quote)* double_quote {
           def eval
             text_value[1..text_value.length-2]
           end
         }
-      end
-    
-      rule double_quote
-        "\""
-      end
-
-      rule backtick
-        "`"
       end
     
       rule backtick_string
@@ -87,10 +59,6 @@ module Guillotine
             text_value
           end
         }
-      end
-    
-      rule string_chars
-        [a-zA-Z_]
       end
     
       rule number
@@ -111,10 +79,6 @@ module Guillotine
             text_value.to_f
           end
         }
-      end
-
-      rule digit
-        [0-9]
       end
 
       rule date
@@ -138,10 +102,6 @@ module Guillotine
         }
       end
   
-      rule dash
-        "-" { def eval; nil; end }
-      end
-
       rule datetime
         quote? date SPACE time quote? {
           def eval

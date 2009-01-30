@@ -16,6 +16,98 @@ module Guillotine
       rule EMPTY_STRING
         '' { def eval; nil; end }
       end
+      
+      rule true
+        "TRUE" {
+          def eval
+            true
+          end
+        }
+      end
+    
+      rule false
+        "FALSE" {
+          def eval
+            false
+          end
+        }
+      end
+      
+      rule single_quote
+        "'"
+      end
+      
+      rule double_quote
+        "\""
+      end
+
+      rule backtick
+        "`"
+      end
+      
+      rule string_chars
+        [a-zA-Z_]
+      end
+      
+      rule digit
+        [0-9]
+      end
+      
+      rule dash
+        "-" { def eval; nil; end }
+      end
+
+      rule real_keyword
+        "REAL"
+      end
+
+      rule double_keyword
+        "DOUBLE"
+      end
+
+      rule float_keyword
+        "FLOAT"
+      end
+
+      rule decimal_keyword
+        "DECIMAL"
+      end
+
+      rule numeric_keyword
+        "NUMERIC"
+      end
+      
+      rule small_int_keyword
+        "SMALLINT"
+      end
+
+      rule tiny_int_keyword
+        "TINYINT"
+      end
+
+      rule int_keyword
+        "INT"
+      end
+
+      rule integer_keyword
+        "INTEGER"
+      end
+      
+      rule zerofill_keyword
+        "ZEROFILL"
+      end
+      
+      rule comma
+        ","
+      end
+      
+      rule unsigned_keyword
+        "UNSIGNED"
+      end
+      
+      rule big_int_keyword
+        "BIGINT"
+      end
     end
   end
 end

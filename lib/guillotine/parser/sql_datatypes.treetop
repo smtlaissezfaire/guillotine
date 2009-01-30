@@ -24,26 +24,6 @@ module Guillotine
         numeric_keyword
       end
 
-      rule real_keyword
-        "REAL"
-      end
-
-      rule double_keyword
-        "DOUBLE"
-      end
-
-      rule float_keyword
-        "FLOAT"
-      end
-
-      rule decimal_keyword
-        "DECIMAL"
-      end
-
-      rule numeric_keyword
-        "NUMERIC"
-      end
-
       rule int_type
         int_field int_options
       end
@@ -56,10 +36,6 @@ module Guillotine
         big_int_keyword
       end
 
-      rule big_int_keyword
-        "BIGINT"
-      end
-
       rule int_options
         field_size_with_space? unsigned? zerofill?
       end
@@ -68,36 +44,12 @@ module Guillotine
         "BIT" field_size?
       end
 
-      rule small_int_keyword
-        "SMALLINT"
-      end
-
-      rule tiny_int_keyword
-        "TINYINT"
-      end
-
-      rule int_keyword
-        "INT"
-      end
-
-      rule integer_keyword
-        "INTEGER"
-      end
-
       rule unsigned
         SPACE unsigned_keyword
       end
 
-      rule unsigned_keyword
-        "UNSIGNED"
-      end
-
       rule zerofill
         SPACE zerofill_keyword
-      end
-
-      rule zerofill_keyword
-        "ZEROFILL"
       end
 
       rule field_size_with_space
@@ -107,10 +59,6 @@ module Guillotine
       rule field_size
         OPEN_PARENS SPACE? integer SPACE? CLOSE_PARENS /
         OPEN_PARENS SPACE? integer SPACE? comma SPACE? integer SPACE? CLOSE_PARENS
-      end
-
-      rule comma
-        ","
       end
     end
   end
