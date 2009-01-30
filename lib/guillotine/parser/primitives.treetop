@@ -1,6 +1,8 @@
 module Guillotine
   module Parser
     grammar SQLPrimitives
+      include SQLHelpers
+    
       rule primitive
         open_parens primitive close_parens {
            def eval
@@ -9,14 +11,6 @@ module Guillotine
         }
         /
         simple_primitive
-      end
-
-      rule open_parens
-        '('
-      end
-
-      rule close_parens
-        ')'
       end
 
       rule simple_primitive

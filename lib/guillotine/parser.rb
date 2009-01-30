@@ -27,9 +27,9 @@ module Guillotine
   require File.dirname(__FILE__) + "/../../ext/quotes_parser/quotes_parser.so"
   
   parser = File.dirname(__FILE__) + "/parser"
+  require "#{parser}/sql_helpers"
   require "#{parser}/primitives"
   require "#{parser}/sql_chars"
-  require "#{parser}/sql_helpers"
   require "#{parser}/sql_row_support"
   require "#{parser}/sql_key_value_pair"
   require "#{parser}/sql_where_condition"

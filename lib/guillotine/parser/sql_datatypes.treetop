@@ -112,14 +112,6 @@ module Guillotine
       rule comma
         ","
       end
-
-      rule open_parens
-        "("
-      end
-
-      rule close_parens
-        ")"
-      end
     end
   end
 end

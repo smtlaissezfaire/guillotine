@@ -42,14 +42,6 @@ module Guillotine
         "OR" { def eval; :OR; end }
       end
     
-      rule open_parens
-        "("
-      end
-    
-      rule close_parens
-        ")"
-      end
-    
       rule single_expression_where_clause
         key_value_pair
       end
