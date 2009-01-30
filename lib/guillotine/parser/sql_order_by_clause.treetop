@@ -38,7 +38,7 @@ module Guillotine
       end
     
       rule optional_sort_condition
-        SPACE sort_condition { def eval; sort_condition.eval; end } / empty_string
+        SPACE sort_condition { def eval; sort_condition.eval; end } / EMPTY_STRING
       end
     
       rule sort_condition

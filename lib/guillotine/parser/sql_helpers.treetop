@@ -8,18 +8,18 @@ module Guillotine
           end
         }
         /  
-        empty_string
+        EMPTY_STRING
       end
     
       rule limit_condition_or_empty
-        SPACE limit { def eval; limit.eval; end } / empty_string
+        SPACE limit { def eval; limit.eval; end } / EMPTY_STRING
       end
     
       rule order_by_condition_or_empty
-        SPACE order_by { def eval; order_by.eval; end } / empty_string
+        SPACE order_by { def eval; order_by.eval; end } / EMPTY_STRING
       end
     
-      rule empty_string
+      rule EMPTY_STRING
         '' { def eval; nil; end }
       end
     end

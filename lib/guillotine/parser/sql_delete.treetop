@@ -41,15 +41,15 @@ module Guillotine
       end
     
       rule optional_low_priority
-        low_priority / empty_string
+        low_priority / EMPTY_STRING
       end
     
       rule optional_quick
-        quick / empty_string
+        quick / EMPTY_STRING
       end
     
       rule optional_ignore
-        ignore / empty_string
+        ignore / EMPTY_STRING
       end
     
       rule ignore
