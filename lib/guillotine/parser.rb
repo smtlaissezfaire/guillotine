@@ -40,7 +40,7 @@ module Guillotine
   require "#{parser}/sql_from_clause"
   require "#{parser}/sql_select_clause"
   require "#{parser}/sql_select"
-  require "#{parser}/truncate"
+  require "#{parser}/sql_truncate"
   require "#{parser}/sql_delete"
   require "#{parser}/sql_drop_table"
   require "#{parser}/sql_show_tables"
