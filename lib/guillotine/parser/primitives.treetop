@@ -22,7 +22,7 @@ module Guillotine
       end
     
       rule boolean
-        true / false
+        TRUE / FALSE
       end
     
       rule quoted_string

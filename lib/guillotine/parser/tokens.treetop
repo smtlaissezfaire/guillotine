@@ -17,7 +17,7 @@ module Guillotine
         '' { def eval; nil; end }
       end
       
-      rule true
+      rule TRUE
         "TRUE" {
           def eval
             true
@@ -25,7 +25,7 @@ module Guillotine
         }
       end
     
-      rule false
+      rule FALSE
         "FALSE" {
           def eval
             false
