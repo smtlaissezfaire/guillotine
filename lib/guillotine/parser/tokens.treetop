@@ -1,0 +1,17 @@
+module Guillotine
+  module Parser
+    grammar SQLTokens
+      rule SPACE
+        " "
+      end
+    
+      rule OPEN_PARENS
+        '('
+      end
+
+      rule CLOSE_PARENS
+        ')'
+      end
+    end
+  end
+end

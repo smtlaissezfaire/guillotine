@@ -22,14 +22,6 @@ module Guillotine
       rule empty_string
         '' { def eval; nil; end }
       end
-      
-      rule OPEN_PARENS
-        '('
-      end
-
-      rule CLOSE_PARENS
-        ')'
-      end
     end
   end
 end

@@ -1,7 +1,7 @@
 module Guillotine
   module Parser
     grammar SQLPrimitives
-      include SQLHelpers
+      include SQLTokens
     
       rule primitive
         OPEN_PARENS primitive CLOSE_PARENS {
@@ -15,10 +15,6 @@ module Guillotine
 
       rule simple_primitive
         datetime / date / boolean / quoted_string / backtick_string / number / string
-      end
-    
-      rule SPACE
-        " "
       end
     
       rule optional_spaces
