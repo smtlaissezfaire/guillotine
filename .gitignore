@@ -21,3 +21,5 @@ Makefile
 
 # c-tags / emacs tags file:
 TAGS
+
+spec/guillotine/integration/database.yml
