@@ -18,6 +18,12 @@ pkg
 doc
 Makefile
 
+# ragel and lemon files
+ext/LemonSQLParser/parser.c
+ext/LemonSQLParser/parser.h
+ext/LemonSQLParser/parser.out
+ext/LemonSQLParser/tokenizer.c
+
 
 # c-tags / emacs tags file:
 TAGS

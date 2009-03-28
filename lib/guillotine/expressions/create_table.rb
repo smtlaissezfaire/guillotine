@@ -1,18 +1,19 @@
 module Guillotine
   module Expressions
     class CreateTable
-      TWO_SPACES = "  "
+      TWO_SPACES         = "  "
       COLUMN_INDENTATION = TWO_SPACES
-      NEWLINE = "\n"
-      COMMA = ","
-      COLUMN_SEPARATOR = "#{COMMA}#{NEWLINE}"
+      NEWLINE            = "\n"
+      COMMA              = ","
+      COLUMN_SEPARATOR   = "#{COMMA}#{NEWLINE}"
       
       class InvalidTableOption < StandardError; end
       
-      def initialize(options = { })
-        check_args(options)
-        @columns = options[:columns]
-        @table_name = options[:table_name].to_sym
+      def initialize(table_name, columns)
+        check_columns(columns)
+
+        @table_name = table_name.to_sym
+        @columns    = columns
       end
       
       attr_reader :columns
@@ -45,17 +46,10 @@ module Guillotine
       def columns_to_sql
         columns.map { |col| "#{COLUMN_INDENTATION}#{col.to_sql}" }.join(COLUMN_SEPARATOR)
       end
-      
-      def check_args(options)
-        columns = options[:columns]
-        name    = options[:table_name]
-        
-        if !columns || columns.empty?
+
+      def check_columns(columns)
+        if columns.empty?
           raise InvalidTableOption, "A table must have one or more columns"
-        end
-        
-        if !name
-          raise InvalidTableOption, "A table must have a name"
         end
       end
     end

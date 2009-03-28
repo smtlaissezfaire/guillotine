@@ -25,6 +25,7 @@ module Guillotine
   end
   
   require File.dirname(__FILE__) + "/../../ext/quotes_parser/quotes_parser.so"
+  require File.dirname(__FILE__) + "/../../ext/LemonSQLParser/LemonSQLParser.so"
   
   parser = File.dirname(__FILE__) + "/parser"
   require "#{parser}/sql_tokens"

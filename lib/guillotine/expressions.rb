@@ -45,6 +45,7 @@ module Guillotine
     autoload :Base,                 "#{dir}/base"
     autoload :TopLevelExpression,   "#{dir}/top_level_expression"
     autoload :Column,               "#{dir}/column"
+    autoload :ColumnDefinition,     "#{dir}/column_definition"
     autoload :Equal,                "#{dir}/expressions"
     autoload :LessThan,             "#{dir}/expressions"
     autoload :GreaterThan,          "#{dir}/expressions"

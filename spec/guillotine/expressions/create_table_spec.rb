@@ -8,34 +8,22 @@ module Guillotine
       end
       
       it "should have columns" do
-        CreateTable.new(:columns => @columns, :table_name => "foo").columns.should == @columns
-      end
-      
-      it "should raise an error if given no columns" do
-        lambda { 
-          CreateTable.new(:table_name => "foo")
-        }.should raise_error(CreateTable::InvalidTableOption, "A table must have one or more columns")
+        CreateTable.new("foo", @columns).columns.should == @columns
       end
       
       it "should raise an error if the list of columns is empty?" do
         lambda { 
-          CreateTable.new(:columns => [], :table_name => "foo")
+          CreateTable.new("foo", [])
         }.should raise_error(CreateTable::InvalidTableOption, "A table must have one or more columns")
       end
       
       it "should have the table name" do
-        tbl = CreateTable.new(:columns => @columns, :table_name => :foo)
+        tbl = CreateTable.new(:foo, @columns)
         tbl.table_name.should equal(:foo)
       end
       
-      it "should raise an error if there is no table name" do
-        lambda { 
-          CreateTable.new(:columns => @columns)
-        }.should raise_error(CreateTable::InvalidTableOption, "A table must have a name")
-      end
-      
       it "should have the table name as a sym" do
-        tbl = CreateTable.new(:columns => @columns, :table_name => "foo")
+        tbl = CreateTable.new("foo", @columns)
         tbl.table_name.should equal(:foo)
       end
       
@@ -46,19 +34,19 @@ module Guillotine
         end
         
         it "should call create_table on the datastore" do
-          create = CreateTable.new(:table_name => :foo, :columns => @columns)
+          create = CreateTable.new(:foo, @columns)
           @datastore.should_receive(:create_table).with(:foo, :columns => @columns)
           create.call(@datastore)
         end
         
         it "should call create_table in the datastore with the correct table name" do
-          create = CreateTable.new(:table_name => :bar, :columns => @columns)
+          create = CreateTable.new(:bar, @columns)
           @datastore.should_receive(:create_table).with(:bar, :columns => @columns)
           create.call(@datastore)
         end
         
         it "should use the default Guillotine::DataStore if none is given" do
-          create = CreateTable.new(:table_name => :foo, :columns => @columns)
+          create = CreateTable.new(:foo, @columns)
           Guillotine::DataStore.should_receive(:create_table).with(:foo, :columns => @columns)
           create.call
         end
@@ -71,44 +59,44 @@ module Guillotine
         end
         
         it "should include 'CREATE TABLE'" do
-          tbl = CreateTable.new(:columns => [@column1], :table_name => "foo")
+          tbl = CreateTable.new("foo", [@column1])
           tbl.to_sql.should include("CREATE TABLE")
         end
         
         it "should quote the table name" do
-          tbl = CreateTable.new(:columns => [@column1], :table_name => "foo")
+          tbl = CreateTable.new("foo", [@column1])
           tbl.to_sql.should include("`foo`")
         end
         
         it "should use the proper table name" do
-          tbl = CreateTable.new(:columns => [@column1], :table_name => "bar")
+          tbl = CreateTable.new("bar", [@column1])
           tbl.to_sql.should include("`bar`")
         end
         
         it "should include one column, wrapped in parens" do
-          tbl = CreateTable.new(:columns => [@column1], :table_name => "bar")
+          tbl = CreateTable.new("bar", [@column1])
           tbl.to_sql.should =~ /.*(.*SQL_FOR_COL_1.*).*/
         end
         
         it "should include the sql for the first col" do
           @column1.stub!(:to_sql).and_return "foo"
           
-          tbl = CreateTable.new(:columns => [@column1], :table_name => "bar")
+          tbl = CreateTable.new("bar", [@column1])
           tbl.to_sql.should =~ /.*(.*foo.*).*/
         end
         
         it "should include the sql for the second col" do
-          tbl = CreateTable.new(:columns => [@column1, @column2], :table_name => "bar")
+          tbl = CreateTable.new("bar", [@column1, @column2])
           tbl.to_sql.should =~ /.*SQL_FOR_COL_2.*/
         end
         
         it "should have the columns separated by ',' s" do
-          tbl = CreateTable.new(:columns => [@column1, @column2], :table_name => "bar")
+          tbl = CreateTable.new("bar", [@column1, @column2])
           tbl.to_sql.should =~ /.*(.*SQL_FOR_COL_1,.*SQL_FOR_COL_2.*).*/m
         end
         
         it "should have the full sql string" do
-          tbl = CreateTable.new(:columns => [@column1, @column2], :table_name => "bar")
+          tbl = CreateTable.new("bar", [@column1, @column2])
           tbl.to_sql.should == "CREATE TABLE `bar` (\n  SQL_FOR_COL_1,\n  SQL_FOR_COL_2\n)"
         end
       end
@@ -120,15 +108,15 @@ module Guillotine
         end
         
         it "should be true if it has the columns and the name are ==" do
-          creator1 = CreateTable.new(:columns => @columns1, :table_name => "foo")
-          creator2 = CreateTable.new(:columns => @columns2, :table_name => "foo")
+          creator1 = CreateTable.new("foo", @columns1)
+          creator2 = CreateTable.new("foo", @columns2)
           
           creator1.should == creator2
         end
         
         it "should be false if the columns are not ==" do
-          creator1 = CreateTable.new(:columns => @columns1, :table_name => "foo")
-          creator2 = CreateTable.new(:columns => @columns2, :table_name => "foo")
+          creator1 = CreateTable.new("foo", @columns1)
+          creator2 = CreateTable.new("foo", @columns2)
           
           @columns1.stub!(:==).and_return false
           
@@ -136,8 +124,8 @@ module Guillotine
         end
         
         it "should be false if the table_name is different" do
-          creator1 = CreateTable.new(:columns => @columns1, :table_name => "foo")
-          creator2 = CreateTable.new(:columns => @columns2, :table_name => "bar")
+          creator1 = CreateTable.new("foo", @columns1)
+          creator2 = CreateTable.new("bar", @columns2)
           
           creator1.should_not == creator2
         end
@@ -149,7 +137,7 @@ module Guillotine
             end
           end.new
           
-          creator = CreateTable.new(:columns => @columns1, :table_name => "foo")
+          creator = CreateTable.new("foo", @columns1)
           creator.should_not == @comparable
         end
         
@@ -160,7 +148,7 @@ module Guillotine
             end
           end.new
           
-          creator = CreateTable.new(:columns => @columns1, :table_name => "foo")
+          creator = CreateTable.new("foo", @columns1)
           creator.should_not == @comparable
         end
       end
