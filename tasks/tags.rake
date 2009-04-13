@@ -1,5 +1,5 @@
 namespace :tags do
-  ruby_files = TASKS::Emacs::Tags::RUBY_FILES
+  ruby_files = Guillotine::RakeTasks::Emacs::Tags::RUBY_FILES
   
   task :emacs => ruby_files do
     puts "Making Emacs TAGS file"
