@@ -3,8 +3,9 @@ require "rubygems"
 
 project = File.dirname(__FILE__) + "/guillotine"
 
-require "#{project}/require"
 require "#{project}/extensions"
+
+module Guillotine; end
 
 Guillotine.module_eval do
   autoload :Assertions,             "#{project}/assertions"
