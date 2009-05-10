@@ -40,29 +40,29 @@ module Guillotine
       end
     end
     
-    dir = File.dirname(__FILE__) + "/expressions"
-    autoload :BacktickString,       "#{dir}/backtick_string"
-    autoload :Base,                 "#{dir}/base"
-    autoload :TopLevelExpression,   "#{dir}/top_level_expression"
-    autoload :Column,               "#{dir}/column"
-    autoload :Equal,                "#{dir}/equal"
-    autoload :LessThan,             "#{dir}/less_than"
-    autoload :GreaterThan,          "#{dir}/greater_than"
-    autoload :GreaterThanOrEqualTo, "#{dir}/greater_than_or_equal_to"
-    autoload :LessThanOrEqualTo,    "#{dir}/less_than_or_equal_to"
-    autoload :NotEqual,             "#{dir}/not_equal"
-    autoload :IsNull,               "#{dir}/is_null"
-    autoload :IsNotNull,            "#{dir}/is_not_null"
-    autoload :Select,               "#{dir}/select"
-    autoload :From,                 "#{dir}/from"
-    autoload :OrderBy,              "#{dir}/order_by"
-    autoload :GroupBy,              "#{dir}/group_by"
-    autoload :Limit,                "#{dir}/limit"
-    autoload :Truncate,             "#{dir}/truncate"
-    autoload :DeleteStatement,      "#{dir}/delete"
-    autoload :SelectExpression,     "#{dir}/select_expression"
-    autoload :Insert,               "#{dir}/insert"
-    autoload :CreateTable,          "#{dir}/create_table"
-    autoload :TableDisplayer,       "#{dir}/table_displayer"
+    extend Using
+    using :BacktickString
+    using :Base
+    using :TopLevelExpression
+    using :Column
+    using :Equal
+    using :LessThan
+    using :GreaterThan
+    using :GreaterThanOrEqualTo
+    using :LessThanOrEqualTo
+    using :NotEqual
+    using :IsNull
+    using :IsNotNull
+    using :Select
+    using :From
+    using :OrderBy
+    using :GroupBy
+    using :Limit
+    using :Truncate
+    using :DeleteStatement
+    using :SelectExpression
+    using :Insert
+    using :CreateTable
+    using :TableDisplayer
   end
 end

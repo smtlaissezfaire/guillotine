@@ -1,27 +1,31 @@
 
 require "rubygems"
+require "using"
 
-project = File.dirname(__FILE__) + "/guillotine"
+Using.default_load_scheme = :autoload
 
-require "#{project}/extensions"
+module Guillotine
+  extend Using
+  
+  with_load_scheme :require do
+    using :extensions
+  end
 
-module Guillotine; end
-
-Guillotine.module_eval do
-  autoload :Assertions,             "#{project}/assertions"
-  autoload :DataStore,              "#{project}/data_store"
-  autoload :PreParser,              "#{project}/pre_parser"
-  autoload :Parser,                 "#{project}/parser"
-  autoload :Conditions,             "#{project}/conditions"
-  autoload :Keywords,               "#{project}/keywords"
-  autoload :Expressions,            "#{project}/expressions"
-  autoload :RSpec,                  "#{project}/test_support"
-  autoload :RakeTasks,              "#{project}/rake"
-  autoload :Shell,                  "#{project}/shell"
-  autoload :StatementExecutors,     "#{project}/statement_executors"
-  autoload :Transactions,           "#{project}/transactions"
-  autoload :TestSupport,            "#{project}/test_support"
-  autoload :VERSION,                "#{project}/version"
+  using :Assertions
+  using :DataStore
+  using :PreParser
+  using :Parser
+  using :Conditions
+  using :Keywords
+  using :Expressions
+  using :TestSupport
+  using :RSpec
+  using :RakeTasks
+  using :Shell
+  using :StatementExecutors
+  using :Transactions
+  using :TestSupport
+  using :Version
   
   class << self
     def execute(string)

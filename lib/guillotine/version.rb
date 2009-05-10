@@ -1,5 +1,5 @@
 module Guillotine
-  module VERSION #:nodoc:
+  module Version #:nodoc:
     MAJOR = 0
     MINOR = 0
     TINY  = 1

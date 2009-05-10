@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + "/../spec_helper"
 
 module Guillotine
-  describe VERSION do
+  describe Version do
     it "should be at 0.0.1" do
-      Guillotine::VERSION::STRING.should == "0.0.1"
+      Guillotine::Version::STRING.should == "0.0.1"
     end
   end
 end

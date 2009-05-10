@@ -37,7 +37,7 @@ end
 REV = nil
 # UNCOMMENT IF REQUIRED:
 # REV = YAML.load(`svn info`)['Revision']
-VERS = Guillotine::VERSION::STRING + (REV ? ".#{REV}" : "")
+VERS = Guillotine::Version::STRING + (REV ? ".#{REV}" : "")
 RDOC_OPTS = ['--quiet', '--title', 'guillotine documentation',
     "--opname", "index.html",
     "--line-numbers",

@@ -1,10 +1,14 @@
 module Guillotine
   module DataStore
-    dir = File.dirname(__FILE__) + "/data_store"
-    autoload :Schema, "#{dir}/schema"
-    autoload :Table,  "#{dir}/table"
-
-    require "#{dir}/database"
+    extend Using
+    
+    using :Schema
+    using :Table
+    
+    with_load_scheme :require do
+      using :Database
+    end
+    
     extend DataStore::Database
 
     class UnknownTable < StandardError; end

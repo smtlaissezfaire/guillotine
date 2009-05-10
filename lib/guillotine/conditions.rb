@@ -1,9 +1,9 @@
 module Guillotine
   module Conditions
-    dir = File.dirname(__FILE__) + "/conditions"
+    extend Using
     
-    autoload :Base,          "#{dir}/base"
-    autoload :AndCondition,  "#{dir}/and_condition"
-    autoload :OrCondition,   "#{dir}/or_condition"
+    using :Base
+    using :AndCondition
+    using :OrCondition
   end
 end
