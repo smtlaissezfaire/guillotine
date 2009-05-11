@@ -24,6 +24,8 @@ module Guillotine
     Insert           = Expressions::Insert           unless defined?(Insert)
   end
   
+  require "gazelle"
+  
   require File.dirname(__FILE__) + "/../../ext/quotes_parser/quotes_parser.so"
   extend Using
   
@@ -48,7 +50,7 @@ module Guillotine
     using :SqlTransaction
     using :SqlInsert
     using :SqlDatatypes
-    using :SqlCreateTable
+    # using :SqlCreateTable
     using :Sql
   end
 end
