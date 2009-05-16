@@ -53,4 +53,16 @@ module Guillotine
     # using :SqlCreateTable
     using :Sql
   end
+  
+  SQLCreateTableParser = Gazelle::Parser.new(File.dirname(__FILE__) + "/parser/create_table.gzc")
+  
+  table_name = nil
+  
+  SQLCreateTableParser.on :TABLE_NAME do |str|
+    table_name = str.dup
+  end
+
+  SQLCreateTableParser.on :create_table do |str|
+    Expressions::CreateTable.new(:table_name => table_name)
+  end
 end
