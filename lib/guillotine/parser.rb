@@ -50,7 +50,7 @@ module Guillotine
     using :SqlTransaction
     using :SqlInsert
     using :SqlDatatypes
-    # using :SqlCreateTable
+    using :SqlCreateTable
     using :Sql
 
     using :SqlGazelleParser
