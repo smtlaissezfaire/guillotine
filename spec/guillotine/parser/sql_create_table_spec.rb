@@ -2,9 +2,9 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 
 module Guillotine
   module Parser
-    describe SQLCreateTableParser do
+    describe SQLGazelleParser do
       before :each do
-        @parser = SQLCreateTableParser
+        @parser = SQLGazelleParser
         @column = mock 'column'
         @create_table = mock 'create table'
       end
