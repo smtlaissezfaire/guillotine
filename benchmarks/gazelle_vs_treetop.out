@@ -1,0 +1,9 @@
+* With sql statement CREATE TABLE foo (bar INT)
+Rehearsal -------------------------------------------------
+using Treetop   7.030000   0.060000   7.090000 (  7.344717)
+using Gazelle   2.190000   0.410000   2.600000 (  2.671285)
+---------------------------------------- total: 9.690000sec
+
+                    user     system      total        real
+using Treetop   7.200000   0.080000   7.280000 (  7.783209)
+using Gazelle   2.070000   0.400000   2.470000 (  2.618475)
