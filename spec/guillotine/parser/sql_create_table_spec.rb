@@ -7,7 +7,6 @@ module Guillotine
         @parser = SQLCreateTableParser
         @column = mock 'column'
         @create_table = mock 'create table'
-        Expressions::CreateTable.stub!(:new).and_return @create_table
       end
       
       def parse(str)
@@ -77,33 +76,30 @@ module Guillotine
     
       it "should instantiate a create table" do
         Expressions::CreateTable.should_receive(:new).and_return @create_table
-        parse_and_eval("CREATE TABLE foo (foo BIT)")
+        parse_and_eval("CREATE TABLE foo (bar BIT)")
       end
       
       it "should instantiate with a table name" do
-        pending 'fixme'
-        Expressions::CreateTable.should_receive(:new).with(hash_including(:table_name => "foo")).and_return @create_table
+        Expressions::CreateTable.should_receive(:new).with(hash_including(:table_name => "foo"))
         parse_and_eval("CREATE TABLE foo (foo BIT)")
       end
-      
-      it "should instantiate with the correct table name" do
-        pending 'fixme'
-        Expressions::CreateTable.should_receive(:new).with(hash_including(:table_name => "bar")).and_return @create_table
+
+      it "should instantiate with a table name" do
+        Expressions::CreateTable.should_receive(:new).with(hash_including(:table_name => "bar"))
         parse_and_eval("CREATE TABLE bar (foo BIT)")
       end
       
-      # it "should receive one column" do
-      #   Expressions::Column.stub!(:new).and_return @column
-      #   Expressions::CreateTable.should_receive(:new).with(hash_including(:columns => [@column])).and_return @create_table
-      #   parse_and_eval("CREATE TABLE bar (foo BIT)")
-      # end
-      # 
-      # it "should instantiate with two columns in an array" do
-      #   Expressions::Column.stub!(:new).and_return @column
-      #   Expressions::CreateTable.should_receive(:new).with(hash_including(:columns => [@column, @column])).and_return @create_table
-      #   parse_and_eval("CREATE TABLE bar (foo BIT, bar BIT)")
-      # end
-      # 
+      it "should receive one column" do
+        Expressions::Column.stub!(:new).and_return @column
+        Expressions::CreateTable.should_receive(:new).with(hash_including(:columns => [@column])).and_return @create_table
+        parse_and_eval("CREATE TABLE bar (foo BIT)")
+      end
+      
+      it "should instantiate with two columns in an array" do
+        Expressions::Column.stub!(:new).and_return @column
+        Expressions::CreateTable.should_receive(:new).with(hash_including(:columns => [@column, @column])).and_return @create_table
+        parse_and_eval("CREATE TABLE bar (foo BIT, bar BIT)")
+      end
     end
   end
 end

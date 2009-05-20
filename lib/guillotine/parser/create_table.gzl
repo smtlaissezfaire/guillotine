@@ -1,14 +1,14 @@
 
 create_table ->
-  CREATE WS+ TABLE WS+ TABLE_NAME WS+
+  CREATE WS+ TABLE WS+ ID WS+
   OPEN_PAREN WS* column_names_and_types WS* CLOSE_PAREN;
   
 column_names_and_types ->
-  column_name_and_type COMMA column_names_and_types /
+  column_name_and_type WS* COMMA WS* column_names_and_types /
   column_name_and_type;
   
 column_name_and_type ->
-  COLUMN_NAME column_type;
+  column_name WS+ column_type;
   
 column_type ->
   BIT /
@@ -18,13 +18,12 @@ BIT: /BIT/;
 INT: /INT/;
 INT_SIZE: /11/;
 
-TABLE_NAME           -> QUOTED_TABLE_NAME / UNQUOTED_COLUMN_NAME;
-QUOTED_TABLE_NAME    -> BACKTICK UNQUOTED_COLUMN_NAME BACKTICK;
-UNQUOTED_TABLE_NAME   : /[a-z\_]+/;
+table_name           -> ID;
+column_name          -> ID;
 
-COLUMN_NAME          -> QUOTED_COLUMN_NAME / UNQUOTED_COLUMN_NAME;
-QUOTED_COLUMN_NAME   -> BACKTICK UNQUOTED_COLUMN_NAME BACKTICK;
-UNQUOTED_COLUMN_NAME  : /[a-z\_]+/;
+ID           -> QUOTED_ID / UNQUOTED_ID;
+QUOTED_ID    -> BACKTICK UNQUOTED_ID BACKTICK;
+UNQUOTED_ID   : /[a-z\_]+/;
 
 WS                  -> " ";
 OPEN_PAREN          :  /\(/;
@@ -35,7 +34,3 @@ COMMA               :  /\,/;
 
 CREATE: /CREATE/;
 TABLE : /TABLE/;
-
-
-whitespace: /[\r\n\t\s]+/;
-@allow whitespace column_name_and_type ... column_type;

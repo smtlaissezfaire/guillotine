@@ -54,15 +54,30 @@ module Guillotine
     using :Sql
   end
   
-  SQLCreateTableParser = Gazelle::Parser.new(File.dirname(__FILE__) + "/parser/create_table.gzc")
-  
-  table_name = nil
-  
-  SQLCreateTableParser.on :TABLE_NAME do |str|
-    table_name = str.dup
+  SQLCreateTableParser = Gazelle::Parser.new(File.dirname(__FILE__) + "/parser/create_table")
+
+  module Lisp
+    def car
+      first
+    end
+
+    def cdr
+      self[1..self.size]
+    end
+  end
+
+  ids = []
+
+  SQLCreateTableParser.on :UNQUOTED_ID do |str|
+    ids << str.dup
   end
 
   SQLCreateTableParser.on :create_table do |str|
-    Expressions::CreateTable.new(:table_name => table_name)
+    ids.extend Lisp
+    table_name = ids.car
+    columns = ids.cdr.map { |col| Expressions::Column.new(col) }
+
+    Expressions::CreateTable.new(:table_name => table_name, :columns => columns)
+    ids = []
   end
 end
