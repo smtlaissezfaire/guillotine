@@ -1,4 +1,3 @@
-require "rubygems"
 require "ruby-prof"
 require File.dirname(__FILE__) + "/../lib/guillotine"
 require 'sqlite3'

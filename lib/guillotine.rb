@@ -1,5 +1,3 @@
-
-require "rubygems"
 require "using"
 
 Using.default_load_scheme = :autoload
