@@ -1,13 +1,12 @@
 require File.dirname(__FILE__) + "/spec_helper"
 
 describe "Integration with rspec" do
-  before :all do
-    Guillotine::RSpec.before_all
-  end
-  
   before :each do
+    Guillotine::DataStore.__clear_all_tables!
+    Guillotine::RSpec.reset_instance!
+    Guillotine::RSpec.before_all
+    
     column = Guillotine::Expressions::Column.new("users.username")
-    Guillotine::DataStore.create_table(:users)
     Guillotine::RSpec.before_each
     
     @user_class = Class.new(ActiveRecord::Base) do
