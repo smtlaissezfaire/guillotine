@@ -52,4 +52,3 @@ module SpecHelpers
 end
 
 SpecHelpers::DatabaseHelper.setup_connection
-
