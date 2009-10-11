@@ -1,8 +1,9 @@
 module Guillotine
   module Shell
     class OutputFormatter
-      dir = File.dirname(__FILE__) + "/output_formatter"
-      autoload :TableOutputer,          "#{dir}/table_outputer"
+      extend Using
+      
+      using :TableOutputer
       
       EMPTY_SET_STRING = "Empty set"
       

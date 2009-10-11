@@ -1,10 +1,10 @@
 module Guillotine
   module Shell
-    dir = "#{File.dirname(__FILE__)}/shell"
+    extend Using
     
-    autoload :Main,            "#{dir}/main"
-    autoload :Command,         "#{dir}/command"
-    autoload :OutputFormatter, "#{dir}/output_formatter"
+    using :Main
+    using :Command
+    using :OutputFormatter
     
     def self.start
       Main.do

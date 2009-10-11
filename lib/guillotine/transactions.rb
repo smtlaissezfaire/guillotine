@@ -1,9 +1,9 @@
 module Guillotine
   module Transactions
-    dir = File.dirname(__FILE__) + "/transactions"
+    extend Using
     
-    autoload :IdGenerator,   "#{dir}/id_generator"
-    autoload :Store,         "#{dir}/store"
-    autoload :Transaction,   "#{dir}/transaction"
+    using :IdGenerator
+    using :Store
+    using :Transaction
   end
 end
